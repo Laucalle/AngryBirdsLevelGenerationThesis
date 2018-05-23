@@ -1,36 +1,22 @@
 %************************************************
 \chapter{Introduction}\label{ch:introduction}
 %************************************************
+\section{Motivation}
+It is common for AI researchers to turn to games in general as a testing environment for AI techniques. Some of the earliest problems that AI attempted to solve were checkers and chess in the 50s, even before AI was defined and recognized as a field in Dartmouth Conference in 1956 \cite{nilsson1998artificial}. 
 
-\section{The necessity of Procedural Content Generation}
-Computer games are a relatively new form of media whose popularity has been increasing non-stop since they appeared in the 70s. Many challenges have arisen --and will keep doing so-- throughout the evolution of the industry, from the early arcades to the most complex modern open-world video games. Developers have come up with all sorts of creative ways to overcome hardware limitations, delivering better graphics and audio. They have pushed the boundaries of the medium by finding new forms of interaction and engaging players with compelling storytelling and original game mechanics. Many of them are related to the fast pace at which the game industry is growing, reaching every passing year to broader audiences that demand a wider range of experiences. Crafting them requires great effort and a high consumption of resources. How do we create a vast amount of content that suits players expectations with lower investment? The answer can be replayability, adaptative content or reduction of designers' workload. All of which can be tackled using \acf{PCG}.\cite{togelius2016introduction}
+What made board games attractive in first place? They have a rather simple set of rules but winning a game could be a challenging task even for a human brain. It is not surprising that soon video games too drew researchers' attention --along with board games--. They offer a wide range of dynamic and competitive elements that resemble real-world problems to some extent.
 
-Replayability, also referred to as replay value, relies on how interesting is playing a game more than once. It is easy to understand why it would be a desirable feature for both players and developers: from the player's point of view, they can extend the game experience further--past the credits roll. For designers, replay value means their product offers more with less manually crafted content.
+Of course, this interest works in both ways. Many video games use AI techniques to deliver better experiences, mainly involving \acf{NPC} behaviour and \acf{PCG}.
 
-Games can also engage players by adapting gameplay elements to each individual player.  In a literal sense, this would be impracticable. Instead, users are usually presented with options to adjust to their preferred style. What is more interesting, the game itself can change based on in-game player behaviour. It can regulate its difficulty level to fit the player's learning curve or create content that matches the player's taste.
+Having this relationship between academia and industry in mind, the IEEE Conference on Computational Intelligence and Games started as a symposium in 2005, and as a conference in 2009. It brings professionals from both parts together to discuss the latest advances in AI and Computational Intelligence and how they apply to games.\cite{ieee-cig}
 
-Both applications above use \ac{PCG} as a replacement for human designers. However, \ac{PCG} can be used as a tool to assist developers. It can suggest what might be a base for later development, enhancing human creativity rather than displacing it. 
+Among other events, the conference hosts competitions. In 2018, most proposed competitions are centred around playing AI agents for specific games or genres. One of the exceptions is the \textit{3rd Angry Birds Level Generation Competition}. Participants must build computer programs that are able to generate levels for the\textit{ Angry Birds} game.
 
-\section{What is Procedural Content Generation}
-The definition of \acf{PCG} has been broadly discussed and there is not a single one. We have plenty of examples of what \textit{is} and what \textit{is not} \ac{PCG}, but every definition struggles to cover all cases, either being too inclusive or too exclusive. The one we choose here balances well between the two, defining \ac{PCG} as \textit{the algorithmical creation of game content with limited or indirect user input}\cite{togelius2011procedural}.
+\textit{Angry Birds} is a mobile game by the Finnish company Rovio Entertainment Corporation\cite{angry-birds}, first launched in 2009. The game was a huge success in the \textit{AppStore} -- being the most downloaded mobile game in history--, has been ported to several other platforms, it has an animated movie and way too many \textit{spin offs} --around seventeen--. In the game, green pigs have stolen the birds' eggs, and they proceed to rescue them. The pigs have built a variety of defensive structures made out of blocks, so the player has to fire the birds from a slingshot -- apparently they never learnt to fly-- so the structure is destabilized.
 
-Although \ac{PCG} often uses AI techniques, this definition does not include all uses of AI in games. We do not consider \acs{NPC} behaviour or AI playing agents as content, thus they are not \ac{PCG} either. Aesthetic elements, game rules, levels, items, stories and characters among others are considered content in this definition.
+However, what is interesting to us is not its wide success, but how heavily the game relies in gravity to create interesting puzzles. The main challenge is to build stable structures that are robust enough to take more than a single shot before crumbling to the ground.
 
-Note that computers nor video games are mentioned in the definition. In fact, \ac{PCG} has its roots in analogical games. This may conflict with the \textit{limited or indirect user input}, but it is reasonable to assume that following a detailed set of instructions --even if it is done by a human-- is not \textit{input}. The underlying concepts used much earlier by non-digital games still prevail in modern video games. Using an algorithm to assembly pre-design pieces is a common technique in tabletop role playing guides --where the algorithm usually consists in several dice rolls-- such as \textit{Dungeon \& Dragons}. It is not surprising that one of the early adaptations of \ac{PCG} to digital platforms aimed to generate monsters and dungeons for physical games.\cite{smith2015analog}
 
-There are many \ac{PCG} methods and it is necessary to look at some traits that characterize and differentiates them from each other: \cite{togelius2016introduction}
-
-\begin{itemize}
-	\item \textit{Online/offline}: In online generation, the \ac{PCG} occurs during the game session, while the user is playing the game. If it is done before the game session or during development, we have offline generation. 
-	\item \textit{Necessary/optional}: Procedurally generated content may be part of the essential structure of the game  or can be additional to the game experience and can be discarded. In the first one the content is \textit{necessary} and needs to be correct while the latter is \textit{optional}.
-	\item \textit{Degree and dimensions of control}: As any other algorithm, a \ac{PCG} method can have a number of parameters which affect the output. If it uses random numbers, the seed is one of them.
-	\item \textit{Generic/adaptative} Adaptative generation takes into account player's behaviour while generic does not. Although there are exceptions, most commercial games choose generic over adaptative.
-	\item \textit{Stochastic/deterministic} Deterministic \ac{PCG} will produce the same output given the same input, in contrast to stochastic generation that is not easily replicated.
-	\item \textit{Constructive/generate-and-test} Generate-and-test produces potentially correct solutions that are tested and adjusted in each iteration before giving the actual output. Constructive methods build partial solutions and add on them.
-	\item \textit{Automatic/mixed authorship} \ac{PCG} can be used as assisting tool for designers, whether the output is used as a base or as an interactive process. Then we talk about mixed authorship, as opposed to automatic generation where the designer does not take part. 
-\end{itemize}
-
-\section{Evolutive Algorithms}
 %*****************************************
 %*****************************************
 %*****************************************
