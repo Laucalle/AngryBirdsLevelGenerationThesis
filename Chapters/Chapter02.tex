@@ -17,6 +17,7 @@ Although \ac{PCG} often uses AI techniques, this definition does not include all
 
 Note that neither computers nor video games are mentioned in the definition. In fact, \ac{PCG} has its roots in analogical games. This may conflict with the \textit{limited or indirect user input}, but it is reasonable to assume that following a detailed set of instructions --even if it is done by a human-- is not \textit{input}. The underlying concepts used much earlier by non-digital games still prevail in modern video games. Using an algorithm to assemble pre-designed pieces is a common technique in tabletop roleplaying guides --where the algorithm usually consists in several dice rolls-- such as \textit{Dungeon \& Dragons}. It is not surprising that one of the early adaptations of \ac{PCG} to digital platforms aimed to generate monsters and dungeons for physical games.\cite{smith2015analog}
 
+\subsection{Taxonomy}
 There are many \ac{PCG} methods and it is necessary to look at some traits that characterize and differentiate them from each other: \cite{togelius2016introduction}
 
 \begin{itemize}
@@ -29,7 +30,41 @@ There are many \ac{PCG} methods and it is necessary to look at some traits that 
 	\item \textit{Automatic/mixed authorship}: \ac{PCG} can be used as assisting tool for designers, whether the output is used as a base or as an interactive process. Then we talk about mixed authorship, as opposed to automatic generation where the designer does not take part. 
 \end{itemize}
 
-\section{Evolutive Algorithms}
+\subsection{Search-based Procedural Content Generation}
+
+A special kind of \textit{generate-and-test} approach to \ac{PCG} is \acf{SBPCG}, which is usually --but not always-- tackled with Evolutionary Algorithms. The problems faced by \ac{SBPCG} are not very far from those encountered in Evolutionary problems. 
+
+The test function does not determine if a solution is valid, but it grades how good the solution is. This is often called \textit{fitness function}. In \ac{SBPCG}, how to evaluate the quality of a solution has no straight forward answer. It requires formalizing what is fun, exciting or engaging content  as a \textit{fitness function} which are usually based in tricky assumptions. 
+
+There are three main classes of \textit{fitness functions} in \ac{SBPCG}\cite{togelius2010search}:
+
+\begin{itemize}
+	\item \textit{Direct Fitness Function} where certain features are extracted from the generated  content and directly mapped to a fitness value. Those features must be easily measurable.
+	\item \textit{Simulation-Based Fitness Function} where an agent plays throw some part of the game that involves the generated content. The fitness is calculated using features from the agent's gameplay.
+	\item \textit{Interactive Fitness Function} where the fitness value is obtained from the player, whether it is explicitly by asking them or implicitly by measuring certain responses to the game.
+\end{itemize}
+
+
+\section{Evolutionary Algorithms}
+
+Evolutionary algorithms are optimization methods inspired by biological evolution. They simulate the optimization carried out by nature with genetic inheritance and natural selection, even borrowing the vocabulary from genetics. The following components are necessary to apply an evolutionary algorithm to an specific problem:
+\begin{itemize}
+	\item A genetic representation of potential solutions, which are \textit{individual} or \textit{chromosome}. Those are formed by smaller units called \textit{features} or \textit{genes} that represents a certain character of the solution.
+	\item an initialization method for the population of individuals
+	\item a \textit{fitness function}, which evaluates each individual and gives it a \textit{fitness value}. It plays the role of the environment, determining how likely an individual will survive.
+	\item genetic operators, such as crossover, mutation, selection and replacement.
+	\item values for all its parameters, i.e. population size, probabilities of applying certain operators, number of generations, etc.
+\end{itemize}
+
+\subsection{Genetic operators}
+	\subsubsection{Crossover}
+		This operator takes two individuals and produces an offspring, one or more individuals who inherit certain traits from their parents. It is also known as \textit{recombination}. The genes of both parents are combined resulting in new individuals, hopefully with better fitness. However, that is not always the case and some of those new solutions can be infeasible. Recombination is equivalent to sexual reproduction in biological evolution.  
+	\subsubsection{Mutation}
+		While the rest of the operators focus on exploitation of promising solutions, mutation---along with initialization--- usually generates diversity. This is key for escaping local optima, balancing between exploration and exploitation. It is applied after crossover and modifies with a certain probability some genes of the offspring.
+	\subsubsection{Selection}
+		Selection operator determines which individuals of a given generation will mate and produce offspring. It is usually based in the fitness value of the individuals: better solutions are more likely to breed than others. The output of selection operator is the input for crossover.
+	\subsubsection{Replacement}
+		In nature, better fit individuals are more likely to survive. In evolutionary algorithms, replacement operator decides which individuals make it to the next generation. In some strategies, offspring completely replace the previous generation, while others maintain best individuals through several generations. 
 %*****************************************
 %*****************************************
 %*****************************************
