@@ -1,0 +1,49 @@
+%************************************************
+\chapter{Evolutionary Algorithm Framework}\label{ch:frameworkSelection}
+
+The selected language for this project was Python. It has a vast Standard Library and is well documented. There are a number of evolutionary programming frameworks for Python. We considered two in particular for this project:
+
+\begin{itemize}
+	\item DEAP (Distributed Evolutionary Algorithms in Python)\cite{fortin2012deap}
+	\item PyEvolve\cite{perone2009pyevolve}
+\end{itemize}
+
+Since the game simulation will be used as a part of the fitness function, there is another aspect to keep in mind. The simulation takes several seconds to start, but much less between levels. When evaluating individuals in a evolutionary algorithm, it would be more efficient to avoid this overhead by simulating the whole population in a single execution than launching a a simulation for each individual. Then it seems compulsory that the framework used would allow this behaviour.
+
+The information that describes a level can be too complex to have a binary representation as pure genetic algorithms suggest, so the framework should be flexible enough to support complex data structures. 
+
+Other features that would be desirable for a framework to have in order to be suitable for our goals are readability, ease of use and efficiency.
+
+\begin{table}
+	\myfloatalign
+	 \begin{tabularx}{\textwidth}{XXX} \toprule
+	
+		& \textbf{DEAP}&\textbf{PyEvolve}\\ \midrule
+		Flexible data \newline structures  & Yes & Yes\\ \midrule
+		Customizable \linebreak evaluation & Yes & Yes\\ \midrule
+		Other \linebreak considerations & Well documented, \linebreak actively maintained &Less flexible\\ 
+	\bottomrule
+	\end{tabularx}
+\caption{Framework comparison}
+\label{t:framework}
+\end{table}
+
+Looking at the table \ref{t:framework}, both frameworks offer what this project is looking for. However, it is important to note exactly how each one provides said feature:
+
+\begin{itemize}
+	\item Flexible data structures: both allow them, but the user has to provide the genetic operators. That is reasonable and expected. Using DEAP, the new data structure only needs to be registered in the \textit{Creator} class, but PyEvolve requires \textit{GenomeBase}---its base module for genomes--- to be modified in order to use custom data types.
+	\item Customizable fitness function calls: With DEAP you can register a function to evaluate individuals, but those have to take a single individual as a parameter. If we were to evaluate all of them at once, we will have to give up the algorithms the framework provides, executing each operator and managing parameters ourselves. In PyEvolve, although it is possible, it is rather inconvenient since it means , working around the \textit{GPopulation} class.
+\end{itemize} 
+
+The problem tackled in this project requires high customization. Both framework are fairly flexible and easy to use when presented with a pure numerical optimization problem, but that is not the case. Taking into account the time limitations for this project, productivity is really important. It is not worth adapting these frameworks, considering how little we gain from their use, even though it would not take a great amount of time. Instead, a new one was implemented, providing all the flexibility we were looking for.
+
+\section{Implemented evolutionary framework}
+
+
+%************************************************
+
+%*****************************************
+%*****************************************
+%*****************************************
+%*****************************************
+%*****************************************
