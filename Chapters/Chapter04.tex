@@ -1,7 +1,33 @@
 %************************************************
 \chapter{Methodology}\label{ch:workflow}
 
+In this chapter we discuss the tools used for this project as well as the workflow followed in the development. 
 
+Agile development is an iterative and incremental method. It focuses on delivering working software in short iterations which makes it a perfect approach to undertake this project considering its time limitations and goals.
+
+The defined phases for this work are:
+\begin{itemize}
+	\item Modification of the existing open source simulation. The goal of the software currently available is not to simulate \textit{Angry Birds} levels but to allow the user play the game using previously generated. 
+	\item Determine the different elements of the evolutionary algorithm, such as fitness, representation and operators. This requires a previous study of feasible options. 
+	\item Selecting or developing a framework for the evolutionary algorithm. There are several frameworks available but not all of them will satisfy our requirements. 
+	\item Experiments and results.
+\end{itemize}
+
+Those phases are not sequential as they overlap. Obviously, there is a logic order for them and therefore there was be a major focus on the first phase early in the development, moving this focus to the following part as the project progressed. 
+
+The overlapping of the other three tasks is greater, providing a better environment for agile development. Each iteration expanded for about two weeks, in  which an increment was delivered. 
+
+First increments consisted in modifications to the simulation and a study of different representations based on previous work on the same topic or related. After that, development started with integration of the simulation and the evolutionary program as well as a comparison of different frameworks. The framework and genetic operators were developed in parallel along with tests.
+
+The increments also included experiments as they were based on hypothesis from previous results. 
+
+The tools involved in the development of this project were:
+
+\begin{itemize}
+	\item Unity Engine (C\#), for the game adaptation.
+	\item Python standard library, for the evolutionary algorithm.
+	\item \LaTeX, for this document.
+\end{itemize}
 
 %************************************************
 
