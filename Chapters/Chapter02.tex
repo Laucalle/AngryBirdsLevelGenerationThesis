@@ -27,7 +27,7 @@ There are many \ac{PCG} methods and it is necessary to look at some traits that 
 	\item \textit{Generic/adaptative}: Adaptative generation takes into account player's behaviour while generic does not. Although there are exceptions, most commercial games choose generic over adaptative.
 	\item \textit{Stochastic/deterministic}: Deterministic \ac{PCG} will produce the same output given the same input, in contrast to stochastic generation that is not easily replicated.
 	\item \textit{Constructive/generate-and-test}: Generate-and-test produces potentially correct solutions that are tested and adjusted in each iteration before giving the actual output. Constructive methods build partial solutions and add on them.
-	\item \textit{Automatic/mixed authorship}: \ac{PCG} can be used as assisting tool for designers, whether the output is used as a base or as an interactive process. Then we talk about mixed authorship, as opposed to automatic generation where the designer does not take part. 
+	\item \textit{Automatic/mixed authorship}: \ac{PCG} can be used as an assisting tool for designers, whether the output is used as a base or as an interactive process. Then we talk about mixed authorship, as opposed to the automatic generation where the designer does not take part. 
 \end{itemize}
 
 \subsection{Search-based Procedural Content Generation}
@@ -50,7 +50,7 @@ There are three main classes of \textit{fitness functions} in \ac{SBPCG}\cite{to
 Evolutionary algorithms are optimization methods inspired by biological evolution. They simulate the optimization carried out by nature with genetic inheritance and natural selection, even borrowing the vocabulary from genetics. The following components are necessary to apply an evolutionary algorithm to an specific problem:
 \begin{itemize}
 	\item A genetic representation of potential solutions, which are \textit{individual} or \textit{chromosome}. Those are formed by smaller units called \textit{features} or \textit{genes} that represents a certain character of the solution.
-	\item an initialization method for the population of individuals
+	\item an initialization method for the population of individuals.
 	\item a \textit{fitness function}, which evaluates each individual and gives it a \textit{fitness value}. It plays the role of the environment, determining how likely an individual will survive.
 	\item genetic operators, such as crossover, mutation, selection and replacement.
 	\item values for all its parameters, i.e. population size, probabilities of applying certain operators, number of generations, etc.
@@ -64,7 +64,7 @@ Evolutionary algorithms are optimization methods inspired by biological evolutio
 	\subsubsection{Selection}
 		Selection operator determines which individuals of a given generation will mate and produce offspring. It is usually based in the fitness value of the individuals: better solutions are more likely to breed than others. The output of selection operator is the input for crossover.
 	\subsubsection{Replacement}
-		In nature, better fit individuals are more likely to survive. In evolutionary algorithms, replacement operator decides which individuals make it to the next generation. In some strategies, offspring completely replace the previous generation, while others maintain best individuals through several generations. 
+		In nature, better fit individuals are more likely to survive. In evolutionary algorithms, the replacement operator decides which individuals make it to the next generation. In some strategies, offspring completely replace the previous generation, while others maintain the best individuals through several generations. 
 %*****************************************
 %*****************************************
 %*****************************************

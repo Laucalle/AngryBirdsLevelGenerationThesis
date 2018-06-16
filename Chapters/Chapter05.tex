@@ -3,7 +3,7 @@
 As a part of their solution, Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} developed an open source simulation for the \textit{Angry Birds} game. Since that implementation is available on Github, it will be used as a starting point for this part of project.
 
 \section{Pre-existing game overview}
-The game is implemented using the Unity Engine and its code is mainly written in C\#. Levels are not part of the game itself and instead they are parsed from XML files contained in an specific folder in the game hierarchy which corresponds with \textit{Assets/StreamingAssets/Levels} directory. Each level is described in a different file, similar to listing \ref{xmlsample}
+The game is implemented using the Unity Engine and its code is mainly written in C\#. Levels are not part of the game itself and instead they are parsed from XML files contained in an specific folder in the game hierarchy which corresponds to \textit{Assets/StreamingAssets/Levels} directory. Each level is described in a different file, similar to listing \ref{xmlsample}
 \lstset{language=XML}
 \begin{lstlisting}[caption=Sample level input to show format, label=xmlsample]
 <?xml version="1.0" encoding="utf-16"?>
@@ -41,7 +41,7 @@ Considering the functionality of the existing code, there are a few issues preve
 
 \begin{itemize}
 	\item (Issue \#1) Human interaction is needed to proceed: there is a main title screen and a level selection.
-	\item (Issue \#2) A level will only be finished if the user skips it or there is no pigs left. If there were not pigs in the level description, the game may have inconsistent behaviour, displaying the \textit{Level cleared} banner or crashing.
+	\item (Issue \#2) A level will only be finished if the user skips it or there are no pigs left. If there were not pigs in the level description, the game may have inconsistent behaviour, displaying the \textit{Level cleared} banner or crashing.
 	\item (Issue \#3) Once a level has been skipped or cleared, data from execution is not stored.
 	\item (Issue \#4) Skipping the last level results in loading the first level again. 
 \end{itemize}
@@ -51,7 +51,7 @@ It is also worth mentioning that the simulation was intended to run under a Linu
 
 \subsection{Output XML}
 
-Modifying the simulation to write data output---Issue \#3--- is fairly simple since the functions were already in the code. However, the data it was being stored was not enough for its purpose. Output XML level was a valid input XML level, which misses some key information about the execution and in this case there were not much interest in obtaining a new valid level. The desired output would look like listing \ref{xmlsampleOUT} (note that encoding was also changed from original):
+Modifying the simulation to write data output---Issue \#3--- is fairly simple since the functions were already in the code. However, the data that was being stored was not enough for its purpose. Output XML level was a valid input XML level, which misses some key information about the execution and in this case there were not much interest in obtaining a new valid level. The desired output would look like listing \ref{xmlsampleOUT} (note that encoding was also changed from original):
 
 \lstset{language=XML}
 \begin{lstlisting}[caption=Sample level output to show format, label=xmlsampleOUT]
@@ -79,9 +79,9 @@ The next logic step is getting rid of interaction. The simulation we are interes
 
 A level will run for a certain amount of time, and then continue to the next one, skipping the main menu and level selection. When the simulation reaches the last level it will end the execution.
 
-Unity Engine projects are usually divided into scenes. This one has a different scene for the main menu, level selection, loading screen, levels and failure screen. Removing scenes from the screen flow causes side effects such as the first level crashing, so instead the same functions invoked by the \acs{GUI} are called after initialization takes places in both scenes (main menu and level selection) before the first level. This solves interaction with menus (Issue \#1). 
+Unity Engine projects are usually divided into scenes. This one has a different scene for the main menu, level selection, loading screen, levels and failure screen. Removing scenes from the screen flow causes side effects such as the first level crashing so instead, the same functions invoked by the \acs{GUI} are called after initialization takes place in both scenes (main menu and level selection) before the first level. This solves interaction with menus (Issue \#1). 
 
-In order to skip levels, and keeping in mind the velocity if the blocks is already being tracked, the game will load the following scene ---the next level--- once all blocks reach velocity $0$, which means the blocks have stabilized. Just in case this condition is never met, there is also a time limit of $10s$ for each level (Issue \#2). 
+In order to skip levels and keeping in mind the velocity of the blocks is already being tracked, the game will load the following scene ---the next level--- once all blocks reach velocity $0$, which means the blocks have stabilized. Just in case this condition is never met, there is also a time limit of $10s$ for each level (Issue \#2). 
 
 The remaining issue (Issue \#4) is solved just by checking how many levels have been loaded and the index of the currently playing level.
 
