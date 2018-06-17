@@ -68,6 +68,8 @@ It follows the basic structure of a generic genetic algorithm, with the differen
 All operators described in Chapter \ref{ch:Representation} are implemented as a part of the framework. The chromosome and the gene are classes with the data members specified. The fitness value (once data from the simulation has been collected) and the penalty function are responsibility of the chromosome. Those two clases along with the genetic operators have been tested using Python Standard Library \textit{unittest}.
 
 The framework also allows logging data from evolution. The format chosen for this purpose was \textit{JSON} since its integration with Python is straightforward and it is a human readable format, which will make easy to interpret the results. For convenience, the parameters to the algorithm are also in \textit{JSON} format. The logs contains the configuration \textit{JSON} object, the time of execution and the execution itself: a dictionary with all generations, each of them containing the value of the best fit individual, the fitness average of the population and the worst fitness value. It also includes the Shannon's entropy for the population.
+
+The source code can be found on Github\cite{ab-level}.
 %************************************************
 
 %*****************************************

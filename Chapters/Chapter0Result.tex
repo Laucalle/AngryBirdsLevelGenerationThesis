@@ -96,6 +96,24 @@ The only parameter that was changed for this experiment is the minimum number of
 The first thing to notice in these experiment(Table \ref{t:resOver}) is the increase of the average execution time: it went from 1.76 hours in the third experiment to 5.03 hours in this one. The time spent running the simulation for each population in this experiments and in the previous one should be similar. However, the number of executions drastically increased too. There is no doubt that placing at least ten objects is more difficult than placing 5. The average best fitness value slightly raised, while the average and worst values are lower. This suggest that the latest generations of this \acs{EA} are less diverse than those from the third experiment. 
 
 Examples of the levels can be found in the Appendix section \ref{a:e4}. Even though levels are a little less stable this time, they are more interesting, which does not mean they could be considered fun levels, or levels at all.
+
+\section{Execution stages}
+As the objective function is composed by several penalty functions and a fitness function, we can analyse how each of them influences the search. For one of the executions for the fourth experiments, we extracted the average value of each of those penalizations for every generation. The results are shown in Figure \ref{f:graph3}. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{gfx/penalty_evolution_lines.png}
+	\caption{Average value for penalization}\label{f:graph3}
+\end{figure}
+
+To make it easier to see, in Figure \ref{f:graph4} we show a zoom in. After less than 60 generations, the population quickly evolves to a low fitness value. The penalty for overlapping blocks drops to zero,  the distance penalty barely affects the fitness value. After 10 generations the \textit{base penalty}---the value that forces all in-game evaluated levels to be better fit than those who did not--- decreases to zero, while the penalty for broken blocks increases to form the majority of the fitness value. This means that after few generations almost all individuals are suitable for the simulation.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale=0.6]{gfx/penalty_evolution_lines_zoom.png}
+	\caption{Zoom in Figure \ref{f:graph3}}\label{f:graph4}
+\end{figure}
+
+Considering these phases and how they affect the outcome of the algorithm, if we decided to tune the parameters for those penalty functions (as discussed in Chapter \ref{ch:Conclusion}) we had to consider how it can affect the balance of those stages. 
 %************************************************
 
 %*****************************************
