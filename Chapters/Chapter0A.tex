@@ -13,6 +13,21 @@ The number of axes that could be separating axis is high, but the algorithm will
 
 To project the blocks into the axes, we perform a dot product operation between the axis and the vertices. The maximum and minimum will be the extremes of the projection. 
 
+\begin{algorithm}
+	\caption{SeparatinAxisTheorem}
+	\label{a:sat}
+	\KwIn{$verticesA$, $verticesB$}
+
+		axes = $((0,1)(1,0)(1,1)(1,-1))$\;
+		\For{$axis=axes_0 \to axes_3$}{
+			$min_0$,$max_0$ = project($verticesA$, $axis$)\;
+			$min_0$,$max_0$ = project($verticesA$, $axis$)\;
+			\If{$! min_0 \le min_1 \le max_0$ \&\& $min_1 \le min_0 \le max_1$}{\KwRet{False}}
+		}
+		\KwRet{True}
+	
+\end{algorithm}
+
 \section{Visualization of results in games}
 
 % NEED FORMATTING
