@@ -1,7 +1,7 @@
 %************************************************
 \chapter{Constrained optimization with EAs}\label{ch:EA}
 
-Section \ref{s:EAoverview} presents an overview of what is and which are the main components of an \acs{EA}. Here look in more detail to fitness functions and how to direct the search. 
+Section \ref{s:EAoverview} presents an overview of what is and which are the main components of an \acs{EA}. Here, look in more detail into fitness functions and how to direct the search.
 
 In evolutionary optimization the fitness function (being $f(x)$) is defined in a search space that contains a feasible region ($\mathcal{F}$), that can be limited by constraints (being $g_j(x)$).
 $$ f(x),\qquad x = (x_1,\ldots,x_n)\in \Re^n$$
@@ -13,7 +13,7 @@ A constrained problem can be turned into an unconstrained one with the inclusion
 
 $$ \psi(x) = f(x) +r_g\phi(g_j(x); \quad j = 1,\ldots, m )$$
 
-Using this parameter ---that can be dynamically adjusted--- the objective function can range from purely dominated by the fitness function to dominated by the penalty function. Canonical evolution strategies would \textit{overpenalize}, meaning that infeasible solutions would be discarded immediately. On the other hand, if the objective function \textit{underpenalizes}, the solution evolved by the algorithm may be belong to the infeasible region. It is recommended that the value for the penalty coefficient is balanced during the evolution since the optimal value is dependant on the problem and the population.
+Using this parameter---that can be dynamically adjusted---the objective function can range from purely dominated by the fitness function to dominated by the penalty function. Canonical evolution strategies would \textit{overpenalize}, meaning that infeasible solutions would be discarded immediately. On the other hand, if the objective function \textit{underpenalizes}, the solution evolved by the algorithm may be belong to the infeasible region. It is recommended that the value for the penalty coefficient is balanced during the evolution since the optimal value is dependent on the problem and the population.
 
 Another approach to constrained optimization is to transform it into multiobjective optimization\cite{runarsson2003evolutionary}, being one of the objectives to minimize the penalty function. Penalty functions usually guide the algorithm, producing a bias in the search. Multiobjective optimization does not produce such bias but it will spend more time exploring infeasible regions.
 

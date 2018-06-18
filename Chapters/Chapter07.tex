@@ -1,14 +1,15 @@
 %************************************************
 \chapter{Evolutionary Algorithm Framework}\label{ch:frameworkSelection}
 
-The selected language for this project was Python. It has a vast Standard Library and is well documented. There are a number of evolutionary programming frameworks for Python. We considered two in particular for this project:
+The selected language for this project was Python. It has a vast Standard Library and is well documented. There are a number of evolutionary programming frameworks for Python. We considered two in particular for this project: %%% "vast, well-documented Standard Library" queda más intellectual O_O¬
 
 \begin{itemize}
 	\item DEAP (Distributed Evolutionary Algorithms in Python)\cite{fortin2012deap}
 	\item PyEvolve\cite{perone2009pyevolve}
 \end{itemize}
 
-Since the game simulation will be used as a part of the fitness function, there is another aspect to keep in mind. The simulation takes several seconds to start, but much less between levels. When evaluating individuals in a evolutionary algorithm, it would be more efficient to avoid this overhead by simulating the whole population in a single execution than launching a a simulation for each individual. Then it seems compulsory that the framework used would allow this behaviour.
+Since the game simulation will be used as a part of the fitness function, there is another aspect to keep in mind. The simulation takes several seconds to start, but much less between levels. When evaluating individuals in a evolutionary algorithm, it would be more efficient to avoid this overhead by simulating the whole population in a single execution than launching a simulation for each individual. Then, it seems compulsory that the framework used would allow this behaviour.
+%%% "instead of launching", "it seems compulsory that the framework used would allow" -> "it seems compulsory that the framework used allow" porque ese "allow" en realidad es subjuntivo, aunque sólo lo notamos cuando vemos que la tercera persona de repente no lleva una "s" al final. Por ejemplo, "it is compulsory that you be here at this certain hour" -> "es obligatorio que __estés__ aquí a esta hora determinada".
 
 The information that describes a level can be too complex to have a binary representation as pure genetic algorithms suggest, so the framework should be flexible enough to support complex data structures. 
 
@@ -31,16 +32,17 @@ Other features that would be desirable for a framework to have in order to be su
 Looking at the table \ref{t:framework}, both frameworks offer what this project is looking for. However, it is important to note exactly how each one provides said feature:
 
 \begin{itemize}
-	\item Flexible data structures: both allow them, but the user has to provide the genetic operators. That is reasonable and expected. Using DEAP, the new data structure only needs to be registered in the \textit{Creator} class, but PyEvolve requires \textit{GenomeBase}---its base module for genomes--- to be modified in order to use custom data types.
-	\item Customizable fitness function calls: With DEAP you can register a function to evaluate individuals, but those have to take a single individual as a parameter. If we were to evaluate all of them at once, we will have to give up the algorithms the framework provides, executing each operator and managing parameters ourselves. In PyEvolve, although it is possible, it is rather inconvenient since it means , working around the \textit{GPopulation} class.
-\end{itemize} 
+	\item Flexible data structures: both allow them, but the user has to provide the genetic operators. That is reasonable and expected. Using DEAP, the new data structure only needs to be registered in the \textit{Creator} class, but PyEvolve requires \textit{GenomeBase}---its base module for genomes---to be modified in order to use custom data types.
+	\item Customizable fitness function calls: With DEAP you can register a function to evaluate individuals, but those have to take a single individual as a parameter. If we were to evaluate all of them at once, we would have to give up the algorithms the framework provides, executing each operator and managing parameters ourselves. In PyEvolve, although it is possible, it is rather inconvenient since it means working around the \textit{GPopulation} class.
+\end{itemize}
 
-The problem tackled in this project requires high customization. Both framework are fairly flexible and easy to use when presented with a pure numerical optimization problem, but that is not the case. Taking into account the time limitations for this project, productivity is really important. It is not worth adapting these frameworks, considering how little we gain from their use, even though it would not take a great amount of time. Instead, a new one was implemented, providing all the flexibility we were looking for.
+The problem tackled in this project requires high customization. Both frameworks are fairly flexible and easy to use when presented with a pure numerical optimization problem, but that is not the case. Taking into account the time limitations for this project, productivity is really important. It is not worth adapting these frameworks, considering how little we gain from their use, even though it would not take a great amount of time. Instead, a new one was implemented, providing all the flexibility we were looking for.
 
 \section{Implemented evolutionary framework}
 
-The framework needed is not complex, but it covers all the features required. The most important one is a fitness function that executes all the individuals at once. This does not mean parallelism, in fact the steps to take cannot be concurrent. First the penalization function is applied to all individuals and XML is generated for those not penalized. Only after that, the simulation is run. The whole evolution process is summarized in algorithm \ref{a:evolution}.
- 
+The framework needed is not complex, but it covers all the features required. The most important one is a fitness function that executes all the individuals at once. This does not mean parallelism, in fact the steps to take cannot be concurrent. First, the penalization function is applied to all individuals and an XML is generated for those not penalized. Only after that, the simulation is run. The whole evolution process is summarized in algorithm \ref{a:evolution}.
+
+
 \begin{algorithm}
 	\caption{Evolution}
 	\label{a:evolution}
@@ -63,11 +65,11 @@ The framework needed is not complex, but it covers all the features required. Th
 }
 \end{algorithm}
 
-It follows the basic structure of a generic genetic algorithm, with the difference in the fitness function that was mentioned before. The terminating condition can be a set number of generations, or until a certain fitness value for the best individual is reached. In our case this threshold is set to $0.01$. Another stop criteria is several generations without any change in the population, which means that for several generations any new individual was better than the worst previous one. In this situation, we assume that a local minimum has been reached. 
+It follows the basic structure of a generic genetic algorithm, with the difference in the fitness function that was mentioned before. The terminating condition can be a set number of generations, or until a certain fitness value for the best individual is reached. In our case this threshold is set to $0.01$. Another stop criteria is several generations without any change in the population, which means that for several generations any new individual was worse than the previous worst one. In this situation, we assume that a local minimum has been reached.
 
-All operators described in Chapter \ref{ch:Representation} are implemented as a part of the framework. The chromosome and the gene are classes with the data members specified. The fitness value (once data from the simulation has been collected) and the penalty function are responsibility of the chromosome. Those two clases along with the genetic operators have been tested using Python Standard Library \textit{unittest}.
+All operators described in Chapter \ref{ch:Representation} are implemented as a part of the framework. The chromosome and the gene are classes with the data members specified. The fitness value (once data from the simulation has been collected) and the penalty function are responsibility of the chromosome. Those two classes, along with the genetic operators, have been tested using Python Standard Library \textit{unittest}.
 
-The framework also allows logging data from evolution. The format chosen for this purpose was \textit{JSON} since its integration with Python is straightforward and it is a human readable format, which will make easy to interpret the results. For convenience, the parameters to the algorithm are also in \textit{JSON} format. The logs contains the configuration \textit{JSON} object, the time of execution and the execution itself: a dictionary with all generations, each of them containing the value of the best fit individual, the fitness average of the population and the worst fitness value. It also includes the Shannon's entropy for the population.
+The framework also allows logging data from evolution. The format chosen for this purpose was \textit{JSON} since its integration with Python is straightforward and it is a human-readable format, which will make easy to interpret the results. For convenience, the parameters to the algorithm are also in \textit{JSON} format. The logs contain the configuration \textit{JSON} object, the time of execution and the execution itself: a dictionary with all generations, each of them containing the value of the best fit individual, the fitness average of the population and the worst fitness value. It also includes the Shannon's entropy for the population. 
 
 The source code can be found on Github\cite{ab-level}.
 %************************************************

@@ -6,11 +6,11 @@ Let's have a look at some participants in previous editions of the Angry Birds L
 \section{Constructive approach}
 In the two solutions proposed by Matthew Stephenson and Jochen Renz \cite{stephenson2017generating} \cite{stephenson2016procedural} the structures displayed on the level are constructed from the top down, in several phases. 
 
-First, they build an structure recursively, each row composed of a single type of block (with a fixed rotation). The likelihood of selecting a certain block is given by a probability table. Then the blocks are placed using a tree structure, where the first selected block is the peak and blocks underneath it are split into subsets that support the previous row with one, two or three blocks. This ensures local stability, but not global stability, which is tested once the whole structure is completed. The second solution also tries to add variety by replacing some blocks with others of the same height.
+First, they build a structure recursively, each row composed of a single type of block (with a fixed rotation). The likelihood of selecting a certain block is given by a probability table. Then, the blocks are placed using a tree structure, where the first selected block is the peak and blocks underneath it are split into subsets that support the previous row with one, two or three blocks. This ensures local stability, but not global stability, which is tested once the whole structure is completed. The second solution also tries to add variety by replacing some blocks with others of the same height.
 
 After that, other objects (pigs and TNT) are placed. Potential positions for those objects are recorded, first trying to place them in the centre of each block, then right above the edges of it, checking if there is enough space. Available positions are ranked based on structural protection, dispersion, etc. and then filled with the desired number of objects.
 
-The second solution also selects material ---which can be stone, ice or wood--- based on trajectory analysis, clustering, row grouping, structure grouping or randomly. Weak points are set to stone material and the rest using one of the previous strategies. Trajectory analysis based strategy sets to the same material all blocks in the trajectory of a shot aimed for a particular pig. Clustering strategy takes a random block, sets its material and propagates to the surrounding blocks that have not been assigned yet. Row grouping and structure blocking apply the same material to a whole row or structure respectively.
+The second solution also selects material---which can be stone, ice or wood---based on trajectory analysis, clustering, row grouping, structure grouping or randomly. Weak points are set to stone material and the rest using one of the previous strategies. Trajectory analysis-based strategy sets to the same material all blocks in the trajectory of a shot aimed at a particular pig. Clustering strategy takes a random block, sets its material and propagates to the surrounding blocks that have not been assigned yet. Row grouping and structure blocking apply the same material to a whole row or structure respectively.
 
 Materials also determine which kind of birds will be used in the level, since some birds are more efficient against certain materials than others. The number of birds available for the player to solve the level is estimated using AI agents designed for a different competition. If the AI agents are unable to solve the level, it is discarded. The lowest number of birds used by the agents is the chosen for the level.
 
@@ -20,21 +20,21 @@ The probability table was tuned using search-based optimization methods.
 
 Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} present a solution based on \acf{SBPCG} using a genetic algorithm and a game clone developed in Unity Engine to evaluate the levels.
 
-In the genetic algorithm individuals correspond to levels, each represented by an array of columns. Each column is a sequence of blocks, pigs and predefined composed blocks, using an identification integer. This representation also includes the distances between different columns. 
+In the genetic algorithm individuals correspond to levels, each represented by an array of columns. Each column is a sequence of blocks, pigs and predefined compound blocks, using an identification integer. This representation also includes the distances between different columns.
 
-The population is initialized randomly following a probability table which defines the likelihood of a certain element to be placed in a certain position inside a column.
+The population is initialized randomly following a probability table which defines the likelihood of a certain element being placed in a certain position inside a column.
 
 For the evaluation, levels are executed in the game which stores data about the simulation. The fitness function is described as:
 
 $$ f_{ind} = \frac{1}{3}(\frac{1}{n} \sum_{n-1}^{i=0}{v_i}+\frac{\sqrt{(|b|-B)^2}}{Max_b-B}+ \frac{1}{1-|p|})$$ 
 
-where $v_i$ is the average magnitude of the velocity vector for block $i$, $|b|$ is the total of blocks in the level  and $|p|$ the amount of pigs. The rest are parameters: $B$ the desired amount of blocks and $Max_b$ the maximum number of elements.
+where $v_i$ is the average magnitude of the velocity vector for block $i$, $|b|$ is the total of blocks in the level and $|p|$ the count of pigs. The rest are parameters: $B$ the desired amount of blocks and $Max_b$ the maximum number of elements.
 
-The recombination process uses an Uniform Crossover where the new individual is generated selecting for each position a column from one of the parents which occupies the same position. When the parents are not the same length, the remaining columns are selected with a $50\%$ of probability. Mutation simply changes with a certain probability each element of the individual randomly (either being a column element or the distance between columns).
+The recombination process uses an Uniform Crossover where the new individual is generated picking for each position a column from one of the parents which occupies the same position. When the parents are not the same length, the remaining columns are selected with a $50\%$ of probability. Mutation simply changes with a certain probability each element of the individual randomly (either being a column element or the distance between columns).
 
 \subsection{Open Source Simulator}
 
-The fitness evaluation requires a simulation to test the behaviour of the levels under the game's physics. Angry Birds is not open source software so the code is not available, so a game clone was developed to fill this gap, using the Unity Engine. 
+The fitness evaluation requires a simulation to test the behaviour of the levels under the game's physics. Angry Birds is not open source software and so the code is not available; therefore, a game clone was developed to fill this gap, using the Unity Engine.
 
 Levels are described in XML files which the game takes as an input. They are parsed to run the simulation which then generates new XML files as an output. Those files contain information about the execution of a certain level such as average velocity of each element, the amount of collisions and the final rotation. 
 %*****************************************
