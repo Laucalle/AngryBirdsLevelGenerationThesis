@@ -2,16 +2,40 @@
 \subsection{The necessity of Procedural Content Generation}
 Computer games are a relatively new form of media whose popularity has been increasing non-stop since they appeared in the 70s. Many challenges have arisen---and will keep doing so---throughout the evolution of the industry, from the early arcades to the most complex modern open-world video games. Developers have come up with all sorts of creative ways to overcome hardware limitations, delivering better graphics and audio. They have pushed the boundaries of the medium by finding new forms of interaction and engaging players with compelling storytelling and original game mechanics. Many of them are related to the fast pace at which the game industry is growing, reaching every passing year to broader audiences that demand a wider range of experiences. Crafting them requires great effort and a high consumption of resources. How do we create a vast amount of content that suits players expectations with lower investment? The answer can be replayability, adaptative content or reduction of designers' workload. All of which can be tackled using PCG.\cite{togelius2016introduction}
 
+% Please cosider doing a hard-wrap on the text, editing and 
+% keeping track of changes in git is going to be easier.
+
+% Consider changing: (others will simply follow each paragraph from now on)
+% that suits players expectations with lower investment?
+% that meets players' expectations with lower investment?
+
+% The sentence:
+% The answer can be replayability, adaptative content or 
+% reduction of designers' workload.
+
+% I think what you mean is: IF we answer the above question, then we will have:
+% increased replayability, adaptative content and a reduction of designers' workload.
+% As it is, this is not easily understood, the above are the result, the benefits not the answer
+
 Replayability, also referred to as replay value, relies on how interesting playing a game more than once is. It is easy to understand why it would be a desirable feature for both players and developers: from the player's point of view, they can extend the game experience further---past the credits roll. For designers, replay value means their product offers more with less manually crafted content.
+
+% how interesting IS playing a game more than once. - Mario 
 
 Games can also engage players by adapting gameplay elements to each individual player. In a literal sense, this would be impracticable. Instead, users are usually presented with options to adjust to their preferred style. What is more interesting, the game itself can change based on in-game player behaviour. It can regulate its difficulty level to fit the player's learning curve or create content that matches the player's taste.
 
+% nstead, users are usually presented with options to adjust to their preferred style.
+% nstead, users are usually presented with options to adjust (gameplay, difficulty, scenery) (game elements?) to their preferred style.
+
 Both applications above use PCG as a replacement for human designers. However, PCG can be used as a tool to assist developers. It can suggest what might be a base for later development, enhancing human creativity rather than displacing it. 
+
 
 \subsection{What is Procedural Content Generation}
 The definition of Procedural Content Generation (PCG) has been broadly discussed but there is no agreement. We have plenty of examples of what \textit{is} and what \textit{is not} PCG, but every definition struggles to cover all cases, either being too inclusive or too exclusive. The one we choose here balances well between the two, defining PCG as \textit{the algorithmical creation of game content with limited or indirect user input} \cite{togelius2011procedural}.
 
+% You can define PCG, NPC, AI the first time they are mentioned
+
 Although PCG often uses AI techniques, this definition does not include all uses of AI in games. We do not consider NPC behaviour or AI playing agents as content, thus they are not PCG either. Aesthetic elements, game rules, levels, items, stories and characters among others are considered content in this definition.
+
 
 Note that neither computers nor video games are mentioned in the definition. In fact, PCG has its roots in analogical games. This may conflict with the \textit{limited or indirect user input}, but it is reasonable to assume that following a detailed set of instructions---even if it is done by a human---is not \textit{input}. The underlying concepts used much earlier by non-digital games still prevail in modern video games. Using an algorithm to assemble pre-designed pieces is a common technique in tabletop roleplaying guides---where the algorithm usually consists in several dice rolls---such as \textit{Dungeon \& Dragons}. It is not surprising that one of the early adaptations of PCG to digital platforms aimed to generate monsters and dungeons for physical games.\cite{smith2015analog}
 
@@ -34,11 +58,15 @@ A special kind of \textit{generate-and-test} approach to PCG is Search-based Pro
 
 The test function does not determine if a solution is valid, but it grades how good the solution is. This is often called \textit{fitness function}. In SBPCG, how to evaluate the quality of a solution has no straightforward answer. It requires formalizing what is fun, exciting or engaging content as a \textit{fitness function}, which are usually based in tricky assumptions.
 
+% It requires formalizing as a \textit{fitness function} how much fun, exciting or engaging certain content is.  
+
 There are three main classes of \textit{fitness functions} in SBPCG\cite{togelius2010search}:
 
 \begin{itemize}
 	\item \textit{Direct Fitness Function} where certain features are extracted from the generated content and directly mapped to a fitness value. Those features must be easily measurable.
 	\item \textit{Simulation-Based Fitness Function} where an agent plays throw some part of the game that involves the generated content. The fitness is calculated using features from the agent's gameplay. 
+	% where an agent plays through some part 
+	
 	\item \textit{Interactive Fitness Function} where the fitness value is obtained from the player, whether it be explicitly by asking them or implicitly by measuring certain responses to the game. 
 \end{itemize}
 
