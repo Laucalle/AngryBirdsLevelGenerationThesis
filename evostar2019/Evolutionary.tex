@@ -1,0 +1,118 @@
+%************************************************
+\chapter{Evolutionary Algorithm}\label{ch:Representation}
+
+In this chapter, level representation is discussed, as well as several genetic operators that will be later used to run the experiments. 
+
+\section{Fitness function}
+
+The most challenging part of the level generation process is to create stable structures. As obvious as it is, the main feature of a stable level is that it is not in motion. So it seems reasonable to evaluate their stillness as opposed to their speed.
+
+$$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
+
+As mentioned in Chapter \ref{ch:gameApdaptation} the game output provides the average magnitude of velocity for each block. This vector is noted as $V$, with $|V|$ being the length of the vector. The number of blocks in an individual is $b$ and it can differ from the length of $V$ since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and it is multiplied by a penalization factor, since a level whose blocks break without user interaction would not be considered valid. This happens when a block free-falls from a certain height or collides with a falling object. $P_{broken}$ is set to $100$ since objects in a level do not usually reach that velocity, therefore it will separate non-valid levels from potentially good ones.
+
+Not all levels are evaluated using a simulation, since it is a costly process. Although we may know that a given level will perform poorly in the simulation, removing it from the population will cause a high loss of diversity. For that matter, before testing a level, there are some indicators that a level would not be suitable and can be skipped in the simulation. Those are its distance to the ground and the number of blocks that overlap.
+
+If the lowest object is not close to the ground is very likely that all blocks will break in the impact. Levels that have all their blocks higher than a certain threshold will not be simulated in the game. The threshold used is $0.1$ in game units and the penalty applied to the fitness value is $10$:
+$$f_{distance} =
+\begin{cases}
+P_{distance}\cdot D_{lowest},& \text{if } D_{lowest} > threshold\\
+0,              & \text{otherwise}
+\end{cases}
+ $$
+
+
+The other measure is the number of overlapping blocks. The separating axis theorem---explained in appendix \ref{ch:appendix}---determines if two convex shapes intersect. It is commonly used in game development for detecting collisions. A level with blocks that occupy the same space is not likely to be stable, as the Unity Engine will solve the issue moving the blocks until there is no collision. Since Unity Engine is not open source and there is no documentation on how exactly those collisions are solved, we assume that a precise prediction of the positions of the blocks is not possible and therefore the fitness value obtained could be inaccurate. A penalization is applied and the level is not simulated in game. In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ where the first factor is a penalty set to $10$ and the second is the number of blocks that overlap with each other. 
+
+If both $f_{distance}$ and $f_{overlapping}$ are $0$ then the level is suitable for the simulation and fitness is calculated as $fitness_{ind}$. As discussed in Chapter \ref{ch:EA}, this would be considered \textit{overpenalization} but exploring infeasible regions entails a serious overhead that we need to minimize. On the other hand, levels with multiple blocks broken during the simulation are not feasible either but running the simulation is necessary. In this case, the penalization does not prevent the region to be explored.
+\section{Level representation}
+
+Previous approaches to this problem (studied in Chapter \ref{ch:otherSolutions}) provide fairly constrained outputs. The constructive method presented creates pyramid-like structures and, even though there is a variety of levels, the method is highly specialized in this kind of theme. The search-based approach only produces tower structures adding some variety by having pre-built compound blocks.
+
+Since one of the objectives of this project is to explore the expressiveness and variability of \acs{SBPCG}, it seems reasonable to use a flexible representation. 
+
+One of the early considered options was the use of grammars. In this category we can find Grammatical Evolution\cite{lourencco2015sge} and Generative Grammatical Encodings\cite{hornby2001advantages}. The first one focuses on optimizing how a grammar is applied, which production rules to expand and in which order. This means there is a grammar previous to the evolution process. In our specific case, designing a grammar that solves the problem is a deeply complex problem itself in addition to the optimization process. The generative grammatical encodings use a range of operations that are combined in the evolution process to form a grammar. Designing those operations is much easier which also allows greater variability in the output.
+
+Although those approaches are promising, the scope of this project and its time limitations made these options little feasible. Instead, we will try a less directed search than previous solutions while keeping a simple representation. 
+\subsection{Gene representation}
+Individuals are composed by a list of blocks, each of them being a gene. Special pieces such as platforms, TNT boxes or pigs are not considered in this phase. The building blocks for the game have several attributes that characterize them: 
+
+\begin{itemize}
+	\item Type: there are eight regular blocks that can be placed in the level with distinct shapes or sizes. Represented as an integer between $0$ and $7$.
+	\item Position: coordinates $x$ and $y$ of the centre of the block in game units.
+	\item Rotation: rotation of the block in degrees. Here four different rotations are considered, 0º, 45º, 90º or 135º represented as integers between $0$ and $3$.
+\end{itemize}
+
+Using this representation a gene will be formed by two integers and two floating point numbers.
+The position of the corners of the block is frequently required, so it is stored along with those attributes even though it can be calculated using the size, the position and rotation of the block. 
+
+There are three types of materials in the game, which determine the durability of the block. However, this does not affect their stability, so it will remain constant for now as \textit{wood} material.
+
+
+\subsection{Chromosome representation}
+
+Individuals are a collection of genes, in the same way a level is a collection of building blocks. The number of blocks is variable and the order in which they are listed is not important. 
+
+As previously stated, only promising individuals are tested in-game, meanwhile those who are not, are penalized instead. This penalty is stored, separately from the fitness value for the individual. The reason for this is that it may change over generations. The goal of the penalization is to maintain fitness value of not tested level above ---it is a minimization problem--- the in-game tested levels, so the starting point for fitness of such individuals is the worst in-game score.
+
+This penalization is calculated using the distance of the lowest block to the ground, which can be easily obtained, and the number of blocks that collide. This requires a bit more of computation, so it will be stored and set in the initialization of the individual. When a gene is modified, the number of overlapping blocks is recalculated for that specific change.
+
+Considering all of the above, the chromosome object is composed by:
+\begin{itemize}
+	\item A list of genes.
+	\item A fitness value.
+	\item A penalty (set to $-1$ for in-game evaluated levels).
+	\item Number of overlapping blocks (calculated).
+\end{itemize}
+
+\section{Genetic Operators}
+
+\subsection{Initialization}\label{ga:init}
+
+Initialization is done randomly, with each individual having a random number of genes. Those genes can be initialized using several methods. 
+
+\begin{itemize}
+	\item Random: selects a random number for each attribute of the gene.
+	\item No Overlapping: also selects a random number but the gene is only added to the chromosome if it does not overlap with an already existing gene.
+	\item Discrete: selects a random number for type and rotation, but the position must be multiple of the dimensions of the smallest block (blocks will be aligned).
+	\item Discrete without overlapping: it combines the second and third initialization method.
+\end{itemize}
+
+\subsection{Selection}\label{ga:select}
+
+Parents are selected using tournaments. Two individuals are chosen from the population and the best of them will be a parent in this generation. This is repeated until a certain percentage of pairs have been reached. It is important to note that individuals chosen are not removed from the population and therefore they can appear several times in the list of parents. 
+
+\subsection{Crossover}
+
+Once the parents have been selected, we implement two different methods of combination.
+
+\subsubsection{Sample Crossover}\label{ga:cross1}
+
+This operator gives a single individual per parent pair. It takes all genes from both parents---excluding genes that are repeated---and randomly takes a number of them to create the new individual. The number of blocks is the minimum between the maximum number of blocks allowed, the mean of the two parent individuals and the number of distinct genes.
+
+\subsubsection{Common Blocks}\label{ga:cross2}
+
+In this case, the operator produces two individuals. The common genes to both parents are passed on to both children. The remaining genes are randomly distributed to each child, half to one and half to the other. 
+
+\subsection{Mutation}\label{ga:mut}
+
+There are four different mutations:
+
+\begin{itemize}
+	\item Type: type is represented as an integer, so it adds or subtracts one to the current value.
+	\item Rotation: similarly to type mutation.
+	\item Position X: a real value between $0$ and $1$---excluding $0$---is added or subtracted from the value of the position X.
+	\item Position Y: same as position X mutation, for position Y.
+\end{itemize}
+
+\subsection{Replacement}\label{ga:rep}
+
+The new generation is selected using an elitist strategy. Best individuals in both the old population and their offspring pass on the next generation, maintaining the size of the population.
+
+%************************************************
+
+%*****************************************
+%*****************************************
+%*****************************************
+%*****************************************
+%*****************************************
