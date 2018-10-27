@@ -7,6 +7,14 @@ $$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
 
 As mentioned in section \ref{ch:gameApdaptation} the game output provides the average magnitude of velocity for each block. This vector is noted as $V$, with $|V|$ being the length of the vector. The number of blocks in an individual is $b$ and it can differ from the length of $V$ since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and it is multiplied by a penalization factor, since a level whose blocks break without user interaction would not be considered valid. This happens when a block free-falls from a certain height or collides with a falling object. $P_{broken}$ is set to $100$ since objects in a level do not usually reach that velocity, therefore it will separate non-valid levels from potentially good ones.
 
+% When we say length of a vector, we think about the norm (the actual lenght) 
+% for instance the hypotenuse in a 2D vector. I think here we are talking about the
+% number of elements. If V is a set, then the cardinality |V| is right. 
+% From your "calculateFitness" this is len so it is a list. 
+% I was confused because we are talking about magnitude, velocity, etc. 
+% Consider changing the name of V to an ordered set? - Mario
+  
+
 Not all levels are evaluated using a simulation, since it is a costly process. Although we may know that a given level will perform poorly in the simulation, removing it from the population will cause a high loss of diversity. For that matter, before testing a level, there are some indicators that a level would not be suitable and can be skipped in the simulation. Those are its distance to the ground and the number of blocks that overlap.
 
 If the lowest object is not close to the ground is very likely that all blocks will break in the impact. Levels that have all their blocks higher than a certain threshold will not be simulated in the game. The threshold used is $0.1$ in game units and the penalty applied to the fitness value is $10$:
@@ -65,6 +73,8 @@ Initialization is done randomly, with each individual having a random number of 
 \end{itemize}
 
 Parents are selected using tournaments. Two individuals are chosen from the population and the best of them will be a parent in this generation. This is repeated until a certain percentage of pairs have been reached. It is important to note that individuals chosen are not removed from the population and therefore they can appear several times in the list of parents. 
+% Is there a reason for this? For small populations some individual could
+% be the parent of every member of the next generation :)  - Mario 
 
 Once the parents have been selected, we implement two different methods of combination.
 \begin{itemize}
@@ -82,6 +92,7 @@ There are four different mutations:
 \end{itemize}
 
 The new generation is selected using an elitist strategy. Best individuals in both the old population and their offspring pass on the next generation, maintaining the size of the population.
+
 
 %************************************************
 
