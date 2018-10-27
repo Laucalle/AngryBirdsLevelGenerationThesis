@@ -16,7 +16,9 @@ The probability table was tuned using search-based optimization methods.
 
 \subsection{Search-based approach}
 
-Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} present a solution based on SBPCG using a genetic algorithm and a game clone developed in Unity Engine to evaluate the levels.
+Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} have
+presented a solution based on SBPCG using a genetic algorithm and a
+game clone developed in Unity Engine to evaluate the levels. 
 
 In the genetic algorithm individuals correspond to levels, each represented by an array of columns. Each column is a sequence of blocks, pigs and predefined compound blocks, using an identification integer. This representation also includes the distances between different columns.
 
@@ -30,11 +32,6 @@ where $v_i$ is the average magnitude of the velocity vector for block $i$, $|b|$
 
 The recombination process uses an Uniform Crossover where the new individual is generated picking for each position a column from one of the parents which occupies the same position. When the parents are not the same length, the remaining columns are selected with a $50\%$ of probability. Mutation simply changes with a certain probability each element of the individual randomly (either being a column element or the distance between columns).
 
-\subsubsection{Open Source Simulator}
-
-The fitness evaluation requires a simulation to test the behaviour of the levels under the game's physics. Angry Birds is not open source software and so the code is not available; therefore, a game clone was developed to fill this gap, using the Unity Engine.
-
-Levels are described in XML files which the game takes as an input. They are parsed to run the simulation which then generates new XML files as an output. Those files contain information about the execution of a certain level such as average velocity of each element, the amount of collisions and the final rotation. 
 %*****************************************
 %*****************************************
 %*****************************************
