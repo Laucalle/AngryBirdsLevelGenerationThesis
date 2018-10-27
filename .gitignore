@@ -11,6 +11,9 @@
 *.cb
 *.cb2
 
+# Mac hidden folder
+.DS_Store
+
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
