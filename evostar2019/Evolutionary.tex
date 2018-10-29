@@ -26,8 +26,13 @@ $$f_{distance} =
 \end{cases}
  $$
 
+% This is question about your code. In there each block individual
+% has a penaly attribute. This is a penalty value or is something that is
+% calculated? This value is the same for all individuals? If it is maybe
+% it belongs on the experiment or evolution object.
 
-The other measure is the number of overlapping blocks. The separating axis theorem\cite{ericson2004real} determines if two convex shapes intersect. It is commonly used in game development for detecting collisions. A level with blocks that occupy the same space is not likely to be stable, as the Unity Engine will solve the issue moving the blocks until there is no collision. Since Unity Engine is not open source and there is no documentation on how exactly those collisions are solved, we assume that a precise prediction of the positions of the blocks is not possible and therefore the fitness value obtained could be inaccurate. A penalization is applied and the level is not simulated in game. In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ where the first factor is a penalty set to $10$ and the second is the number of blocks that overlap with each other. 
+
+The other measure is the number of overlapping blocks. The separating axis theorem\cite{ericson2004real} determines if two convex shapes intersect. It is commonly used in game development for detecting collisions. A level with blocks that occupy the same space is not likely to be stable, as the Unity Engine will solve the issue moving the blocks until there is no collision. Since Unity Engine is not open source and there is no documentation on how exactly those collisions are solved, we assume that a precise prediction of the positions of the blocks is not possible and therefore the fitness value obtained could be inaccurate. A penalization is applied and the level is not simulated in-game. In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ where the first factor is a penalty set to $10$ and the second is the number of blocks that overlap with each other. 
 
 If both $f_{distance}$ and $f_{overlapping}$ are $0$ then the level is suitable for the simulation and fitness is calculated as $fitness_{ind}$. This would be considered \textit{overpenalization} but exploring infeasible regions entails a serious overhead that we need to minimize. On the other hand, levels with multiple blocks broken during the simulation are not feasible either but running the simulation is necessary. In this case, the penalization does not prevent the region to be explored.
 
@@ -77,6 +82,11 @@ Parents are selected using tournaments. Two individuals are chosen from the popu
 % Is there a reason for this? For small populations some individual could
 % be the parent of every member of the next generation :)  - Mario
 % The reason was we were getting very poor results, beacuse we start with very few fairly good individuals. Should this be mentioned here? - Laura
+% Yes, you should mention it. Beacuse this a good problem for future work. 
+% For instance you could try to do this only at the begining and after several
+% generations change it to something not as extreme. This means that the parameters
+% of the algorithm are dynamic or adapted. - Mario
+
 
 Once the parents have been selected, we implement two different methods of combination.
 \begin{itemize}
