@@ -1,0 +1,36 @@
+%************************************************
+\subsection{Conclusion}
+
+Here, we briefly recap several aspects of the development of this project. First, we reviewed the context of the problem: PCG. In section \ref{ch:context}, we looked at the main reasons for its existence: from replacing human creativity where it cannot reach (unlimited or personalized) to enhancing and speeding the creative process. In some cases, PCG can  be considered a kind of creative expression for itself. The technical background to approach the problem is discussed in section \ref{sec:soa}.
+
+
+This project was developed with a set of objectives in mind (stated in section \ref{motivation}). The first goal was to explore the expressiveness and variability of SBPCG with evolutionary techniques. Perhaps the level of achievement of this one is not as easily measurable as the other three. It could seem like this objective has not been fully accomplished: only one SBPCG method has been implemented and tested. However, it was not in the scope of the project to test SBPCG in general, but in this particular case, for this particular game. Considering this, the method studied was sufficiently general and flexible to draw some conclusions about the topic. SBPCG methods are a potential good solution to offline content generation but it requires a great amount of problem-specific knowledge. Like any other form of creative work, the biggest issue may be how to measure how good, creative or enjoyable is the piece. The more rules the author adds, expressiveness starts to get lost as the results are variations of the same idea. However, it is crystal clear, from the experiments run in this project, that a lack of knowledge will lead to unexpected and even disappointing outcomes.
+
+The second objective, adapting the game to extract data from execution, was certainly achieved. It was also a basic requirement to proceed with the rest of them. The game does provide the data, as long as the input is correctly structured. Although the original intention was to make it available on Linux, currently it can only be executed with the desired behaviour on Windows. Another issue is that the simulation is not easily adaptable. If the fitness function of the EA is changed and needs data that is not included in the output right now, the game would have to be changed and compiled again.
+
+Producing stable structures under gravity was the third objective, and can be considered half a victory. The levels generated in the last experiments were undeniably stable. Whether or not they can be considered structures, that is arguable. Again, the main issue is how we evaluate the levels. In fact this is a matter of how we define what an Angry Birds' level \textit{is} and if that definition matches the fitness function. A lot of elements were correct, but the definition was not complete.
+
+This idea brings us to the last objective, that was not achieved. Without results that match the definition of an Angry Birds level, placing the remaining objects would not have made the level playable. The partial achievement of the third goal, blocked the fourth one as this objective was dependent on the third one.
+
+To conclude on an optimistic tone, this work provides an interesting insight into the SBPCG, through the completion---and failure---of those four goals.
+
+\subsection{Future work}
+
+In order to improve the results of the method, different constraints could be expressed as multiple objectives. Overlapping blocks, velocity and height could be treated as minimization objectives.
+
+Once we had a generator that meets our expectations, performance could be enhanced by the analysis of the best set of initial parameters using Analysis of Variance (or ANOVA), as presented in \cite{estevez2017statistical}. 
+
+Some options were discarded for time limitations, so these could be main areas of development. The chromosome representation using generative grammatical encoding\cite{hornby2001advantages}, although it would radically change the structure of the method, might ensure that generated levels are consistent. This would require carefully selection the operators that would be the building blocks of the generative grammar.
+
+Another important issue that needs to be addressed is the time performance. Right now the simulation is the main bottleneck in the execution. One way to speed up the process can be \textit{cleaning} the current simulation, getting rid of any unnecessary asset while maintaining the bare minimum. However, this will not solve the problem, since the content generator will still need to launch an external executable.
+
+The communication between the simulation and the content generator is through read and write operations on disk, instead of memory. This could be avoided if both tools were integrated in one. If we aim for an online automatic generator, the generator should be integrated in the game. However, if our goal is to generate levels for mixed authorship, as an assistance to developers, it may be a better idea to integrate the simulation in the generator. This could be done by approximating in-game physics with real physics, as described in \cite{blum1970stability}. 
+
+
+%************************************************
+
+%*****************************************
+%*****************************************
+%*****************************************
+%*****************************************
+%*****************************************
