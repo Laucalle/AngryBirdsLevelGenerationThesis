@@ -13,6 +13,12 @@
 \newcommand{\keywords}[1]{\par\addvspace\baselineskip
 \noindent\keywordname\enspace\ignorespaces#1}
 
+\usepackage{tabularx} % better tables
+\setlength{\extrarowheight}{3pt} % increase table row height
+\newcommand{\tableheadline}[1]{\multicolumn{1}{c}{\spacedlowsmallcaps{#1}}}
+\newcommand{\myfloatalign}{\centering} % to be used with each float for alignment
+\usepackage{caption}
+\usepackage[ruled]{algorithm2e}
 %\providecommand{\tabularnewline}{\\}
 \usepackage{listings}
 \usepackage{color}
@@ -136,6 +142,7 @@
 \label{sec:torcs}
 \input{Modifications}
 \input{Evolutionary}
+\input{Framework}
 
 
 
