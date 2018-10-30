@@ -30,6 +30,7 @@ $$f_{distance} =
 % has a penaly attribute. This is a penalty value or is something that is
 % calculated? This value is the same for all individuals? If it is maybe
 % it belongs on the experiment or evolution object.
+% There is a penalty that is equal for all of them. It was that way to make the fitness value calculation of each individual independent. I am pretty sure it would be easy to change. Does it need to be change before the paper submission date? 
 
 
 The other measure is the number of overlapping blocks. The separating axis theorem\cite{ericson2004real} determines if two convex shapes intersect. It is commonly used in game development for detecting collisions. A level with blocks that occupy the same space is not likely to be stable, as the Unity Engine will solve the issue moving the blocks until there is no collision. Since Unity Engine is not open source and there is no documentation on how exactly those collisions are solved, we assume that a precise prediction of the positions of the blocks is not possible and therefore the fitness value obtained could be inaccurate. A penalization is applied and the level is not simulated in-game. In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ where the first factor is a penalty set to $10$ and the second is the number of blocks that overlap with each other. 
@@ -86,7 +87,7 @@ Parents are selected using tournaments. Two individuals are chosen from the popu
 % For instance you could try to do this only at the begining and after several
 % generations change it to something not as extreme. This means that the parameters
 % of the algorithm are dynamic or adapted. - Mario
-
+% OK, I added it to the Future Work section. 
 
 Once the parents have been selected, we implement two different methods of combination.
 \begin{itemize}

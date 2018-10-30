@@ -18,6 +18,8 @@ To conclude on an optimistic tone, this work provides an interesting insight int
 
 In order to improve the results of the method, different constraints could be expressed as multiple objectives. Overlapping blocks, velocity and height could be treated as minimization objectives.
 
+If we pay attention at the stages of evolution in this project, there is also room for improvement in the genetic operators. For example, the initialization produces a small amount of valid individuals which suggested that an elitist strategy for selection would work best. However, new experiments will help to better balance exploration and exploitation. 
+
 Once we had a generator that meets our expectations, performance could be enhanced by the analysis of the best set of initial parameters using Analysis of Variance (or ANOVA), as presented in \cite{estevez2017statistical}. 
 
 Some options were discarded for time limitations, so these could be main areas of development. The chromosome representation using generative grammatical encoding\cite{hornby2001advantages}, although it would radically change the structure of the method, might ensure that generated levels are consistent. This would require carefully selection the operators that would be the building blocks of the generative grammar.
