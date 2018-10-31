@@ -128,73 +128,7 @@
 % It's probably the best to eliminate subsections. It saves space, and it's a 
 %short paper anyway - JJ
 
-<<<<<<< HEAD
-The definition of Procedural Content Generation (PCG) has been broadly 
-discussed but there is no agreement. We have plenty of examples of what 
-\textit{is} and what \textit{is not} PCG, but every definition struggles to 
-cover all cases, either being too inclusive or too exclusive. The one we choose 
-here balances well between the two, defining PCG as \textit{the algorithmical 
-creation of game content with limited or indirect user input} 
-\cite{togelius2011procedural}.
 
-% You can define PCG, NPC, AI the first time they are mentioned
-% Done - Laura
-
-Although PCG often uses Artificial Intelligence (AI) techniques, this 
-definition does not include all uses of it in games. We do not consider Non 
-Playable Character (NPC) behaviour or AI playing agents as content, thus they 
-are not PCG either. Aesthetic elements, game rules, levels, items, stories and 
-characters among others are considered content in this definition.
-
-% In a conference paper, we shouldn't probably go down to the level of 
-%subsubsection (or, for that matter, subsection) - JJ
-% DONE - Laura
-% Still 20 pages; we should also eliminate subsections, and leave just 
-%top-level sections - JJ 
-
-
-% This item list should probably be eliminated to leave only the type we are 
-%going to use, along with the reference - JJ
-There are many PCG methods and it is necessary to look at some traits that 
-characterize and differentiate them from each 
-other\cite{togelius2016introduction}. The method proposed in this paper is 
-described as \textit{offline} ---the PCG occurs before the game session or 
-during development---, \textit{necessary} ---the generated content is part of 
-the essential structure of the game and so, it needs to be correct---, 
-\textit{generic} ---it does not take into account player behaviour---, 
-\textit{stochastic} ---it will not produce the same output given the same 
-input, which makes it difficult to replicate---, \textit{generate-and-test} 
----it produces potentially correct solutions that are tested and adjusted in 
-each iteration before giving the actual output--- and potentially be either 
-\textit{automatic} or \textit{mixed authorship}. PCG can be used as an 
-assisting tool for designers, whether the output is used as a base or as an 
-interactive process. Then we talk about mixed authorship, as opposed to the 
-automatic generation where the designer does not take part. 
-
-A special kind of \textit{generate-and-test} approach to PCG is Search-based 
-Procedural Content Generation (SBPCG), which is usually---but not 
-always---tackled with Evolutionary Algorithms. The problems faced by SBPCG are 
-not very far from those encountered in Evolutionary problems. 
-
-The test function does not determine if a solution is valid, but it grades how 
-good the solution is. This is often called \textit{fitness function}. In SBPCG, 
-how to evaluate the quality of a solution has no straightforward answer. It 
-requires formalizing as a \textit{fitness function} how much fun, exciting or 
-engaging certain content is, which are usually based in tricky assumptions.
-
-There are three main classes of \textit{fitness functions} in 
-SBPCG\cite{togelius2010search}:
-
-\begin{itemize}
-	\item \textit{Direct Fitness Function} where certain features are extracted 
-	from the generated content and directly mapped to a fitness value. Those 
-	features must be easily measurable.
-	\item \textit{Simulation-Based Fitness Function} where an agent plays 
-	through some part of the game that involves the generated content. The 
-	fitness is calculated using features from the agent's gameplay. 
-	% where an agent plays through some part 
-	% DONE - Laura
-=======
 %The definition of Procedural Content Generation (PCG) has been
 %broadly discussed but there is no agreement. We have plenty of
 %examples of what \textit{is} and what \textit{is not} PCG, but every
@@ -204,15 +138,18 @@ SBPCG\cite{togelius2010search}:
 
 For the purpose of this paper, we define Procedural Game Generation
 (PCG) as \textit{the algorithmical creation of game content with
-  limited or indirect user input} \cite{togelius2011procedural}. 
+  limited or indirect user input}. 
 %Although PCG often uses Artificial Intelligence (AI) techniques, this
 %definition does not include all uses of it in games. We do not
 %consider Non Playable Character (NPC) behaviour or AI playing agents
 %as content, thus they are not PCG either.
 Aesthetic elements, game rules, levels, items, stories and characters
-among others are considered content in this definition. % If this
+among others are considered content in this definition  
+\cite{togelius2011procedural}. % If this
                                 % definition is not totally yours, you
                                 % should give a reference for it.
+                                % It is from the same  
+                                %\cite{togelius2011procedural}
 
 Note that neither computers nor video games are mentioned in the
 definition. In fact, PCG has its roots in analogical games. This may
@@ -243,46 +180,28 @@ There are three main classes of \textit{fitness functions} in SBPCG\cite{togeliu
 
 \begin{itemize}
 	\item \textit{Direct Fitness Function} where certain features are extracted from the generated content and directly mapped to a fitness value. Those features must be easily measurable.
-	\item \textit{Simulation-Based Fitness Function} where an agent plays through some part of the game that involves the generated content. The fitness is calculated using features from the agent's gameplay. 
->>>>>>> e7504040ad8085e50783a207fd22c90925991a36
-	
+	\item \textit{Simulation-Based Fitness Function} where an agent plays 
+	through some part of the game that involves the generated content. The 
+	fitness is calculated using features from the agent's gameplay. 
 	\item \textit{Interactive Fitness Function} where the fitness value is 
 	obtained from the player, whether it be explicitly by asking them or 
 	implicitly by measuring certain responses to the game. 
 \end{itemize}
 
-<<<<<<< HEAD
-% This should go _after_ the definition, and probably before Motivation. - JJ
-% DONE - Laura
+% I've shorten the first part of this section, but I don't know if we better just remove it or remove why replayability, adptative contet and assistance tools are interesting for saving resources. Is there need to define PCG in depth in the previous section then? - Laura
+% No, really no need. It's a games track, probably people already know what it is. A general definition and focusing on the specific type we are using is more than enough. - JJ
+% OK, it does look good now. No need to eliminate - JJ
 
-% And it's a special session for games within EvoStar. There's no need to talk 
-%about the need to research games, I guess. Also, this probably should go 
-%before 
-%Motivation - JJ
-% I've shorten the first part of this section, but I don't know if we better 
-%just remove it or remove why replayability, adptative contet and assistance 
-%tools are interesting for saving resources. Is there need to define PCG in 
-%depth in the previous section then? - Laura
-% No, really no need. It's a games track, probably people already know what it 
-%is. A general definition and focusing on the specific type we are using is 
-%more 
-%than enough. - JJ
-PCG can tackle some of the challenges of that the video game industry is facing 
-nowadays. It grows at a fast pace, reaching every passing year 
-to broader audiences that demand a wider range of experiences. 
-However, crafting those them requires great effort and a high 
+The video game industry is growing at a fast pace, reaching every passing year 
+to broader audiences that demand a wider range of experiences. Developers have 
+pushed the boundaries of the medium by finding new forms of interaction and 
+engaging players with compelling storytelling and original game mechanics. 
+However, crafting those experiences  requires great effort and a high 
 consumption of resources. How do we create a vast amount of content that suits 
 players' expectations with lower investment? If we answer the above question, 
 then we will have increased replayability, adaptative content or reduction of 
 designers' workload. All of which can be tackled using 
 PCG.\cite{togelius2016introduction}
-=======
-% I've shorten the first part of this section, but I don't know if we better just remove it or remove why replayability, adptative contet and assistance tools are interesting for saving resources. Is there need to define PCG in depth in the previous section then? - Laura
-% No, really no need. It's a games track, probably people already know what it is. A general definition and focusing on the specific type we are using is more than enough. - JJ
-% OK, it does look good now. No need to eliminate - JJ
-
-The video game industry is growing at a fast pace, reaching every passing year to broader audiences that demand a wider range of experiences. Developers have pushed the boundaries of the medium by finding new forms of interaction and engaging players with compelling storytelling and original game mechanics. However, crafting those experiences  requires great effort and a high consumption of resources. How do we create a vast amount of content that suits players' expectations with lower investment? If we answer the above question, then we will have increased replayability, adaptative content or reduction of designers' workload. All of which can be tackled using PCG.\cite{togelius2016introduction}
->>>>>>> e7504040ad8085e50783a207fd22c90925991a36
 
 % Please cosider doing a hard-wrap on the text, editing and 
 % keeping track of changes in git is going to be easier.
@@ -314,17 +233,11 @@ PCG can be used as a tool to assist developers. It can suggest what might be a
 base for later development, enhancing human creativity rather than displacing 
 it. 
 
-<<<<<<< HEAD
-%************************************************
-
 It is common for AI researchers to turn to games in general as a testing 
 environment for AI techniques. Some of the earliest problems that AI attempted 
 to solve were checkers and chess in the 50s, even before AI was defined and 
 recognized as a field in the Dartmouth workshop in 1956 
 \cite{nilsson1998artificial}.
-=======
-It is common for AI researchers to turn to games in general as a testing environment for AI techniques. Some of the earliest problems that AI attempted to solve were checkers and chess in the 50s, even before AI was defined and recognized as a field in the Dartmouth workshop in 1956 \cite{nilsson1998artificial}.
->>>>>>> e7504040ad8085e50783a207fd22c90925991a36
 
 % Motivation should probably go better than context, and both files to
 % the main file so that we can do this kind of stuff better (and  git
@@ -398,48 +311,7 @@ more concise, objectives:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background and State of the Art}
 \label{sec:soa}
-%************************************************
-<<<<<<< HEAD
-Let's have a look at some participants in previous editions of the Angry Birds 
-Level Generation Competition.
 
-\subsection{Constructive approach}
-In the two solutions proposed by Matthew Stephenson and Jochen Renz 
-\cite{stephenson2017generating} \cite{stephenson2016procedural} the structures 
-displayed on the level are constructed from the top down, in several phases. 
-
-First, they build a structure recursively, each row composed of a single type 
-of block (with a fixed rotation). The likelihood of selecting a certain block 
-is given by a probability table. Then, the blocks are placed using a tree 
-structure, where the first selected block is the peak and blocks underneath it 
-are split into subsets that support the previous row with one, two or three 
-blocks. This ensures local stability, but not global stability, which is tested 
-once the whole structure is completed. The second solution also tries to add 
-variety by replacing some blocks with others of the same height.
-
-After that, other objects (pigs and TNT) are placed. Potential positions for 
-those objects are recorded, first trying to place them in the centre of each 
-block, then right above the edges of it, checking if there is enough space. 
-Available positions are ranked based on structural protection, dispersion, etc. 
-and then filled with the desired number of objects.
-
-The second solution also selects material---which can be stone, ice or 
-wood---based on trajectory analysis, clustering, row grouping, structure 
-grouping or randomly. Weak points are set to stone material and the rest using 
-one of the previous strategies. Trajectory analysis-based strategy sets to the 
-same material all blocks in the trajectory of a shot aimed at a particular pig. 
-Clustering strategy takes a random block, sets its material and propagates to 
-the surrounding blocks that have not been assigned yet. Row grouping and 
-structure blocking apply the same material to a whole row or structure 
-respectively.
-
-Materials also determine which kind of birds will be used in the level, since 
-some birds are more efficient against certain materials than others. The number 
-of birds available for the player to solve the level is estimated using AI 
-agents designed for a different competition. If the AI agents are unable to 
-solve the level, it is discarded. The lowest number of birds used by the agents 
-is the chosen for the level.
-=======
 Let's have a look at some participants in previous editions of the
 Angry Birds Level Generation Competition. % Introduce the two types,
                                 % once subsections have been
@@ -454,7 +326,7 @@ After that, other objects (pigs and TNT) are placed. Potential positions for tho
 The second solution also selects material---which can be stone, ice or wood---based on trajectory analysis, clustering, row grouping, structure grouping or randomly. Weak points are set to stone material and the rest using one of the previous strategies. Trajectory analysis-based strategy sets to the same material all blocks in the trajectory of a shot aimed at a particular pig. Clustering strategy takes a random block, sets its material and propagates to the surrounding blocks that have not been assigned yet. Row grouping and structure blocking apply the same material to a whole row or structure respectively.
 
 Materials also determine which kind of birds will be used in the level, since some birds are more efficient against certain materials than others. The number of birds available for the player to solve the level is estimated using AI agents designed for a different competition. If the AI agents are unable to solve the level, it is discarded. The lowest number of birds used by the agents is the chosen for the level.
->>>>>>> e7504040ad8085e50783a207fd22c90925991a36
+
 
 The probability table was tuned using search-based optimization methods.
 
