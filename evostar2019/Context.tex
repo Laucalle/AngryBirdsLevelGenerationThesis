@@ -1,18 +1,23 @@
 %************************************************
 
+% It's probably the best to eliminate subsections. It saves space, and it's a short paper anyway - JJ
+
 \subsection{What is Procedural Content Generation}
+
 The definition of Procedural Content Generation (PCG) has been broadly discussed but there is no agreement. We have plenty of examples of what \textit{is} and what \textit{is not} PCG, but every definition struggles to cover all cases, either being too inclusive or too exclusive. The one we choose here balances well between the two, defining PCG as \textit{the algorithmical creation of game content with limited or indirect user input} \cite{togelius2011procedural}.
 
 % You can define PCG, NPC, AI the first time they are mentioned
 
 Although PCG often uses Artificial Intelligence (AI) techniques, this definition does not include all uses of it in games. We do not consider Non Playable Character (NPC) behaviour or AI playing agents as content, thus they are not PCG either. Aesthetic elements, game rules, levels, items, stories and characters among others are considered content in this definition.
 
-
 Note that neither computers nor video games are mentioned in the definition. In fact, PCG has its roots in analogical games. This may conflict with the \textit{limited or indirect user input}, but it is reasonable to assume that following a detailed set of instructions---even if it is done by a human---is not \textit{input}. The underlying concepts used much earlier by non-digital games still prevail in modern video games. Using an algorithm to assemble pre-designed pieces is a common technique in tabletop roleplaying guides---where the algorithm usually consists in several dice rolls---such as \textit{Dungeon \& Dragons}. It is not surprising that one of the early adaptations of PCG to digital platforms aimed to generate monsters and dungeons for physical games.\cite{smith2015analog}
 
 % In a conference paper, we shouldn't probably go down to the level of subsubsection (or, for that matter, subsection) - JJ
 % DONE - Laura
+% Still 20 pages; we should also eliminate subsections, and leave just top-level sections - JJ 
 
+
+% This item list should probably be eliminated to leave only the type we are going to use, along with the reference - JJ
 There are many PCG methods and it is necessary to look at some traits that characterize and differentiate them from each other: \cite{togelius2016introduction}
 
 \begin{itemize}
@@ -31,9 +36,6 @@ A special kind of \textit{generate-and-test} approach to PCG is Search-based Pro
 
 The test function does not determine if a solution is valid, but it grades how good the solution is. This is often called \textit{fitness function}. In SBPCG, how to evaluate the quality of a solution has no straightforward answer. It requires formalizing as a \textit{fitness function} how much fun, exciting or engaging certain content is, which are usually based in tricky assumptions.
 
-% It requires formalizing as a \textit{fitness function} how much fun, exciting or engaging certain content is.  
-% DONE - Laura
-
 There are three main classes of \textit{fitness functions} in SBPCG\cite{togelius2010search}:
 
 \begin{itemize}
@@ -50,32 +52,18 @@ There are three main classes of \textit{fitness functions} in SBPCG\cite{togeliu
 
 % And it's a special session for games within EvoStar. There's no need to talk about the need to research games, I guess. Also, this probably should go before Motivation - JJ
 % I've shorten the first part of this section, but I don't know if we better just remove it or remove why replayability, adptative contet and assistance tools are interesting for saving resources. Is there need to define PCG in depth in the previous section then? - Laura
+% No, really no need. It's a games track, probably people already know what it is. A general definition and focusing on the specific type we are using is more than enough. - JJ
+
 \subsection{The necessity of Procedural Content Generation}
 The video game industry is growing at a fast pace, reaching every passing year to broader audiences that demand a wider range of experiences. Developers have pushed the boundaries of the medium by finding new forms of interaction and engaging players with compelling storytelling and original game mechanics. However, crafting those experiences  requires great effort and a high consumption of resources. How do we create a vast amount of content that suits players' expectations with lower investment? If we answer the above question, then we will have increased replayability, adaptative content or reduction of designers' workload. All of which can be tackled using PCG.\cite{togelius2016introduction}
 
 % Please cosider doing a hard-wrap on the text, editing and 
 % keeping track of changes in git is going to be easier.
 % Sorry, but what do you mean by hard-wrap? - Laura
-
-% Consider changing: (others will simply follow each paragraph from now on)
-% that suits players expectations with lower investment?
-% that meets players' expectations with lower investment?
-% DONE - Laura
-
-% The sentence:
-% The answer can be replayability, adaptative content or 
-% reduction of designers' workload.
-% DONE - Laura
-
-% I think what you mean is: IF we answer the above question, then we will have:
-% increased replayability, adaptative content and a reduction of designers' workload.
-% As it is, this is not easily understood, the above are the result, the benefits not the answer
-% DONE - Laura
+% It means using editor config to keep line length to a certain number
+% of characters, 72 or 80.  Like these two lines - JJ
 
 Replayability, also referred to as replay value, relies on how interesting is playing a game more than once. Players can extend the game experience further---past the credits roll. For designers, replay value means their product offers more with less manually crafted content.
-
-% how interesting IS playing a game more than once. - Mario 
-% DONE - Laura
 
 Games can also engage players by adapting gameplay elements to each individual player. In a literal sense, this would be impracticable. The most common way is to present users with options to adjust game elements to their preferred style. What is more interesting, the game itself can change based on in-game player behaviour. It can regulate its difficulty level to fit the player's learning curve or create content that matches the player's taste.
 
@@ -90,3 +78,7 @@ Both applications above use PCG as a replacement for human designers. However, P
 %*****************************************
 %*****************************************
 %*****************************************
+
+% Please consider also moving all this file to the main file. It's a
+% short paper, and after shortening we are going to have just a few
+% paragraphs left - JJ
