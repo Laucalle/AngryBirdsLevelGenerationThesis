@@ -243,28 +243,21 @@ recognized as a field in the Dartmouth workshop in 1956
 % the main file so that we can do this kind of stuff better (and  git
 % does a better job out of that) - JJ
 
-What made board games attractive in the first place? They have a rather simple 
-set of rules but winning a game could be a challenging task even for a human 
-brain. It is not surprising that soon video games too drew researchers' 
-attention---along with board games. They offer a wide range of dynamic and 
-competitive elements that resemble real-world problems to some extent.
-
-Of course, this interest works in both ways. Many video games use AI techniques 
-to deliver better experiences, mainly involving NPC behaviour and PCG.
+The researchers' interest in games ---both video games and bard games--- is not 
+surprising since they have a rather simple set of rules, they can be a 
+challenging task even for a human brain and they offer a wide range of dynamic 
+and competitive elements that resemble real-world problems to some extent. This 
+interest works in both ways. Many video games use AI techniques to deliver 
+better experiences, mainly involving NPC behaviour and PCG.
 
 % These two paragraphs should probably be synthesized to a single
 % sentence. - JJ
 Having this relationship between academia and industry in mind, the IEEE 
-Conference on Computational Intelligence and Games started as a symposium in 
-2005, and as a conference in 2009. It brings professionals from both fields 
-together to discuss the latest advances in AI and Computational Intelligence 
-and how they apply to games.\cite{ieee-cig}
-
-Among other events, the conference hosts competitions. In 2018, most proposed 
-competitions are centred around playing AI agents for specific games or genres. 
-One of the exceptions is the \textit{3rd Angry Birds Level Generation 
-Competition}. Participants must build computer programs that are able to 
-generate levels for the\textit{ Angry Birds} game.
+Conference on Computational Intelligence and Games was created\cite{ieee-cig}. 
+In 2018, most proposed competitions are centred around playing AI agents for 
+specific games or genres, but we can find an exception in the \textit{3rd Angry 
+Birds Level Generation Competition}. Participants must build computer programs 
+that are able to generate levels for the \textit{Angry Birds} game.
 
 \textit{Angry Birds} is a mobile game by Finnish company Rovio Entertainment 
 Corporation\cite{angry-birds}, first launched in 2009. The game was a huge 
@@ -313,7 +306,8 @@ more concise, objectives:
 \label{sec:soa}
 
 Let's have a look at some participants in previous editions of the
-Angry Birds Level Generation Competition. % Introduce the two types,
+Angry Birds Level Generation Competition. There are two main approaches to the 
+problem that stand out: constructive and search-based.% Introduce the two types,
                                 % once subsections have been
                                 % eliminated - JJ
 
@@ -325,14 +319,19 @@ After that, other objects (pigs and TNT) are placed. Potential positions for tho
 
 The second solution also selects material---which can be stone, ice or wood---based on trajectory analysis, clustering, row grouping, structure grouping or randomly. Weak points are set to stone material and the rest using one of the previous strategies. Trajectory analysis-based strategy sets to the same material all blocks in the trajectory of a shot aimed at a particular pig. Clustering strategy takes a random block, sets its material and propagates to the surrounding blocks that have not been assigned yet. Row grouping and structure blocking apply the same material to a whole row or structure respectively.
 
-Materials also determine which kind of birds will be used in the level, since some birds are more efficient against certain materials than others. The number of birds available for the player to solve the level is estimated using AI agents designed for a different competition. If the AI agents are unable to solve the level, it is discarded. The lowest number of birds used by the agents is the chosen for the level.
-
+Materials also determine which kind of birds will be used in the level, since 
+some birds are more efficient against certain materials than others. The number 
+of birds available for the player to solve the level is estimated using AI 
+agents designed for a different competition. If the AI agents are unable to 
+solve the level, it is discarded. The lowest number of birds used by the agents 
+is the chosen for the level.
 
 The probability table was tuned using search-based optimization methods.
 
-Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} have
-presented a solution based on SBPCG using a genetic algorithm and a
-game clone developed in Unity Engine to evaluate the levels. 
+Following the search-based approach, Lucas Ferreira and Claudio 
+Toledo\cite{ferreira2014search} have presented a solution based on SBPCG using 
+a genetic algorithm and a game clone developed in Unity Engine to evaluate the 
+levels. 
 
 In the genetic algorithm individuals correspond to levels, each represented by 
 an array of columns. Each column is a sequence of blocks, pigs and predefined 
@@ -470,6 +469,13 @@ changes with a certain probability each element of the individual randomly
 % I have eliminated the whole subsection above. Some reference to what
 % was done here should be inserted elsewhere - JJ
 
+As a part of their solution, Lucas Ferreira and Claudio 
+Toledo\cite{ferreira2014search} developed an open source simulation for the 
+game. Since that implementation is available on Github\cite{sciencebirds}, it 
+will be used as a starting point for this part of the project. The modified 
+version is available on Github\cite{sciencebirds-adapt} and the main changes 
+revolve around automation and producing output.
+
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
 The most challenging part of the level generation process is to create stable 
@@ -479,16 +485,16 @@ to their speed.
 
 $$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
 
-As mentioned in section \ref{ch:gameApdaptation} the game output provides the 
-average magnitude of velocity for each block. This set is noted as $V$, with 
-$|V|$ being the cardinality of the set. The number of blocks in an individual 
-is $b$ and it can differ from the cardinality of $V$ since broken blocks are 
-not tracked. The number of broken blocks is $b-|V|$ and it is multiplied by a 
-penalization factor, since a level whose blocks break without user interaction 
-would not be considered valid. This happens when a block free-falls from a 
-certain height or collides with a falling object. $P_{broken}$ is set to $100$ 
-since objects in a level do not usually reach that velocity, therefore it will 
-separate non-valid levels from potentially good ones.
+The game output provides the average magnitude of velocity for each block. This 
+set is noted as $V$, with $|V|$ being the cardinality of the set. The number of 
+blocks in an individual is $b$ and it can differ from the cardinality of $V$ 
+since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and 
+it is multiplied by a penalization factor, since a level whose blocks break 
+without user interaction would not be considered valid. This happens when a 
+block free-falls from a certain height or collides with a falling object. 
+$P_{broken}$ is set to $100$ since objects in a level do not usually reach that 
+velocity, therefore it will separate non-valid levels from potentially good 
+ones.
 
 % When we say length of a vector, we think about the norm (the actual lenght) 
 % for instance the hypotenuse in a 2D vector. I think here we are talking about 
@@ -693,7 +699,12 @@ maintaining the size of the population.
 
 % Since the game simulation will be used as a part of the fitness function, there is another aspect to keep in mind. The simulation takes several seconds to start, but much less between levels. When evaluating individuals in a evolutionary algorithm, it would be more efficient to avoid this overhead by simulating the whole population in a single execution instead of launching a simulation for each individual. Then, it seems compulsory that the framework used allow this behaviour.
 
-The information that describes a level can be too complex to have a binary representation as pure genetic algorithms suggest, so the framework should be flexible enough to support complex data structures. 
+The information that describes a level can be too complex to have a binary 
+representation as pure genetic algorithms suggest, so the framework should be 
+flexible enough to support complex data structures. This prevents us for using 
+frameworks such as DEAP\cite{fortin2012deap}, PyEvolve\cite{perone2009pyevolve} 
+or Evolopy\cite{evolopy} and therefore a new framework was created. The source 
+code can be found on Github\cite{ab-level}.
 % Say in a sentence why we are not using those above (and there's also
 % Evolopy) - jj
 
@@ -742,7 +753,7 @@ The information that describes a level can be too complex to have a binary repre
 % Also commented out most text above. Just a minimal reference to the
 % tools used - JJ
 
-The source code can be found on Github\cite{ab-level}.
+
 %************************************************
 \section{Experimentation and Results}\label{ch:res}
 Each experiment was based on an hypothesis formulated after the observation of 
