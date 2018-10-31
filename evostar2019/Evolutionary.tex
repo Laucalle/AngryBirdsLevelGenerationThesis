@@ -37,7 +37,7 @@ The other measure is the number of overlapping blocks. The separating axis theor
 
 If both $f_{distance}$ and $f_{overlapping}$ are $0$ then the level is suitable for the simulation and fitness is calculated as $fitness_{ind}$. This would be considered \textit{overpenalization} but exploring infeasible regions entails a serious overhead that we need to minimize. On the other hand, levels with multiple blocks broken during the simulation are not feasible either but running the simulation is necessary. In this case, the penalization does not prevent the region to be explored.
 
-Previous approaches to this problem (studied in section \ref{ch:otherSolutions}) provide fairly constrained outputs. The constructive method presented creates pyramid-like structures and, even though there is a variety of levels, the method is highly specialized in this kind of theme. The search-based approach only produces tower structures adding some variety by having pre-built compound blocks.
+Previous approaches to this problem (studied in section \ref{sec:soa}) provide fairly constrained outputs. The constructive method presented creates pyramid-like structures and, even though there is a variety of levels, the method is highly specialized in this kind of theme. The search-based approach only produces tower structures adding some variety by having pre-built compound blocks.
 
 Since one of the objectives of this project is to explore the expressiveness and variability of SBPCG, it seems reasonable to use a flexible representation. We will try a less directed search than previous solutions while keeping a simple representation. 
 
@@ -92,7 +92,7 @@ Parents are selected using tournaments. Two individuals are chosen from the popu
 Once the parents have been selected, we implement two different methods of combination.
 \begin{itemize}
 	\item Sample Crossover: gives a single individual per parent pair. It takes all genes from both parents---excluding genes that are repeated---and randomly takes a number of them to create the new individual. The number of blocks is the minimum between the maximum number of blocks allowed, the mean of the two parent individuals and the number of distinct genes.
-	\item Common Blocks: produces two individuals. The common genes to both parents are passed on to both children. The remaining genes are randomly distributed to each child, half to one and half to the other. 
+	\item Common Blocks: produces two individuals. The common genes to both parents are passed on to both children. The remaining genes are randomly distributed to each child, half to one and half to the other. \label{ga:cross2}
 \end{itemize}
 
 There are four different mutations:
