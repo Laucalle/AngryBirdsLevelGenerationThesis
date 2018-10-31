@@ -77,10 +77,12 @@
 \mainmatter  % start of an individual contribution
 
 % first the title is needed
-\title{}
+\title{AngryBirds Level Generation by Means of Evolutionary Search-based PCG}
+
+% Antonio - Improve the title
 
 % a short form should be given in case it is too long for the running head
-\titlerunning{}
+\titlerunning{Angrybirds levels with EAs}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -122,8 +124,40 @@
 %
 \section{Introduction}
 \label{sec:intro}
-\input{Context}
-\input{Motivation}
+%\input{Context}
+%\input{Motivation}
+
+% Antonio - I have written a text closer to what a paper needs to include. We must be quite concise and explain just what it is required to justify our work. ;D
+% Moreover, for a document as short as a paper is, I would suggest to work on a single TEX file. 
+
+One of the main challenges nowadays in the videogames development is the automatic generation of contents, as games are growing in complexity exponentially \cite{togelius2016introduction}. Thus, there is a vast amount of resources and assets to be created by the artistic staff, designers and programmers, who would profit some tools to automatise or simplify their tasks.
+
+Procedural Content Generation (PCG) brings a possible solution to this situation. It is defined as \textit{the algorithmic creation of game content with limited or indirect user input} \cite{togelius2011procedural}. 
+PCG often uses Artificial Intelligence (AI) techniques and normally includes aesthetic elements, game rules, levels, items, stories and character designs among others contents or assets.
+
+The main objective to reach for a videogame is the \textit{player's engagement}, which is mainly based on two factors: replayability (how interesting is playing a game more than once) and adaptability (adapting gameplay elements to each individual player). Replay value strongly depends on the offer of new (and attractive) content for the player, once he/she has finished the main game. The second factor normally lies on the possibility of configuring some game aspects in a menu, such as the game difficulty, character control, or camera options. However, more advanced approaches implement adjustments based on in-game player behaviour: automatically regulating its difficulty level to fit the player's learning curve or creating content that matches the player's taste.
+These are also PCG applications.
+
+% Antonio - a paragraph saying which of these factors (replayability or adaptability), or both, are we addressing in this paper.
+
+This paper will present a PCG approach focused on the generation of levels for the videogame \textit{Angry Birds}\cite{angry-birds}, one of the most successful games in mobile phones also ported to many other platforms, following the rules of the international \textit{Angry Birds Level Generation Competition} \footnote{\url{https://project.dke.maastrichtuniversity.nl/cig2018/competitions/#angrybirds}}.
+
+We will consider the so-called Search-based Procedural Content Generation (SBPCG), an approach which produces potentially correct solutions that are tested and adjusted in each iteration before giving the final output. This has been tackled several times in the literature by means of Evolutionary Algorithms [*** Include a couple of REFS ***].
+
+However, the evaluation of the quality of a solution in a SBPCG approach for a game has not a straightforward answer. It requires formalising a \textit{fitness function} involving several factors such as how much fun, exciting or engaging certain content is, which are usually based subjective assumptions.
+According to some authors \cite{togelius2010search}, these functions could follow a direct mapping between the content features and its associated value, could be based on a agent's output after it has played or used the generated content, or could be defined as an interactive function in which a human player gives a personal score (or provides a set of values to compute it).
+
+% Antonio - Comment which kind of approach are we following in order to evaluate the generated levels.
+
+Thus, the objectives to address in this paper are as follows:
+\begin{itemize}
+	\item Explore the expressiveness and variability of SBPCG using evolutionary algorithms for the automatic design of Angry Birds levels.
+	\item Adapt the game code to extract data from execution, with the aim of evaluating the created levels.
+	\item Produce stable structures under gravity as the core.
+	\item Place other elements on the structures to complete the levels.
+\end{itemize}
+
+% Antonio - Better define these objectives.
 
 %The rest of this paper is organized as follows:
 %The next section presents the state of the art and related works, and comments their differences with regard to this study, along with its contribution to advance in this research line. TORCS simulator is described in Section \ref{sec:torcs}.
@@ -142,7 +176,8 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
-\label{sec:torcs}
+\label{sec:aibirds}
+
 \input{Modifications}
 \input{Evolutionary}
 \input{Framework}
