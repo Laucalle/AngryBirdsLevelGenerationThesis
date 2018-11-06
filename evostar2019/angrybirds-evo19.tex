@@ -114,13 +114,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   ABSTRACT   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 \begin{abstract}
-This paper presents an approach for building stable structures under gravity 
-for the physics-based puzzle game Angry Birds. Thus, a search-based procedural 
-level generation method has been developed using evolutionary algorithms. 
-Different representations and operators have been considered and studied. In 
-order to evaluate the stability of the levels, they are executed in an 
-adaptation of an open source version of the game called \textit{Science Birds}. 
-% Antonio - abstract do not include references.  ;)
+This paper presents an approach for building stable structures under gravity for the physics-based puzzle game Angry Birds. Thus, a search-based procedural level 
+generation method has been developed using evolutionary algorithms. Different 
+representations and operators have been considered and studied. In order to evaluate the stability of the levels, they are executed in an adaptation of an open source version of the game called \textit{Science Birds}. 
+% Antonio - abstract does not include references.  ;)
 In the same way, an open source evolutionary computation framework has been implemented to fit the requirements of the problem. In order to test the method four experiments have been carried out, obtaining a variety of stable structures.
 % Antonio - Speak about the structures and their utility, fun, player's opinion, etc, which are the objectives in PCGs
 
@@ -162,6 +159,7 @@ among others are considered content in this definition
                                 % It is from the same  
                                 %\cite{togelius2011procedural}
 Note that neither computers nor video games are mentioned in the
+
 definition. In fact, PCG has its roots in analogical games.
 %This may
 %conflict with the \textit{limited or indirect user input}, but it is
@@ -195,17 +193,18 @@ part of an interactive tool.
 
 A special kind of \textit{generate-and-test} approach to PCG is
 Search-based Procedural Content Generation (SBPCG), which is
-usually---but not always---tackled with Evolutionary Algorithms. The
-problems faced by SBPCG are not very far from those encountered in
-Evolutionary problems.  
+usually tackled with Evolutionary Algorithms [REF]. 
+% Antonio - It is needed to add a reference (or two) here
+The problems faced by SBPCG are not very far from those encountered in Evolutionary problems.  
 
-The test function grades how good a valid solution is. This is often called 
-\textit{fitness function}. In SBPCG, how to evaluate the quality of a solution 
-has no straightforward answer. It requires formalizing as a \textit{fitness 
-function} how much fun, exciting or engaging certain content is, which are 
-usually based in tricky assumptions.
+As it is required in this type of algorithms, there is a \textit{fitness function} which grades how good a solution is, and frequently, it punishes non-valid solutions. 
+% Antonio - fitness function is part of the EA
+In SBPCG, how to evaluate the quality of a solution has no straightforward answer. It requires formalizing as an evaluation function how much fun, exciting or engaging certain content is, which are usually based in tricky assumptions.
+% Antonio - I would say 'subjective' instead of 'tricky'
 
-There are three main classes of \textit{fitness functions} in SBPCG\cite{togelius2010search}:
+There are three main classes of fitness functions in 
+% Antonio - You should just remark the term once. ;)
+SBPCG \cite{togelius2010search}:
 
 \begin{itemize}
 	\item \textit{Direct Fitness Function} where certain easily measurable 
@@ -222,23 +221,26 @@ There are three main classes of \textit{fitness functions} in SBPCG\cite{togeliu
 % No, really no need. It's a games track, probably people already know what it is. A general definition and focusing on the specific type we are using is more than enough. - JJ
 % OK, it does look good now. No need to eliminate - JJ
 
+
+% Antonio - I think this text should be moved to the beginning of this section. Or remove it.
 The fast pace at which the game industry grows poses a challenge to developers. 
 How do we create a vast amount of content that suits 
 players' expectations with lower investment? PCG can tackle this by  
 increasing replayability, offering adaptative content or reducing designers' 
 workload.\cite{togelius2016introduction}
 
-
 Replayability relies on how interesting is 
 playing a game more than once. For designers, this means their 
 product offers more with less manually crafted content. 
 Games can also engage players by adapting gameplay elements to each individual 
+% Antonio - these two paragraphs could be moved up and should be summarized (or removed). The text must be concise. ;)
 player. The most common way is 
 to present users with options to adjust game elements, but with PCG techniques, 
 the game itself can change based on in-game player behaviour.
 PCG can be used as a tool to assist developers. It can suggest what might be a 
 base for later development, enhancing human creativity rather than displacing 
 it. 
+
 
 It is common for AI researchers to turn to games in general as a testing 
 environment for AI techniques.
@@ -261,6 +263,8 @@ In 2018, most proposed competitions were centred around playing AI agents for
 specific games or genres, but we can find an exception in the \textit{3rd Angry 
 Birds Level Generation Competition}. Participants must build computer programs 
 that are able to generate levels for the \textit{Angry Birds} game.
+% Antonio - remove the reference to CIG conference (EvoGAMES is a similar conference). Just introduce the Level Generation Competition.
+% Antonio - You should first present the game and later introduce the competition centered on that game
 It is a mobile game by Finnish company Rovio Entertainment 
 Corporation\cite{angry-birds}, first launched in 2009. 
 %The game was a huge success in the \textit{AppStore}
@@ -279,7 +283,6 @@ take more than a single shot before crumbling to the ground.
 % The main challenge [from the PCG perspective (or similar)] is to build stable 
 %structures.. - Mario
 
-
 The ultimate objective of this project is to build a program capable of 
 creating levels for \textit{Angry Birds}. We can break it down to the 
 following, more concise, objectives:
@@ -294,6 +297,8 @@ following, more concise, objectives:
 	\item Produce stable structures under gravity.
 	\item Place other elements on the structures to complete the levels.
 \end{itemize} 
+% Antonio - I think that the paper must be better motivated. It cannot be just a "let's try what happens", but you should justify why this idea is different *and better* than other existing approaches. And also, what's the objective from the PCG perspective, I mean, do you aim to create funny levels, enjoyable ones, challenging ones, etc? ;)
+
 
 % Antonio - In my opinion the introduction is extremely long. It should be reduced, doing it more concise, focused on the paper objectives and with a firm motivation based on the existing gap of the state of the art.
  
@@ -589,7 +594,7 @@ characterize them:
 	\item Position: coordinates $x$ and $y$ of the centre of the block in game 
 	units.
 	\item Rotation: rotation of the block in degrees. Here four different 
-	rotations are considered, 0บ, 45บ, 90บ or 135บ represented as integers 
+	rotations are considered, 0ยบ, 45ยบ, 90ยบ or 135ยบ represented as integers 
 	between $0$ and $3$.
 \end{itemize}
 
