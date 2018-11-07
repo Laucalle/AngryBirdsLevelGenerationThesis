@@ -177,6 +177,28 @@ prevail in modern video games. \cite{smith2015analog}
 %platforms aimed to generate monsters and dungeons for physical
 %games.
 
+% Antonio - I think this text should be moved to the beginning of this section. 
+%Or remove it.
+% Moved it for now - Laura
+The fast pace at which the game industry grows poses a challenge to developers. 
+How do we create a vast amount of content that suits 
+players' expectations with lower investment? PCG can tackle this by  
+increasing replayability, offering adaptative content or reducing designers' 
+workload.\cite{togelius2016introduction}
+% Antonio - these two paragraphs could be moved up and should be summarized (or 
+%removed). The text must be concise. ;)
+
+Replayability relies on how interesting is 
+playing a game more than once. For designers, this means their 
+product offers more with less manually crafted content. 
+Games can also engage players by adapting gameplay elements to each individual 
+player. The most common way is 
+to present users with options to adjust game elements, but with PCG techniques, 
+the game itself can change based on in-game player behaviour.
+PCG can be used as a tool to assist developers. It can suggest what might be a 
+base for later development, enhancing human creativity rather than displacing 
+it.
+
 There are many PCG methods and it is necessary to look at some traits that 
 characterize and differentiate them from each 
 other\cite{togelius2016introduction}. The method proposed in this paper is 
@@ -193,14 +215,21 @@ part of an interactive tool.
 
 A special kind of \textit{generate-and-test} approach to PCG is
 Search-based Procedural Content Generation (SBPCG), which is
-usually tackled with Evolutionary Algorithms [REF]. 
+usually tackled with Evolutionary Algorithms\cite{togelius2010search} like the 
+one proposed in \cite{hastings2009evolving}. 
 % Antonio - It is needed to add a reference (or two) here
+% This is said in Togelius paper that is already cited and I haven't found much 
+% more on the topic - Laura
 The problems faced by SBPCG are not very far from those encountered in Evolutionary problems.  
 
 As it is required in this type of algorithms, there is a \textit{fitness function} which grades how good a solution is, and frequently, it punishes non-valid solutions. 
 % Antonio - fitness function is part of the EA
-In SBPCG, how to evaluate the quality of a solution has no straightforward answer. It requires formalizing as an evaluation function how much fun, exciting or engaging certain content is, which are usually based in tricky assumptions.
+In SBPCG, how to evaluate the quality of a solution has no straightforward 
+answer. It requires formalizing as an evaluation function how much fun, 
+exciting or engaging certain content is, which are usually based in subjective 
+assumptions.
 % Antonio - I would say 'subjective' instead of 'tricky'
+% Done - Laura
 
 There are three main classes of fitness functions in 
 % Antonio - You should just remark the term once. ;)
@@ -220,26 +249,7 @@ SBPCG \cite{togelius2010search}:
 % I've shorten the first part of this section, but I don't know if we better just remove it or remove why replayability, adptative contet and assistance tools are interesting for saving resources. Is there need to define PCG in depth in the previous section then? - Laura
 % No, really no need. It's a games track, probably people already know what it is. A general definition and focusing on the specific type we are using is more than enough. - JJ
 % OK, it does look good now. No need to eliminate - JJ
-
-
-% Antonio - I think this text should be moved to the beginning of this section. Or remove it.
-The fast pace at which the game industry grows poses a challenge to developers. 
-How do we create a vast amount of content that suits 
-players' expectations with lower investment? PCG can tackle this by  
-increasing replayability, offering adaptative content or reducing designers' 
-workload.\cite{togelius2016introduction}
-
-Replayability relies on how interesting is 
-playing a game more than once. For designers, this means their 
-product offers more with less manually crafted content. 
-Games can also engage players by adapting gameplay elements to each individual 
-% Antonio - these two paragraphs could be moved up and should be summarized (or removed). The text must be concise. ;)
-player. The most common way is 
-to present users with options to adjust game elements, but with PCG techniques, 
-the game itself can change based on in-game player behaviour.
-PCG can be used as a tool to assist developers. It can suggest what might be a 
-base for later development, enhancing human creativity rather than displacing 
-it. 
+ 
 
 
 It is common for AI researchers to turn to games in general as a testing 
@@ -255,17 +265,7 @@ and competitive elements that resemble real-world problems to some extent. The
 interest works in both ways. Many video games use AI techniques to deliver 
 better experiences, mainly involving NPC behaviour and PCG.
 
-% These two paragraphs should probably be synthesized to a single
-% sentence. - JJ
-Having this relationship between academia and industry in mind, the IEEE 
-Conference on Computational Intelligence and Games was created\cite{ieee-cig}. 
-In 2018, most proposed competitions were centred around playing AI agents for 
-specific games or genres, but we can find an exception in the \textit{3rd Angry 
-Birds Level Generation Competition}. Participants must build computer programs 
-that are able to generate levels for the \textit{Angry Birds} game.
-% Antonio - remove the reference to CIG conference (EvoGAMES is a similar conference). Just introduce the Level Generation Competition.
-% Antonio - You should first present the game and later introduce the competition centered on that game
-It is a mobile game by Finnish company Rovio Entertainment 
+\textit{Angry Birds} is a mobile game by Finnish company Rovio Entertainment 
 Corporation\cite{angry-birds}, first launched in 2009. 
 %The game was a huge success in the \textit{AppStore}
 %---being the most downloaded mobile game in 
@@ -279,6 +279,22 @@ What is interesting to us is how heavily the
 game relies in gravity to create interesting puzzles. The main challenge from 
 the PCG perspective is to build stable structures that are robust enough to 
 take more than a single shot before crumbling to the ground.
+
+% These two paragraphs should probably be synthesized to a single
+% sentence. - JJ
+%Having this relationship between academia and industry in mind, the IEEE 
+%Conference on Computational Intelligence and Games was created\cite{ieee-cig}. 
+%In 2018, most proposed competitions were centred around playing AI agents for 
+There is a number of competitions centred around playing AI agents for specific 
+games or genres, but it is less common to find PCG competitions like the 
+\textit{3rd Angry Birds Level Generation Competition}. Participants must build 
+computer programs that are able to generate levels for the \textit{Angry Birds} 
+game.
+% Antonio - remove the reference to CIG conference (EvoGAMES is a similar 
+%conference). Just introduce the Level Generation Competition.
+% Antonio - You should first present the game and later introduce the 
+%competition centered on that game
+
 
 % The main challenge [from the PCG perspective (or similar)] is to build stable 
 %structures.. - Mario
@@ -304,7 +320,10 @@ following, more concise, objectives:
  
 
 %The rest of this paper is organized as follows:
-%The next section presents the state of the art and related works, and comments their differences with regard to this study, along with its contribution to advance in this research line. TORCS simulator is described in Section \ref{sec:torcs}.
+%The next section presents the state of the art and related works, and comments 
+%their differences with regard to this study, along with its contribution to 
+%advance in this research line. TORCS simulator is described in Section 
+%\{sec:torcs}.
 %The proposed fuzzy controller (and its sub-controllers) is detailed in Section \ref{sec:fuzzy_controller}, whereas it is tested in `real' (simulated) races in Section \ref{sec:results}. Obtained results are analyzed and compared 
 %with other controllers are given in the same section. Finally, the conclusions and future lines of work are included in Section \ref{sec:conclusions}.
 
