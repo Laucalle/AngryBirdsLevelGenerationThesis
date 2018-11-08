@@ -393,11 +393,35 @@ occupies the same position. When the parents are not the same length, the
 remaining columns are selected with a $50\%$ of probability. Mutation simply 
 changes with a certain probability each element of the individual randomly 
 (either being a column element or the distance between columns).
-
 % If possible, add more entries about evolution of free-form structures, which was after all the motivation for this particular algorithm - JJ
 % In general or from the competition? - Laura
-% In general. The state of the art has to reflect what other people are doing in general - JJ
+% In general. The state of the art has to reflect what other people are doing 
+%in general - JJ
 
+Outside game development, we can find some approaches to structural 
+optimization using search based algorithms. Amir Hossein Gandomi, Xin-She Yang 
+and Amir Hossein Alavi proposed a genetic algorithm called Cuckoo Search and 
+tested its performance with several structural optimization problems. The 
+algorithm is inspired by brood parasitic behaviour of some cuckoo
+species using Lévy flight behaviour, a random walk that follows a certain 
+probability distribution that can be modelled mathematically.
+\cite{gandomi2013cuckoo}
+
+Certain cuckoo species lay eggs in other birds' nests and if the new host does 
+discover the intruding eggs it can either abandon the nest or throw them away. 
+Keeping this behaviour in mind, the Cuckoo Search follows a set of rules to 
+balance between exploration and exploitation. A cuckoo represents a 
+solution. Each of them can lay one egg and place it in a random nest. The nests 
+that contain the best eggs continue to the next generations. A host can 
+discover an egg can with a certain probability throw it away or start a new 
+nest elsewhere. The total number of nests is fixed.
+
+One of the test cases for the algorithm is a structural design of a pin-jointed 
+plane frame. In this case the forces and the length of the base is predefined 
+and the frame is parametrized with two angles. The lengths of the members need 
+to be minimized but they depend on those two angles. The cuckoo search locates 
+two global optima for this problem specification. However this kind of 
+structural optimization is not flexible enough to fit our optimization problem. 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
 \label{sec:torcs}
