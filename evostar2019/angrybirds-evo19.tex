@@ -148,140 +148,6 @@ Game development, Angry Birds, Level generation}
 \section{Introduction}
 \label{sec:intro}
 
-%************************************************
-
-% It's probably the best to eliminate subsections. It saves space, and it's a 
-%short paper anyway - JJ
-
-
-%The definition of Procedural Content Generation (PCG) has been
-%broadly discussed but there is no agreement. We have plenty of
-%examples of what \textit{is} and what \textit{is not} PCG, but every
-%definition struggles to cover all cases, either being too inclusive
-%or too exclusive. The one we choose here balances well between the
-%two, defining
-
-For the purpose of this paper, we define Procedural Game Generation
-(PCG) as \textit{the algorithmic creation of game content with
-  limited or indirect user input}. 
-%Although PCG often uses Artificial Intelligence (AI) techniques, this
-%definition does not include all uses of it in games. We do not
-%consider Non Playable Character (NPC) behaviour or AI playing agents
-%as content, thus they are not PCG either.
-Aesthetic elements, game rules, levels, items, stories and characters
-among others are considered content in this definition  
-\cite{togelius2011procedural}. % If this
-                                % definition is not totally yours, you
-                                % should give a reference for it.
-                                % It is from the same  
-                                %\cite{togelius2011procedural}
-Note that neither computers nor video games are mentioned in the
-
-definition. In fact, PCG has its roots in analogical games.
-%This may
-%conflict with the \textit{limited or indirect user input}, but it is
-%reasonable to assume that following a detailed set of
-%instructions---even if it is done by a human---is not
-%\textit{input}.
-The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
-prevail in modern video games. \cite{smith2015analog} 
-% Using an
-%algorithm to assemble pre-designed pieces is a common technique in
-%tabletop roleplaying guides---where the algorithm usually consists in
-%several dice rolls---such as \textit{Dungeon \& Dragons}.
-% It is not
-%surprising that one of the early adaptations of PCG to digital
-%platforms aimed to generate monsters and dungeons for physical
-%games.
-
-% Antonio - I think this text should be moved to the beginning of this section. 
-%Or remove it.
-% Moved it for now - Laura
-The fast pace at which the game industry grows poses a challenge to developers. 
-How do we create a vast amount of content that suits 
-players' expectations with lower investment? PCG can tackle this by  
-increasing replayability, offering adaptive content or reducing designers' 
-workload.\cite{togelius2016introduction}
-% Antonio - these two paragraphs could be moved up and should be summarized (or 
-%removed). The text must be concise. ;)
-
-Replayability relies on how interesting is 
-playing a game more than once. For designers, this means their 
-product offers more with less manually crafted content. 
-Games can also engage players by adapting gameplay elements to each individual 
-player. The most common way is 
-to present users with options to adjust game elements, but with PCG techniques, 
-the game itself can change based on in-game player behaviour.
-PCG can be used as a tool to assist developers. It can suggest what might be a 
-base for later development, enhancing human creativity rather than displacing 
-it.
-
-There are many PCG methods and it is necessary to look at some traits that 
-characterize and differentiate them from each 
-other\cite{togelius2016introduction}. The method proposed in this paper is 
-described as \textit{offline} ---the PCG occurs before the game session or 
-during development---, \textit{necessary} ---the generated content is part of 
-the essential structure of the game---, \textit{generic} ---it does not take 
-into account player behaviour---, \textit{stochastic} ---it will not produce 
-the same output given the same input---, \textit{generate-and-test} ---it 
-produces potentially correct solutions that are tested and adjusted in each 
-iteration before giving the actual output--- and potentially be either 
-\textit{automatic}---where the designer does not take part on the process--- or 
-\textit{mixed authorship}, where the generated content is used as a base or 
-part of an interactive tool. 
-
-A special kind of \textit{generate-and-test} approach to PCG is
-Search-based Procedural Content Generation (SBPCG), which is
-usually tackled with Evolutionary Algorithms\cite{togelius2010search} like the 
-one proposed in \cite{hastings2009evolving}. 
-% Antonio - It is needed to add a reference (or two) here
-% This is said in Togelius paper that is already cited and I haven't found much 
-% more on the topic - Laura
-The problems faced by SBPCG are not very far from those encountered in Evolutionary problems.  
-
-As it is required in this type of algorithms, there is a \textit{fitness function} which grades how good a solution is, and frequently, it punishes non-valid solutions. 
-% Antonio - fitness function is part of the EA
-In SBPCG, how to evaluate the quality of a solution has no straightforward 
-answer. It requires formalizing as an evaluation function how much fun, 
-exciting or engaging certain content is, which are usually based in subjective 
-assumptions.
-% Antonio - I would say 'subjective' instead of 'tricky'
-% Done - Laura
-
-There are three main classes of fitness functions in 
-% Antonio - You should just remark the term once. ;)
-SBPCG \cite{togelius2010search}:
-
-\begin{itemize}
-	\item \textit{Direct Fitness Function} where certain easily measurable 
-	features are extracted from the generated content and mapped to a 
-	fitness value.
-	\item \textit{Simulation-Based Fitness Function} where the 
-	fitness is calculated using features from an agent's gameplay. 
-	\item \textit{Interactive Fitness Function} where the fitness value is 
-	obtained from the player, whether it be explicitly or 
-	implicitly. 
-\end{itemize}
-
-% I've shorten the first part of this section, but I don't know if we better just remove it or remove why replayability, adptative contet and assistance tools are interesting for saving resources. Is there need to define PCG in depth in the previous section then? - Laura
-% No, really no need. It's a games track, probably people already know what it is. A general definition and focusing on the specific type we are using is more than enough. - JJ
-% OK, it does look good now. No need to eliminate - JJ
- 
-
-
-It is common for AI researchers to turn to games in general as a testing 
-environment for AI techniques.
-%Some of the earliest problems that AI attempted 
-%to solve were checkers and chess in the 50s, even before AI was defined and 
-%recognized as a field in the Dartmouth workshop in 1956 
-%\cite{nilsson1998artificial}.
-This interest in games ---both video games and bard games--- is not 
-surprising since they have a rather simple set of rules, they can be a 
-challenging task even for a human brain and they offer a wide range of dynamic 
-and competitive elements that resemble real-world problems to some extent. The 
-interest works in both ways. Many video games use AI techniques to deliver 
-better experiences, mainly involving NPC behaviour and PCG.
-
 \textit{Angry Birds} is a mobile game by Finnish company Rovio Entertainment 
 Corporation\cite{angry-birds}, first launched in 2009. 
 %The game was a huge success in the \textit{AppStore}
@@ -330,20 +196,169 @@ following, more concise, objectives:
 	\item Produce stable structures under gravity.
 	\item Place other elements on the structures to complete the levels.
 \end{itemize} 
-% Antonio - I think that the paper must be better motivated. It cannot be just a "let's try what happens", but you should justify why this idea is different *and better* than other existing approaches. And also, what's the objective from the PCG perspective, I mean, do you aim to create funny levels, enjoyable ones, challenging ones, etc? ;)
+
+% Antonio - I think that the paper must be better motivated. It cannot
+% be just a "let's try what happens", but you should justify why this
+% idea is different *and better* than other existing approaches. And
+% also, what's the objective from the PCG perspective, I mean, do you
+% aim to create funny levels, enjoyable ones, challenging ones, etc?
+% ;)
+% It's not that now, and it's not too long. 
+
+% ***********************************************
+% I have moved this to below, but we have to check we have narrative
+% coherence in the introduction.
+% ************************************************
+
+
+%The definition of Procedural Content Generation (PCG) has been
+%broadly discussed but there is no agreement. We have plenty of
+%examples of what \textit{is} and what \textit{is not} PCG, but every
+%definition struggles to cover all cases, either being too inclusive
+%or too exclusive. The one we choose here balances well between the
+%two, defining
+
+For the purpose of this paper, we define Procedural Game Generation
+(PCG) as \textit{the algorithmic creation of game content with
+  limited or indirect user input} \cite{togelius2011procedural}. 
+%Although PCG often uses Artificial Intelligence (AI) techniques, this
+%definition does not include all uses of it in games. We do not
+%consider Non Playable Character (NPC) behaviour or AI playing agents
+%as content, thus they are not PCG either.
+Aesthetic elements, game rules, levels, items, stories and characters
+among others are considered content in this definition  
+\cite{togelius2011procedural}. % If this
+                                % definition is not totally yours, you
+                                % should give a reference for it.
+                                % It is from the same  
+                                %\cite{togelius2011procedural}
+Note that neither computers nor video games are mentioned in the
+definition. In fact, PCG has its roots in analog games.
+%This may
+%conflict with the \textit{limited or indirect user input}, but it is
+%reasonable to assume that following a detailed set of
+%instructions---even if it is done by a human---is not
+%\textit{input}.
+The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
+prevail in modern video games. \cite{smith2015analog} 
+% Using an
+%algorithm to assemble pre-designed pieces is a common technique in
+%tabletop roleplaying guides---where the algorithm usually consists in
+%several dice rolls---such as \textit{Dungeon \& Dragons}.
+% It is not
+%surprising that one of the early adaptations of PCG to digital
+%platforms aimed to generate monsters and dungeons for physical
+%games.
+%
+% Antonio - I think this text should be moved to the beginning of this section. 
+%Or remove it.
+% Moved it for now - Laura
+But the fast pace at which the game industry grows poses a challenge to developers. 
+How do we create a vast amount of content that suits 
+players' expectations with low investment? PCG can tackle this by  
+increasing replayability, offering adaptive content or reducing designers' 
+workload.\cite{togelius2016introduction}
+% Antonio - these two paragraphs could be moved up and should be summarized (or 
+%removed). The text must be concise. ;)
+
+From these factors that we need to optimize, replayability relies on how interesting is 
+playing a game more than once. For designers, this means their 
+product should offer more with less manually crafted content. 
+Games can also engage players by adapting gameplay elements to each individual 
+player. The most common way is 
+to present users with options to adjust game elements; however, by using PCG techniques 
+the game itself can change based on in-game player behaviour.
+PCG can be used as a tool to assist developers. It can suggest what might be a 
+base for later development, enhancing human creativity rather than displacing 
+it.
+
+There are many PCG methods and it is necessary to look at some traits that 
+characterize and differentiate them from each 
+other\cite{togelius2016introduction}. The method proposed in this paper is 
+described as \textit{offline} ---the PCG occurs before the game session or 
+during development---, \textit{necessary} ---the generated content is part of 
+the essential structure of the game---, \textit{generic} ---it does not take 
+into account player behaviour---, \textit{stochastic} ---it will not produce 
+the same output every time it is run---, \textit{generate-and-test} ---it 
+produces potentially correct solutions that are tested and adjusted in each 
+iteration before giving the actual output--- and potentially be either 
+\textit{automatic}---where the designer does not take part on the process--- or 
+\textit{mixed authorship}, where the generated content is used as a base or 
+part of an interactive tool. From all these features, the actual
+challenge in the game we are occupied with in this paper, Angry Birds,
+is to generate potentially correct solutions.
+
+A special kind of \textit{generate-and-test} approach to PCG is
+Search-based Procedural Content Generation (SBPCG), which is
+usually tackled with Evolutionary Algorithms\cite{togelius2010search} like the 
+one proposed in \cite{hastings2009evolving}. 
+% Antonio - It is needed to add a reference (or two) here
+% This is said in Togelius paper that is already cited and I haven't found much 
+% more on the topic - Laura
+The problems faced by SBPCG are not very far from those encountered in
+Evolutionary problems; since evolutionary algorithms are search
+methods, they can be a good match to perform this kind of procedures. 
+
+It is probably well known that, in the game of Angry Birds, birds are
+launched against structures that include pigs. What we are searching
+for are these structures, whose playability and appearance has to be
+optimized. But first of all, they are structures with a realistic
+gravity, which must not break down when they are erected at the
+beginning of a level. We will have to include this factor into the 
+\textit{fitness function}, which grades how good a solution is, and
+frequently, it punishes non-valid solutions.  
+% Antonio - fitness function is part of the EA
+In SBPCG, how to evaluate the quality of a solution has no straightforward 
+answer. It requires formalizing as an evaluation function how much fun, 
+exciting or engaging certain content is, which are usually based in subjective 
+assumptions. However, before being fun, the generated content must be
+valid; this is the main issue we are tackling in this paper.
+
+
+There are three main classes of fitness functions in 
+% Antonio - You should just remark the term once. ;)
+SBPCG \cite{togelius2010search}:
+
+\begin{itemize}
+	\item \textit{Direct Fitness Function} where certain easily measurable 
+	features are extracted from the generated content and mapped to a 
+	fitness value.
+	\item \textit{Simulation-Based Fitness Function} where the 
+	fitness is calculated using features from an agent's gameplay. 
+	\item \textit{Interactive Fitness Function} where the fitness value is 
+	obtained from the player, whether it be explicitly or 
+	implicitly. 
+\end{itemize}
+
+Since we are interested in structural integrity of the generated
+structures, neither actual gameplay nor players are taken into
+account. We will use then a {\em direct fitness function}, which takes
+measures directly on the generated content.
+
+% This paragraph does not fit into the narrative. It's better to
+% eliminate it - JJ
+% ---------------------------------
+% It is common for AI researchers to turn to games in general as a testing 
+% environment for AI techniques.
+% This interest in games ---both video games and board games--- is not 
+% surprising since they have a rather simple set of rules, they can be a 
+% challenging task even for a human brain and they offer a wide range of dynamic 
+% and competitive elements that resemble real-world problems to some extent. The 
+% interest works in both ways. Many video games use AI techniques to deliver 
+% better experiences, mainly involving NPC behaviour and PCG.
+% ---------------------------------
+
 
 
 % Antonio - In my opinion the introduction is extremely long. It should be reduced, doing it more concise, focused on the paper objectives and with a firm motivation based on the existing gap of the state of the art.
  
 
-%The rest of this paper is organized as follows:
-%The next section presents the state of the art and related works, and comments 
-%their differences with regard to this study, along with its contribution to 
-%advance in this research line. TORCS simulator is described in Section 
-%\{sec:torcs}.
-%The proposed fuzzy controller (and its sub-controllers) is detailed in Section \ref{sec:fuzzy_controller}, whereas it is tested in `real' (simulated) races in Section \ref{sec:results}. Obtained results are analyzed and compared 
-%with other controllers are given in the same section. Finally, the conclusions and future lines of work are included in Section \ref{sec:conclusions}.
-
+The rest of this paper is organized as follows: next section presents
+the state of the art in this type of level generation, as well as its
+relationship to the actual problem of generation of structurally sound
+structures. The problem of generating Angry Birds levels is described
+next in Section \ref{sec:angry}. Next experiments are presented in
+section \ref{ch:res}. We present our conclusions in \ref{sec:conclusions}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background and State of the Art}
@@ -469,7 +484,7 @@ parts of the other one in it, like a subsequence of commands for example.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
-\label{sec:torcs}
+\label{sec:angry}
 % It's probably better if this subsection is eliminated and
 % substituted by a reference to the fact that some changes were made
 % and that these changes are available. In general, implementation
@@ -1038,7 +1053,6 @@ from the third experiment.
 %
 \section{Conclusions and Future Work} 
 \label{sec:conclusions}
-\subsection{Conclusion}
 
 Here, we briefly recap several aspects of the development of this project. 
 First, we reviewed the context of the problem: PCG. In section \ref{sec:intro}, 
@@ -1076,8 +1090,6 @@ dependent on the third one.
 
 To conclude on an optimistic tone, this work provides an interesting insight 
 into the SBPCG, through the completion---and failure---of those four goals.
-
-\subsection{Future work}
 
 In order to improve the results of the method, different constraints could be 
 expressed as multiple objectives. Overlapping blocks, velocity and height could 
