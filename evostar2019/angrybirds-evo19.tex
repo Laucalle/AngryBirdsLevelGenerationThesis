@@ -422,6 +422,34 @@ and the frame is parametrized with two angles. The lengths of the members need
 to be minimized but they depend on those two angles. The cuckoo search locates 
 two global optima for this problem specification. However this kind of 
 structural optimization is not flexible enough to fit our optimization problem. 
+
+A different take on the design of structures is using Generative Grammatical 
+Encodings as Gregory S. Hornby and Jordan B. Pollack present in 
+\cite{hornby2001advantages}. In this case, structures are formed by voxels and 
+build following instructions given as commands to a LOGO-style turtle. The 
+structures evolved in this experiments were tables. The commands are generated 
+by a context-free L-system. For the evolutionary algorithm, an L-system and its 
+production rules are considered individuals. In order to allow these systems to 
+evolve they are parametrized and constrained.
+
+Production rules are formed by different components: the predecessor, the 
+condition and the successor, like in the following example:
+$$A(n0, n1): n1 > 5 \rightarrow B(n1, n0)$$
+This algorithm restricts the comparison to whether the production parameter is 
+greater than a constant. Parameters to design commands are constant values or 
+production parameters. Parameters to productions are equations that use either 
+production parameters or constants as in :
+$$[production \; parameter | constant ]\; [ + | - | \times | 
+\; \backslash]\; [ production \; parameter | constant ]$$
+
+All individuals have a predetermined number of production rules with a fixed 
+number of arguments. Each of them is then initialized with random build 
+commands grouped in blocks. The mutation of the system is done by making a 
+small change in it such as replacing one command, changing the parameter by 
+adding a constant or changing the condition equation, among others. The 
+crossover takes two individuals, copies one of them and inserts some small 
+parts of the other one in it, like a subsequence of commands for example.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
 \label{sec:torcs}
