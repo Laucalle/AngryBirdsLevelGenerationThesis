@@ -1147,7 +1147,9 @@ problem is discussed in section \ref{sec:soa}.
 % of this paper, and whether they have been, or not, achieved or to
 % what extent - JJ
 
-This project was developed with a set of objectives in mind: The first
+This project was developed with the main objective of developing a
+competitive engry for the Angry Birds level generation contest, and  a
+set of subobjectives in mind: The first 
 goal was to explore the expressiveness and variability of SBPCG with
 evolutionary techniques. Perhaps the level of achievement of this one
 is not as easily measurable as the other three. It could seem like
@@ -1161,9 +1163,12 @@ generation but it requires a great amount of problem-specific
 knowledge. Like any other form of creative work, the biggest issue may
 be how to measure how good, creative or enjoyable is the piece. The
 more rules the author adds, expressiveness starts to get lost as the
-results are variations of the same idea. However, it is crystal clear,
-from the experiments run in this project, that a lack of knowledge
-will lead to unexpected and even disappointing outcomes. 
+results are variations of the same idea. However, it is crystal clear
+from the experiments run in this project that a lack of knowledge
+will lead to unexpected and even disappointing outcomes. % I am lost
+                                % in this paragraph. It should be more
+                                % related to the actual experiments
+                                % made - JJ
 
 The second objective, adapting the game to extract data from execution, was 
 certainly achieved. It was also a basic requirement to proceed with the rest of 
@@ -1172,19 +1177,31 @@ structured. Although the original intention was to make it available on Linux,
 currently it can only be executed with the desired behaviour on Windows. 
 Another issue is that the simulation is not easily adaptable. If the fitness 
 function of the EA is changed and needs data that is not included in the output 
-right now, the game would have to be changed and compiled again.
+right now, the game would have to be changed and compiled again. It
+would be interesting to obtain other kind of data from the simulator,
+such as the height of the structure and, eventually, its resistance to
+bombardment by angry birds. However, this is left as future work.
 
-Producing stable structures under gravity was the third objective, and can be 
-considered half a victory. % Not enough for a paper. Let's say 75% - JJ
-The levels generated in the last two experiments were 
-undeniably stable. Whether or not they can be considered structures, that is 
-arguable. % if the 4th experiment does not find any kind of structure,
-          % we should modify title and abstract to talk about "proof
-          % of concept" or "First steps" - JJ
-Again, the main issue is how we evaluate the levels. In fact this is 
+Producing stable structures under gravity was the third objective and
+the closest to the ultimate one. That objective was effectively
+achieved, but the consequence of evolving in a path of minimum
+movement or maximum estability results in structures that are close to
+the ground and do not have more than a few floors. % Tell me what you
+                                % think of this.
+The main issue is, then, how we evaluate the levels. In fact this is 
 a matter of how we define what an Angry Birds' level \textit{is} and if that 
 definition matches the fitness function. A lot of elements were correct, but 
-the definition was not complete.
+the definition was not complete. How this definition of level plays
+with the paths of evolution is also a problem. Since we define as
+level a structure that is stable, evolution will maximize stability
+finding, as in the beginnings of architectural practice, squat
+structures that are neither aesthetically pleasing nor playable,
+although undeniably sturdy and stable. We have been successful in,
+evolving free form structures, to find these type. But once we get
+there, we need to go into a different evolution mode that takes into
+account several features as a multiobjective optimization problem:
+stability is the first, but we can sacrifice a bit of stability for
+height or some other aesthetic quality.
 
 % This idea brings us to the last objective, that was not achieved. Without 
 % results that match the definition of an Angry Birds level, placing the 
@@ -1193,37 +1210,47 @@ the definition was not complete.
 % dependent on the third one.
 
 To conclude on an optimistic tone, this work provides an interesting insight 
-into the SBPCG, through the completion---and failure---of those four goals.
+into the SBPCG, through the completion---and failure---of the goals we
+set out to achieve at the beginning.
 
 In order to improve the results of the method, different constraints could be 
 expressed as multiple objectives. Overlapping blocks, velocity and height could 
-be treated as minimization objectives.
+be treated as minimization objectives. % but of course we don't need
+                                % to minimize height any more... - JJ
 
 If we pay attention at the stages of evolution in this project, there is also 
 room for improvement in the genetic operators. For example, the initialization 
 produces a small amount of valid individuals which suggested that an elitist 
 strategy for selection would work best. However, new experiments will help to 
-better balance exploration and exploitation. 
+better balance exploration and exploitation. An interesting addition
+would be to add {\em building} operators that pile blocks on
+structures that are already stable. % Check out this idea, Laura - JJ
 
 % First a discussion to say if the goal can be achieved using these
 % methods. That is, finding stable structures is just a matter of
 % adding more to the minimum numbre of blocks or more generations? - JJ
 
-Once we had a generator that meets our expectations, performance could be 
-enhanced by the analysis of the best set of initial parameters using Analysis 
-of Variance (or ANOVA), as presented in \cite{estevez2017statistical}. 
+% ---- If we need 5 hours for every run, this is not realistic --- 
+% Once we had a generator that meets our expectations, performance could be 
+% enhanced by the analysis of the best set of initial parameters using Analysis 
+% of Variance (or ANOVA), as presented in \cite{estevez2017statistical}. 
 
-Some options were discarded for time limitations, so these could be main areas 
-of development. The chromosome representation using generative grammatical 
-encoding\cite{hornby2001advantages}, although it would radically change the 
-structure of the method, might ensure that generated levels are consistent. 
-This would require carefully selection the operators that would be the building 
-blocks of the generative grammar.
+% ---- Some kind of "building" could be combined as genetic operator,
+% but that would create structures that are too similar -- JJ
+% -------------
+% Some options were discarded for time limitations, so these could be main areas 
+% of development. The chromosome representation using generative grammatical 
+% encoding\cite{hornby2001advantages}, although it would radically change the 
+% structure of the method, might ensure that generated levels are consistent. 
+% This would require carefully selection the operators that would be the building 
+% blocks of the generative grammar.
+
 
 Another important issue that needs to be addressed is the time performance. 
 Right now the simulation is the main bottleneck in the execution. One way to 
-speed up the process can be \textit{cleaning} the current simulation, getting 
-rid of any unnecessary asset while maintaining the bare minimum. However, this 
+speed up the process can be \textit{cleaning} up the current simulation, getting 
+rid of any unnecessary assets while maintaining the bare minimum to
+perform evaluation. However, this 
 will not solve the problem, since the content generator will still need to 
 launch an external executable.
 
@@ -1234,7 +1261,8 @@ the generator should be integrated in the game. However, if our goal is to
 generate levels for mixed authorship, as an assistance to developers, it may be 
 a better idea to integrate the simulation in the generator. This could be done 
 by approximating in-game physics with real physics, as described in 
-\cite{blum1970stability}. 
+\cite{blum1970stability}. % Expand on this - JJ
+% Or maybe eliminate if there's no space - JJ
 
 
 %************************************************
