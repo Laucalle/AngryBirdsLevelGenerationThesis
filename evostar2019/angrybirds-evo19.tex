@@ -363,7 +363,10 @@ from first principles, so several options will have to be evaluated.
 
 
 
-% Antonio - In my opinion the introduction is extremely long. It should be reduced, doing it more concise, focused on the paper objectives and with a firm motivation based on the existing gap of the state of the art.
+% Antonio - In my opinion the introduction is extremely long. It
+% should be reduced, doing it more concise, focused on the paper
+% objectives and with a firm motivation based on the existing gap of
+% the state of the art. 
  
 
 The rest of this paper is organized as follows: next section presents
@@ -386,11 +389,14 @@ PCG is becoming more frequently used in new games as one of the main tools for s
 
 
 The main contributions related wit this paper objectives are entries presented to previous editions of the Angry Birds Level Generation Competition. 
-From them, we could extract two main approaches to the problem that stand out: constructive and search-based.
+From them, we could extract two main approaches to the problem: constructive and search-based.
 
 % Introduce the two types, once subsections have been eliminated - JJ
 
-In the two solutions proposed by Matthew Stephenson and Jochen Renz \cite{stephenson2017generating} \cite{stephenson2016procedural} the structures displayed on the level are constructed from the top down, in several phases. 
+In the two solutions proposed by Matthew Stephenson and Jochen Renz
+\cite{stephenson2017generating,stephenson2016procedural} the
+structures displayed on the level are constructed from the top down,
+in several phases. 
 
 First, they build a structure recursively, each row composed of a single type of block (with a fixed rotation). The likelihood of selecting a certain block is given by a probability table. Then, the blocks are placed using a tree structure, where the first selected block is the peak and blocks underneath it are split into subsets that support the previous row with one, two or three blocks. This ensures local stability, but not global stability, which is tested once the whole structure is completed. The second solution also tries to add variety by replacing some blocks with others of the same height.
 
@@ -403,23 +409,29 @@ some birds are more efficient against certain materials than others. The number
 of birds available for the player to solve the level is estimated using AI 
 agents designed for a different competition. If the AI agents are unable to 
 solve the level, it is discarded. The lowest number of birds used by the agents 
-is the chosen for the level.
+is the chosen for the level. The probability table was tuned using search-based optimization
+methods. % All this could probably be made shorter
 
-The probability table was tuned using search-based optimization methods.
+The main problem with this construtive approach is that the range of
+different structures created is going to be relatively small; monotony
+leads to boredom, decreasing playability. On the other hand, generated
+structures are guaranteed to be structurally sound, and constructive
+approaches are generally faster than search-based procedures.
 
 Following the search-based approach, Lucas Ferreira and Claudio 
 Toledo\cite{ferreira2014search} have presented a solution based on SBPCG using 
 a genetic algorithm and a game clone developed in Unity Engine to evaluate the 
-levels. 
+levels. % Same game clone as we use here? - JJ
 
 In the genetic algorithm individuals correspond to levels, each represented by 
 an array of columns. Each column is a sequence of blocks, pigs and predefined 
 compound blocks, using an identification integer. This representation also 
-includes the distances between different columns.
-
-The population is initialized randomly following a probability table which 
+includes the distances between different columns. The population is initialized randomly following a probability table which 
 defines the likelihood of a certain element being placed in a certain position 
-inside a column.
+inside a column. This implies that a certain shape is chosen
+beforehand, once again to guarantee stability, but decreases
+playability by generating structures whose only differences are which
+blocks are placed on top of which. 
 
 For the evaluation, levels are executed in the game which stores data about the 
 simulation. The fitness function is described as:
@@ -430,7 +442,8 @@ $$ f_{ind} = \frac{1}{3}(\frac{1}{n}
 where $v_i$ is the average magnitude of the velocity vector for block $i$, 
 $|b|$ is the total of blocks in the level and $|p|$ the count of pigs. The rest 
 are parameters: $B$ the desired amount of blocks and $Max_b$ the maximum number 
-of elements.
+of elements. % This is the velocity after they have been hit by a
+             % bird? Or when they are erected? - JJ
 
 The recombination process uses an Uniform Crossover where the new individual is 
 generated picking for each position a column from one of the parents which 
@@ -441,35 +454,40 @@ changes with a certain probability each element of the individual randomly
 % If possible, add more entries about evolution of free-form structures, which was after all the motivation for this particular algorithm - JJ
 % In general or from the competition? - Laura
 % In general. The state of the art has to reflect what other people are doing 
-%in general - JJ
+% in general - JJ
+% This paragraph above can probably be suppressed. Since they are not
+% using a free form, this is not relevant for this paper - JJ
 
-Outside game development, we can find some approaches to structural 
-optimization using search based algorithms. Amir Hossein Gandomi, Xin-She Yang 
-and Amir Hossein Alavi proposed a genetic algorithm called Cuckoo Search and 
+Since we are focusing in this paper on free form evolution, we will
+mainly have to look outside the game field to focus on optimization in
+architecture, where there are several  approaches to structural 
+optimization using search based algorithms. Gandomi et al. \cite{gandomi2013cuckoo} proposed a bioinspired algorithm called Cuckoo Search and 
 tested its performance with several structural optimization problems. The 
 algorithm is inspired by brood parasitic behaviour of some cuckoo
 species using Lévy flight behaviour, a random walk that follows a certain 
 probability distribution that can be modelled mathematically.
-\cite{gandomi2013cuckoo}
 
-Certain cuckoo species lay eggs in other birds' nests and if the new host does 
-discover the intruding eggs it can either abandon the nest or throw them away. 
-Keeping this behaviour in mind, the Cuckoo Search follows a set of rules to 
-balance between exploration and exploitation. A cuckoo represents a 
-solution. Each of them can lay one egg and place it in a random nest. The nests 
-that contain the best eggs continue to the next generations. A host can 
-discover an egg can with a certain probability throw it away or start a new 
-nest elsewhere. The total number of nests is fixed.
+% Certain cuckoo species lay eggs in other birds' nests and if the new host does 
+% discover the intruding eggs it can either abandon the nest or throw them away. 
+% Keeping this behaviour in mind, the Cuckoo Search follows a set of rules to 
+% balance between exploration and exploitation. A cuckoo represents a 
+% solution. Each of them can lay one egg and place it in a random nest. The nests 
+% that contain the best eggs continue to the next generations. A host can 
+% discover an egg can with a certain probability throw it away or start a new 
+% nest elsewhere. The total number of nests is fixed.
+% --------------------------- Irrelevant for this paper -------
 
 One of the test cases for the algorithm is a structural design of a pin-jointed 
 plane frame. In this case the forces and the length of the base is predefined 
 and the frame is parametrized with two angles. The lengths of the members need 
 to be minimized but they depend on those two angles. The cuckoo search locates 
 two global optima for this problem specification. However this kind of 
-structural optimization is not flexible enough to fit our optimization problem. 
+structural optimization is not flexible enough to fit our optimization
+problem, since we are looking for evolution of structures that do not
+follow any pattern.
 
 A different take on the design of structures is using Generative Grammatical 
-Encodings as Gregory S. Hornby and Jordan B. Pollack present in 
+Encodings as Hornby and Pollack present in 
 \cite{hornby2001advantages}. In this case, structures are formed by voxels and 
 build following instructions given as commands to a LOGO-style turtle. The 
 structures evolved in this experiments were tables. The commands are generated 
@@ -477,15 +495,16 @@ by a context-free L-system. For the evolutionary algorithm, an L-system and its
 production rules are considered individuals. In order to allow these systems to 
 evolve they are parametrized and constrained.
 
-Production rules are formed by different components: the predecessor, the 
-condition and the successor, like in the following example:
-$$A(n0, n1): n1 > 5 \rightarrow B(n1, n0)$$
-This algorithm restricts the comparison to whether the production parameter is 
-greater than a constant. Parameters to design commands are constant values or 
-production parameters. Parameters to productions are equations that use either 
-production parameters or constants as in :
-$$[production \; parameter | constant ]\; [ + | - | \times | 
-\; \backslash]\; [ production \; parameter | constant ]$$
+% Production rules are formed by different components: the predecessor, the 
+% condition and the successor, like in the following example:
+% $$A(n0, n1): n1 > 5 \rightarrow B(n1, n0)$$
+% This algorithm restricts the comparison to whether the production parameter is 
+% greater than a constant. Parameters to design commands are constant values or 
+% production parameters. Parameters to productions are equations that use either 
+% production parameters or constants as in :
+% $$[production \; parameter | constant ]\; [ + | - | \times | 
+% \; \backslash]\; [ production \; parameter | constant ]$$
+% --- No more details are needed on this kind of section --
 
 All individuals have a predetermined number of production rules with a fixed 
 number of arguments. Each of them is then initialized with random build 
@@ -493,17 +512,14 @@ commands grouped in blocks. The mutation of the system is done by making a
 small change in it such as replacing one command, changing the parameter by 
 adding a constant or changing the condition equation, among others. The 
 crossover takes two individuals, copies one of them and inserts some small 
-parts of the other one in it, like a subsequence of commands for example.
+parts of the other one in it, like a subsequence of commands for
+example. Still, this increases the number of patterns that can be
+generated, but stil precludes the formation of disjoint structures
+(for instance, a defensive tower before a simple pigsty). 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
 \label{sec:angry}
-% It's probably better if this subsection is eliminated and
-% substituted by a reference to the fact that some changes were made
-% and that these changes are available. In general, implementation
-% details (and code snippets) are not suitable for this kind of
-% conferences - JJ
-
 
 % \subsection{Open Source Simulator}
 % \textit{Angry Birds} is not open source software and so the code is not available. As a part of their solution, Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} developed an open source simulation for the game. Since that implementation is available on Github\cite{sciencebirds}, it will be used as a starting point for this part of project. The modified version is available on Github\cite{sciencebirds-adapt} and described in section \ref{ch:gameApdaptation}.
