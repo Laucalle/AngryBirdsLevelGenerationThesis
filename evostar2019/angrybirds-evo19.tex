@@ -159,7 +159,7 @@ blocks which house {\em pigs} (which we can call {\em pigsties} for
 that reason)
 and the player has to fire birds from a slingshot
 %---apparently they never learnt to fly---
-so the structure is destabilized or, in some cases, destroyed..
+so the structure is destabilized or, in some cases, destroyed.
 What is interesting to us is how heavily the 
 game relies in gravity to create interesting puzzles, making the
 structures very close to reality in its dynamic behavior. The main challenge from 
@@ -178,8 +178,11 @@ computer programs that are able to generate levels for the \textit{Angry Birds}
 game; these levels must first be valid (i. e. not crash), and then,
 they are evaluated and judged for playability and aesthetics. 
 
-The ultimate objective of the project presented in this paper is to build a program capable of creating levels for \textit{Angry Birds}. We can break it down to the 
-following, more concise, objectives:
+The ultimate objective of the project presented in this paper is to
+build a program capable of creating levels for \textit{Angry Birds}
+and which would be able to eventually compete in the above mentioned
+competitions. We can break it down to the following, more concise,
+objectives: 
 
 \begin{itemize}
 	\item Explore the expressiveness and variability of SBPCG using 
@@ -189,6 +192,11 @@ following, more concise, objectives:
 	\item Produce stable structures under gravity.
 	\item Place other elements on the structures to complete the levels.
 \end{itemize} 
+
+In this paper we will focus on the first three objectives, with sight
+on producing free-form structures that do not collapse; in a nutshell,
+we will be describing a PCG method that efficiently generates free
+form and stable Angry Birds {\em pigsty} structures.
 
 % Antonio - I think that the paper must be better motivated. It cannot
 % be just a "let's try what happens", but you should justify why this
@@ -200,13 +208,8 @@ following, more concise, objectives:
 
 % ***********************************************
 % I have moved this to below, but we have to check we have narrative
-% coherence in the introduction.
+% coherence in the introduction. - JJ
 % ************************************************
-
-In this paper we will focus on the first three objectives, with sight
-on producing free-form structures that do not collapse; in a nutshell,
-we will be describing a PCG method that efficiently generates free
-form and stable Angry Birds {\em pigsty} structures.
 
 
 For the purpose of this paper, we define Procedural Game Generation
@@ -261,8 +264,14 @@ to present users with options to adjust game elements; however, by using PCG tec
 the game itself can change based on in-game player behaviour.
 PCG can be used as a tool to assist developers. It can suggest what might be a 
 base for later development, enhancing human creativity rather than displacing 
-it.
+it. In this paper we target replayability by insisting in the
+generation of free-form structures. If all content generated follow a
+simple pattern, this is easily spotted and the player disengages. By
+creating structures whose form is only constrained by gravity, levels
+generated will be much more playable.
 
+% Paragraph that could be reduced to a single sentence or even
+% eliminated. We are now up to 17 pages - JJ
 There are many PCG methods and it is necessary to look at some traits that 
 characterize and differentiate them from each 
 other\cite{togelius2016introduction}. The method proposed in this paper is 
@@ -278,33 +287,34 @@ iteration before giving the actual output--- and potentially be either
 part of an interactive tool. From all these features, the actual
 challenge in the game we are occupied with in this paper, Angry Birds,
 is to generate potentially correct solutions.
+% ------------------------------------------------------------------
 
 A special kind of \textit{generate-and-test} approach to PCG is
 Search-based Procedural Content Generation (SBPCG), which is
 usually tackled with Evolutionary Algorithms\cite{togelius2010search} like the 
 one proposed in \cite{hastings2009evolving}. 
-% Antonio - It is needed to add a reference (or two) here
-% This is said in Togelius paper that is already cited and I haven't found much 
-% more on the topic - Laura
 The problems faced by SBPCG are not very far from those encountered in
-Evolutionary problems; since evolutionary algorithms are search
+Evolutionary Algorithms; since evolutionary algorithms are search
 methods, they can be a good match to perform this kind of procedures. 
 
-It is probably well known that, in the game of Angry Birds, birds are
-launched against structures that include pigs. What we are searching
-for are these structures, whose playability and appearance has to be
-optimized. But first of all, they are structures with a realistic
-gravity, which must not break down when they are erected at the
+Since in Angry Birds birds are
+launched against structures that include pigs, we will be searching
+for these structures, whose playability and appearance has to be
+optimized. We try to address playability by eliminating the constraint
+that they must follow a pattern, and do not really address aesthetics
+in this paper, not even constraining the structures to be
+symmetric. However, the free form implies that structural integrity is
+not guaranteed, and the structures have a realistic
+gravity, so we must avoid its collapse when they are erected at the
 beginning of a level. We will have to include this factor into the 
-\textit{fitness function}, which grades how good a solution is, and
-frequently, it punishes non-valid solutions.  
+\textit{fitness function}, which grades how good a solution is, or, as
+it might be the case, how far away it is from actually being good.
 % Antonio - fitness function is part of the EA
 In SBPCG, how to evaluate the quality of a solution has no straightforward 
 answer. It requires formalizing as an evaluation function how much fun, 
 exciting or engaging certain content is, which are usually based in subjective 
 assumptions. However, before being fun, the generated content must be
 valid; this is the main issue we are tackling in this paper.
-
 
 There are three main classes of fitness functions in 
 % Antonio - You should just remark the term once. ;)
@@ -324,8 +334,20 @@ SBPCG \cite{togelius2010search}:
 Since we are interested in structural integrity of the generated
 structures, neither actual gameplay nor players are taken into
 account. We will use then a {\em direct fitness function}, which takes
-measures directly on the generated content.
+measures directly on the generated content. However, this is a
+time-consuming procedure since it actually involves the graphic
+representation of the structure and application of falling motion to
+its different parts. If we have to subject every single individual in
+the population to this, the size of the search space (which is huge
+since it is free form) explored is going to be very small. So we will
+have to change it to minimize the actual number of structures that are
+simulated by applying heuristics to the data structure and assigning
+it a fitness even before simulation.
 
+The fact that we are focusing on structures with a free form also
+implies that the data structure we will evolve has to take this into
+account. However, there is no single way to create this representation
+from first principles, so several options will have to be evaluated. 
 % This paragraph does not fit into the narrative. It's better to
 % eliminate it - JJ
 % ---------------------------------
