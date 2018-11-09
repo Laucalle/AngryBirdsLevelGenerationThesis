@@ -148,44 +148,37 @@ Game development, Angry Birds, Level generation}
 \section{Introduction}
 \label{sec:intro}
 
-\textit{Angry Birds} is a mobile game by Finnish company Rovio Entertainment 
+\textit{Angry Birds} is a mobile game created by the Finnish company Rovio Entertainment 
 Corporation\cite{angry-birds}, first launched in 2009. 
 %The game was a huge success in the \textit{AppStore}
 %---being the most downloaded mobile game in 
 %history. Having been ported to several other platforms since, it has an 
 %animated movie and way too many \textit{spin offs}---around seventeen.
-In the game, there is a variety of defensive structures made out of blocks 
+In the game, there is a variety of defensive structures made out of
+blocks which house {\em pigs} (which we can call {\em pigsties} for
+that reason)
 and the player has to fire birds from a slingshot
 %---apparently they never learnt to fly---
-so the structure is destabilized.
+so the structure is destabilized or, in some cases, destroyed..
 What is interesting to us is how heavily the 
-game relies in gravity to create interesting puzzles. The main challenge from 
-the PCG perspective is to build stable structures that are robust enough to 
-take more than a single shot before crumbling to the ground.
+game relies in gravity to create interesting puzzles, making the
+structures very close to reality in its dynamic behavior. The main challenge from 
+the Procedural Content Generation (PCG) perspective is to build stable
+structures that are robust enough to take more than a single shot
+before crumbling to the ground. Prior to that they have to obviously
+stand on their own and not crash immediately, even before a single
+shot has been fired.
 
-% These two paragraphs should probably be synthesized to a single
-% sentence. - JJ
-%Having this relationship between academia and industry in mind, the IEEE 
-%Conference on Computational Intelligence and Games was created\cite{ieee-cig}. 
-%In 2018, most proposed competitions were centred around playing AI agents for 
-There is a number of competitions centred around playing AI agents for specific 
+There is a number of competitions centered around playing AI agents for specific 
 games or genres, but it is less common to find PCG competitions like the 
 \textit{Angry Birds Level Generation Competition}, whose third edition
 was celebrated in 2018 during CIG \cite{aibirds}.
 Participants must build 
 computer programs that are able to generate levels for the \textit{Angry Birds} 
-game.
-% Antonio - remove the reference to CIG conference (EvoGAMES is a similar 
-%conference). Just introduce the Level Generation Competition.
-% Antonio - You should first present the game and later introduce the 
-%competition centered on that game
+game; these levels must first be valid (i. e. not crash), and then,
+they are evaluated and judged for playability and aesthetics. 
 
-
-% The main challenge [from the PCG perspective (or similar)] is to build stable 
-%structures.. - Mario
-
-The ultimate objective of this project is to build a program capable of 
-creating levels for \textit{Angry Birds}. We can break it down to the 
+The ultimate objective of the project presented in this paper is to build a program capable of creating levels for \textit{Angry Birds}. We can break it down to the 
 following, more concise, objectives:
 
 \begin{itemize}
@@ -193,8 +186,6 @@ following, more concise, objectives:
 	EAs.
 	\item Adapt the game code to extract data from execution to 
 	evaluate the levels.
-	% Adapt the [game code], to extract (readers may think about the actual 
-	%game) - Mario 
 	\item Produce stable structures under gravity.
 	\item Place other elements on the structures to complete the levels.
 \end{itemize} 
@@ -212,13 +203,11 @@ following, more concise, objectives:
 % coherence in the introduction.
 % ************************************************
 
+In this paper we will focus on the first three objectives, with sight
+on producing free-form structures that do not collapse; in a nutshell,
+we will be describing a PCG method that efficiently generates free
+form and stable Angry Birds {\em pigsty} structures.
 
-%The definition of Procedural Content Generation (PCG) has been
-%broadly discussed but there is no agreement. We have plenty of
-%examples of what \textit{is} and what \textit{is not} PCG, but every
-%definition struggles to cover all cases, either being too inclusive
-%or too exclusive. The one we choose here balances well between the
-%two, defining
 
 For the purpose of this paper, we define Procedural Game Generation
 (PCG) as \textit{the algorithmic creation of game content with
