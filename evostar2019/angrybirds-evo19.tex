@@ -931,11 +931,16 @@ section.
 
 %************************************************
 \section{Experimentation and Results}\label{ch:res}
-Each experiment was based on an hypothesis formulated after the observation of 
-previous results. The structure of this section reflects this methodology.
 
+%Each experiment was based on an hypothesis formulated after the observation of 
+%previous results. The structure of this section reflects this methodology.
+% This is obvious. You should instead create a narrative of the
+% experiments performed, and why every experiment leads to the next -
+% JJ
+
+% This table should probably be moved to the end of the section - JJ
 Four experiments have been carried out, with more than 15 executions per 
-experiment. Table \ref{t:resOver} shows an overview of the results.
+experiment. Table \ref{t:resOver} shows an overview of the results. 
 \begin{table}[H]
 	\myfloatalign
 	\begin{tabular}{ccccc}
@@ -948,27 +953,32 @@ experiment. Table \ref{t:resOver} shows an overview of the results.
 		
 		\hline
 	\end{tabular}
-	\caption{Summary of results, G: number of generations}
+	\caption{Summary of results, G: number of generations} % What
+                                % is E? Is that the average? Number of
+                                % generations up to what?
 	\label{t:resOver}
 \end{table}
 
 \subsection{First Experiment}
+
 The premise of the first experiment is that our basic EA should be able to 
 minimize the movement of the blocks placed on the level and the flexibility of 
-the representation should allow variety in the structures. This may be 
-optimistic, but we need an estimation as a starting point, and this experiment 
-will serve the purpose. 
+the representation should allow variety in the structures. This will
+be used as a baseline.
+% This may be 
+% optimistic, but we need an estimation as a starting point, and this experiment 
+% will serve the purpose. 
 
 The EA in this experiments uses:
 \begin{itemize}
-	\item  initialization with the discrete method described earlier.
-	\item  basic sample crossover.
-	\item  all four mutations.
-	\item  elitist replacement.
-	\item  selection using tournaments.
+	\item  Initialization with the discrete method described earlier.
+	\item  Basic sample crossover.
+	\item  All four mutations.
+	\item  Elitist replacement.
+	\item  Tournament selection using.
 \end{itemize}
 
-The parameters are:
+The parameters are: % A table is better for this - JJ
 \begin{itemize}
 	\item Population size: 100
 	\item Number of generations: 100
@@ -997,24 +1007,22 @@ the population is stable, where every child has a greater fitness value than
 its parents, therefore no new members are allowed. If there are no new 
 individuals and the population is completely \textit{stuck}, the fitness value 
 of the worst individual should be the same over several generations. In Figure 
-\ref{f:grahp1} we can see that is not the case in average. Although some 
+\ref{f:grahp1} we can see that this is not the case in average. Although some 
 populations do remain the same for several generations close to the maximum, 
 most of them do not.
 
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.55]{exp1_worstIndv.png}
-	\caption{In grey, different executions of the first experiment 
-	1}\label{f:grahp1}
+	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
 \end{figure}
-
-\subsection{Second Experiment}
 
 Most executions from the previous experiment reached the maximum number of 
 generations without stabilizing or converging. This means the EA may need a 
 larger number of generations to fully evolve a solution. This is the hypothesis 
-for the second experiment.
+for the second experiment, which we describe next
 
+\subsection{Second Experiment}
 
 The set of operators is the same as the previous one. The parameters remain 
 unchanged except for:
@@ -1022,10 +1030,14 @@ unchanged except for:
 	\item Number of generations: 1000
 \end{itemize}
 We also added two stop conditions: 10 generations without changes (stable 
-population) or best fitness value below 0.01.
+population) or best fitness value below 0.01. % This should not be
+                                % "also", it's maybe the most
+                                % important change - JJ
 
+% Enphasize that we can run 1000 generations because fitness is
+% designed to not having to use the simulator - JJ
 
-Although best levels obtained with this experiment are better than those 
+Although the best levels obtained with this experiment are better than those 
 evolved in the first experiment, the bad solutions have a really high fitness 
 value. In table \ref{t:resOver}, we can see that average fitness of levels 
 produced with this version of the EA is worse than the ones generated in the 
@@ -1050,16 +1062,22 @@ improvements are most common in those executions with a poor initial
 population. Even the ones with several hundreds of generations struggle to 
 improve the initial population.
 
-\subsection{Third Experiment}
-The previous experiment proved that the problem is not with the number of 
-generations. Then it is more likely that there this EA is biased towards 
+Our hypothesis that the number of generations could be the main factor
+is then not correct; it is more likely that there this EA is biased towards 
 exploration rather than exploitation. The genetic operators are failing to 
 create new individuals that inherit good traits from their parents. A new 
-crossover operator could shift the focus to exploitation.
+crossover operator could shift the focus to exploitation, and we will
+examine this in the next experiment.
+
+\subsection{Third Experiment}
 
 
 For the third experiment, the change introduced is in the crossover operator 
-used. It was described in section \ref{ga:cross2}. The rest of the operators as 
+used which was described in section \ref{ga:cross2}. % This reference
+                                % now points to the section at
+                                % large. A better reference should be
+                                % used, as well as name - JJ
+The rest of the operators as 
 well as the termination criteria are kept the same. 
 
 
