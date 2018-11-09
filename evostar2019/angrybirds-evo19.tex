@@ -1090,8 +1090,8 @@ fitness of the population and the worst individual have similar values now,
 which suggest that in most executions the population did converge.
 
 The levels are stable and the blocks do not fall when loading the level, but 
-they could arguably be considered structures, since most of them consist in a 
-few blocks displayed on the floor. The average amount of blocks is $6.26$, 
+it is arguable that they would be be considered structures, since most of them consist in a 
+few blocks spread about on the floor. The average amount of blocks is $6.26$, 
 which is really close to the minimum amount of blocks allowed. However, given 
 the proposed fitness function, it is completely logical that the evolution 
 leads to this kind of arrangements. The more objects placed on the level, the 
@@ -1099,26 +1099,30 @@ more likely the individual is to not meet the requirements imposed by the
 constraints. It also makes sense to place objects near the ground, instead of 
 one on top of the other.
 
+The fitness landscape a fitness function creates is difficult to
+assess, but in this case it is clear that search goes on the direction
+of minimizing the number of blocks so that the number of blocks
+actually falling is zero. The created structures are not very
+interesting, though, that is why we propose some changes in the next experiment.
+
 \subsection{Fourth Experiment}
-The previous EA generates levels with a number of blocks that tends to the 
-minimum of blocks allowed which is 5. Such a small number of elements does not 
-create interesting structures. A higher number of blocks may lead to more 
-appealing levels. We test this in the fourth experiment.
 
+The only parameter that was changed for this experiment is the minimum
+number, which went from 5 to 10. 
 
-The only parameter that was changed for this experiment is the minimum number 
-of blocks from 5 to 10. 
-
-
-The first thing to notice in this experiments (Table \ref{t:resOver}) is the 
+The first thing to notice in these experiments (Table \ref{t:resOver}) is the 
 increase of the average execution time: it went from 1.76 hours in the third 
 experiment to 5.03 hours in this one. The time spent running the simulation for 
 each population in this experiments and in the previous one should be similar. 
-However, the number of executions drastically increased too. There is no doubt 
-that placing at least ten objects is more difficult than placing 5. The average 
-best fitness value slightly rose, while the average and worst values are lower. 
-This suggest that the latest generations of this EA are less diverse than those 
+However, the number of actual executions of the simulator, which only
+kick in if there is actually some block on the floor and there is no overlap, drastically increased too. There is no doubt 
+that placing at least ten objects in a structure that does not
+collapse is more difficult than placing just five. The average 
+best fitness value increased slightly, while the average and worst values are lower. This suggest that the latest generations of this EA are less diverse than those 
 from the third experiment.
+
+% Comment on the actual appearance of these structures. Do they
+% achieve the stated objective - JJ?
 
 %************************************************
 
