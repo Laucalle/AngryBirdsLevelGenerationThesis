@@ -162,7 +162,8 @@ and the player has to fire birds from a slingshot
 so the structure is destabilized or, in some cases, destroyed.
 What is interesting to us is how heavily the 
 game relies in gravity to create interesting puzzles, making the
-structures very close to reality in its dynamic behavior. The main challenge from 
+structures very close to reality in its dynamic behavior. The main challenge 
+from 
 the Procedural Content Generation (PCG) perspective is to build stable
 structures that are robust enough to take more than a single shot
 before crumbling to the ground. Prior to that they have to obviously
@@ -405,8 +406,8 @@ The second solution also selects material---which can be stone, ice or wood---ba
 Materials also determine which kind of birds will be used in the level, since 
 some birds are more efficient against certain materials than others. The number 
 of birds available for the player to solve the level is estimated using AI 
-agents designed for a different competition. If the AI agents are unable to 
-solve the level, it is discarded. The lowest number of birds used by the agents 
+agents and discarded if they are unable to 
+solve it. The lowest number of birds used by the agents 
 is the chosen for the level. The probability table was tuned using search-based optimization
 methods. % All this could probably be made shorter
 
@@ -419,14 +420,16 @@ approaches are generally faster than search-based procedures.
 Following the search-based approach, Lucas Ferreira and Claudio 
 Toledo\cite{ferreira2014search} have presented a solution based on SBPCG using 
 a genetic algorithm and a game clone developed in Unity Engine to evaluate the 
-levels. % Same game clone as we use here? - JJ
+levels. Their game clone will be used in this paper. % Same game clone as we 
+%use here? - JJ
+% yes - Laura
 
 In the genetic algorithm individuals correspond to levels, each represented by 
 an array of columns. Each column is a sequence of blocks, pigs and predefined 
 compound blocks, using an identification integer. This representation also 
 includes the distances between different columns. The population is initialized randomly following a probability table which 
 defines the likelihood of a certain element being placed in a certain position 
-inside a column. This implies that a certain shape is chosen
+inside a column. This implies that a shape is chosen
 beforehand, once again to guarantee stability, but decreases
 playability by generating structures whose only differences are which
 blocks are placed on top of which. 
@@ -442,6 +445,8 @@ $|b|$ is the total of blocks in the level and $|p|$ the count of pigs. The rest
 are parameters: $B$ the desired amount of blocks and $Max_b$ the maximum number 
 of elements. % This is the velocity after they have been hit by a
              % bird? Or when they are erected? - JJ
+             % Velocity when erected. They don't use agents at this point - 
+             % Laura
 
 The recombination process uses an Uniform Crossover where the new individual is 
 generated picking for each position a column from one of the parents which 
@@ -630,10 +635,13 @@ is not in motion, so it seems reasonable to evaluate its whole stillness as oppo
 
 $$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
 
-The (modified) 
+The modified 
 % Antonio - So it was not in the original simulator, was it?
 game simulator provides the average magnitude of
 velocity for each block. % Check that this is true - JJ
+% The original simulator did calculate the average but it did not offer it as 
+% output and most importantly th value was frame rate dependent. So yes, it was 
+% the modified version - Laura 
 This set is noted as $V$, with $|V|$ being the cardinality of the set. The number of blocks in an individual is $b$ and it can differ from the cardinality of $V$ since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and it is multiplied by a penalization factor, since a level whose blocks break without user interaction would not be considered valid. This happens when a block free-falls from a certain height or collides with a falling object. 
 $P_{broken}$ is set to $100$ since objects in a level do not usually reach that 
 velocity, therefore it will separate non-valid levels from potentially good 
@@ -657,7 +665,7 @@ levels are actually simulated.
 %removing it from the population will cause a high loss of diversity.
 For that reason, before testing a level, there are some indicators, like
 distance to the ground and number of overlapping blocks, that a level would 
-not be suitable 
+not be a valid solution
 % Antonio - what do you mean? It is not clear.
 and thus simulation can be skipped.
 
@@ -758,6 +766,8 @@ they are listed is not important.
 % change over generations.
 % - But you always take the last value? Or average? Is there a random
 % component in the way they fall? - JJ
+% always the worst simulated one to date. There shouldn't be a random component 
+% but that is managed by Unity Engine. - Laura
 
 The fitness of the worst individual that has been tested in game is
 stored, so that the value of not tested levels is always above ---it is a minimization problem--- the in-game 
@@ -830,12 +840,16 @@ combination:
 There are four different mutations:
 
 \begin{itemize}
-	\item Type: type is represented as an integer, so it adds or subtracts one 
+	\item Rotation: rotation is represented as an integer (it is discretized), 
+	so it adds or 
+	subtracts one 
 	to the current value. % If types follow a logical order, you
                               % should mention it. If they don't, this
                               % is the same as generating a random
                               % number - JJ
-	\item Rotation: similarly to type mutation.
+                              % it makes more sense for rotation than it does 
+                              % for type actually - Laura
+	\item Type: similarly to rotation mutation.
 	\item Position X: a real value between $0$ and $1$---excluding $0$---is 
 	added or subtracted from the value of the position X.
 	\item Position Y: same as position X mutation, for position Y.
@@ -948,7 +962,8 @@ Table \ref{t:resOver} shows an overview of the results.
 % If possible, add standard deviation here - JJ
 		\hline
 	\end{tabular}
-	\caption{Summary of results, G: number of generations} % What
+	\caption{Summary of results, G: number of generations, E: experiment 
+	number} % What
                                 % is E? Is that the average? Number of
                                 % generations up to what?
 	\label{t:resOver}
@@ -975,16 +990,26 @@ The EA in this experiments uses:
 \end{itemize}
 
 The parameters are: % A table is better for this - JJ
-\begin{itemize}
-	\item Population size: 100
-	\item Number of generations: 100
-	\item Percentage of parents: 0.5
-	\item Percentage of type mutations: 0.5
-	\item Percentage of rotation mutations: 0.5
-	\item Percentage of axis x mutations: 0.5
-	\item Percentage of axis y mutations: 1
-\end{itemize}
-% Antonio - I agree, you could save space using a table with two columns, for instance. Moreover it will be easier for the reader to find the configuration in a table. ;)
+
+\begin{table}[H]
+	\myfloatalign
+	\begin{tabular}{lc}
+		\hline
+		\textbf{Population size} & 100 \\ \hline
+		\textbf{Number of generations} & 100 \\  \hline
+		\textbf{Percentage of parents} &  0.5 \\  \hline
+		\textbf{Percentage of type mutations} & 0.5 \\  \hline
+		\textbf{Percentage of rotation mutations} & 0.5 \\  \hline
+		\textbf{Percentage of axis x mutations}  & 0.5 \\  \hline
+		\textbf{Percentage of axis y mutations}  & 1 \\  \hline
+	\end{tabular}
+	\caption{Parameters used in the first experiment} 
+	\label{t:base}
+\end{table}
+% Antonio - I agree, you could save space using a table with two columns, for 
+%instance. Moreover it will be easier for the reader to find the configuration 
+%in a table. ;)
+% Done - Laura
 
 The results suggest that the hypothesis was not correct. The average best 
 solution has a fitness value of 61.334 (as shown in Table \ref{t:resOver}) 
@@ -1017,7 +1042,7 @@ most of them do not.
 Most executions from the previous experiment reached the maximum number of 
 generations without stabilizing or converging. This means the EA may need a 
 larger number of generations to fully evolve a solution. This is the hypothesis 
-for the second experiment, which we describe next
+for the second experiment, which we describe next.
 
 \subsection{Second Experiment}
 
@@ -1027,10 +1052,15 @@ The main change in this implementation is the addition of two new stop condition
 % This should not be "also", it's maybe the most important change - JJ
 % Antonio - I have stressed it. ;)
 The set of operators is the same as the previous one, and the parameters remain 
-unchanged except for the \textit{Number of generations} which is equal to 1000.
+unchanged except for the \textit{Number of generations} which is equal to 1000. 
+The increase in the number of generations allows each run to fully develop 
+their individuals. This would not be feasible if we had to simulate all the 
+individuals, but thanks to the fitness function and the new stop conditions we 
+can afford this number of generations.
 % Antonio - why did you increase the number of generations? Explain it.
 % Enphasize that we can run 1000 generations because fitness is
 % designed to not having to use the simulator - JJ
+% Updated - Laura
 
 Although the best levels obtained with this experiment are better than those 
 evolved in the first experiment, the bad solutions have a really high fitness 
@@ -1068,10 +1098,12 @@ examine this in the next experiment.
 
 
 For the third experiment, the change introduced is in the crossover operator 
-used which was described in section \ref{ga:cross2}. % This reference
+used which was previously described as \textit{Common blocks} crossover. % This 
+%reference
                                 % now points to the section at
                                 % large. A better reference should be
                                 % used, as well as name - JJ
+                                % Removed reference, added name - Laura
 The rest of the operators as 
 well as the termination criteria are kept the same. 
 
@@ -1116,6 +1148,9 @@ collapse is more difficult than placing just five. The average
 best fitness value increased slightly, while the average and worst values are lower. This suggest that the latest generations of this EA are less diverse than those 
 from the third experiment.
 
+However, the results are more interesting visually. We can find some blocks 
+being stack together, not only lied on the ground like in the previous 
+experiment. 
 % Comment on the actual appearance of these structures. Do they
 % achieve the stated objective - JJ?
 
