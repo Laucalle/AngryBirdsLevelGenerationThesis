@@ -694,7 +694,7 @@ Engine underlying the simulator will solve the issue moving the blocks until the
 % collisions are solved, we assume that a precise prediction of the positions of 
 % the blocks is not possible and therefore the fitness value obtained could be 
 % inaccurate.
-So, a punishment is applied and the level is not simulated either. 
+So, a penalty is applied and the level is not simulated either. 
 In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ 
 where the first factor is a penalty set to $10$ and the second is the number of 
 blocks that overlap with each other. 
@@ -940,12 +940,12 @@ Table \ref{t:resOver} shows an overview of the results.
 	\myfloatalign
 	\begin{tabular}{ccccc}
 		& \textbf{E1} & \textbf{E2} & \textbf{E3} &\textbf{E4} \\ \hline
-		\textbf{Time (h)} & 0.89 $\pm$ STDDEV & 1.002 & 1.76 & 5.03 \\  \hline
+		\textbf{Time (h)} & 0.89 & 1.002 & 1.76 & 5.03 \\  \hline
 		\textbf{G} &  100.0 & 155.087 & 76.625 & 365.929 \\  \hline
 		\textbf{Best} & 61.334 & 110.66 & 0.0015 & 0.0018 \\  \hline
 		\textbf{Avg} & 383.701 & 327.547 & 0.54 &  0.203 \\  \hline
 		\textbf{Worst}  & 510.515 & 367.895 & 0.828 & 0.2997\\  \hline
-		
+% If possible, add standard deviation here - JJ
 		\hline
 	\end{tabular}
 	\caption{Summary of results, G: number of generations} % What
