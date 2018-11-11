@@ -382,16 +382,14 @@ section \ref{ch:res}. We present our conclusions in \ref{sec:conclusions}.
 
 % Antonio - TODO: Introduce the PCG in similar games
 
-PCG is becoming more frequently used in new games as one of the main tools for supporting designers and developers. It has a growing relevance which has been also translated into the arising of new international competitions aimed to design algorithms to generate interesting/funny/enjoyable contents for different games, such as Super Mario (a clone of it) \cite{MarioAI_Level_12}, not specified General Video Games \cite{GAIG_LevelGeneration_18,Khalifa_GVGLG_16}, or recently, for Angry Birds \cite{AngryBirds_LevelGeneration_18}.
+PCG is becoming more frequently used in new games as one of the main tools for supporting designers and developers. It has a growing relevance which has been also translated into the arising of new international competitions aimed to design algorithms to generate interesting/funny/enjoyable contents for different games, such as Super Mario (a clone of it indeed) \cite{MarioAI_Level_12}, not specified General Video Games \cite{GAIG_LevelGeneration_18,Khalifa_GVGLG_16}, or recently, for Angry Birds \cite{AngryBirds_LevelGeneration_18}.
 
-
-% -------- Antonio ---- TO BE CONTINUED --------------------
-
-
-The main contributions related wit this paper objectives are entries presented to previous editions of the Angry Birds Level Generation Competition. 
+Thus, the main contributions related with this paper objectives are entries presented to previous editions of the Angry Birds Level Generation Competition. 
 From them, we could extract two main approaches to the problem: constructive and search-based.
 
 % Introduce the two types, once subsections have been eliminated - JJ
+
+% Antonio - TODO (for me): revise and improve this. Add new references to other related works.
 
 In the two solutions proposed by Matthew Stephenson and Jochen Renz
 \cite{stephenson2017generating,stephenson2016procedural} the
@@ -616,31 +614,27 @@ generated, but still precludes the formation of disjoint structures
 % I have eliminated the whole subsection above. Some reference to what
 % was done here should be inserted elsewhere - JJ
 
-The main open source Angry Birds simulator is the one that had been developed by  Ferreira and 
-Toledo \cite{ferreira2014search}, available in
-GitHub\cite{sciencebirds}. We used it  as a starting point; however we
-had to patch it for producing usable output and automate its work. The modified 
-version is available on GitHub\cite{sciencebirds-adapt}.
+Science Birds is nowadays the main open source Angry Birds simulator. It was developed by  Ferreira and Toledo \cite{ferreira2014search}, and is available at
+GitHub \cite{sciencebirds}. We used it  as a starting point; however we
+had to patch it for producing usable output 
+% Antonio - I think this is important and could be considered as a contribution of the work, so please, explain it and clarify.
+and automate its work. The modified 
+version is available on GitHub \cite{sciencebirds-adapt}.
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
 Once the simulator that is going to be used to measure fitness is
-ready, we will have to design that fitness function. As obvious as it
+ready, we have to design the fitness function. As obvious as it
 might seem, the main feature of a stable level is that it 
-is not in motion, so it seems reasonable to evaluate their stillness as opposed 
-to their speed.
+is not in motion, so it seems reasonable to evaluate its whole stillness as opposed to its speed -- considering every single block --.
 
 $$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
 
-The (modified) game simulator provides the average magnitude of
+The (modified) 
+% Antonio - So it was not in the original simulator, was it?
+game simulator provides the average magnitude of
 velocity for each block. % Check that this is true - JJ
-This  
-set is noted as $V$, with $|V|$ being the cardinality of the set. The number of 
-blocks in an individual is $b$ and it can differ from the cardinality of $V$ 
-since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and 
-it is multiplied by a penalization factor, since a level whose blocks break 
-without user interaction would not be considered valid. This happens when a 
-block free-falls from a certain height or collides with a falling object. 
+This set is noted as $V$, with $|V|$ being the cardinality of the set. The number of blocks in an individual is $b$ and it can differ from the cardinality of $V$ since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and it is multiplied by a penalization factor, since a level whose blocks break without user interaction would not be considered valid. This happens when a block free-falls from a certain height or collides with a falling object. 
 $P_{broken}$ is set to $100$ since objects in a level do not usually reach that 
 velocity, therefore it will separate non-valid levels from potentially good 
 ones.
@@ -661,10 +655,11 @@ decided to take additional factors on the fitness so that not all
 levels are actually simulated. 
 %Although we may know that a given level will perform poorly in the simulation, 
 %removing it from the population will cause a high loss of diversity.
-For that 
-matter, before testing a level, there are some indicators, like
+For that reason, before testing a level, there are some indicators, like
 distance to the ground and number of overlapping blocks, that a level would 
-not be suitable and thus simulation can be skipped.
+not be suitable 
+% Antonio - what do you mean? It is not clear.
+and thus simulation can be skipped.
 
 If the lowest object is not close to the ground it is very likely that
 it, along with all the others blocks above it, 
@@ -690,19 +685,16 @@ $$
 
 
 The other measure is the number of overlapping blocks. The separating axis 
-theorem\cite{ericson2004real} determines if two convex shapes intersect. It is 
+theorem \cite{ericson2004real} determines if two convex shapes intersect. It is 
 commonly used in game development for detecting collisions. A level with blocks 
 that occupy the same space is not likely to be stable, as the Unity
-Engine underlying the simulator will 
-solve the issue moving the blocks until there is no collision, but
-this is done by Unity proprietary code and it is impossible to know
-what it does.
+Engine underlying the simulator will solve the issue moving the blocks until there is no collision, but this is done by Unity proprietary code and it is not possible to know what it does.
 % Since Unity 
 % Engine is not open source and there is no documentation on how exactly those 
 % collisions are solved, we assume that a precise prediction of the positions of 
 % the blocks is not possible and therefore the fitness value obtained could be 
 % inaccurate.
-So, a penalization is applied and the level is not simulated either. 
+So, a punishment is applied and the level is not simulated either. 
 In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ 
 where the first factor is a penalty set to $10$ and the second is the number of 
 blocks that overlap with each other. 
@@ -822,7 +814,7 @@ therefore they can appear several times in the list of parents.
 % OK, I added it to the Future Work section. 
 
 Once the parents have been selected, we implement two different methods of 
-combination.
+combination:
 \begin{itemize}
 	\item Sample Crossover: gives a single individual per parent pair. It takes 
 	all genes from both parents---excluding genes that are repeated---and 
@@ -874,9 +866,7 @@ maintaining the size of the population.
 The information that describes a level can be too complex to have a binary 
 representation as pure genetic algorithms suggest, so the framework should be 
 flexible enough to support complex data structures. This prevented us from using 
-frameworks such as DEAP\cite{fortin2012deap}, PyEvolve\cite{perone2009pyevolve} 
-or Evolopy\cite{evolopy} and therefore a new framework was created. The source 
-code can be found on GitHub\cite{ab-level}.
+frameworks such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy} and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level}.
 % Say in a sentence why we are not using those above (and there's also
 % Evolopy) - jj
 
@@ -940,12 +930,17 @@ section.
 
 % This table should probably be moved to the end of the section - JJ
 Four experiments have been carried out, with more than 15 executions per 
-experiment. Table \ref{t:resOver} shows an overview of the results. 
+experiment. 
+% Antonio - say exactly how many runs have you conducted
+Table \ref{t:resOver} shows an overview of the results. 
+% Antonio - Explain the table. What is it shown (average values I guess).
+% Explain it to the reader why the number of generations is not exact.
+% When you show average results, you must also add standard deviations in the shape $\pm$ 123.45 (I have included an example in the table).
 \begin{table}[H]
 	\myfloatalign
 	\begin{tabular}{ccccc}
 		& \textbf{E1} & \textbf{E2} & \textbf{E3} &\textbf{E4} \\ \hline
-		\textbf{Time (h)} & 0.89 & 1.002 & 1.76 & 5.03 \\  \hline
+		\textbf{Time (h)} & 0.89 $\pm$ STDDEV & 1.002 & 1.76 & 5.03 \\  \hline
 		\textbf{G} &  100.0 & 155.087 & 76.625 & 365.929 \\  \hline
 		\textbf{Best} & 61.334 & 110.66 & 0.0015 & 0.0018 \\  \hline
 		\textbf{Avg} & 383.701 & 327.547 & 0.54 &  0.203 \\  \hline
@@ -965,6 +960,7 @@ The premise of the first experiment is that our basic EA should be able to
 minimize the movement of the blocks placed on the level and the flexibility of 
 the representation should allow variety in the structures. This will
 be used as a baseline.
+% Antonio - Comment what kind of baseline do you need.
 % This may be 
 % optimistic, but we need an estimation as a starting point, and this experiment 
 % will serve the purpose. 
@@ -988,6 +984,7 @@ The parameters are: % A table is better for this - JJ
 	\item Percentage of axis x mutations: 0.5
 	\item Percentage of axis y mutations: 1
 \end{itemize}
+% Antonio - I agree, you could save space using a table with two columns, for instance. Moreover it will be easier for the reader to find the configuration in a table. ;)
 
 The results suggest that the hypothesis was not correct. The average best 
 solution has a fitness value of 61.334 (as shown in Table \ref{t:resOver}) 
@@ -1024,16 +1021,14 @@ for the second experiment, which we describe next
 
 \subsection{Second Experiment}
 
-The set of operators is the same as the previous one. The parameters remain 
-unchanged except for:
-\begin{itemize}
-	\item Number of generations: 1000
-\end{itemize}
-We also added two stop conditions: 10 generations without changes (stable 
-population) or best fitness value below 0.01. % This should not be
-                                % "also", it's maybe the most
-                                % important change - JJ
+% Antonio - You must introduce the experiment (each of them), trying to justify its necessity.
 
+The main change in this implementation is the addition of two new stop conditions: being 10 generations without changes (stable population) or best fitness value below 0.01. 
+% This should not be "also", it's maybe the most important change - JJ
+% Antonio - I have stressed it. ;)
+The set of operators is the same as the previous one, and the parameters remain 
+unchanged except for the \textit{Number of generations} which is equal to 1000.
+% Antonio - why did you increase the number of generations? Explain it.
 % Enphasize that we can run 1000 generations because fitness is
 % designed to not having to use the simulator - JJ
 
