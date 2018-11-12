@@ -1186,14 +1186,19 @@ execution and producing stable structures under gravity.
 % of this paper, and whether they have been, or not, achieved or to
 % what extent - JJ
 
-Perhaps the level of achievement of the first objective, exploring the 
-expressiveness and variability of 
-SBPCG with evolutionary techniques,
-is not as easily measurable as the other two. It could seem like
-this objective has not been fully accomplished: only one SBPCG method
-has been implemented and tested. However, it was not in the scope of
-this work to test SBPCG in general, but in this particular case, for
-this particular game. Considering this, the method studied was
+% Antonio - This is my Proposal for this paragraph
+For this aim we have implemented an Evolutionary Algorithm able to optimize 
+level structures to meet some criteria, being the main one the stability of the 
+constructions.
+%Perhaps the level of achievement of the first objective, exploring the 
+%expressiveness and variability of 
+%SBPCG with evolutionary techniques,
+%is not as easily measurable as the other two. It could seem like
+%this objective has not been fully accomplished: only one SBPCG method
+%has been implemented and tested. However, it was not in the scope of
+%this work to test SBPCG in general, but in this particular case, for
+%this particular game.
+Considering this, the method studied was
 sufficiently general and flexible to draw some conclusions about the
 topic. SBPCG methods are a potential good solution to offline content
 generation but it requires a great amount of problem-specific
@@ -1202,12 +1207,10 @@ be how to measure how good, creative or enjoyable is the piece. The
 more rules the author adds, expressiveness starts to get lost as the
 results are variations of the same idea. However, it is crystal clear
 from the experiments run in this paper that a lack of knowledge
-will lead to unexpected outcomes. In our case, the fitness function used the 
+will lead to unexpected outcomes.
+In our case, the fitness function used the 
 stability of the structure and only considered other features--- overlapping 
 blocks and distance to the ground--- to ensure the levels would be valid.
-
-% Antonio - This is my Proposal for this paragraph
-%For this aim we have implemented an Evolutionary Algorithm able to optimize level structures to meet some criteria, being the main one the stability of the constructions. The method studied let us conclude that SBPCG methods are a potential good solution to offline content generation but it requires a great amount of problem-specific knowledge. Like any other form of creative work, the biggest issue may be how to measure how good, creative or enjoyable is the piece. The more rules the author adds, expressiveness starts to get lost as the results are variations of the same idea. However, it is crystal clear from the experiments run in this project that a lack of knowledge will lead to unexpected and even disappointing outcomes.
 
  % I am lost in this paragraph. It should be more
  % related to the actual experiments made - JJ
@@ -1219,12 +1222,14 @@ structured.
 % Although the original intention was to make it available on Linux, 
 % currently it can only be executed with the desired behaviour on Windows. 
 % Antonio - I think this is not relevant
-Another issue is that the simulation is not easily adaptable. If the fitness 
-function of the EA is changed and needs data that is not included in the output 
-right now, the game would have to be changed and compiled again. 
+% Another issue is that the simulation is not easily adaptable. If the fitness 
+% function of the EA is changed and needs data that is not included in the 
+%output 
+% right now, the game would have to be changed and compiled again. 
 % Antonio - I would suggest this text instead
-% In order to conduct our experiments the Angry Birds simulator (Science Birds) has been adapted to our necessities, yielding now some  other information required to evaluate the individuals of the implemented EA.
-%
+In order to conduct our experiments the Angry Birds simulator (Science Birds) 
+has been adapted to our necessities, yielding now some  other information 
+required to evaluate the individuals of the implemented EA.
 It would be interesting to obtain other kind of data from the simulator,
 such as the height of the structure and, eventually, its resistance to
 bombardment by angry birds. However, this is left as future work.
@@ -1233,14 +1238,16 @@ Producing stable structures under gravity was the third objective and
 the closest to the ultimate one. That objective was effectively
 achieved, but the consequence of evolving in a path of minimum
 movement or maximum stability results in structures that are close to
-the ground and do not have more than a few floors. 
+the ground and do not have more than a few floors , which could not be very 
+exciting for the players. 
 % Antonio - I would add:
 % , which could not be very exciting for the players. 
 % Tell me what you think of this.
 The main issue is, then, how we evaluate the levels. In fact this is 
 a matter of how we define what an Angry Birds' level \textit{is} and if that 
-definition matches the fitness function. A lot of elements were correct, but 
-the definition was not complete. How this definition of level plays
+definition matches the fitness function.
+%A lot of elements were correct, but the definition was not complete.
+How this definition of level plays
 with the paths of evolution is also a problem. Since we define as
 level a structure that is stable, evolution will maximize stability
 finding, as in the beginnings of architectural practice, squat
