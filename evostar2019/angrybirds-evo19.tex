@@ -966,7 +966,7 @@ whose result is shown in Table \ref{t:resOver} shows an overview of the results.
 	\label{t:resOver}
 \end{table}
 
-\subsection{First Experiment}
+\subsection{Baseline experiment}
 
 The premise of the first experiment is that our basic EA should be able to 
 minimize the movement of the blocks placed on the level and the flexibility of 
@@ -1041,7 +1041,7 @@ generations without stabilizing or converging. This means the EA may need a
 larger number of generations to fully evolve a solution. This is the hypothesis 
 for the second experiment, which we describe next.
 
-\subsection{Second Experiment}
+\subsection{Changing termination conditions}
 
 % Antonio - You must introduce the experiment (each of them), trying to justify its necessity.
 
@@ -1091,16 +1091,11 @@ create new individuals that inherit good traits from their parents. A new
 crossover operator could shift the focus to exploitation, and we will
 examine this in the next experiment.
 
-\subsection{Third Experiment}
+\subsection{Improving exploitation by a better crossover operator}
 
 
 For the third experiment, the change introduced is in the crossover operator 
-used which was previously described as \textit{Common blocks} crossover. % This 
-%reference
-                                % now points to the section at
-                                % large. A better reference should be
-                                % used, as well as name - JJ
-                                % Removed reference, added name - Laura
+used which was previously described as \textit{Common blocks} crossover. 
 The rest of the operators as 
 well as the termination criteria are kept the same. 
 
@@ -1129,7 +1124,7 @@ of minimizing the number of blocks so that the number of blocks
 actually falling is zero. The created structures are not very
 interesting, though, that is why we propose some changes in the next experiment.
 
-\subsection{Fourth Experiment}
+\subsection{Changing the minimum number of blocks per individual}
 
 The only parameter that was changed for this experiment is the minimum
 number, which went from 5 to 10. 
