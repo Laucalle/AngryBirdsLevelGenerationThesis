@@ -932,17 +932,11 @@ section.
 %************************************************
 \section{Experimentation and Results}\label{ch:res}
 
-%Each experiment was based on an hypothesis formulated after the observation of 
-%previous results. The structure of this section reflects this methodology.
-% This is obvious. You should instead create a narrative of the
-% experiments performed, and why every experiment leads to the next -
-% JJ
-
-% This table should probably be moved to the end of the section - JJ
-Four experiments have been carried out, with more than 15 executions per 
-experiment. 
-% Antonio - say exactly how many runs have you conducted
-Table \ref{t:resOver} shows an overview of the results. 
+We set out to evolve free-form structures, but we need to test, one by
+one, the different parts of our algorithm: fitness function, some
+evolutionary algorithm parameters and the genetic operators. In order
+to do so, we performed a set of experiments to test our hypotheses,
+whose result is shown in Table \ref{t:resOver} shows an overview of the results. 
 % Antonio - Explain the table. What is it shown (average values I guess).
 % Explain it to the reader why the number of generations is not exact.
 % When you show average results, you must also add standard deviations in the shape $\pm$ 123.45 (I have included an example in the table).
@@ -958,10 +952,17 @@ Table \ref{t:resOver} shows an overview of the results.
 % If possible, add standard deviation here - JJ
 		\hline
 	\end{tabular}
-	\caption{Summary of results, G: number of generations, E: experiment 
+	\caption{Summary of the results of 15 runs for each
+          experiment.
+          G: number of generations, E: experiment 
 	number} % What
                                 % is E? Is that the average? Number of
                                 % generations up to what?
+                                % Also explain the importance of the
+                                % fitness as an evaluation of the
+                                % quality of the solutions - JJ
+      % Also, average over what. Best individual in every experiment?
+      % Last generation? - JJ
 	\label{t:resOver}
 \end{table}
 
