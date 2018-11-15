@@ -118,12 +118,17 @@ This paper presents an original approach for building structures that
 are stable under gravity for the physics-based puzzle game Angry
 Birds, with the ultimate objective of creating fun and aesthetically
 pleasing Angry Birds levels with the minimum number of constraints. This approach consists of a search-based procedural level 
-generation method that uses evolutionary algorithms. In order to evaluate the stability of the levels, they are executed in an adaptation of an open source version of the game called \textit{Science Birds}. 
+generation method that uses evolutionary algorithms. In order to evaluate 
+the stability of the levels, they are executed in an adaptation of an 
+open source version of the game called \textit{Science Birds}. 
 % Antonio - abstract does not include references.  ;)
-In the same way, an open source evolutionary computation framework has
+In the same way, an open source evolutionary computation framework has 
+% It is more like a library than a framework - Mario
 been implemented to fit the requirements of the problem. The main
 challenge has been to design a fitness function that, first, avoids if
 possible the actual execution of the simulator, which is time
+% that, first, avoids if possible the execution of a simulation, which is time
+% I propose this change because we haven't talked about a simulator yet - Mario
 consuming, and, then, to take into account the different ways in which
 a structure is not structurally sound and consider them in different
 ways to provide a smooth landscape that eventually achieves that
@@ -159,6 +164,7 @@ blocks which house {\em pigs} (which we can call {\em pigsties} for
 that reason)
 and the player has to fire birds from a slingshot
 %---apparently they never learnt to fly---
+% aiming at destabilizing or destroyng the structures to hit the pigs - Mario
 so the structure is destabilized or, in some cases, destroyed.
 What is interesting to us is how heavily the 
 game relies in gravity to create interesting puzzles, making the
@@ -186,7 +192,7 @@ competitions. We can break it down to the following, more concise,
 objectives: 
 
 \begin{itemize}
-	\item Explore the expressiveness and variability of SBPCG using 
+	\item Explore the expressiveness and variability of Search-Based PCG (SBPCG) using  % 
 	EAs.
 	\item Adapt the game code to extract data from execution to 
 	evaluate the levels.
@@ -256,6 +262,8 @@ workload.\cite{togelius2016introduction}
 % Antonio - these two paragraphs could be moved up and should be summarized (or 
 %removed). The text must be concise. ;)
 
+% The sentence below I think is an orphan, From these factors?  define replayability?
+% I can do it if needed - Mario
 From these factors that we need to optimize, replayability relies on how interesting is 
 playing a game more than once. For designers, this means their 
 product should offer more with less manually crafted content. 
@@ -291,6 +299,8 @@ is to generate potentially correct solutions.
 % ------------------------------------------------------------------
 
 A special kind of \textit{generate-and-test} approach to PCG is
+% This was mantioned earlier so I defined the 
+% acronym before. But I like it more in here.
 Search-based Procedural Content Generation (SBPCG), which is
 usually tackled with Evolutionary Algorithms\cite{togelius2010search} like the 
 one proposed in \cite{hastings2009evolving}. 
@@ -1179,7 +1189,7 @@ experiment.
 
 This paper was developed with the main objective of implementing a
 competitive entry for the Angry Birds level generation contest, and  a
-set of subobjectives in mind: exploring the expressiveness and variability of 
+set of sub-objectives in mind: exploring the expressiveness and variability of 
 SBPCG with evolutionary techniques, adapting the game to extract data from 
 execution and producing stable structures under gravity.
 % What the intro to the conclusion should say are the main objectives
@@ -1243,13 +1253,14 @@ exciting for the players.
 % Antonio - I would add:
 % , which could not be very exciting for the players. 
 % Tell me what you think of this.
+% Floors is not precise. ..more than a few stacked blocks? - Mario 
 The main issue is, then, how we evaluate the levels. In fact this is 
 a matter of how we define what an Angry Birds' level \textit{is} and if that 
 definition matches the fitness function.
 %A lot of elements were correct, but the definition was not complete.
 How this definition of level plays
 with the paths of evolution is also a problem. Since we define as
-level a structure that is stable, evolution will maximize stability
+level as a structure that is stable, evolution will maximize stability
 finding, as in the beginnings of architectural practice, squat
 structures that are neither aesthetically pleasing nor playable,
 although undeniably sturdy and stable. We have been successful in,
