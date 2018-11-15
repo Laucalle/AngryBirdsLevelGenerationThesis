@@ -391,40 +391,6 @@ section \ref{ch:res}. We present our conclusions in \ref{sec:conclusions}.
 \section{Background and State of the Art}
 \label{sec:soa}
 
-<<<<<<< HEAD
-% Antonio - TODO: Introduce the PCG in similar games
-
-PCG is becoming more frequently used in new games as one of the main tools for supporting designers and developers.
-It has a growing relevance which has been also translated into the arising of new international competitions aimed to design algorithms to generate interesting/funny/enjoyable contents for different games, such as Super Mario (a clone of it indeed) \cite{MarioAI_Level_12}, not specified General Video Games \cite{GAIG_LevelGeneration_18,Khalifa_GVGLG_16}, or recently, for Angry Birds \cite{AngryBirds_LevelGeneration_18}.
-
-Thus, the main contributions related with this paper objectives are entries presented to previous editions of the Angry Birds Level Generation Competition. 
-From them, we could extract two main approaches to the problem: constructive and search-based.
-
-% Introduce the two types, once subsections have been eliminated - JJ
-
-% Antonio - TODO (for me): revise and improve this. Add new references to other related works.
-
-In the two solutions proposed by Matthew Stephenson and Jochen Renz
-\cite{stephenson2017generating,stephenson2016procedural} the
-structures displayed on the level are constructed from the top down,
-in several phases. 
-
-First, they build a structure recursively, each row composed of a single type of block (with a fixed rotation). The likelihood of selecting a certain block is given by a probability table. Then, the blocks are placed using a tree structure, where the first selected block is the peak and blocks underneath it are split into subsets that support the previous row with one, two or three blocks. This ensures local stability, but not global stability, which is tested once the whole structure is completed. The second solution also tries to add variety by replacing some blocks with others of the same height.
-
-After that, other objects (pigs and TNT) are placed. Potential positions for those objects are recorded, first trying to place them in the centre of each block, then right above the edges of it, checking if there is enough space. Available positions are ranked based on structural protection, dispersion, etc. and then filled with the desired number of objects.
-
-The second solution also selects material---which can be stone, ice or wood---based on trajectory analysis, clustering, row grouping, structure grouping or randomly. Weak points are set to stone material and the rest using one of the previous strategies. Trajectory analysis-based strategy sets to the same material all blocks in the trajectory of a shot aimed at a particular pig. Clustering strategy takes a random block, sets its material and propagates to the surrounding blocks that have not been assigned yet. Row grouping and structure blocking apply the same material to a whole row or structure respectively.
- 
-Some birds are more efficient against certain materials than others, so those  
-used in the level are determined by the material. The number 
-of birds available is estimated using AI 
-agents and discarded if they are unable to 
-solve it. The lowest number of birds used by the agents 
-is the chosen for the level. The probability table was tuned using search-based optimization
-methods. % All this could probably be made shorter
-
-The main problem with this constructive approach is that the range of
-=======
 PCG is becoming more frequently used in new games as one of the main
 tools for supporting designers and developers. It has a growing
 relevance which has been also translated into the creation of new
@@ -480,7 +446,6 @@ yet. Row grouping and structure blocking apply the same material to a
 whole row or structure respectively. 
 
 The main problem with this and other constructive approaches is that the range of
->>>>>>> upstream/master
 different structures created is going to be relatively small; monotony
 leads to boredom, decreasing playability. On the other hand, generated
 structures are guaranteed to be structurally sound, and constructive
@@ -516,14 +481,14 @@ use this approach for the generation of Angry Birds levels.
 % think this is the only approach of free form evolution in games,
 % remove the word 'many' in the sentence above. ;D
 % Done - JJ
-Thus, we will mainly have to look outside computationa intelligence in
+Thus, we will mainly have to look outside computational intelligence in
 games to focus on optimization in architecture, where there are
 several approaches to structural optimization using search-based
 algorithms. Gandomi et al. \cite{gandomi2013cuckoo} proposed a
 bioinspired algorithm called Cuckoo Search and tested its performance
 with several structural optimization problems. The  
 algorithm is inspired by brood parasitic behaviour of some cuckoo
-species using L�vy flight behaviour, a random walk that follows a certain 
+species using Lévy flight behaviour, a random walk that follows a certain 
 probability distribution that can be modelled mathematically.
 One of the test cases for the algorithm is a structural design of a pin-jointed 
 plane frame. In this case the forces and the length of the base is predefined 
@@ -538,7 +503,7 @@ A different take on the design of structures is using Generative Grammatical
 Encodings as Hornby and Pollack present in
 \cite{hornby2001advantages}. In this case, structures are formed by
 voxels and build following instructions given as commands to a
-LOGO-style turtle. They implementad an EA which evolved tables as
+LOGO-style turtle. They implemented an EA which evolved tables as
 structures. The commands are generated by a context-free L-system. For
 the EA, an L-system and its production rules are considered
 individuals. In order to allow these systems to evolve they are
@@ -662,9 +627,15 @@ problem and our approach to it.
 Science Birds is nowadays the main open source Angry Birds simulator. It was developed by  Ferreira and Toledo \cite{ferreira2014search}, and is available at
 GitHub \cite{sciencebirds}. We used it  as a starting point; however we
 had to patch it for producing usable output 
-% Antonio - I think this is important and could be considered as a contribution of the work, so please, explain it and clarify.
+% Antonio - I think this is important and could be considered as a contribution 
+%of the work, so please, explain it and clarify.
+% Better this way? - Laura
 and automate its work. The modified 
-version is available on GitHub \cite{sciencebirds-adapt}.
+version is available on GitHub \cite{sciencebirds-adapt}. It produces output 
+containing the position and average magnitude of the velocity of each block 
+that was not broken after the simulation. It can be run from beginning to end 
+without user interaction and minimizes the amount of time spent on simulating 
+each level. 
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
@@ -995,9 +966,11 @@ whose result is shown in Table \ref{t:resOver} shows an overview of the results.
 		\textbf{Avg} & 383.701 & 327.547 & 0.54 &  0.203 \\  \hline
 		\textbf{Worst}  & 510.515 & 367.895 & 0.828 & 0.2997\\  \hline
 % If possible, add standard deviation here - JJ
+% I could not find the original spreadsheet, I only have the raw data. I could 
+%%% not add standard deviation on time - Laura
 		\hline
 	\end{tabular}
-	\caption{Summary of the results of 15 runs for each
+	\caption{Summary of the results of the last generation in 15 runs for each
           experiment.
           G: number of generations, E: experiment 
 	number} % What
@@ -1008,6 +981,7 @@ whose result is shown in Table \ref{t:resOver} shows an overview of the results.
                                 % quality of the solutions - JJ
       % Also, average over what. Best individual in every experiment?
       % Last generation? - JJ
+      % Modified caption. Better? - Laura
 	\label{t:resOver}
 \end{table}
 
@@ -1190,6 +1164,7 @@ being stack together, not only lied on the ground like in the previous
 experiment. 
 % Comment on the actual appearance of these structures. Do they
 % achieve the stated objective - JJ?
+% I did change that - Laura
 
 %************************************************
 
@@ -1212,7 +1187,7 @@ experiment.
 % problem is discussed in section \ref{sec:soa}.
 % --- up to here --
 
-This paper was developed with the main objective of developing a
+This paper was developed with the main objective of implementing a
 competitive entry for the Angry Birds level generation contest, and  a
 set of sub-objectives in mind: exploring the expressiveness and variability of 
 SBPCG with evolutionary techniques, adapting the game to extract data from 
@@ -1221,14 +1196,19 @@ execution and producing stable structures under gravity.
 % of this paper, and whether they have been, or not, achieved or to
 % what extent - JJ
 
-Perhaps the level of achievement of the first objective, exploring the 
-expressiveness and variability of 
-SBPCG with evolutionary techniques,
-is not as easily measurable as the other two. It could seem like
-this objective has not been fully accomplished: only one SBPCG method
-has been implemented and tested. However, it was not in the scope of
-this work to test SBPCG in general, but in this particular case, for
-this particular game. Considering this, the method studied was
+% Antonio - This is my Proposal for this paragraph
+For this aim we have implemented an Evolutionary Algorithm able to optimize 
+level structures to meet some criteria, being the main one the stability of the 
+constructions.
+%Perhaps the level of achievement of the first objective, exploring the 
+%expressiveness and variability of 
+%SBPCG with evolutionary techniques,
+%is not as easily measurable as the other two. It could seem like
+%this objective has not been fully accomplished: only one SBPCG method
+%has been implemented and tested. However, it was not in the scope of
+%this work to test SBPCG in general, but in this particular case, for
+%this particular game.
+Considering this, the method studied was
 sufficiently general and flexible to draw some conclusions about the
 topic. SBPCG methods are a potential good solution to offline content
 generation but it requires a great amount of problem-specific
@@ -1237,21 +1217,30 @@ be how to measure how good, creative or enjoyable is the piece. The
 more rules the author adds, expressiveness starts to get lost as the
 results are variations of the same idea. However, it is crystal clear
 from the experiments run in this paper that a lack of knowledge
-will lead to unexpected outcomes. In our case, the fitness function used the 
+will lead to unexpected outcomes.
+In our case, the fitness function used the 
 stability of the structure and only considered other features--- overlapping 
 blocks and distance to the ground--- to ensure the levels would be valid.
+
  % I am lost in this paragraph. It should be more
  % related to the actual experiments made - JJ
 
 The second objective, adapting the game to extract data from execution, was 
 certainly achieved. It was also a basic requirement to proceed with the rest of 
 them. The game does provide the data, as long as the input is correctly 
-structured. Although the original intention was to make it available on Linux, 
-currently it can only be executed with the desired behaviour on Windows. 
-Another issue is that the simulation is not easily adaptable. If the fitness 
-function of the EA is changed and needs data that is not included in the output 
-right now, the game would have to be changed and compiled again. It
-would be interesting to obtain other kind of data from the simulator,
+structured. 
+% Although the original intention was to make it available on Linux, 
+% currently it can only be executed with the desired behaviour on Windows. 
+% Antonio - I think this is not relevant
+% Another issue is that the simulation is not easily adaptable. If the fitness 
+% function of the EA is changed and needs data that is not included in the 
+%output 
+% right now, the game would have to be changed and compiled again. 
+% Antonio - I would suggest this text instead
+In order to conduct our experiments the Angry Birds simulator (Science Birds) 
+has been adapted to our necessities, yielding now some  other information 
+required to evaluate the individuals of the implemented EA.
+It would be interesting to obtain other kind of data from the simulator,
 such as the height of the structure and, eventually, its resistance to
 bombardment by angry birds. However, this is left as future work.
 
@@ -1259,13 +1248,17 @@ Producing stable structures under gravity was the third objective and
 the closest to the ultimate one. That objective was effectively
 achieved, but the consequence of evolving in a path of minimum
 movement or maximum stability results in structures that are close to
-the ground and do not have more than a few floors. % Tell me what you
-								% think of this. 
-								% Floors is not exact. ..more than a few stacked blocks? - Mario 
+the ground and do not have more than a few floors , which could not be very 
+exciting for the players. 
+% Antonio - I would add:
+% , which could not be very exciting for the players. 
+% Tell me what you think of this.
+% Floors is not precise. ..more than a few stacked blocks? - Mario 
 The main issue is, then, how we evaluate the levels. In fact this is 
 a matter of how we define what an Angry Birds' level \textit{is} and if that 
-definition matches the fitness function. A lot of elements were correct, but 
-the definition was not complete. How this definition of level plays
+definition matches the fitness function.
+%A lot of elements were correct, but the definition was not complete.
+How this definition of level plays
 with the paths of evolution is also a problem. Since we define as
 level as a structure that is stable, evolution will maximize stability
 finding, as in the beginnings of architectural practice, squat
@@ -1327,9 +1320,9 @@ Another important issue that needs to be addressed is the time performance.
 Right now the simulation is the main bottleneck in the execution. One way to 
 speed up the process can be \textit{cleaning} up the current simulation, getting 
 rid of any unnecessary assets while maintaining the bare minimum to
-perform evaluation. However, this 
-will not solve the problem, since the content generator will still need to 
-launch an external executable.
+perform evaluation. 
+%However, this will not solve the problem, since the content generator will still need to launch an external executable.
+% Antonio - I would not mention future problems
 
 The communication between the simulation and the content generator is through 
 read and write operations on disk, instead of memory. This could be avoided if 
