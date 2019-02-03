@@ -116,8 +116,8 @@
 \begin{abstract}
 This paper presents an original approach for building structures that
 are stable under gravity for the physics-based puzzle game Angry
-Birds, with the ultimate objective of creating fun and aesthetically
-pleasing Angry Birds levels with the minimum number of constraints. This approach consists of a search-based procedural level 
+Birds, with the ultimate objective of creating levels with the minimum
+number of constraints. This approach consists of a search-based procedural level 
 generation method that uses evolutionary algorithms. In order to evaluate 
 the stability of the levels, they are executed in an adaptation of an 
 open source version of the game called \textit{Science Birds}. 
@@ -132,8 +132,8 @@ possible the actual execution of the simulator, which is time
 consuming, and, then, to take into account the different ways in which
 a structure is not structurally sound and consider them in different
 ways to provide a smooth landscape that eventually achieves that
-soundness. Different 
-representations and operators have been considered and studied. In
+soundness. % TODO Change this sentence 
+Different representations and operators have been considered and studied. In
 order to test the method four experiments have been carried out,
 obtaining a variety of stable structures, which is the first path for
 the generation of levels that are aesthetically pleasing as well as
@@ -197,10 +197,12 @@ objectives:
 	\item Adapt the game code to extract data from execution to 
 	evaluate the levels.
 	\item Produce stable structures under gravity.
-	\item Place other elements on the structures to complete the levels.
+	% \item Place other elements on the structures to complete the levels.
 \end{itemize} 
 
-In this paper we will focus on the first three objectives, with sight
+In this paper we will focus on 
+% the first three
+these objectives, with sight
 on producing free-form structures that do not collapse; in a nutshell,
 we will be describing a PCG method that efficiently generates free
 form and stable Angry Birds {\em pigsty} structures.
@@ -219,7 +221,7 @@ form and stable Angry Birds {\em pigsty} structures.
 % ************************************************
 
 
-For the purpose of this paper, we define Procedural Game Generation
+For the purpose of this paper, we take the definition of Procedural Game Generation
 (PCG) as \textit{the algorithmic creation of game content with
   limited or indirect user input} \cite{togelius2011procedural}. 
 %Although PCG often uses Artificial Intelligence (AI) techniques, this
@@ -233,15 +235,15 @@ among others are considered content in this definition
                                 % should give a reference for it.
                                 % It is from the same  
                                 %\cite{togelius2011procedural}
-Note that neither computers nor video games are mentioned in the
-definition. In fact, PCG has its roots in analog games.
+%Note that neither computers nor video games are mentioned in the
+%definition. In fact, PCG has its roots in analog games.
 %This may
 %conflict with the \textit{limited or indirect user input}, but it is
 %reasonable to assume that following a detailed set of
 %instructions---even if it is done by a human---is not
 %\textit{input}.
-The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
-prevail in modern video games. \cite{smith2015analog} 
+%The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
+%prevail in modern video games. \cite{smith2015analog} 
 % Using an
 %algorithm to assemble pre-designed pieces is a common technique in
 %tabletop roleplaying guides---where the algorithm usually consists in
@@ -264,36 +266,40 @@ workload.\cite{togelius2016introduction}
 
 % The sentence below I think is an orphan, From these factors?  define replayability?
 % I can do it if needed - Mario
-From these factors that we need to optimize, replayability relies on how interesting is 
-playing a game more than once. For designers, this means their 
-product should offer more with less manually crafted content. 
-Games can also engage players by adapting gameplay elements to each individual 
-player. The most common way is 
-to present users with options to adjust game elements; however, by using PCG techniques 
-the game itself can change based on in-game player behaviour.
-PCG can be used as a tool to assist developers. It can suggest what might be a 
-base for later development, enhancing human creativity rather than displacing 
-it. In this paper we target replayability by insisting in the
+%From these factors that we need to optimize, replayability relies on how interesting is 
+%playing a game more than once. For designers, this means their 
+%product should offer more with less manually crafted content. 
+%Games can also engage players by adapting gameplay elements to each individual 
+%player. The most common way is 
+%to present users with options to adjust game elements; however, by using PCG techniques 
+%the game itself can change based on in-game player behaviour.
+% Pcg can be used as a tool to assist developers. It can suggest what might be a 
+% base for later development, enhancing human creativity rather than displacing it.
+In this paper we target replayability by insisting in the
 generation of free-form structures. If all content generated follow a
 simple pattern, this is easily spotted and the player disengages. By
 creating structures whose form is only constrained by gravity, levels
-generated will be much more playable.
+generated will be much more engaging.
 
 % Paragraph that could be reduced to a single sentence or even
 % eliminated. We are now up to 17 pages - JJ
 There are many PCG methods and it is necessary to look at some traits that 
 characterize and differentiate them from each 
 other\cite{togelius2016introduction}. The method proposed in this paper is 
-described as \textit{offline} ---the PCG occurs before the game session or 
-during development---, \textit{necessary} ---the generated content is part of 
-the essential structure of the game---, \textit{generic} ---it does not take 
-into account player behaviour---, \textit{stochastic} ---it will not produce 
-the same output every time it is run---, \textit{generate-and-test} ---it 
-produces potentially correct solutions that are tested and adjusted in each 
-iteration before giving the actual output--- and potentially be either 
-\textit{automatic}---where the designer does not take part on the process--- or 
-\textit{mixed authorship}, where the generated content is used as a base or 
-part of an interactive tool. From all these features, the actual
+described as \textit{offline}, 
+%---the PCG occurs before the game session or during development---
+\textit{necessary}, 
+%---the generated content is part of the essential structure of the game---,
+\textit{generic},
+%---it does not take into account player behaviour---,
+\textit{stochastic} 
+%---it will not produce the same output every time it is run---,
+\textit{generate-and-test} %---it produces potentially correct solutions that are tested and adjusted in each iteration before giving the actual output---
+and potentially be either \textit{automatic}
+%---where the designer does not take part on the process---
+or \textit{mixed authorship}.
+% where the generated content is used as a base or part of an interactive tool.
+From all these features, the actual
 challenge in the game we are occupied with in this paper, Angry Birds,
 is to generate potentially correct solutions.
 % ------------------------------------------------------------------
