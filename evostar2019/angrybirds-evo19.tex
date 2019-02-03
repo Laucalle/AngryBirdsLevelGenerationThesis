@@ -179,7 +179,7 @@ shot has been fired.
 There is a number of competitions centered around playing AI agents for specific 
 games or genres, but it is less common to find PCG competitions like the 
 \textit{Angry Birds Level Generation Competition}, whose third edition
-was celebrated in 2018 during CIG \cite{aibirds}.
+was celebrated in 2018 during the conference on Computational Intelligence and Games (CIG)\cite{aibirds}.
 Participants must build 
 computer programs that are able to generate levels for the \textit{Angry Birds} 
 game; these levels must first be valid (i. e. not crash), and then,
@@ -192,8 +192,8 @@ competitions. We can break it down to the following, more concise,
 objectives: 
 
 \begin{itemize}
-	\item Explore the expressiveness and variability of Search-Based PCG (SBPCG) using  % 
-	EAs.
+	\item Explore the expressiveness and variability of Search-Based PCG (SBPCG) using
+	evolutionary algorithms (EA).
 	\item Adapt the game code to extract data from execution to 
 	evaluate the levels.
 	\item Produce stable structures under gravity.
@@ -230,7 +230,7 @@ For the purpose of this paper, we take the definition of Procedural Game Generat
 %as content, thus they are not PCG either.
 Aesthetic elements, game rules, levels, items, stories and characters
 among others are considered content in this definition  
-\cite{togelius2011procedural}. % If this
+ \cite{togelius2011procedural}. % If this
                                 % definition is not totally yours, you
                                 % should give a reference for it.
                                 % It is from the same  
@@ -260,7 +260,7 @@ But the fast pace at which the game industry grows poses a challenge to develope
 How do we create a vast amount of content that suits 
 players' expectations with low investment? PCG can tackle this by  
 increasing replayability, offering adaptive content or reducing designers' 
-workload.\cite{togelius2016introduction}
+workload. \cite{togelius2016introduction}
 % Antonio - these two paragraphs could be moved up and should be summarized (or 
 %removed). The text must be concise. ;)
 
@@ -285,7 +285,7 @@ generated will be much more engaging.
 % eliminated. We are now up to 17 pages - JJ
 There are many PCG methods and it is necessary to look at some traits that 
 characterize and differentiate them from each 
-other\cite{togelius2016introduction}. The method proposed in this paper is 
+other \cite{togelius2016introduction}. The method proposed in this paper is 
 described as \textit{offline}, 
 %---the PCG occurs before the game session or during development---
 \textit{necessary}, 
@@ -308,7 +308,7 @@ A special kind of \textit{generate-and-test} approach to PCG is
 % This was mantioned earlier so I defined the 
 % acronym before. But I like it more in here.
 Search-based Procedural Content Generation (SBPCG), which is
-usually tackled with Evolutionary Algorithms\cite{togelius2010search} like the 
+usually tackled with Evolutionary Algorithms \cite{togelius2010search} like the 
 one proposed in \cite{hastings2009evolving}. 
 The problems faced by SBPCG are not very far from those encountered in
 Evolutionary Algorithms; since evolutionary algorithms are search
@@ -335,23 +335,23 @@ valid; this is the main issue we are tackling in this paper.
 
 There are three main classes of fitness functions in 
 % Antonio - You should just remark the term once. ;)
-SBPCG \cite{togelius2010search}:
+SBPCG \cite{togelius2010search}, but we will use a {\em direct fitness function}.
+In this kind of function, we extract measurable features from the generated content and map them to a fitness value.
 
-\begin{itemize}
-	\item \textit{Direct Fitness Function} where certain easily measurable 
-	features are extracted from the generated content and mapped to a 
-	fitness value.
-	\item \textit{Simulation-Based Fitness Function} where the 
-	fitness is calculated using features from an agent's gameplay. 
-	\item \textit{Interactive Fitness Function} where the fitness value is 
-	obtained from the player, whether it be explicitly or 
-	implicitly. 
-\end{itemize}
+%\begin{itemize}
+%	\item \textit{Direct Fitness Function} where certain easily measurable 
+%	features are extracted from the generated content and mapped to a 
+%	fitness value.
+%	\item \textit{Simulation-Based Fitness Function} where the 
+%	fitness is calculated using features from an agent's gameplay. 
+%	\item \textit{Interactive Fitness Function} where the fitness value is 
+%	obtained from the player, whether it be explicitly or 
+%	implicitly. 
+%\end{itemize}
 
 Since we are interested in structural integrity of the generated
 structures, neither actual gameplay nor players are taken into
-account. We will use then a {\em direct fitness function}, which takes
-measures directly on the generated content. However, this is a
+account. However, this is a
 time-consuming procedure since it actually involves the graphic
 representation of the structure and application of falling motion to
 its different parts. If we have to subject every single individual in
@@ -411,7 +411,7 @@ Obviously, all the entries presented in previous editions of this last
 competition are strongly related with this
 work. Unfortunately just a few  authors have published their
 proposals in conferences or journals. The latest edition
-\cite{AngryBirds_LevelGeneration_18} was focused on finding the best 
+ \cite{AngryBirds_LevelGeneration_18} was focused on finding the best 
 entry generating entertaining levels. Fun was the main factor in the
 evaluation of the participants;  creativity and difficulty were then
 also taken into account as secondary factors. 
@@ -424,7 +424,7 @@ structures. % No reference for this? - JJ
 
 The winner was a submission called Iratus Aves, an new iteration of
 the works by M. Stephenson and J. Renz
-\cite{stephenson2017generating,stephenson2016procedural}, which is a
+ \cite{stephenson2017generating,stephenson2016procedural}, which is a
 \textit{constructive method} where the structures displayed on the
 level are built from top to down, in several phases, recursively
 building a structure, each row composed of a single type of block
@@ -459,7 +459,7 @@ approaches are generally faster than search-based procedures.
 
 \textit{Search-based approaches} propose a good alternative to deal
 with these limitations. Thus, Lucas Ferreira and Claudio Toledo
-\cite{ferreira2014search} presented a solution -- ranked 4th on the
+ \cite{ferreira2014search} presented a solution -- ranked 4th on the
 last competition -- based on SBPCG, which uses a Genetic Algorithm
 (GA) and a game clone named \textit{Science Birds} developed to
 evaluate the levels, the same one we use in this paper.
@@ -507,7 +507,7 @@ follow any pattern.
 
 A different take on the design of structures is using Generative Grammatical 
 Encodings as Hornby and Pollack present in
-\cite{hornby2001advantages}. In this case, structures are formed by
+ \cite{hornby2001advantages}. In this case, structures are formed by
 voxels and build following instructions given as commands to a
 LOGO-style turtle. They implemented an EA which evolved tables as
 structures. The commands are generated by a context-free L-system. For
@@ -630,7 +630,8 @@ problem and our approach to it.
 % I have eliminated the whole subsection above. Some reference to what
 % was done here should be inserted elsewhere - JJ
 
-Science Birds is nowadays the main open source Angry Birds simulator. It was developed by  Ferreira and Toledo \cite{ferreira2014search}, and is available at
+Science Birds is nowadays the main open source Angry Birds simulator. It was developed by
+Ferreira and Toledo \cite{ferreira2014search}, and is available at
 GitHub \cite{sciencebirds}. We used it  as a starting point; however we
 had to patch it for producing usable output 
 % Antonio - I think this is important and could be considered as a contribution 
@@ -1339,7 +1340,7 @@ the generator should be integrated in the game. However, if our goal is to
 generate levels for mixed authorship, as an assistance to developers, it may be 
 a better idea to integrate the simulation in the generator. This could be done 
 by approximating in-game physics with real physics, as described in 
-\cite{blum1970stability}. % Expand on this - JJ
+ \cite{blum1970stability}. % Expand on this - JJ
 % Or maybe eliminate if there's no space - JJ
 
 
