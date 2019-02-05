@@ -126,13 +126,11 @@ In the same way, an open source evolutionary computation framework has
 % It is more like a library than a framework - Mario
 been implemented to fit the requirements of the problem. The main
 challenge has been to design a fitness function that, first, avoids if
-possible the actual execution of the simulator, which is time
+possible the actual execution of the game, which is time
 % that, first, avoids if possible the execution of a simulation, which is time
 % I propose this change because we haven't talked about a simulator yet - Mario
 consuming, and, then, to take into account the different ways in which
-a structure is not structurally sound and consider them in different
-ways to provide a smooth landscape that eventually achieves that
-soundness. % TODO Change this sentence 
+a structure is not sound and consider how to achieve that soundness.
 Different representations and operators have been considered and studied. In
 order to test the method four experiments have been carried out,
 obtaining a variety of stable structures, which is the first path for
@@ -363,8 +361,8 @@ it a fitness even before simulation.
 
 The fact that we are focusing on structures with a free form also
 implies that the data structure we will evolve has to take this into
-account. However, there is no single way to create this representation
-from first principles, so several options will have to be evaluated. 
+account. However, there is no single way to create this representation,
+ so several options will have to be evaluated. 
 % This paragraph does not fit into the narrative. It's better to
 % eliminate it - JJ
 % ---------------------------------
@@ -487,43 +485,52 @@ use this approach for the generation of Angry Birds levels.
 % think this is the only approach of free form evolution in games,
 % remove the word 'many' in the sentence above. ;D
 % Done - JJ
-Thus, we will mainly have to look outside computational intelligence in
-games to focus on optimization in architecture, where there are
-several approaches to structural optimization using search-based
-algorithms. Gandomi et al. \cite{gandomi2013cuckoo} proposed a
-bioinspired algorithm called Cuckoo Search and tested its performance
-with several structural optimization problems. The  
-algorithm is inspired by brood parasitic behaviour of some cuckoo
-species using Levy flight behaviour, a random walk that follows a certain 
-probability distribution that can be modelled mathematically.
-One of the test cases for the algorithm is a structural design of a pin-jointed 
-plane frame. In this case the forces and the length of the base is predefined 
-and the frame is parametrized with two angles. The lengths of the members need 
-to be minimized but they depend on those two angles. The cuckoo search locates 
-two global optima for this problem specification. However this kind of 
-structural optimization is not flexible enough to fit our optimization
-problem, since we are looking for evolution of structures that do not
-follow any pattern.
+If we look outside computational intellignece in games and focus on 
+structural optimization in architecture, there are several approaches using search-based
+algorithms. Just to cite some examples, we can find a bioinspired algorithm called Cuckoo Search \cite{gandomi2013cuckoo}
+which performance was tested with structural optimization. However, this optimization is heavily parametrized
+and we are looking for evolution of structures that do not follow a predefined pattern, so this approach does not fit our requirements. A different take on the design of structures is using Generative Grammatical 
+Encodings as Hornby and Pollack present in \cite{hornby2001advantages} where L-system
+and its production rules are considered individuals. Still, this increases the
+number of patterns that can be generated, but still precludes the formation 
+of disjoint structures, for instance, a defensive tower before a simple pigsty in our scope.
+%Thus, we will mainly have to look outside computational intelligence in
+%games to focus on optimization in architecture, where there are
+%several approaches to structural optimization using search-based
+%algorithms. Gandomi et al. \cite{gandomi2013cuckoo} proposed a
+%bioinspired algorithm called Cuckoo Search and tested its performance
+%with several structural optimization problems. The  
+%algorithm is inspired by brood parasitic behaviour of some cuckoo
+%species using Levy flight behaviour, a random walk that follows a certain 
+%probability distribution that can be modelled mathematically.
+%One of the test cases for the algorithm is a structural design of a pin-jointed 
+%plane frame. In this case the forces and the length of the base is predefined 
+%and the frame is parametrized with two angles. The lengths of the members need 
+%to be minimized but they depend on those two angles. The cuckoo search locates 
+%two global optima for this problem specification. However this kind of 
+%structural optimization is not flexible enough to fit our optimization
+%problem, since we are looking for evolution of structures that do not
+%5follow any pattern.
 
-A different take on the design of structures is using Generative Grammatical 
-Encodings as Hornby and Pollack present in
- \cite{hornby2001advantages}. In this case, structures are formed by
-voxels and build following instructions given as commands to a
-LOGO-style turtle. They implemented an EA which evolved tables as
-structures. The commands are generated by a context-free L-system. For
-the EA, an L-system and its production rules are considered
-individuals. In order to allow these systems to evolve they are
-parametrized and constrained.
+%A different take on the design of structures is using Generative Grammatical 
+%Encodings as Hornby and Pollack present in
+% \cite{hornby2001advantages}. In this case, structures are formed by
+%voxels and build following instructions given as commands to a
+%LOGO-style turtle. They implemented an EA which evolved tables as
+%structures. The commands are generated by a context-free L-system. For
+%the EA, an L-system and its production rules are considered
+%individuals. In order to allow these systems to evolve they are
+%parametrized and constrained.
 
-All individuals have a predetermined number of production rules with a fixed 
-number of arguments. Each of them is then initialized with random build 
-commands grouped in blocks. The mutation of the system is done by making a 
-small change in it such as replacing one command, changing the parameter by 
-adding a constant or changing the condition equation, among others. The 
-crossover takes two individuals, copies one of them and inserts some small 
-parts of the other one in it, like a subsequence of commands for
-example. Still, this increases the number of patterns that can be
-generated, but still precludes the formation of disjoint structures, for instance, a defensive tower before a simple pigsty in our scope. 
+%All individuals have a predetermined number of production rules with a fixed 
+%number of arguments. Each of them is then initialized with random build 
+%commands grouped in blocks. The mutation of the system is done by making a 
+%small change in it such as replacing one command, changing the parameter by 
+%adding a constant or changing the condition equation, among others. The 
+%crossover takes two individuals, copies one of them and inserts some small 
+%parts of the other one in it, like a subsequence of commands for
+%example. Still, this increases the number of patterns that can be
+%generated, but still precludes the formation of disjoint structures, for instance, a defensive tower before a simple pigsty in %our scope. 
 
 In general, we will try to follow a realistic structure generation
 approach, without constraining it to a fixed form, thus advancing the
