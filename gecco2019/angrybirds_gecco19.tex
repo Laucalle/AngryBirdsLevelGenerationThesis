@@ -821,7 +821,18 @@ Engine underlying the simulator will solve the issue moving the blocks until the
 So, a penalty is applied and the level is not simulated either. 
 In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ 
 where the first factor is a penalty set to $10$ and the second is the number of 
-blocks that overlap with each other. 
+blocks that overlap with each other.
+
+In some of the late experiments we will substitute the $f_{distance}$ with gap in Y-axis.
+We project all blocks on the Y-axis and calculate range of values for the Y coordinate
+that are not covered inside the feasible range. This is treated the same way as $f_{distance}$
+(same penalization and threshold) and we call it $f_{Y-axis}$:
+$$f_{Y-axis} = 
+\begin{cases}
+P_{distance}\cdot Project_{Y-axis}, & \text{if } Project_{Y-axis} > threshold\\
+0, & \text{otherwise}
+\end{cases}
+$$
 
 If both $f_{distance}$ and $f_{overlapping}$ are $0$ then the level is suitable 
 for simulation and fitness is calculated as $fitness_{ind}$. This would be 
@@ -996,8 +1007,10 @@ maintaining the size of the population.
 
 The information that describes a level can be too complex to have a binary 
 representation as pure genetic algorithms suggest, so the framework should be 
-flexible enough to support complex data structures. This prevented us from using 
-frameworks such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy} and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level}.
+flexible enough to support complex data structures. This prevented us from using other 
+frameworks
+%such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy}
+and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level}.
 % Say in a sentence why we are not using those above (and there's also
 % Evolopy) - jj
 
