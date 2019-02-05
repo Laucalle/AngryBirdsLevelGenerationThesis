@@ -649,7 +649,13 @@ version is available on GitHub \cite{sciencebirds-adapt}. It produces an output
 containing the position and average magnitude of the velocity of each block 
 that was not broken after the simulation. It can be run from beginning to end 
 without user interaction and minimizes the amount of time spent on simulating 
-each level. 
+each level.
+
+In later experiments we will use Box2D, a physics engine written in C++ originally
+used for the actual Angry Birds game, to avoid launching the whole game. In this 
+simulation we do not have the resistance of the blocks implemented but we can test
+the level stabiliy much more effiently (since there is no overhead computing things
+unrelated to physics)
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
@@ -891,6 +897,8 @@ There are four different mutations:
 	added or subtracted from the value of the position X.
 	\item Position Y: same as position X mutation, for position Y.
 \end{itemize}
+
+They are all applied to random members of the population.
 
 The new generation is selected using an elitist strategy. Best individuals in 
 both the old population and their offspring pass on the next generation, 
