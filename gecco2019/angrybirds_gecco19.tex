@@ -358,16 +358,18 @@ workload.\cite{togelius2016introduction}
 
 % The sentence below I think is an orphan, From these factors?  define replayability?
 % I can do it if needed - Mario
-From these factors that we need to optimize, replayability relies on how interesting is 
-playing a game more than once. For designers, this means their 
-product should offer more with less manually crafted content. 
-Games can also engage players by adapting gameplay elements to each individual 
-player. The most common way is 
-to present users with options to adjust game elements; however, by using PCG techniques 
-the game itself can change based on in-game player behaviour.
-PCG can be used as a tool to assist developers. It can suggest what might be a 
-base for later development, enhancing human creativity rather than displacing 
-it. In this paper we target replayability by insisting in the
+%From these factors that we need to optimize, replayability relies on how interesting is 
+%playing a game more than once.
+%For designers, this means their 
+%product should offer more with less manually crafted content. 
+%Games can also engage players by adapting gameplay elements to each individual 
+%player.
+%The most common way is 
+%to present users with options to adjust game elements; however, by using PCG techniques 
+%the game itself can change based on in-game player behaviour.
+%PCG can be used as a tool to assist developers. It can suggest what might be a 
+%base for later development, enhancing human creativity rather than displacing it.
+In this paper we target replayability by insisting in the
 generation of free-form structures.This is, that it does not follow a pattern.
 If all content generated follow a simple pattern, this is easily spotted and
 the player disengages. We aim to avoid this by creating structures whose form
@@ -427,18 +429,19 @@ valid; this is the main issue we are tackling in this paper.
 
 There are three main classes of fitness functions in 
 % Antonio - You should just remark the term once. ;)
-SBPCG \cite{togelius2010search}:
+SBPCG \cite{togelius2010search}, but we will use a {\em direct fitness function}.
+In this kind of function, we extract measurable features from the generated content and map them to a fitness value.
 
-\begin{itemize}
-	\item \textit{Direct Fitness Function} where certain easily measurable 
-	features are extracted from the generated content and mapped to a 
-	fitness value.
-	\item \textit{Simulation-Based Fitness Function} where the 
-	fitness is calculated using features from an agent's gameplay. 
-	\item \textit{Interactive Fitness Function} where the fitness value is 
-	obtained from the player, whether it be explicitly or 
-	implicitly. 
-\end{itemize}
+%\begin{itemize}
+%	\item \textit{Direct Fitness Function} where certain easily measurable 
+%	features are extracted from the generated content and mapped to a 
+%	fitness value.
+%	\item \textit{Simulation-Based Fitness Function} where the 
+%	fitness is calculated using features from an agent's gameplay. 
+%	\item \textit{Interactive Fitness Function} where the fitness value is 
+%	obtained from the player, whether it be explicitly or 
+%	implicitly. 
+%\end{itemize}
 
 Since we are interested in structural integrity of the generated
 structures, neither actual gameplay nor players are taken into
@@ -523,10 +526,11 @@ level are built from top to down, in several phases, recursively
 building a structure, each row composed of a single type of block
 (with a fixed rotation). The likelihood of selecting a certain block
 is given by a probability table, which was tuned using an optimization
-method. Then, the blocks are placed using a tree structure, where the
-first selected block is the peak and blocks underneath it are split
-into subsets that support the previous row with one, two or three
-blocks. This ensures local stability, but not global stability, which
+method. Then, the blocks are placed using a tree structure.
+% where the first selected block is the peak and blocks underneath it are split
+%into subsets that support the previous row with one, two or three
+%blocks. 
+This ensures local stability, but not global stability, which
 is tested once the whole structure is completed.  
 After that, other objects (pigs and TNT) are placed, following an
 scheme of potential positions for them according to a rank based on
@@ -534,17 +538,22 @@ some terms such as structural protection or dispersion.
 
 This approach was improved by adding a `layer' devoted to the
 selection of the material (stone, ice or wood) based on different
-strategies. Materials are important given that certain birds are more
-efficient against particular ones, so they will have a high impact on
-the game dynamics. Thus, a strategy sets stone to detected weak
-points. Trajectory analysis-based strategy sets to the same material
-all blocks in the trajectory of a shot aimed at a particular
-pig. Clustering strategy takes a random block, sets its material and
-propagates to the surrounding blocks that have not been assigned
-yet. Row grouping and structure blocking apply the same material to a
+strategies. Materials are important for the game dynamics given that certain birds are more
+efficient against particular ones.
+%so they will have a high impact on
+%the game dynamics.
+Thus, a strategy sets stone to detected weak
+points using a trajectory analysis-based strategy.
+% sets to the same material
+% all blocks in the trajectory of a shot aimed at a particular pig.
+Clustering strategy takes a random block, sets its material and
+propagates to the surrounding blocks
+%that have not been assigned yet.
+Row grouping and structure blocking apply the same material to a
 whole row or structure respectively. 
 
-The main problem with this and other constructive approaches is that the range of different structures created is going to be relatively small; monotony
+The main problem with this and other constructive approaches is that 
+the range of different structures created is going to be relatively small; monotony
 leads to boredom, decreasing playability. On the other hand, generated
 structures are guaranteed to be structurally sound, and constructive
 approaches are generally faster than search-based procedures.
