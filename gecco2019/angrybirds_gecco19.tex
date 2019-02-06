@@ -1208,28 +1208,33 @@ structures. Still, this path leads to mostly flat structures, which
 are structurally solid, but not interesting.
 % Something more should have to be commented on these results - JJ
 
- \subsection{Changing the evaluation function}\label{E6}
+\subsection{Changing the evaluation function}\label{E6}
 
-Observing results from the fifth experiment, it is not enough to penalize
-not growing vertically. The response was to place many objects on the ground
-and some of them scattered above them so the static block speed will make up
-for the free falling blocks. In order to correct this behaviour we changed the
+Observing results from the previous experiment we realized that what
+evolution found was that laying many blocks on the ground was enough
+to get a high fitness: no gaps, and the average speed decreased. In
+order to correct this behaviour we changed the 
 fitness function to take into account the fastest moving object:
 $$fitness_{indV2} = \max{(V)}$$
+Additionally, we initialized levels including one of a list of pre configured
+blocks in addition to the random initialization used until
+now.
 
-This way the fitness value depends on just one gene, although it can be a
-different one each time. This made our generations to evolve slower, so the
-stop criteria introduced in previous experiments was removed.
-It also initializes levels with one of a list of pre configured
-blocks in addition to the random initialization used up until now.
-
-Again, with a different fitness function we cannot compare the fitness value with the rest of the experiments.
+This makes the fitness value depends on just one gene, although it can be a
+different one each time. The improvement of solutions to find acceptable ones
+slowed down % This would have to be proved by a chart
+Again, with a different fitness function we cannot compare the fitness
+value with the rest of the experiments. 
  \begin{figure}
  	\centering
  	\includegraphics[scale=0.3]{E6.png}
  	\caption{One of the solutions from \ref{E6}}\label{f:e6}
  \end{figure}
 
+
+ %Again, you can't simply show a single figure as a result. Maybe show
+ %average height, or several best solutions. And always reference the
+ %figure - JJ
 %************************************************
 
 
