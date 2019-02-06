@@ -274,10 +274,10 @@ workload. \cite{togelius2016introduction}
 % Pcg can be used as a tool to assist developers. It can suggest what might be a 
 % base for later development, enhancing human creativity rather than displacing it.
 In this paper we target replayability by insisting in the
-generation of free-form structures. If all content generated follow a
-simple pattern, this is easily spotted and the player disengages. By
-creating structures whose form is only constrained by gravity, levels
-generated will be much more engaging.
+generation of free-form structures.This is, that it does not follow a pattern.
+If all content generated follow a simple pattern, this is easily spotted and
+the player disengages. We aim to avoid this by creating structures whose form
+is only constrained by gravity.
 
 % Paragraph that could be reduced to a single sentence or even
 % eliminated. We are now up to 17 pages - JJ
@@ -286,9 +286,9 @@ characterize and differentiate them from each
 other \cite{togelius2016introduction}. The method proposed in this paper is 
 described as \textit{offline}, 
 %---the PCG occurs before the game session or during development---
-\textit{necessary}, 
+% \textit{necessary}, 
 %---the generated content is part of the essential structure of the game---,
-\textit{generic},
+% \textit{generic},
 %---it does not take into account player behaviour---,
 \textit{stochastic} 
 %---it will not produce the same output every time it is run---,
@@ -306,10 +306,10 @@ A special kind of \textit{generate-and-test} approach to PCG is
 % This was mantioned earlier so I defined the 
 % acronym before. But I like it more in here.
 Search-based Procedural Content Generation (SBPCG), which is
-usually tackled with Evolutionary Algorithms \cite{togelius2010search} like the 
+usually tackled with Evolutionary Algorithms(EA) \cite{togelius2010search} like the 
 one proposed in \cite{hastings2009evolving}. 
 The problems faced by SBPCG are not very far from those encountered in
-Evolutionary Algorithms; since evolutionary algorithms are search
+EAs; since they are search
 methods, they can be a good match to perform this kind of procedures. 
 
 Since in Angry Birds birds are
@@ -428,10 +428,11 @@ level are built from top to down, in several phases, recursively
 building a structure, each row composed of a single type of block
 (with a fixed rotation). The likelihood of selecting a certain block
 is given by a probability table, which was tuned using an optimization
-method. Then, the blocks are placed using a tree structure, where the
-first selected block is the peak and blocks underneath it are split
-into subsets that support the previous row with one, two or three
-blocks. This ensures local stability, but not global stability, which
+method. Then, the blocks are placed using a tree structure,
+% where the first selected block is the peak and blocks underneath it are split
+%into subsets that support the previous row with one, two or three
+%blocks. 
+This ensures local stability, but not global stability, which
 is tested once the whole structure is completed.  
 After that, other objects (pigs and TNT) are placed, following an
 scheme of potential positions for them according to a rank based on
@@ -439,14 +440,18 @@ some terms such as structural protection or dispersion.
 
 This approach was improved by adding a `layer' devoted to the
 selection of the material (stone, ice or wood) based on different
-strategies. Materials are important given that certain birds are more
-efficient against particular ones, so they will have a high impact on
-the game dynamics. Thus, a strategy sets stone to detected weak
-points. Trajectory analysis-based strategy sets to the same material
-all blocks in the trajectory of a shot aimed at a particular
-pig. Clustering strategy takes a random block, sets its material and
-propagates to the surrounding blocks that have not been assigned
-yet. Row grouping and structure blocking apply the same material to a
+strategies. Materials are important for the game dynamics given that certain birds are more
+efficient against particular ones.
+%so they will have a high impact on
+%the game dynamics.
+Thus, a strategy sets stone to detected weak
+points using a trajectory analysis-based strategy.
+% sets to the same material
+% all blocks in the trajectory of a shot aimed at a particular pig.
+Clustering strategy takes a random block, sets its material and
+propagates to the surrounding blocks
+%that have not been assigned yet.
+Row grouping and structure blocking apply the same material to a
 whole row or structure respectively. 
 
 The main problem with this and other constructive approaches is that the range of
@@ -479,7 +484,7 @@ operators, aiming to maintain some consistency in the new solutions
 generated.
 
 However, this paper proposes a different approach: the \textit{free
-  form evolution}. To our knowledge there are no other PCGs that
+form evolution}. To our knowledge there are no other PCGs that
 use this approach for the generation of Angry Birds levels. 
 % Antonio - This is the main selling point of the paper, so if you
 % think this is the only approach of free form evolution in games,
@@ -850,6 +855,10 @@ genes, which are initialized by several methods:
 	will be aligned).
 	\item Discrete without overlapping: it combines the second and third 
 	initialization method.
+	\item Discrete with a set of pre configured blocks: first it includes
+	a set of blocks, and then adds blocks following the third method until
+	it reaches the desired number of blocks. The configurations used are the
+	compound blocks found in \cite{ferreira2014search}.
 \end{itemize}
 
 Candidates for reproduction are selected using tournaments. Two individuals are chosen from the 
@@ -1086,7 +1095,7 @@ of the worst individual should be the same over several generations. In Figure
 populations do remain the same for several generations close to the maximum, 
 most of them do not.
 
-\begin{figure}[H]
+\begin{figure}
 	\centering
 	\includegraphics[scale=0.55]{exp1_worstIndv.png}
 	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
@@ -1095,8 +1104,13 @@ most of them do not.
 
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.3]{level-0-180523_203106.png}
-	\caption{One of the results for \ref{E1}: Fitness = 9.021, nBlocks = 7, G = 100  }\label{f:e1}
+	\subfloat[One of the results for \ref{E1}: Fitness = 9.021, nBlocks = 7, G = 100  \label{f:e1}]{%
+		\includegraphics[scale=0.2]{level-0-180523_203106.png}
+	}
+	\hfill
+	\subfloat[One of the results for \ref{E2}: Fitness = 5.176, nBlocks = 9, G = 767  \label{f:e2-4}]{%
+		\includegraphics[scale=0.2]{level-0-base_large180529_223045.png}
+	}
 \end{figure}
 \subsection{Changing termination conditions}\label{E2}
 Most executions from the previous experiment reached the maximum number of 
@@ -1150,11 +1164,7 @@ exploration rather than exploitation. The genetic operators are failing to
 create new individuals that inherit good traits from their parents. A new 
 crossover operator could shift the focus to exploitation, and we will
 examine this in the next experiment.
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.3]{level-0-base_large180529_223045.png}
-	\caption{One of the solutions from \ref{E2}: Fitness = 5.176, nBlocks = 9, G = 767  }\label{f:e2-4}
-\end{figure}
+
 \subsection{Improving exploitation by a better crossover operator}\label{E3}
 
 
@@ -1187,10 +1197,17 @@ assess, but in this case it is clear that search goes on the direction
 of minimizing the number of blocks so that the number of blocks
 actually falling is zero. The created structures are not very
 interesting, though, that is why we propose some changes in the next experiment.
+
+
 \begin{figure}
 	\centering
-	\includegraphics[scale=0.3]{level-0-second_crossover180613_055622.png}
-	\caption{One of the solutions from \ref{E3}: Fitness = 1.571e-7, nBlocks = 9, G = 194  }\label{f:e3-4}
+	\subfloat[One of the solutions from \ref{E3}: Fitness = 1.571e-7, nBlocks = 9, G = 194  \label{f:e3-4}]{%
+		\includegraphics[scale=0.2]{level-0-second_crossover180613_055622.png}
+	}
+	\hfill
+	\subfloat[One of the solutions from \ref{E4}: Fitness = 9.229e-7, nBlocks = 10, G = 198 \label{f:e4-1}]{%
+		\includegraphics[scale=0.2]{level-0-second_crossover_min10_180602_035405.png}
+	}
 \end{figure}
 \subsection{Changing the minimum number of blocks per individual}\label{E4}
 
@@ -1214,11 +1231,7 @@ experiment.
 % Comment on the actual appearance of these structures. Do they
 % achieve the stated objective - JJ?
 % I did change that - Laura
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.3]{level-0-second_crossover_min10_180602_035405.png}
-	\caption{One of the solutions from \ref{E4}: Fitness = 9.229e-7, nBlocks = 10, G = 198 }\label{f:e4-1}
-\end{figure}
+
 
 \subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
 Since last experiment had high execution time, in this one we get
@@ -1237,11 +1250,18 @@ not only the distance to the ground but also the \textit{gaps} in the Y-axis.
 This will encourage individuals to grow vertically and not only horizontally
 like in previous experiments. Since the fitness evaluation is now different
 from those experiments, it does not make sense to compare their fitness value.
+
+ 
  \begin{figure}
  	\centering
- 	\includegraphics[scale=0.4]{E5.png}
- 	\caption{One of the solutions from \ref{E5}}\label{f:e5}
- \end{figure} 
+ 	\subfloat[One of the solutions from \ref{E5}\label{f:e5}]{%
+ 			\includegraphics[scale=0.27]{E5.png}
+ 	}
+ 	\hfill
+ 	\subfloat[One of the solutions from \ref{E6}\label{f:e6}]{%
+ 			\includegraphics[scale=0.27]{E6.png}
+ 	}
+ \end{figure}
 \subsection{Changing the evaluation function}\label{E6}
 
 Observing results from the fifth experiment, it is not enough to penalize
@@ -1254,13 +1274,11 @@ $$fitness_{indV2} = \max{(V)}$$
 This way the fitness value depends on just one gene, although it can be a
 different one each time. This made our generations to evolve slower, so the
 stop criteria introduced in previous experiments was removed.
+It also initializes levels with one of a list of pre configured
+blocks in addition to the random initialization used up until now.
 
 Again, with a different fitness function we cannot compare the fitness value with the rest of the experiments.
- \begin{figure}
- 	\centering
- 	\includegraphics[scale=0.4]{E6.png}
- 	\caption{One of the solutions from \ref{E6}}\label{f:e6}
- \end{figure}
+
 %************************************************
 
 
