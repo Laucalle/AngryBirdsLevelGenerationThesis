@@ -651,11 +651,11 @@ that was not broken after the simulation. It can be run from beginning to end
 without user interaction and minimizes the amount of time spent on simulating 
 each level.
 
-In later experiments we will use Box2D, a physics engine written in C++ originally
+In later experiments we will use Box2D \cite{box2d}, a physics engine written in C++ originally
 used for the actual Angry Birds game, to avoid launching the whole game. In this 
 simulation we do not have the resistance of the blocks implemented but we can test
-the level stabiliy much more effiently (since there is no overhead computing things
-unrelated to physics)
+the level stabiliy much more efficiently (since there is no overhead computing things
+unrelated to physics). This means we cannot penalize levels per broken block.
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
@@ -678,6 +678,8 @@ $P_{broken}$ is set to $100$ since objects in a level do not usually reach that
 velocity, therefore it will separate non-valid levels from potentially good 
 ones.
 
+In the sixth experiment this fitness function is changed to the following function after observing the results for the previous experiment, al of them described in section \ref{ch:res}:
+$$fitness_{indV2} = \max{(V)}$$
 % When we say length of a vector, we think about the norm (the actual lenght) 
 % for instance the hypotenuse in a 2D vector. I think here we are talking about 
 %the
@@ -688,8 +690,8 @@ ones.
 % Done - Laura
 
 
-However, simulating a level is quite time consuming, on the order of
-seconds, which makes it almost unfeasible for our purpose, so we
+Either way, simulating a level is quite time consuming, on the order of
+seconds using the game, which makes it almost infeasible for our purpose, so we
 decided to take additional factors on the fitness so that not all
 levels are actually simulated. 
 %Although we may know that a given level will perform poorly in the simulation, 
@@ -991,36 +993,36 @@ whose result is shown in Table \ref{t:resOver} shows an overview of the results.
 % Antonio - Explain the table. What is it shown (average values I guess).
 % Explain it to the reader why the number of generations is not exact.
 % When you show average results, you must also add standard deviations in the shape $\pm$ 123.45 (I have included an example in the table).
+
 \begin{table}[H]
 	\myfloatalign
-	\begin{tabular}{ccccc}
-		& \textbf{E1} & \textbf{E2} & \textbf{E3} &\textbf{E4} \\ \hline
-		\textbf{Time (h)} & 0.89 & 1.002 & 1.76 & 5.03 \\  \hline
-		\textbf{G} &  100.0 & 155.087 & 76.625 & 365.929 \\  \hline
-		\textbf{Best} & 61.334 & 110.66 & 0.0015 & 0.0018 \\  \hline
-		\textbf{Avg} & 383.701 & 327.547 & 0.54 &  0.203 \\  \hline
-		\textbf{Worst}  & 510.515 & 367.895 & 0.828 & 0.2997\\  \hline
-% If possible, add standard deviation here - JJ
-% I could not find the original spreadsheet, I only have the raw data. I could 
-%%% not add standard deviation on time - Laura
+	\begin{tabular}{cclclclclcl}
+		& \textbf{Time(h)} &$\sigma$ & \textbf{G}& $\sigma$&\textbf{Best}& $\sigma$  &\textbf{Avg}&$\sigma$  & \textbf{Worst}&$\sigma$ \\ \hline
+		\textbf{E1}&0.89&(0.59)&100.0&(0)&61.334&(133.02)&383.701&(106.14)&510.515&(133.04)\\  \hline
+		\textbf{E2}&1.002&(1,97)&155.087&(240.56)&110.66&(142.21)&327.547&(238.33)&367.895&(260.83)  \\  \hline
+		\textbf{E3}&1.76&(0.6)&76.625&(42.3)&0.0015&(0.003)&0.54&(0.24)&0.828&(0.34)   \\  \hline
+		\textbf{E4}&5.03&(1.46)&365.929&(158.09)&0.0018&(0.003)&0.203&(0.068)&0.2997&(0.1)  \\  \hline
+		\textbf{E5}&0.27&(0,1)&894.95&(184.73)& 0.065&(0.06)&0.069&(0.06)&0.071&(0.06)     \\  \hline 
+		\textbf{E6}&0.81&(0.15)&1000.0&(0)& 0.932&(0.78)&1.223&(0.74)&1.3&(0.72) \\  \hline
+		% If possible, add standard deviation here - JJ
+		% added standard deviation - Laura
 		\hline
 	\end{tabular}
-	\caption{Summary of the results of the last generation in 15 runs for each
-          experiment.
-          G: number of generations, E: experiment 
-	number} % What
-                                % is E? Is that the average? Number of
-                                % generations up to what?
-                                % Also explain the importance of the
-                                % fitness as an evaluation of the
-                                % quality of the solutions - JJ
-      % Also, average over what. Best individual in every experiment?
-      % Last generation? - JJ
-      % Modified caption. Better? - Laura
+	\caption{Summary of the results of the last generation in 15-20 runs for each
+		experiment (averages and standard deviation).
+		G: number of generations, E: experiment 
+		number} % What
+	% is E? Is that the average? Number of
+	% generations up to what?
+	% Also explain the importance of the
+	% fitness as an evaluation of the
+	% quality of the solutions - JJ
+	% Also, average over what. Best individual in every experiment?
+	% Last generation? - JJ
+	% Modified caption. Better? - Laura
 	\label{t:resOver}
 \end{table}
-
-\subsection{Baseline experiment}
+\subsection{Baseline experiment}\label{E1}
 
 The premise of the first experiment is that our basic EA should be able to 
 minimize the movement of the blocks placed on the level and the flexibility of 
@@ -1090,13 +1092,17 @@ most of them do not.
 	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
 \end{figure}
 
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{level-0-180523_203106.png}
+	\caption{One of the results for \ref{E1}: Fitness = 9.021, nBlocks = 7, G = 100  }\label{f:e1}
+\end{figure}
+\subsection{Changing termination conditions}\label{E2}
 Most executions from the previous experiment reached the maximum number of 
 generations without stabilizing or converging. This means the EA may need a 
 larger number of generations to fully evolve a solution. This is the hypothesis 
 for the second experiment, which we describe next.
-
-\subsection{Changing termination conditions}
-
 % Antonio - You must introduce the experiment (each of them), trying to justify its necessity.
 
 The main change in this implementation is the addition of two new stop conditions: being 10 generations without changes (stable population) or best fitness value below 0.01. 
@@ -1144,8 +1150,12 @@ exploration rather than exploitation. The genetic operators are failing to
 create new individuals that inherit good traits from their parents. A new 
 crossover operator could shift the focus to exploitation, and we will
 examine this in the next experiment.
-
-\subsection{Improving exploitation by a better crossover operator}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{level-0-base_large180529_223045.png}
+	\caption{One of the solutions from \ref{E2}: Fitness = 5.176, nBlocks = 9, G = 767  }\label{f:e2-4}
+\end{figure}
+\subsection{Improving exploitation by a better crossover operator}\label{E3}
 
 
 For the third experiment, the change introduced is in the crossover operator 
@@ -1157,7 +1167,7 @@ well as the termination criteria are kept the same.
 Table \ref{t:resOver} shows that the results have radically improved as the 
 average fitness of the best solutions drops to $0.0015$, a decrease of almost 
 100\%. Additionally, it took less generations in general to reach those 
-results. However, executions took longer on average, which makes sense given 
+results. However, executions took longer on average(table \ref{t:resOver}), which makes sense given 
 that a greater number of individuals would have been simulated. The average 
 fitness of the population and the worst individual have similar values now, 
 which suggest that in most executions the population did converge.
@@ -1177,8 +1187,12 @@ assess, but in this case it is clear that search goes on the direction
 of minimizing the number of blocks so that the number of blocks
 actually falling is zero. The created structures are not very
 interesting, though, that is why we propose some changes in the next experiment.
-
-\subsection{Changing the minimum number of blocks per individual}
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{level-0-second_crossover180613_055622.png}
+	\caption{One of the solutions from \ref{E3}: Fitness = 1.571e-7, nBlocks = 9, G = 194  }\label{f:e3-4}
+\end{figure}
+\subsection{Changing the minimum number of blocks per individual}\label{E4}
 
 The only parameter that was changed for this experiment is the minimum
 number, which went from 5 to 10. 
@@ -1200,6 +1214,43 @@ experiment.
 % Comment on the actual appearance of these structures. Do they
 % achieve the stated objective - JJ?
 % I did change that - Laura
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{level-0-second_crossover_min10_180602_035405.png}
+	\caption{One of the solutions from \ref{E4}: Fitness = 9.229e-7, nBlocks = 10, G = 198 }\label{f:e4-1}
+\end{figure}
+
+\subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
+Since last experiment had high execution time, in this one we get
+rid of the in-game simulation. Instead we will use a physics engine
+called Box2D that was used in the development of the original game.
+Since game physics do not usually resemble real world physics we adjusted
+the parameters so this simulation an the game behave in the same way.
+As we can see in table \ref{t:resOver} the execution time drastically
+drops from 5 hours to less than 20 minutes on average although it runs
+a higher number of generations.
+
+
+With less overhead in the simulation we were able to perform more
+operations on the individuals. In this case we chose to penalize
+not only the distance to the ground but also the \textit{gaps} in the Y-axis.
+This will encourage individuals to grow vertically and not only horizontally
+like in previous experiments. Since the fitness evaluation is now different
+from those experiments, it does not make sense to compare their fitness value. 
+\subsection{Changing the evaluation function}\label{E6}
+
+Observing results from the fifth experiment, it is not enough to penalize
+not growing vertically. The response was to place many objects on the ground
+and some of them scattered above them so the static block speed will make up
+for the free falling blocks. In order to correct this behaviour we changed the
+fitness function to take into account the fastest moving object:
+$$fitness_{indV2} = \max{(V)}$$
+
+This way the fitness value depends on just one gene, although it can be a
+different one each time. This made our generations to evolve slower, so the
+stop criteria introduced in previous experiments was removed.
+
+Again, with a different fitness function we cannot compare the fitness value with the rest of the experiments.
 
 %************************************************
 
