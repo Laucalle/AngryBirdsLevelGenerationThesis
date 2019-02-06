@@ -428,22 +428,8 @@ The fact that we are focusing on structures with a free form also
 implies that the data structure we will evolve has to take this into
 account. However, there is no single way to create this representation,
  so several options will have to be evaluated. 
-% This paragraph does not fit into the narrative. It's better to
-% eliminate it - JJ
-% ---------------------------------
-% It is common for AI researchers to turn to games in general as a testing 
-% environment for AI techniques.
-% This interest in games ---both video games and board games--- is not 
-% surprising since they have a rather simple set of rules, they can be a 
-% challenging task even for a human brain and they offer a wide range of dynamic 
-% and competitive elements that resemble real-world problems to some extent. The 
-% interest works in both ways. Many video games use AI techniques to deliver 
-% better experiences, mainly involving NPC behaviour and PCG.
-% ---------------------------------
 
-
-
-% Antonio - In my opinion the introduction is extremely long. It
+ % Antonio - In my opinion the introduction is extremely long. It
 % should be reduced, doing it more concise, focused on the paper
 % objectives and with a firm motivation based on the existing gap of
 % the state of the art. 
@@ -615,102 +601,9 @@ problem and our approach to it.
 \section{Problem Description}
 \label{sec:angry}
 
-% \subsection{Open Source Simulator}
-% \textit{Angry Birds} is not open source software and so the code is not available. As a part of their solution, Lucas Ferreira and Claudio Toledo\cite{ferreira2014search} developed an open source simulation for the game. Since that implementation is available on Github\cite{sciencebirds}, it will be used as a starting point for this part of project. The modified version is available on Github\cite{sciencebirds-adapt} and described in section \ref{ch:gameApdaptation}.
-
-% The game is implemented using the Unity Engine and its code is mainly written in C\#. Levels are not part of the game itself and instead they are parsed from XML files contained in an specific folder in the game hierarchy (which corresponds to the \textit{Assets/StreamingAssets/Levels} directory). Each level is described in a different file, similar to listing \ref{xmlsample}
-
-% \bigskip
-
-% \lstset{language=XML}
-% \begin{lstlisting}[caption=Sample level input to show format, label=xmlsample]
-% <?xml version="1.0" encoding="utf-16"?>
-% <Level width="2">
-% <Camera x="0" y="0" minWidth="20" maxWidth="25">
-% <Birds>
-% <Bird type="BirdRed"/>
-% <Bird type="BirdBlack"/>
-% </Birds>
-% <Slingshot x="-7" y="-2.5">
-% <GameObjects>
-% <Block type="RectMedium" material="wood" x="2.78" y="-3.18" rotation="0"/>
-% <Block type="RectFat" material="wood" x="2.75" y="-2.66" rotation="90.00001"/>
-% <Block type="SquareHole" material="stone" x="2.04" y="-2.3" rotation="0"/>
-% <Block type="RectSmall" material="wood" x="4.05" y="-3.08" rotation="0"/>
-% <Pig type="BasicSmall" material="" x="2.74" y="-1.98" rotation="0"/>
-% </GameObjects>
-% </Level>
-% \end{lstlisting}
-% The XML file sets a number of parameters for the level, some of them are key to level generation and others will be ignored by the generator but still needed for the simulation:
-% \begin{itemize}
-% 	\item Level width 
-% 	\item Camera position
-% 	\item List of birds, each one with its type (for our objective of making stable structures this will remain constant, although it is important from a game designer's point of view)
-% 	\item Slingshot position
-% 	\item Game objects list, this one is the most important for level generation. It can contain blocks, pigs or TNT.
-% \end{itemize}
-
-% Those elements are then used to build a level, placing the objects in the specified coordinates (note that 0,0 correspond to the centre of the screen, the ground being at $y=-3.5$ in game world units).
-
-% Although the simulation described in \cite{ferreira2014search} does offer an output and it is automated to run through all levels, the implementation provided does not. However, some of these features can be found in the source code.
-
-% \subsection{Modifications to the Open Source Simulator}\label{ch:gameApdaptation}
-% Considering the functionality of the existing code, there are a few issues preventing us from using the game as a simulation:
-
-% \begin{itemize}
-% 	\item (Issue \#1) Human interaction is needed in order to proceed: there is a main title screen and a level selection. 
-% 	\item (Issue \#2) A level will only be finished if the user skips it or if there are no pigs left. If there are no pigs in the level description, the game may have inconsistent behaviour, displaying the \textit{Level cleared} banner or crashing.
-% 	\item (Issue \#3) Once a level has been skipped or cleared, data from execution is not stored.
-% 	\item (Issue \#4) Skipping the last level results in loading the first level again. 
-% \end{itemize}
-
-% It is also worth mentioning that the simulation was intended to run under a Linux distribution. However, this was not possible probably due to issues with the Unity Engine compiler for Linux. Those were presumably fixed in later releases but it is not working on this project, originally created in a much older version although the code itself does not seem to be platform-dependent.
-
-% Modifying the simulation to write data output---Issue \#3--- is fairly simple since the functions were already in the code. However, the data that was being stored was not enough for its purpose. Output XML level was a valid input XML level, which misses some key information about the execution and in this case there was not much interest in obtaining a new valid level. The desired output would look like listing \ref{xmlsampleOUT} (note that encoding was also changed from original): 
-
-% \bigskip
-
-% \lstset{language=XML}
-% \begin{lstlisting}[caption=Sample level output to show format, label=xmlsampleOUT]
-% <?xml version="1.0" encoding="utf-8"?>
-% <Level width="2">
-% <Camera x="0" y="0" minWidth="20" maxWidth="25" />
-% <Birds>
-% <Bird type="BirdRed" />
-% </Birds>
-% <Slingshot x="-5" y="-2.5" />
-% <GameObjects>
-% <Block type="RectSmall" material="wood" x="3.78" y="-3.294594" rotation="90" id="0" aVelocity="6.974828E-08" />
-% <Block type="SquareTiny" material="wood" x="3.78" y="-2.551131" rotation="90" id="1" aVelocity="1.464643E-07" />
-% </GameObjects>
-% </Level>
-% \end{lstlisting}
-
-% To calculate the average magnitude of velocity for each block, it should be measured at regular time intervals; but, since this and other processes seem to be framerate-dependent, this was achieved by forcing the game to a constant frame rate. Blocks that were destroyed on execution are not present in the output.
-
-% Encoding was changed from \texttt{utf-16} (C\# XML reader/writer default) to \texttt{utf-8} (the only format available for Python's Standard Library XML reader).
-
-% The next logical step is getting rid of interaction. The simulation we are interested in does not require a player (human or AI agent) to play the level since the goal is to know how the level behaves under the game's physics that do not need to---and they do not---match real physics.
-
-% A level will run for a certain amount of time, and then continue to the next one, skipping the main menu and level selection. When the simulation reaches the last level it will end the execution.
-
-% Unity Engine projects are usually divided into scenes. This one has a 
-%different scene for the main menu, level selection, loading screen, levels and 
-%failure screen. Removing scenes from the screen flow causes side effects such 
-%as the first level crashing so instead, the same functions invoked by the GUI 
-%are called after initialization takes place in both scenes (main menu and 
-%level 
-%selection) before the first level. This solves interaction with menus (Issue 
-%\#1). 
-
-% In order to skip levels and keeping in mind the velocity of the blocks is already being tracked, the game will load the following scene---the next level---once all blocks reach velocity $0$, which means the blocks have stabilized. Just in case this condition is never met, there is also a time limit of $10s$ for each level (Issue \#2). 
-
-% The remaining issue (Issue \#4) is solved just by checking how many levels have been loaded and the index of the currently playing level.
-
-% I have eliminated the whole subsection above. Some reference to what
-% was done here should be inserted elsewhere - JJ
-
-Science Birds is nowadays the main open source Angry Birds simulator. It was developed by  Ferreira and Toledo \cite{ferreira2014search}, and is available at
+Science Birds is nowadays the main open source Angry Birds
+simulator. It was developed by  Ferreira and Toledo
+\cite{ferreira2014search}, and is available at 
 GitHub \cite{sciencebirds}. We used it  as a starting point; however we
 had to patch it for producing usable output 
 % Antonio - I think this is important and could be considered as a contribution 
@@ -876,16 +769,6 @@ Individuals are a collection of genes, in the same way a level is a collection
 of building blocks. The number of blocks is variable and the order in which 
 they are listed is not important. 
 
-% - Possibly irrelevant implementation detail - JJ
-% As previously stated, only promising individuals are tested in-game, meanwhile 
-% those who are not, are penalized instead. This penalty is stored, separately 
-% from the fitness value for the individual. The reason for this is that it may 
-% change over generations.
-% - But you always take the last value? Or average? Is there a random
-% component in the way they fall? - JJ
-% always the worst simulated one to date. There shouldn't be a random component 
-% but that is managed by Unity Engine. - Laura
-
 The fitness of the worst individual that has been tested in game is
 stored, so that the value of not tested levels is always above ---it is a minimization problem--- the in-game 
 tested levels; the starting point for fitness of such individuals is the 
@@ -1023,37 +906,6 @@ and therefore a new framework was created. The source  code can be found on GitH
 % The framework is not complex, but it covers all the features required. The most important one is a fitness function that executes all the individuals at once. This does not mean parallelism, in fact the steps to take cannot be concurrent. First, the penalization function is applied to all individuals and an XML is generated for those not penalized. Only after that, the simulation is run. The whole evolution process is summarized in algorithm \ref{a:evolution}.
 
 
-% \begin{algorithm}
-% 	\caption{Evolution}
-% 	\label{a:evolution}
-% 	\Begin{
-% 		population = Initialization(size, method)\;
-% 		suitable = EvaluatePenalization(population)\;
-% 		velocity = Simulation(suitable)\;
-% 		EvaluateFitness(suitable, velocity)\;
-% 		\For{$gen=0 \to nGenerations$}{
-% 			parents = Selection(population)\;
-% 			children = Crossover(parents)\;
-% 			Mutation(children)\;
-% 			suitable = EvaluatePenalization(children)\;
-% 			velocity = Simulation(suitable)\;
-% 			EvaluateFitness(suitable, velocity)\;
-% 			Update Global Penalization\;
-% 			population = Replacement(population, children)\;
-% 		}
-% 		\KwRet{Best individual}
-% 	}
-% \end{algorithm}
-
-% It follows the basic structure of a generic genetic algorithm, with the difference in the fitness function that was mentioned before. The terminating condition can be a set number of generations, or until a certain fitness value for the best individual is reached. In our case this threshold is set to $0.01$. Another stop criteria is several generations without any change in the population, which means that for several generations any new individual was worse than the previous worst one. In this situation, we assume that a local minimum has been reached.
-
-% All operators described in section \ref{ch:Representation} are implemented as a part of the framework. The chromosome and the gene are classes with the data members specified. The fitness value (once data from the simulation has been collected) and the penalty function are responsibility of the chromosome. Those two classes, along with the genetic operators, have been tested using Python Standard Library \textit{unittest}.
-
-% The framework also allows logging data from evolution. The format chosen for this purpose was \textit{JSON} since its integration with Python is straightforward and it is a human-readable format, which will make easy to interpret the results. For convenience, the parameters to the algorithm are also in \textit{JSON} format. The logs contain the configuration \textit{JSON} object, the time of execution and the execution itself: a dictionary with all generations, each of them containing the value of the best fit individual, the fitness average of the population and the worst fitness value. It also includes the Shannon's entropy for the population. 
-
-% Also commented out most text above. Just a minimal reference to the
-% tools used - JJ
-
 In order to evaluate the different options and check if they meet our
 objective, we performed a series of experiments presented in next
 section. 
@@ -1066,9 +918,7 @@ one, the different parts of our algorithm: fitness function, some
 evolutionary algorithm parameters and the genetic operators. In order
 to do so, we performed a set of experiments to test our hypotheses,
 whose result is shown in Table \ref{t:resOver1} shows an overview of the results. 
-% Antonio - Explain the table. What is it shown (average values I guess).
-% Explain it to the reader why the number of generations is not exact.
-% When you show average results, you must also add standard deviations in the shape $\pm$ 123.45 (I have included an example in the table).
+
 \begin{table}
 	\myfloatalign
 	\begin{tabular}{cclcl}
