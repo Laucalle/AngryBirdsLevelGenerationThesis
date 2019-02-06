@@ -1307,6 +1307,7 @@ will lead to unexpected outcomes.
 In our case, the fitness function used the 
 stability of the structure and only considered other features--- overlapping 
 blocks and distance to the ground--- to ensure the levels would be valid.
+In experiment \ref{E5} and \ref{E6} height was also taken into account.
 
  % I am lost in this paragraph. It should be more
  % related to the actual experiments made - JJ
@@ -1325,8 +1326,10 @@ structured.
 % Antonio - I would suggest this text instead
 In order to conduct our experiments the Angry Birds simulator (Science Birds) 
 has been adapted to our necessities, yielding now some  other information 
-required to evaluate the individuals of the implemented EA.
-It would be interesting to obtain other kind of data from the simulator,
+required to evaluate the individuals of the implemented EA. As this was a 
+bottleneck, experiments \ref{E5} and \ref{E6} used only a physic simulation,
+leaving behind the actual game.
+It would be interesting to obtain other kind of data from both simulations,
 such as the height of the structure and, eventually, its resistance to
 bombardment by angry birds. However, this is left as future work.
 
@@ -1403,21 +1406,24 @@ structures that are already stable. % Check out this idea, Laura - JJ
 
 
 Another important issue that needs to be addressed is the time performance. 
-Right now the simulation is the main bottleneck in the execution. One way to 
-speed up the process can be \textit{cleaning} up the current simulation, getting 
-rid of any unnecessary assets while maintaining the bare minimum to
-perform evaluation. 
-%However, this will not solve the problem, since the content generator will still need to launch an external executable.
+%Right now the simulation is the main bottleneck in the execution. One way to 
+%speed up the process can be \textit{cleaning} up the current simulation, getting 
+%rid of any unnecessary assets while maintaining the bare minimum to
+%perform evaluation. 
+% However, this will not solve the problem, since the content generator will still need to launch an external executable.
 % Antonio - I would not mention future problems
 
-The communication between the simulation and the content generator is through 
-read and write operations on disk, instead of memory. This could be avoided if 
-both tools were integrated in one. If we aim for an online automatic generator, 
-the generator should be integrated in the game. However, if our goal is to 
+%The communication between the simulation and the content generator is through 
+%read and write operations on disk, instead of memory. This could be avoided if 
+%both tools were integrated in one.
+If we aim for an online automatic generator, the generator should be 
+integrated in the game and therefore the current execution times would
+be unacceptable. However, if our goal is to 
 generate levels for mixed authorship, as an assistance to developers, it may be 
-a better idea to integrate the simulation in the generator. This could be done 
-by approximating in-game physics with real physics, as described in 
- \cite{blum1970stability}. % Expand on this - JJ
+a better idea to integrate the simulation in the generator.
+% This could be done 
+% by approximating in-game physics with real physics, as described in 
+% \cite{blum1970stability}. % Expand on this - JJ
 % Or maybe eliminate if there's no space - JJ
 
 
