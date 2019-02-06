@@ -111,7 +111,7 @@
 
 
 \begin{document}
-\title{Improved Free Form Evolution for Angry Birds Level Generation}
+\title{Improved Free Form Evolution for Angry Birds Structures}
 %\titlenote{Produces the permission block, and copyright information}
 %\subtitle{Subtitle}
 %\subtitlenote{The full version of the author's guide is available as  \texttt{acmart.pdf} document}
@@ -176,18 +176,19 @@
 
 
 \begin{abstract}
-This paper presents an original approach for building structures that
+This paper presents an original approach based on evolutionary algorithms for building structures that
 are stable under gravity for the physics-based puzzle game Angry
 Birds, with the ultimate objective of creating
-Angry Birds levels with the minimum number of constraints. This approach consists of a search-based procedural level 
-generation method that uses evolutionary algorithms. In order to evaluate 
-the stability of the levels, they are executed in an adaptation of an 
-open source version of the game called \textit{Science Birds}. 
-% Antonio - abstract does not include references.  ;)
-In the same way, an open source evolutionary computation framework has 
+Angry Birds levels with the minimum number of constraints.
+%In order to evaluate 
+%the stability of the levels, they are executed in an adaptation of an 
+%open source version of the game called \textit{Science Birds}. 
+% Eliminated this paragraph to get some space. Also, I'm not sure
+% we're doing it in this version.
+We have created a custom open source evolutionary computation library,
 % It is more like a library than a framework - Mario
-been implemented to fit the requirements of the problem. The main
-challenge has been to design a fitness function that, first, avoids if
+% changed - JJ
+whose main challenges have been to design a fitness function that, first, avoids if
 possible the actual execution of the game, which is time
 % that, first, avoids if possible the execution of a simulation, which is time
 % I propose this change because we haven't talked about a simulator yet - Mario
@@ -198,10 +199,8 @@ order to test the method four experiments have been carried out,
 obtaining a variety of stable structures, which is the first path for
 the generation of levels that are aesthetically pleasing as well as
 playable. 
-% Antonio - Speak about the structures and their utility, fun,
-% player's opinion, etc, which are the objectives in PCGs
-% Done a bit. That's the ultimate objective, but it's not one we are
-% doing in this particular work - JJ
+% I'm not sure this is specific for this paper. Laura, can you
+% clarify? - JJ
 \end{abstract}
 
 %
