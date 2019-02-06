@@ -1071,10 +1071,6 @@ The increase in the number of generations allows each run to fully develop
 their individuals. This would not be feasible if we had to simulate all the 
 individuals, but thanks to the fitness function and the new stop conditions we 
 can afford this number of generations.
-% Antonio - why did you increase the number of generations? Explain it.
-% Enphasize that we can run 1000 generations because fitness is
-% designed to not having to use the simulator - JJ
-% Updated - Laura
 
 Although the best levels obtained with this experiment are better than those 
 evolved in the first experiment, the bad solutions have a really high fitness 
@@ -1113,7 +1109,7 @@ examine this in the next experiment.
 	\caption{One of the solutions from \ref{E2}: Fitness = 5.176, G = 767  }\label{f:e2-4}
 \end{figure}
 % -------------------------------------------------------------------
-\subsection{Improving exploitation by a better crossover operator}\label{E3}
+\subsection{Improving exploitation using a better crossover operator}\label{E3}
 
 For the third experiment, the change introduced is in the crossover operator 
 used which was previously described as \textit{Common blocks} crossover. 
@@ -1179,9 +1175,12 @@ experiment.
 
 \subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
 
-Since last experiment had high execution time, in this one we get
-rid of the in-game simulation. Instead we will use a physics engine
-called Box2D that was used in the development of the original game.
+The main problem with the previous experiments was the time needed to
+load the Science Birds simulation environment and run the levels,
+which needed several seconds for loading and obtaining results. So the
+main objetive of this experiment was to find a way to get
+rid of the in-game simulation. In order to do that, we will use a Physics engine
+called Box2D \cite{catto2011box2d} that was used in the development of the original game.
 Since game physics do not usually resemble real world physics we adjusted
 the parameters so this simulation an the game behave in the same way.
 As we can see in table \ref{t:resOver1} the execution time drastically
