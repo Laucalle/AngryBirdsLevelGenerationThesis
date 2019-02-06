@@ -580,7 +580,7 @@ use this approach for the generation of Angry Birds levels.
 % remove the word 'many' in the sentence above. ;D
 % Done - JJ
 
-If we look outside computational intellignece in games and focus on 
+If we look outside computational intelligence in games and focus on 
 structural optimization in architecture, there are several approaches using search-based
 algorithms. Just to cite some examples, we can find a bioinspired algorithm called Cuckoo Search \cite{gandomi2013cuckoo}
 which performance was tested with structural optimization. However, this optimization is heavily parametrized
@@ -749,7 +749,7 @@ each level.
 In later experiments we will use Box2D \cite{box2d}, a physics engine written in C++ originally
 used for the actual Angry Birds game, to avoid launching the whole game. In this 
 simulation we do not have the resistance of the blocks implemented but we can test
-the level stabiliy much more efficiently (since there is no overhead computing things
+the level stability much more efficiently (since there is no overhead computing things
 unrelated to physics). This means we cannot penalize levels per broken block.
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
@@ -786,7 +786,7 @@ $$fitness_{indV2} = \max{(V)}$$
 
 
 Either way, simulating a level is quite time consuming, on the order of
-seconds using the game, which makes it almost infeasible for our purpose, so we
+seconds using the game, which makes it almost unfeasible for our purpose, so we
 decided to take additional factors on the fitness so that not all
 levels are actually simulated. 
 %Although we may know that a given level will perform poorly in the simulation, 
@@ -848,7 +848,7 @@ $$
 
 If both $f_{distance}$ and $f_{overlapping}$ are $0$ then the level is suitable 
 for simulation and fitness is calculated as $fitness_{ind}$. This would be 
-considered \textit{overpenalization} but exploring infeasible regions entails a 
+considered \textit{overpenalization} but exploring unfeasible regions entails a 
 serious overhead that we need to minimize \cite{runarsson2003evolutionary}. 
 On the other hand, levels with 
 multiple blocks broken during the simulation are not feasible either but 
