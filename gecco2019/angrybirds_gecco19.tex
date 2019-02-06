@@ -1184,22 +1184,31 @@ called Box2D \cite{catto2011box2d} that was used in the development of the origi
 Since game physics do not usually resemble real world physics we adjusted
 the parameters so this simulation an the game behave in the same way.
 As we can see in table \ref{t:resOver1} the execution time drastically
-drops from 5 hours to less than 20 minutes on average although it runs
-a higher number of generations.
+drops from 5 hours to less than 20 minutes on average, even running
+more generations in the process.
 
 
-With less overhead in the simulation we were able to perform more
+This opened the way for performing more 
 operations on the individuals. In this case we chose to penalize
-not only the distance to the ground but also the \textit{gaps} in the Y-axis.
+not only the distance to the ground but also the \textit{gaps} in the
+Y-axis, which will make objects drop and maybe break.
 This will encourage individuals to grow vertically and not only horizontally
-like in previous experiments. Since the fitness evaluation is now different
-from those experiments, it does not make sense to compare their fitness value
+like in previous experiments. This changes the fitness function, so we
+will have to compare by the actual obtained structure, one of which is
+shown in Figure \fig{f:e5}.
+%
  \begin{figure}
  	\centering
  	\includegraphics[scale=0.3]{E5.png}
  	\caption{One of the solutions from \ref{E5}}\label{f:e5}
- \end{figure}
-\subsection{Changing the evaluation function}\label{E6}
+      \end{figure}
+
+In general, this penalization of gaps creates a faster path to stable
+structures. Still, this path leads to mostly flat structures, which
+are structurally solid, but not interesting.
+% Something more should have to be commented on these results - JJ
+
+ \subsection{Changing the evaluation function}\label{E6}
 
 Observing results from the fifth experiment, it is not enough to penalize
 not growing vertically. The response was to place many objects on the ground
