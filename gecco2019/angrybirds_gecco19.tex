@@ -243,10 +243,10 @@ There is a number of competitions centered around playing AI agents for specific
 games or genres, but it is less common to find PCG competitions like the 
 \textit{Angry Birds Level Generation Competition}, whose third edition
 was celebrated in 2018 during CIG \cite{aibirds}.
-Participants must build 
-computer programs that are able to generate levels for the \textit{Angry Birds} 
-game; these levels must first be valid (i. e. not crash), and then,
-they are evaluated and judged for playability and aesthetics. 
+%Participants must build 
+%computer programs that are able to generate levels for the \textit{Angry Birds} game;
+Generated levels must first be valid (i. e. not crash), and then,
+they are evaluated and judged for playability and aesthetics.
 
 The ultimate objective of the work presented in this paper is to
 build a program capable of creating levels for \textit{Angry Birds}
@@ -281,9 +281,9 @@ form and stable Angry Birds {\em pigsty} structures.
 % ************************************************
 
 
-For the purpose of this paper, we define Procedural Game Generation
+For the purpose of this paper, we take the definition of Procedural Game Generation
 (PCG) as \textit{the algorithmic creation of game content with
-  limited or indirect user input} \cite{togelius2011procedural}. 
+	limited or indirect user input} \cite{togelius2011procedural}.  
 %Although PCG often uses Artificial Intelligence (AI) techniques, this
 %definition does not include all uses of it in games. We do not
 %consider Non Playable Character (NPC) behaviour or AI playing agents
@@ -295,15 +295,15 @@ among others are considered content in this definition
                                 % should give a reference for it.
                                 % It is from the same  
                                 %\cite{togelius2011procedural}
-Note that neither computers nor video games are mentioned in the
-definition. In fact, PCG has its roots in analog games.
+%Note that neither computers nor video games are mentioned in the
+%definition. In fact, PCG has its roots in analog games.
 %This may
 %conflict with the \textit{limited or indirect user input}, but it is
 %reasonable to assume that following a detailed set of
 %instructions---even if it is done by a human---is not
 %\textit{input}.
-The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
-prevail in modern video games. \cite{smith2015analog} 
+%The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
+%prevail in modern video games. \cite{smith2015analog} 
 % Using an
 %algorithm to assemble pre-designed pieces is a common technique in
 %tabletop roleplaying guides---where the algorithm usually consists in
@@ -1048,7 +1048,8 @@ most of them do not.
 	\includegraphics[scale=0.5]{exp1_worstIndv.png}
 	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
 \end{figure}
-
+Solutions found in this experiment contained just a few blocks on the ground,
+occasionally those were stacked as seen in figure \ref{f:e1}.
 Most executions from the previous experiment reached the maximum number of 
 generations without stabilizing or converging. This means the EA may need a 
 larger number of generations to fully evolve a solution. This is the hypothesis 
@@ -1074,13 +1075,14 @@ can afford this number of generations.
 
 Although the best levels obtained with this experiment are better than those 
 evolved in the first experiment, the bad solutions have a really high fitness 
-value. In table \ref{t:resOver2}, we can see that average fitness of levels 
+value. An example of one the best levels obtained is shown in figure \ref{f:e2-4}.
+In table \ref{t:resOver2}, we can see that average fitness of levels 
 produced with this version of the EA is worse than the ones generated in the 
 first experiment. It suggest that populations can be stuck for many generations 
 before making any type of improvement. Any of the generated levels have a 
 fitness below 0.01 or reached maximum number of generations, which means the 
 termination criteria that stopped the evolution was that the population was 
-stable, without any new individuals added for 10 generations. 
+stable, without any new individuals added for 10 generations.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale=0.4]{exp2_explication.png}
@@ -1126,7 +1128,8 @@ which suggest that in most executions the population did converge.
 
 The levels are stable and the blocks do not fall when loading the level, but 
 it is arguable that they would be be considered structures, since most of them consist in a 
-few blocks spread about on the floor. The average amount of blocks is $6.26$, 
+few blocks spread about on the floor, like the one shown in figure \ref{f:e3-4}.
+The average amount of blocks is $6.26$, 
 which is really close to the minimum amount of blocks allowed. However, given 
 the proposed fitness function, it is completely logical that the evolution 
 leads to this kind of arrangements. The more objects placed on the level, the 
@@ -1163,7 +1166,7 @@ from the third experiment.
 
 However, the results are more interesting visually. We can find some blocks 
 being stacked together, not only lying on the ground as in previous 
-experiment. 
+experiment. An example of the resulting structures is found in figure \ref{f:e4-1}.
 
 % There is no reference to figures. You have to reference every single
 % figure and comment it- JJ
@@ -1195,7 +1198,7 @@ Y-axis, which will make objects drop and maybe break.
 This will encourage individuals to grow vertically and not only horizontally
 like in previous experiments. This changes the fitness function, so we
 will have to compare by the actual obtained structure, one of which is
-shown in Figure \fig{f:e5}.
+shown in Figure \ref{f:e5}.
 %
  \begin{figure}
  	\centering
@@ -1204,15 +1207,17 @@ shown in Figure \fig{f:e5}.
       \end{figure}
 
 In general, this penalization of gaps creates a faster path to stable
-structures. Still, this path leads to mostly flat structures, which
-are structurally solid, but not interesting.
+structures. Still, this path leads to mostly flat structures with 
+some higher block in unstable positions, which
+are structurally solid, but not interesting. One of the stable results is shown in figure \ref{f:e5}.
 % Something more should have to be commented on these results - JJ
 
 \subsection{Changing the evaluation function}\label{E6}
 
 Observing results from the previous experiment we realized that what
 evolution found was that laying many blocks on the ground was enough
-to get a high fitness: no gaps, and the average speed decreased. In
+to get a high fitness: the average speed was decreased and it will
+place unstable blocks to cover gaps in Y-axis. In
 order to correct this behaviour we changed the 
 fitness function to take into account the fastest moving object:
 $$fitness_{indV2} = \max{(V)}$$
