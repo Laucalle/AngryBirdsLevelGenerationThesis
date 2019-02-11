@@ -78,10 +78,7 @@
 
 % first the title is needed
 \title{Free Form Evolution for Angry Birds Level Generation}
-% Antonio - I fix the format of the title and the name of the game
-
-% a short form should be given in case it is too long for the running head
-\titlerunning{}
+%\titlerunning{Generation of Angry Birds Levels}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -90,23 +87,27 @@
 % the running heads and the author index.
 %
 
-\author{A. N. Onymous\inst{1}%
-\thanks{No Institute}}
-\authorrunning{Anonymous, A}
-% (feature abused for this document to repeat the title also on left hand pages)
+ \author{Laura Calle \inst{1}
+   \and
+   Juan J. Merelo\inst{1}
+ \and
+ Antonio Mora-García\inst{1}
+ \and
+ José-Mario García-Valdez\inst{3}
+}
 
-% the affiliations are given next; don't give your e-mail address
-% unless you accept that it will be published
-%\institute{Dept. of Computer Architecture and Technology, University of Granada, Spain}
-\institute{Anonymous Institute}
+\authorrunning{Calle et al.}
 
-
-%
-% NB: a more complex sample for affiliations and the mapping to the
-% corresponding authors can be found in the file "llncs.dem"
-% (search for the string "\mainmatter" where a contribution starts).
-% "llncs.dem" accompanies the document class "llncs.cls".
-%
+ \institute{%
+   Universidad de Granada/CITIC\\
+   Granada, Spain\\
+   \email{laucalle09@gmail.com,\{jmerelo,amorag\}@ugr.es}\\
+ \and
+ Instituto Tecnológico de Tijuana\\
+ Calzada Tecnológico, s/n\\
+ Tijuana, Mexico\\
+ \email{mario@tectijuana.edu.mx}
+}
 
 \maketitle
 
@@ -126,20 +127,18 @@ In the same way, an open source evolutionary computation framework has
 % It is more like a library than a framework - Mario
 been implemented to fit the requirements of the problem. The main
 challenge has been to design a fitness function that, first, avoids if
-possible the actual execution of the game, which is time
+possible the actual execution of the simulator, which is time
 % that, first, avoids if possible the execution of a simulation, which is time
 % I propose this change because we haven't talked about a simulator yet - Mario
 consuming, and, then, to take into account the different ways in which
-a structure is not sound and consider how to achieve that soundness.
+a structure is not structurally sound and consider them in different
+ways to provide a smooth landscape that eventually achieves that
+soundness. % TODO Change this sentence 
 Different representations and operators have been considered and studied. In
 order to test the method four experiments have been carried out,
 obtaining a variety of stable structures, which is the first path for
 the generation of levels that are aesthetically pleasing as well as
 playable. 
-% Antonio - Speak about the structures and their utility, fun,
-% player's opinion, etc, which are the objectives in PCGs
-% Done a bit. That's the ultimate objective, but it's not one we are
-% doing in this particular work - JJ
 
 \keywords{Search-Based Procedural Content Generator, Evolutionary algorithm, 
 Game development, Angry Birds, Level generation}
@@ -174,22 +173,20 @@ before crumbling to the ground. Prior to that they have to obviously
 stand on their own and not crash immediately, even before a single
 shot has been fired.
 
-%There is a number of competitions centered around playing AI agents for specific 
-%games or genres, but it is less common to find PCG competitions like the 
-%\textit{Angry Birds Level Generation Competition}, whose third edition
-%was celebrated in 2018 during the conference on Computational Intelligence and Games (CIG)\cite{aibirds}.
-%Participants must build 
-%computer programs that are able to generate levels for the \textit{Angry Birds} game;
-%Generated levels must first be valid (i. e. not crash), and then,
-%they are evaluated and judged for playability and aesthetics. 
-
-% This is mentioned in the next section - Laura
+There is a number of competitions centered around playing AI agents for specific 
+games or genres, but it is less common to find PCG competitions like the 
+\textit{Angry Birds Level Generation Competition}, whose third edition
+was celebrated in 2018 during the conference on Computational Intelligence and Games (CIG)\cite{aibirds}.
+Participants must build 
+computer programs that are able to generate levels for the \textit{Angry Birds} 
+game; these levels must first be valid (i. e. not crash), and then,
+they are evaluated and judged for playability and aesthetics. 
 
 The ultimate objective of the work presented in this paper is to
 build a program capable of creating levels for \textit{Angry Birds}
-%and which would be able to eventually compete in the above mentioned
-%competitions.
-We can break it down to the following, more concise, objectives: 
+and which would be able to eventually compete in the above mentioned
+competitions. We can break it down to the following, more concise,
+objectives: 
 
 \begin{itemize}
 	\item Explore the expressiveness and variability of Search-Based PCG (SBPCG) using
@@ -221,7 +218,7 @@ form and stable Angry Birds {\em pigsty} structures.
 % ************************************************
 
 
-Here, we take the definition of Procedural Game Generation
+For the purpose of this paper, we take the definition of Procedural Game Generation
 (PCG) as \textit{the algorithmic creation of game content with
   limited or indirect user input} \cite{togelius2011procedural}. 
 %Although PCG often uses Artificial Intelligence (AI) techniques, this
@@ -276,10 +273,10 @@ workload. \cite{togelius2016introduction}
 % Pcg can be used as a tool to assist developers. It can suggest what might be a 
 % base for later development, enhancing human creativity rather than displacing it.
 In this paper we target replayability by insisting in the
-generation of free-form structures.This is, that it does not follow a pattern.
-If all content generated follow a simple pattern, this is easily spotted and
-the player disengages. We aim to avoid this by creating structures whose form
-is only constrained by gravity.
+generation of free-form structures. If all content generated follow a
+simple pattern, this is easily spotted and the player disengages. By
+creating structures whose form is only constrained by gravity, levels
+generated will be much more engaging.
 
 % Paragraph that could be reduced to a single sentence or even
 % eliminated. We are now up to 17 pages - JJ
@@ -288,9 +285,9 @@ characterize and differentiate them from each
 other \cite{togelius2016introduction}. The method proposed in this paper is 
 described as \textit{offline}, 
 %---the PCG occurs before the game session or during development---
-% \textit{necessary}, 
+\textit{necessary}, 
 %---the generated content is part of the essential structure of the game---,
-% \textit{generic},
+\textit{generic},
 %---it does not take into account player behaviour---,
 \textit{stochastic} 
 %---it will not produce the same output every time it is run---,
@@ -308,26 +305,24 @@ A special kind of \textit{generate-and-test} approach to PCG is
 % This was mantioned earlier so I defined the 
 % acronym before. But I like it more in here.
 Search-based Procedural Content Generation (SBPCG), which is
-usually tackled with Evolutionary Algorithms(EA) \cite{togelius2010search} like the 
+usually tackled with Evolutionary Algorithms \cite{togelius2010search} like the 
 one proposed in \cite{hastings2009evolving}. 
 The problems faced by SBPCG are not very far from those encountered in
-EAs; since they are search
+Evolutionary Algorithms; since evolutionary algorithms are search
 methods, they can be a good match to perform this kind of procedures. 
 
-%Since in Angry Birds birds are
-%launched against structures that include pigs, we will be searching
-%for these structures, whose playability and appearance has to be optimized.
-We try to address the playability of the structures by eliminating the constraint
-that they must follow a pattern,and do not really address aesthetics
+Since in Angry Birds birds are
+launched against structures that include pigs, we will be searching
+for these structures, whose playability and appearance has to be
+optimized. We try to address playability by eliminating the constraint
+that they must follow a pattern, and do not really address aesthetics
 in this paper, not even constraining the structures to be
 symmetric. However, the free form implies that structural integrity is
-not guaranteed, which means they could collapse under gravity 
-%and the structures have a realistic gravity, so we must avoid its collapse
-when they are erected at the
+not guaranteed, and the structures have a realistic
+gravity, so we must avoid its collapse when they are erected at the
 beginning of a level. We will have to include this factor into the 
-\textit{fitness function}.
-%, which grades how good a solution is, or, as
-%it might be the case, how far away it is from actually being good.
+\textit{fitness function}, which grades how good a solution is, or, as
+it might be the case, how far away it is from actually being good.
 % Antonio - fitness function is part of the EA
 In SBPCG, how to evaluate the quality of a solution has no straightforward 
 answer. It requires formalizing as an evaluation function how much fun, 
@@ -353,11 +348,10 @@ In this kind of function, we extract measurable features from the generated cont
 
 Since we are interested in structural integrity of the generated
 structures, neither actual gameplay nor players are taken into
-account. However, this is a time-consuming procedure
-%since it actually involves the graphic
-%representation of the structure and application of falling motion to
-%its different parts.
-If we have to subject every single individual in
+account. However, this is a
+time-consuming procedure since it actually involves the graphic
+representation of the structure and application of falling motion to
+its different parts. If we have to subject every single individual in
 the population to this, the size of the search space (which is huge
 since it is free form) explored is going to be very small. So we will
 have to change it to minimize the actual number of structures that are
@@ -366,8 +360,8 @@ it a fitness even before simulation.
 
 The fact that we are focusing on structures with a free form also
 implies that the data structure we will evolve has to take this into
-account. However, there is no single way to create this representation,
- so several options will have to be evaluated. 
+account. However, there is no single way to create this representation
+from first principles, so several options will have to be evaluated. 
 % This paragraph does not fit into the narrative. It's better to
 % eliminate it - JJ
 % ---------------------------------
@@ -433,11 +427,10 @@ level are built from top to down, in several phases, recursively
 building a structure, each row composed of a single type of block
 (with a fixed rotation). The likelihood of selecting a certain block
 is given by a probability table, which was tuned using an optimization
-method. Then, the blocks are placed using a tree structure,
-% where the first selected block is the peak and blocks underneath it are split
-%into subsets that support the previous row with one, two or three
-%blocks. 
-This ensures local stability, but not global stability, which
+method. Then, the blocks are placed using a tree structure, where the
+first selected block is the peak and blocks underneath it are split
+into subsets that support the previous row with one, two or three
+blocks. This ensures local stability, but not global stability, which
 is tested once the whole structure is completed.  
 After that, other objects (pigs and TNT) are placed, following an
 scheme of potential positions for them according to a rank based on
@@ -445,18 +438,14 @@ some terms such as structural protection or dispersion.
 
 This approach was improved by adding a `layer' devoted to the
 selection of the material (stone, ice or wood) based on different
-strategies. Materials are important for the game dynamics given that certain birds are more
-efficient against particular ones.
-%so they will have a high impact on
-%the game dynamics.
-Thus, a strategy sets stone to detected weak
-points using a trajectory analysis-based strategy.
-% sets to the same material
-% all blocks in the trajectory of a shot aimed at a particular pig.
-Clustering strategy takes a random block, sets its material and
-propagates to the surrounding blocks
-%that have not been assigned yet.
-Row grouping and structure blocking apply the same material to a
+strategies. Materials are important given that certain birds are more
+efficient against particular ones, so they will have a high impact on
+the game dynamics. Thus, a strategy sets stone to detected weak
+points. Trajectory analysis-based strategy sets to the same material
+all blocks in the trajectory of a shot aimed at a particular
+pig. Clustering strategy takes a random block, sets its material and
+propagates to the surrounding blocks that have not been assigned
+yet. Row grouping and structure blocking apply the same material to a
 whole row or structure respectively. 
 
 The main problem with this and other constructive approaches is that the range of
@@ -475,12 +464,10 @@ evaluate the levels, the same one we use in this paper.
 In a GA individuals correspond to levels, each represented by an array
 of columns. Each column is a sequence of blocks, pigs and predefined
 compound blocks, using an identification integer. This representation
-also includes the distances between different columns.
-%The population
-%is initialized randomly following a probability table which defines
-%the likelihood of a certain element being placed in a certain position
-%inside a column. 
-This implies that a shape is chosen beforehand, once
+also includes the distances between different columns. The population
+is initialized randomly following a probability table which defines
+the likelihood of a certain element being placed in a certain position
+inside a column. This implies that a shape is chosen beforehand, once
 again to guarantee stability, but decreases playability by generating
 structures whose only differences are which blocks are placed on top
 of which.  Levels are evaluated executing them in the simulator and
@@ -491,58 +478,49 @@ operators, aiming to maintain some consistency in the new solutions
 generated.
 
 However, this paper proposes a different approach: the \textit{free
-form evolution}. To our knowledge there are no other PCGs that
+  form evolution}. To our knowledge there are no other PCGs that
 use this approach for the generation of Angry Birds levels. 
 % Antonio - This is the main selling point of the paper, so if you
 % think this is the only approach of free form evolution in games,
 % remove the word 'many' in the sentence above. ;D
 % Done - JJ
-If we look outside computational intelligence in games and focus on 
-structural optimization in architecture, there are several approaches using search-based
-algorithms. Just to cite some examples, we can find a bioinspired algorithm called Cuckoo Search \cite{gandomi2013cuckoo}
-which performance was tested with structural optimization. However, this optimization is heavily parametrized
-and we are looking for evolution of structures that do not follow a predefined pattern, so this approach does not fit our requirements. A different take on the design of structures is using Generative Grammatical 
-Encodings as Hornby and Pollack present in \cite{hornby2001advantages} where L-system
-and its production rules are considered individuals. Still, this increases the
-number of patterns that can be generated, but still precludes the formation 
-of disjoint structures, for instance, a defensive tower before a simple pigsty in our scope.
-%Thus, we will mainly have to look outside computational intelligence in
-%games to focus on optimization in architecture, where there are
-%several approaches to structural optimization using search-based
-%algorithms. Gandomi et al. \cite{gandomi2013cuckoo} proposed a
-%bioinspired algorithm called Cuckoo Search and tested its performance
-%with several structural optimization problems. The  
-%algorithm is inspired by brood parasitic behaviour of some cuckoo
-%species using Levy flight behaviour, a random walk that follows a certain 
-%probability distribution that can be modelled mathematically.
-%One of the test cases for the algorithm is a structural design of a pin-jointed 
-%plane frame. In this case the forces and the length of the base is predefined 
-%and the frame is parametrized with two angles. The lengths of the members need 
-%to be minimized but they depend on those two angles. The cuckoo search locates 
-%two global optima for this problem specification. However this kind of 
-%structural optimization is not flexible enough to fit our optimization
-%problem, since we are looking for evolution of structures that do not
-%5follow any pattern.
+Thus, we will mainly have to look outside computational intelligence in
+games to focus on optimization in architecture, where there are
+several approaches to structural optimization using search-based
+algorithms. Gandomi et al. \cite{gandomi2013cuckoo} proposed a
+bioinspired algorithm called Cuckoo Search and tested its performance
+with several structural optimization problems. The  
+algorithm is inspired by brood parasitic behaviour of some cuckoo
+species using Levy flight behaviour, a random walk that follows a certain 
+probability distribution that can be modelled mathematically.
+One of the test cases for the algorithm is a structural design of a pin-jointed 
+plane frame. In this case the forces and the length of the base is predefined 
+and the frame is parametrized with two angles. The lengths of the members need 
+to be minimized but they depend on those two angles. The cuckoo search locates 
+two global optima for this problem specification. However this kind of 
+structural optimization is not flexible enough to fit our optimization
+problem, since we are looking for evolution of structures that do not
+follow any pattern.
 
-%A different take on the design of structures is using Generative Grammatical 
-%Encodings as Hornby and Pollack present in
-% \cite{hornby2001advantages}. In this case, structures are formed by
-%voxels and build following instructions given as commands to a
-%LOGO-style turtle. They implemented an EA which evolved tables as
-%structures. The commands are generated by a context-free L-system. For
-%the EA, an L-system and its production rules are considered
-%individuals. In order to allow these systems to evolve they are
-%parametrized and constrained.
+A different take on the design of structures is using Generative Grammatical 
+Encodings as Hornby and Pollack present in
+ \cite{hornby2001advantages}. In this case, structures are formed by
+voxels and build following instructions given as commands to a
+LOGO-style turtle. They implemented an EA which evolved tables as
+structures. The commands are generated by a context-free L-system. For
+the EA, an L-system and its production rules are considered
+individuals. In order to allow these systems to evolve they are
+parametrized and constrained.
 
-%All individuals have a predetermined number of production rules with a fixed 
-%number of arguments. Each of them is then initialized with random build 
-%commands grouped in blocks. The mutation of the system is done by making a 
-%small change in it such as replacing one command, changing the parameter by 
-%adding a constant or changing the condition equation, among others. The 
-%crossover takes two individuals, copies one of them and inserts some small 
-%parts of the other one in it, like a subsequence of commands for
-%example. Still, this increases the number of patterns that can be
-%generated, but still precludes the formation of disjoint structures, for instance, a defensive tower before a simple pigsty in %our scope. 
+All individuals have a predetermined number of production rules with a fixed 
+number of arguments. Each of them is then initialized with random build 
+commands grouped in blocks. The mutation of the system is done by making a 
+small change in it such as replacing one command, changing the parameter by 
+adding a constant or changing the condition equation, among others. The 
+crossover takes two individuals, copies one of them and inserts some small 
+parts of the other one in it, like a subsequence of commands for
+example. Still, this increases the number of patterns that can be
+generated, but still precludes the formation of disjoint structures, for instance, a defensive tower before a simple pigsty in our scope. 
 
 In general, we will try to follow a realistic structure generation
 approach, without constraining it to a fixed form, thus advancing the
@@ -661,21 +639,14 @@ version is available on GitHub \cite{sciencebirds-adapt}. It produces an output
 containing the position and average magnitude of the velocity of each block 
 that was not broken after the simulation. It can be run from beginning to end 
 without user interaction and minimizes the amount of time spent on simulating 
-each level.
-
-In later experiments we will use Box2D \cite{box2d}, a physics engine written in C++ originally
-used for the actual Angry Birds game, to avoid launching the whole game. In this 
-simulation we do not have the resistance of the blocks implemented but we can test
-the level stabiliy much more efficiently (since there is no overhead computing things
-unrelated to physics). This means we cannot penalize levels per broken block.
+each level. 
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
 Once the simulator that is going to be used to measure fitness is
 ready, we have to design the fitness function. As obvious as it
 might seem, the main feature of a stable level is that it 
-is not in motion, so it seems reasonable to evaluate its whole stillness
-as opposed to its speed -- considering every single block --.
+is not in motion, so it seems reasonable to evaluate its whole stillness as opposed to its speed -- considering every single block --.
 
 $$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
 
@@ -691,8 +662,6 @@ $P_{broken}$ is set to $100$ since objects in a level do not usually reach that
 velocity, therefore it will separate non-valid levels from potentially good 
 ones.
 
-In the sixth experiment this fitness function is changed to the following function after observing the results for the previous experiment, al of them described in section \ref{ch:res}:
-$$fitness_{indV2} = \max{(V)}$$
 % When we say length of a vector, we think about the norm (the actual lenght) 
 % for instance the hypotenuse in a 2D vector. I think here we are talking about 
 %the
@@ -703,8 +672,8 @@ $$fitness_{indV2} = \max{(V)}$$
 % Done - Laura
 
 
-Either way, simulating a level is quite time consuming, on the order of
-seconds using the game, which makes it almost infeasible for our purpose, so we
+However, simulating a level is quite time consuming, on the order of
+seconds, which makes it almost unfeasible for our purpose, so we
 decided to take additional factors on the fitness so that not all
 levels are actually simulated. 
 %Although we may know that a given level will perform poorly in the simulation, 
@@ -742,8 +711,7 @@ The other measure is the number of overlapping blocks. The separating axis
 theorem \cite{ericson2004real} determines if two convex shapes intersect. It is 
 commonly used in game development for detecting collisions. A level with blocks 
 that occupy the same space is not likely to be stable, as the Unity
-Engine underlying the simulator will solve the issue moving the blocks until there
-is no collision, but this is done by Unity proprietary code and it is not possible to know what it does.
+Engine underlying the simulator will solve the issue moving the blocks until there is no collision, but this is done by Unity proprietary code and it is not possible to know what it does.
 % Since Unity 
 % Engine is not open source and there is no documentation on how exactly those 
 % collisions are solved, we assume that a precise prediction of the positions of 
@@ -753,17 +721,6 @@ So, a penalty is applied and the level is not simulated either.
 In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$ 
 where the first factor is a penalty set to $10$ and the second is the number of 
 blocks that overlap with each other. 
-
-In some of the late experiments we will substitute the $f_{distance}$ with gap in Y-axis.
-We project all blocks on the Y-axis and calculate range of values for the Y coordinate
-that are not covered inside the feasible range. This is treated the same way as $f_{distance}$
-(same penalization and threshold) and we call it $f_{Y-axis}$:
-$$f_{Y-axis} = 
-\begin{cases}
-P_{distance}\cdot Projection_{Y-axis}, & \text{if } Projection_{Y-axis} > threshold\\
-0, & \text{otherwise}
-\end{cases}
-$$
 
 If both $f_{distance}$ and $f_{overlapping}$ are $0$ then the level is suitable 
 for simulation and fitness is calculated as $fitness_{ind}$. This would be 
@@ -795,11 +752,13 @@ building blocks have the following attributes:
 
 \begin{itemize}
 	\item Type: there are eight regular blocks that can be placed in the level 
-	with distinct shapes or sizes.% they are represented as an integer between $0$ and $7$.
+	with distinct shapes or sizes; they are represented as an
+        integer between $0$ and $7$.
 	\item Position: coordinates $x$ and $y$ of the centre of the block in game 
 	units.
 	\item Rotation: rotation of the block in degrees. Here four different 
-	rotations are considered, 0, 45, 90 or 135 degrees.% represented as integers between $0$ and $3$.
+	rotations are considered, 0, 45, 90 or 135 degrees represented as integers 
+	between $0$ and $3$.
         \item Material: three types, which determine the durability 
 of the block. However, this does not affect their stability, so it will remain 
 constant for now as \textit{wood} material.
@@ -815,6 +774,7 @@ Using this representation a gene representing a single block will be formed by t
 Individuals are a collection of genes, in the same way a level is a collection 
 of building blocks. The number of blocks is variable and the order in which 
 they are listed is not important. 
+
 % - Possibly irrelevant implementation detail - JJ
 % As previously stated, only promising individuals are tested in-game, meanwhile 
 % those who are not, are penalized instead. This penalty is stored, separately 
@@ -824,11 +784,10 @@ they are listed is not important.
 % component in the way they fall? - JJ
 % always the worst simulated one to date. There shouldn't be a random component 
 % but that is managed by Unity Engine. - Laura
+
 The fitness of the worst individual that has been tested in game is
-stored, so
-%that the value of not tested levels is always above ---it is a minimization problem--- the in-game 
-%tested levels; 
-the starting point for fitness of such individuals is the 
+stored, so that the value of not tested levels is always above ---it is a minimization problem--- the in-game 
+tested levels; the starting point for fitness of such individuals is the 
 worst in-game score.
 
 This penalization is calculated using the distance of the lowest block to the 
@@ -837,13 +796,13 @@ This requires a bit more of computation, so it will be stored and set in the
 initialization of the individual. When a gene is modified, the number of 
 overlapping blocks is recalculated for that specific change.
 
-%Considering all of the above, the chromosome object is composed by:
-%\begin{itemize}
-%	\item A list of genes.
-%	\item A fitness value.
-%	\item A penalty (set to {\tt False} for in-game evaluated levels).
-%	\item Number of overlapping blocks (calculated).
-%\end{itemize} % not sure these implementation details should be
+Considering all of the above, the chromosome object is composed by:
+\begin{itemize}
+	\item A list of genes.
+	\item A fitness value.
+	\item A penalty (set to {\tt False} for in-game evaluated levels).
+	\item Number of overlapping blocks (calculated).
+\end{itemize} % not sure these implementation details should be
               % included. Let's leve them, but if space is in short
               % supply, we can eliminate - JJ
 
@@ -858,13 +817,10 @@ genes, which are initialized by several methods:
 	added to the chromosome if it does not overlap with an already existing 
 	gene.
 	\item Discrete: selects a random number for type and rotation, but the 
-	%position must be multiple of the dimensions of the smallest block (
-	blocks will be aligned.
-	\item Discrete without overlapping: it combines the second and third method.
-	\item Discrete with pre configured blocks: first, it includes
-	a set of blocks, and then adds blocks following the third method until
-	it reaches the desired number of blocks. The configurations used are the
-	compound blocks found in \cite{ferreira2014search}.
+	position must be multiple of the dimensions of the smallest block (blocks 
+	will be aligned).
+	\item Discrete without overlapping: it combines the second and third 
+	initialization method.
 \end{itemize}
 
 Candidates for reproduction are selected using tournaments. Two individuals are chosen from the 
@@ -888,18 +844,22 @@ combination:
 \begin{itemize}
 	\item Sample Crossover: gives a single individual per parent pair. It takes 
 	all genes from both parents---excluding genes that are repeated---and 
-	randomly takes a number of them to create the new individual.% The number of 
-	%blocks is the minimum between the maximum number of blocks allowed, the 
-	%mean of the two parent individuals and the number of distinct genes.
+	randomly takes a number of them to create the new individual. The number of 
+	blocks is the minimum between the maximum number of blocks allowed, the 
+	mean of the two parent individuals and the number of distinct genes.
 	\item Common Blocks: produces two individuals. The common genes to both 
 	parents are passed on to both children. The remaining genes are randomly 
 	distributed to each child, half to one and half to the other. 
 	\label{ga:cross2}
 \end{itemize}
-There are four different mutations, all applied to random individuals:
+
+There are four different mutations:
+
 \begin{itemize}
 	\item Rotation: rotation is represented as an integer (it is discretized), 
-	so it adds or subtracts one to the current value. % If types follow a logical order, you
+	so it adds or 
+	subtracts one 
+	to the current value. % If types follow a logical order, you
                               % should mention it. If they don't, this
                               % is the same as generating a random
                               % number - JJ
@@ -910,7 +870,7 @@ There are four different mutations, all applied to random individuals:
 	added or subtracted from the value of the position X.
 	\item Position Y: same as position X mutation, for position Y.
 \end{itemize}
-%They are all applied to random members of the population.
+
 The new generation is selected using an elitist strategy. Best individuals in 
 both the old population and their offspring pass on the next generation, 
 maintaining the size of the population.
@@ -935,12 +895,9 @@ maintaining the size of the population.
 
 The information that describes a level can be too complex to have a binary 
 representation as pure genetic algorithms suggest, so the framework should be 
-flexible enough to support complex data structures. This prevented us from using other
-frameworks
-%such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy}
-and therefore a library was created. The source  code can be found on GitHub \cite{ab-level}.
-% Say in a sentence why we are not using those above (and there's also
-% Evolopy) - jj
+flexible enough to support complex data structures. This prevented us from using 
+frameworks such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy}
+and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level-nonanon}.
 
 % Other features that would be desirable for a framework to have in order to be suitable for our goals are readability, ease of use and efficiency.
 
@@ -1002,36 +959,36 @@ whose result is shown in Table \ref{t:resOver} shows an overview of the results.
 % Antonio - Explain the table. What is it shown (average values I guess).
 % Explain it to the reader why the number of generations is not exact.
 % When you show average results, you must also add standard deviations in the shape $\pm$ 123.45 (I have included an example in the table).
-
 \begin{table}[H]
 	\myfloatalign
-	\begin{tabular}{cclclclclcl}
-		& \textbf{Time(h)} &$\sigma$ & \textbf{G}& $\sigma$&\textbf{Best}& $\sigma$  &\textbf{Avg}&$\sigma$  & \textbf{Worst}&$\sigma$ \\ \hline
-		\textbf{E1}&0.89&(0.59)&100.0&(0)&61.334&(133.02)&383.701&(106.14)&510.515&(133.04)\\  \hline
-		\textbf{E2}&1.002&(1,97)&155.087&(240.56)&110.66&(142.21)&327.547&(238.33)&367.895&(260.83)  \\  \hline
-		\textbf{E3}&1.76&(0.6)&76.625&(42.3)&0.0015&(0.003)&0.54&(0.24)&0.828&(0.34)   \\  \hline
-		\textbf{E4}&5.03&(1.46)&365.929&(158.09)&0.0018&(0.003)&0.203&(0.068)&0.2997&(0.1)  \\  \hline
-		\textbf{E5}&0.27&(0,1)&894.95&(184.73)& 0.065&(0.06)&0.069&(0.06)&0.071&(0.06)     \\  \hline 
-		\textbf{E6}&0.81&(0.15)&1000.0&(0)& 0.932&(0.78)&1.223&(0.74)&1.3&(0.72) \\  \hline
-		% If possible, add standard deviation here - JJ
-		% added standard deviation - Laura
+	\begin{tabular}{ccccc}
+		& \textbf{E1} & \textbf{E2} & \textbf{E3} &\textbf{E4} \\ \hline
+		\textbf{Time (h)} & 0.89 & 1.002 & 1.76 & 5.03 \\  \hline
+		\textbf{G} &  100.0 & 155.087 & 76.625 & 365.929 \\  \hline
+		\textbf{Best} & 61.334 & 110.66 & 0.0015 & 0.0018 \\  \hline
+		\textbf{Avg} & 383.701 & 327.547 & 0.54 &  0.203 \\  \hline
+		\textbf{Worst}  & 510.515 & 367.895 & 0.828 & 0.2997\\  \hline
+% If possible, add standard deviation here - JJ
+% I could not find the original spreadsheet, I only have the raw data. I could 
+%%% not add standard deviation on time - Laura
 		\hline
 	\end{tabular}
-	\caption{Summary of the results of the last generation in 15-20 runs for each
-		experiment (averages and standard deviation).
-		G: number of generations, E: experiment 
-		number} % What
-	% is E? Is that the average? Number of
-	% generations up to what?
-	% Also explain the importance of the
-	% fitness as an evaluation of the
-	% quality of the solutions - JJ
-	% Also, average over what. Best individual in every experiment?
-	% Last generation? - JJ
-	% Modified caption. Better? - Laura
+	\caption{Summary of the results of the last generation in 15 runs for each
+          experiment.
+          G: number of generations, E: experiment 
+	number} % What
+                                % is E? Is that the average? Number of
+                                % generations up to what?
+                                % Also explain the importance of the
+                                % fitness as an evaluation of the
+                                % quality of the solutions - JJ
+      % Also, average over what. Best individual in every experiment?
+      % Last generation? - JJ
+      % Modified caption. Better? - Laura
 	\label{t:resOver}
 \end{table}
-\subsection{Baseline experiment}\label{E1}
+
+\subsection{Baseline experiment}
 
 The premise of the first experiment is that our basic EA should be able to 
 minimize the movement of the blocks placed on the level and the flexibility of 
@@ -1095,28 +1052,19 @@ of the worst individual should be the same over several generations. In Figure
 populations do remain the same for several generations close to the maximum, 
 most of them do not.
 
-Solutions found in this experiment contained just a few blocks on the ground,
-occasionally those were stacked as seen in figure \ref{f:e1}.
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.5]{exp1_worstIndv.png}
-	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
-\end{figure}
 \begin{figure}[H]
 	\centering
-	\subfloat[One of the results for \ref{E1}: Fitness = 9.021, nBlocks = 7, G = 100  \label{f:e1}]{%
-		\includegraphics[scale=0.2]{level-0-180523_203106.png}
-	}
-	\hfill
-	\subfloat[One of the results for \ref{E2}: Fitness = 5.176, nBlocks = 9, G = 767  \label{f:e2-4}]{%
-		\includegraphics[scale=0.2]{level-0-base_large180529_223045.png}
-	}
+	\includegraphics[scale=0.55]{exp1_worstIndv.png}
+	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
 \end{figure}
-\subsection{Changing termination conditions}\label{E2}
+
 Most executions from the previous experiment reached the maximum number of 
 generations without stabilizing or converging. This means the EA may need a 
 larger number of generations to fully evolve a solution. This is the hypothesis 
 for the second experiment, which we describe next.
+
+\subsection{Changing termination conditions}
+
 % Antonio - You must introduce the experiment (each of them), trying to justify its necessity.
 
 The main change in this implementation is the addition of two new stop conditions: being 10 generations without changes (stable population) or best fitness value below 0.01. 
@@ -1135,8 +1083,7 @@ can afford this number of generations.
 
 Although the best levels obtained with this experiment are better than those 
 evolved in the first experiment, the bad solutions have a really high fitness 
-value. An example of one the best levels obtained is shown in figure \ref{f:e2-4}.
-In table \ref{t:resOver}, we can see that average fitness of levels 
+value. In table \ref{t:resOver}, we can see that average fitness of levels 
 produced with this version of the EA is worse than the ones generated in the 
 first experiment. It suggest that populations can be stuck for many generations 
 before making any type of improvement. Any of the generated levels have a 
@@ -1145,7 +1092,7 @@ termination criteria that stopped the evolution was that the population was
 stable, without any new individuals added for 10 generations. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale=0.45]{exp2_explication.png}
+	\includegraphics[scale=0.5]{exp2_explication.png}
 	\caption{Best individual evolution for all executions, grouped by number of 
 	generations}\label{f:grahp2}
 \end{figure}
@@ -1166,13 +1113,14 @@ create new individuals that inherit good traits from their parents. A new
 crossover operator could shift the focus to exploitation, and we will
 examine this in the next experiment.
 
-\subsection{Improving exploitation by a better crossover operator}\label{E3}
+\subsection{Improving exploitation by a better crossover operator}
 
 
 For the third experiment, the change introduced is in the crossover operator 
 used which was previously described as \textit{Common blocks} crossover. 
 The rest of the operators as 
 well as the termination criteria are kept the same. 
+
 
 Table \ref{t:resOver} shows that the results have radically improved as the 
 average fitness of the best solutions drops to $0.0015$, a decrease of almost 
@@ -1184,8 +1132,7 @@ which suggest that in most executions the population did converge.
 
 The levels are stable and the blocks do not fall when loading the level, but 
 it is arguable that they would be be considered structures, since most of them consist in a 
-few blocks spread about on the floor, like the one shown in figure \ref{f:e3-4}.
-The average amount of blocks is $6.26$, 
+few blocks spread about on the floor. The average amount of blocks is $6.26$, 
 which is really close to the minimum amount of blocks allowed. However, given 
 the proposed fitness function, it is completely logical that the evolution 
 leads to this kind of arrangements. The more objects placed on the level, the 
@@ -1199,18 +1146,7 @@ of minimizing the number of blocks so that the number of blocks
 actually falling is zero. The created structures are not very
 interesting, though, that is why we propose some changes in the next experiment.
 
-
-\begin{figure}[H]
-	\centering
-	\subfloat[One of the solutions from \ref{E3}: Fitness = 1.571e-7, nBlocks = 9, G = 194  \label{f:e3-4}]{%
-		\includegraphics[scale=0.2]{level-0-second_crossover180613_055622.png}
-	}
-	\hfill
-	\subfloat[One of the solutions from \ref{E4}: Fitness = 9.229e-7, nBlocks = 10, G = 198 \label{f:e4-1}]{%
-		\includegraphics[scale=0.2]{level-0-second_crossover_min10_180602_035405.png}
-	}
-\end{figure}
-\subsection{Changing the minimum number of blocks per individual}\label{E4}
+\subsection{Changing the minimum number of blocks per individual}
 
 The only parameter that was changed for this experiment is the minimum
 number, which went from 5 to 10. 
@@ -1227,64 +1163,11 @@ best fitness value increased slightly, while the average and worst values are lo
 from the third experiment.
 
 However, the results are more interesting visually. We can find some blocks 
-being stacked together, not only lying on the ground as in previous 
-experiment. An example of the resulting structures is found in figure \ref{f:e4-1}.
-
-\subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
-The main problem with the previous experiments was the time needed to
-load the Science Birds simulation environment and run the levels,
-which needed several seconds for loading and obtaining results. So the
-main objetive of this experiment was to find a way to get
-rid of the in-game simulation. In order to do that, we will use a Physics engine
-called Box2D \cite{catto2011box2d} that was used in the development of the original game.
-Since game physics do not usually resemble real world physics we adjusted
-the parameters so this simulation an the game behave in the same way.
-As we can see in table \ref{t:resOver} the execution time drastically
-drops from 5 hours to less than 20 minutes on average, even running
-more generations in the process.
-
-
-This opened the way for performing more 
-operations on the individuals. In this case we chose to penalize
-not only the distance to the ground but also the \textit{gaps} in the
-Y-axis, which will make objects drop and maybe break.
-This will encourage individuals to grow vertically and not only horizontally
-like in previous experiments. This changes the fitness function, so we
-will have to compare by the actual obtained structure, one of which is
-shown in Figure \ref{f:e5}.
-
- In general, this penalization of gaps creates a faster path to stable
- structures. Still, this path leads to mostly flat structures with 
- some higher block in unstable positions, which
- are structurally solid, but not interesting. One of the stable results is shown in figure \ref{f:e5}.
- \begin{figure}
- 	\centering
- 	\subfloat[One of the solutions from \ref{E5}\label{f:e5}]{%
- 			\includegraphics[scale=0.27]{E5.png}
- 	}
- 	\hfill
- 	\subfloat[One of the solutions from \ref{E6}\label{f:e6}]{%
- 			\includegraphics[scale=0.27]{E6.png}
- 	}
- \end{figure}
-\subsection{Changing the evaluation function}\label{E6}
-
-Observing results from the previous experiment we realized that what
-evolution found was that laying many blocks on the ground was enough
-to get a high fitness: the average speed was decreased and it will
-place unstable blocks to cover gaps in Y-axis. In
-order to correct this behaviour we changed the 
-fitness function to take into account the fastest moving object:
-$$fitness_{indV2} = \max{(V)}$$
-Additionally, we initialized levels including one of a list of pre configured
-blocks in addition to the random initialization used until
-now.
-
-This makes the fitness value depends on just one gene, although it can be a
-different one each time. The improvement of solutions to find acceptable ones
-slowed down % This would have to be proved by a chart
-Again, with a different fitness function we cannot compare the fitness
-value with the rest of the experiments. 
+being stack together, not only lied on the ground like in the previous 
+experiment. 
+% Comment on the actual appearance of these structures. Do they
+% achieve the stated objective - JJ?
+% I did change that - Laura
 
 %************************************************
 
@@ -1341,7 +1224,6 @@ will lead to unexpected outcomes.
 In our case, the fitness function used the 
 stability of the structure and only considered other features--- overlapping 
 blocks and distance to the ground--- to ensure the levels would be valid.
-In experiment \ref{E5} and \ref{E6} height was also taken into account.
 
  % I am lost in this paragraph. It should be more
  % related to the actual experiments made - JJ
@@ -1360,10 +1242,8 @@ structured.
 % Antonio - I would suggest this text instead
 In order to conduct our experiments the Angry Birds simulator (Science Birds) 
 has been adapted to our necessities, yielding now some  other information 
-required to evaluate the individuals of the implemented EA. As this was a 
-bottleneck, experiments \ref{E5} and \ref{E6} used only a physic simulation,
-leaving behind the actual game.
-It would be interesting to obtain other kind of data from both simulations,
+required to evaluate the individuals of the implemented EA.
+It would be interesting to obtain other kind of data from the simulator,
 such as the height of the structure and, eventually, its resistance to
 bombardment by angry birds. However, this is left as future work.
 
@@ -1405,10 +1285,8 @@ set out to achieve at the beginning.
 
 In order to improve the results of the method, different constraints could be 
 expressed as multiple objectives. Overlapping blocks and velocity could 
-be treated as minimization objectives and height as a maximization one. % but 
-%of course we don't need
-                                % to minimize height any more... - JJ
-                                % Corrected - Laura
+be treated as minimization objectives and height as a maximization one.
+
 
 If we pay attention at the stages of evolution in this work, there is also 
 room for improvement in the genetic operators. For example, the initialization 
@@ -1416,8 +1294,7 @@ produces a small amount of valid individuals which suggested that an elitist
 strategy for selection would work best. However, new experiments will help to 
 better balance exploration and exploitation. An interesting addition
 would be to add {\em building} operators that pile blocks on
-structures that are already stable. % Check out this idea, Laura - JJ
- % I like it, let's keep it - Laura
+structures that are already stable.
 
 % First a discussion to say if the goal can be achieved using these
 % methods. That is, finding stable structures is just a matter of
@@ -1440,36 +1317,31 @@ structures that are already stable. % Check out this idea, Laura - JJ
 
 
 Another important issue that needs to be addressed is the time performance. 
-%Right now the simulation is the main bottleneck in the execution. One way to 
-%speed up the process can be \textit{cleaning} up the current simulation, getting 
-%rid of any unnecessary assets while maintaining the bare minimum to
-%perform evaluation. 
-% However, this will not solve the problem, since the content generator will still need to launch an external executable.
+Right now the simulation is the main bottleneck in the execution. One way to 
+speed up the process can be \textit{cleaning} up the current simulation, getting 
+rid of any unnecessary assets while maintaining the bare minimum to
+perform evaluation. 
+%However, this will not solve the problem, since the content generator will still need to launch an external executable.
 % Antonio - I would not mention future problems
 
-%The communication between the simulation and the content generator is through 
-%read and write operations on disk, instead of memory. This could be avoided if 
-%both tools were integrated in one.
-If we aim for an online automatic generator, the generator should be 
-integrated in the game and therefore the current execution times would
-be unacceptable. However, if our goal is to 
+The communication between the simulation and the content generator is through 
+read and write operations on disk, instead of memory. This could be avoided if 
+both tools were integrated in one. If we aim for an online automatic generator, 
+the generator should be integrated in the game. However, if our goal is to 
 generate levels for mixed authorship, as an assistance to developers, it may be 
-a better idea to integrate the simulation in the generator.
-% This could be done 
-% by approximating in-game physics with real physics, as described in 
-% \cite{blum1970stability}. % Expand on this - JJ
+a better idea to integrate the simulation in the generator. This could be done 
+by approximating in-game physics with real physics, as described in 
+ \cite{blum1970stability}. % Expand on this - JJ
 % Or maybe eliminate if there's no space - JJ
 
 
 %************************************************
 
-\section*{Acknowledgements}
-% This paper has been supported in part by
-% \href{http://geneura.wordpress.com}{GeNeura Team}, 
-% projects TIN2014-56494-C4-3-P (Spanish Ministry of Economy and
-% Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
-Acks taking\\
-this much space.
+ \section*{Acknowledgements}
+ 
+   This paper has been supported in part by
+ projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
+ Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
 
 \bibliographystyle{splncs03}
 \bibliography{angrybirds}
