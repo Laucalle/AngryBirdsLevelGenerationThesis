@@ -896,11 +896,8 @@ maintaining the size of the population.
 The information that describes a level can be too complex to have a binary 
 representation as pure genetic algorithms suggest, so the framework should be 
 flexible enough to support complex data structures. This prevented us from using 
-frameworks
-%such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy}
-and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level}.
-% Say in a sentence why we are not using those above (and there's also
-% Evolopy) - jj
+frameworks such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy}
+and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level-nonanon}.
 
 % Other features that would be desirable for a framework to have in order to be suitable for our goals are readability, ease of use and efficiency.
 
@@ -1288,10 +1285,8 @@ set out to achieve at the beginning.
 
 In order to improve the results of the method, different constraints could be 
 expressed as multiple objectives. Overlapping blocks and velocity could 
-be treated as minimization objectives and height as a maximization one. % but 
-%of course we don't need
-                                % to minimize height any more... - JJ
-                                % Corrected - Laura
+be treated as minimization objectives and height as a maximization one.
+
 
 If we pay attention at the stages of evolution in this work, there is also 
 room for improvement in the genetic operators. For example, the initialization 
@@ -1299,8 +1294,7 @@ produces a small amount of valid individuals which suggested that an elitist
 strategy for selection would work best. However, new experiments will help to 
 better balance exploration and exploitation. An interesting addition
 would be to add {\em building} operators that pile blocks on
-structures that are already stable. % Check out this idea, Laura - JJ
- % I like it, let's keep it - Laura
+structures that are already stable.
 
 % First a discussion to say if the goal can be achieved using these
 % methods. That is, finding stable structures is just a matter of
@@ -1343,13 +1337,11 @@ by approximating in-game physics with real physics, as described in
 
 %************************************************
 
-\section*{Acknowledgements}
-% This paper has been supported in part by
-% \href{http://geneura.wordpress.com}{GeNeura Team}, 
-% projects TIN2014-56494-C4-3-P (Spanish Ministry of Economy and
-% Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
-Acks taking\\
-this much space.
+ \section*{Acknowledgements}
+ 
+   This paper has been supported in part by
+ projects TIN2014-56494-C4-3-P s (Spanish Ministry of Economy and
+ Competitiveness) and DeepBio (TIN2017-85727-C4-2-P).
 
 \bibliographystyle{splncs03}
 \bibliography{angrybirds}
