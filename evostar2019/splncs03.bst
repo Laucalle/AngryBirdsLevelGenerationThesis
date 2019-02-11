@@ -1471,7 +1471,7 @@ FUNCTION {presort}
   #1 entry.max$ substring$
   'sort.key$ :=
 }
-ITERATE {presort}
+%%ITERATE {presort}
 SORT
 STRINGS { longest.label }
 INTEGERS { number.label longest.label.width }
