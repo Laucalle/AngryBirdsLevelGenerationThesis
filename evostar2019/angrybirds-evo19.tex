@@ -78,10 +78,7 @@
 
 % first the title is needed
 \title{Free Form Evolution for Angry Birds Level Generation}
-% Antonio - I fix the format of the title and the name of the game
-
-% a short form should be given in case it is too long for the running head
-\titlerunning{}
+%\titlerunning{Generation of Angry Birds Levels}
 
 % the name(s) of the author(s) follow(s) next
 %
@@ -90,23 +87,27 @@
 % the running heads and the author index.
 %
 
-\author{A. N. Onymous\inst{1}%
-\thanks{No Institute}}
-\authorrunning{Anonymous, A}
-% (feature abused for this document to repeat the title also on left hand pages)
+ \author{Laura Calle \inst{1}
+   \and
+   Juan J. Merelo\inst{1}
+ \and
+ Antonio Mora-García\inst{1}
+ \and
+ José-Mario García-Valdez\inst{3}
+}
 
-% the affiliations are given next; don't give your e-mail address
-% unless you accept that it will be published
-%\institute{Dept. of Computer Architecture and Technology, University of Granada, Spain}
-\institute{Anonymous Institute}
+\authorrunning{Calle et al.}
 
-
-%
-% NB: a more complex sample for affiliations and the mapping to the
-% corresponding authors can be found in the file "llncs.dem"
-% (search for the string "\mainmatter" where a contribution starts).
-% "llncs.dem" accompanies the document class "llncs.cls".
-%
+ \institute{%
+   Universidad de Granada/CITIC\\
+   Granada, Spain\\
+   \email{laucalle09@gmail.com,\{jmerelo,amorag\}@ugr.es}\\
+ \and
+ Instituto Tecnológico de Tijuana\\
+ Calzada Tecnológico, s/n\\
+ Tijuana, Mexico\\
+ \email{mario@tectijuana.edu.mx}
+}
 
 \maketitle
 
@@ -138,10 +139,6 @@ order to test the method four experiments have been carried out,
 obtaining a variety of stable structures, which is the first path for
 the generation of levels that are aesthetically pleasing as well as
 playable. 
-% Antonio - Speak about the structures and their utility, fun,
-% player's opinion, etc, which are the objectives in PCGs
-% Done a bit. That's the ultimate objective, but it's not one we are
-% doing in this particular work - JJ
 
 \keywords{Search-Based Procedural Content Generator, Evolutionary algorithm, 
 Game development, Angry Birds, Level generation}
