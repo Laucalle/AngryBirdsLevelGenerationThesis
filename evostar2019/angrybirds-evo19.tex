@@ -76,16 +76,8 @@
 
 \mainmatter  % start of an individual contribution
 
-% first the title is needed
 \title{Free Form Evolution for Angry Birds Level Generation}
 %\titlerunning{Generation of Angry Birds Levels}
-
-% the name(s) of the author(s) follow(s) next
-%
-% NB: Chinese authors should write their first names(s) in front of
-% their surnames. This ensures that the names appear correctly in
-% the running heads and the author index.
-%
 
  \author{Laura Calle \inst{1}
    \and
@@ -122,7 +114,6 @@ number of constraints. This approach consists of a search-based procedural level
 generation method that uses evolutionary algorithms. In order to evaluate 
 the stability of the levels, they are executed in an adaptation of an 
 open source version of the game called \textit{Science Birds}. 
-% Antonio - abstract does not include references.  ;)
 In the same way, an open source evolutionary computation framework has 
 % It is more like a library than a framework - Mario
 been implemented to fit the requirements of the problem. The main
@@ -133,7 +124,8 @@ possible the actual execution of the simulator, which is time
 consuming, and, then, to take into account the different ways in which
 a structure is not structurally sound and consider them in different
 ways to provide a smooth landscape that eventually achieves that
-soundness. % TODO Change this sentence 
+soundness. % TODO Change this sentence
+% Has this been changed? - JJ
 Different representations and operators have been considered and studied. In
 order to test the method four experiments have been carried out,
 obtaining a variety of stable structures, which is the first path for
@@ -152,16 +144,13 @@ Game development, Angry Birds, Level generation}
 
 \textit{Angry Birds} is a mobile game created by the Finnish company Rovio Entertainment 
 Corporation\cite{angry-birds}, first launched in 2009. 
-%The game was a huge success in the \textit{AppStore}
-%---being the most downloaded mobile game in 
-%history. Having been ported to several other platforms since, it has an 
-%animated movie and way too many \textit{spin offs}---around seventeen.
 In the game, there is a variety of defensive structures made out of
 blocks which house {\em pigs} (which we can call {\em pigsties} for
 that reason)
 and the player has to fire birds from a slingshot
 %---apparently they never learnt to fly---
 % aiming at destabilizing or destroyng the structures to hit the pigs - Mario
+% re-use Mario's comments for next versions - JJ
 so the structure is destabilized or, in some cases, destroyed.
 What is interesting to us is how heavily the 
 game relies in gravity to create interesting puzzles, making the
@@ -198,25 +187,10 @@ objectives:
 \end{itemize} 
 
 In this paper we will focus on 
-% the first three
 these objectives, with sight
 on producing free-form structures that do not collapse; in a nutshell,
 we will be describing a PCG method that efficiently generates free
 form and stable Angry Birds {\em pigsty} structures.
-
-% Antonio - I think that the paper must be better motivated. It cannot
-% be just a "let's try what happens", but you should justify why this
-% idea is different *and better* than other existing approaches. And
-% also, what's the objective from the PCG perspective, I mean, do you
-% aim to create funny levels, enjoyable ones, challenging ones, etc?
-% ;)
-% It's not that now, and it's not too long. 
-
-% ***********************************************
-% I have moved this to below, but we have to check we have narrative
-% coherence in the introduction. - JJ
-% ************************************************
-
 
 For the purpose of this paper, we take the definition of Procedural Game Generation
 (PCG) as \textit{the algorithmic creation of game content with
@@ -227,32 +201,8 @@ For the purpose of this paper, we take the definition of Procedural Game Generat
 %as content, thus they are not PCG either.
 Aesthetic elements, game rules, levels, items, stories and characters
 among others are considered content in this definition  
- \cite{togelius2011procedural}. % If this
-                                % definition is not totally yours, you
-                                % should give a reference for it.
-                                % It is from the same  
-                                %\cite{togelius2011procedural}
-%Note that neither computers nor video games are mentioned in the
-%definition. In fact, PCG has its roots in analog games.
-%This may
-%conflict with the \textit{limited or indirect user input}, but it is
-%reasonable to assume that following a detailed set of
-%instructions---even if it is done by a human---is not
-%\textit{input}.
-%The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
-%prevail in modern video games. \cite{smith2015analog} 
-% Using an
-%algorithm to assemble pre-designed pieces is a common technique in
-%tabletop roleplaying guides---where the algorithm usually consists in
-%several dice rolls---such as \textit{Dungeon \& Dragons}.
-% It is not
-%surprising that one of the early adaptations of PCG to digital
-%platforms aimed to generate monsters and dungeons for physical
-%games.
-%
-% Antonio - I think this text should be moved to the beginning of this section. 
-%Or remove it.
-% Moved it for now - Laura
+\cite{togelius2011procedural}.
+
 But the fast pace at which the game industry grows poses a challenge to developers. 
 How do we create a vast amount of content that suits 
 players' expectations with low investment? PCG can tackle this by  
@@ -261,17 +211,6 @@ workload. \cite{togelius2016introduction}
 % Antonio - these two paragraphs could be moved up and should be summarized (or 
 %removed). The text must be concise. ;)
 
-% The sentence below I think is an orphan, From these factors?  define replayability?
-% I can do it if needed - Mario
-%From these factors that we need to optimize, replayability relies on how interesting is 
-%playing a game more than once. For designers, this means their 
-%product should offer more with less manually crafted content. 
-%Games can also engage players by adapting gameplay elements to each individual 
-%player. The most common way is 
-%to present users with options to adjust game elements; however, by using PCG techniques 
-%the game itself can change based on in-game player behaviour.
-% Pcg can be used as a tool to assist developers. It can suggest what might be a 
-% base for later development, enhancing human creativity rather than displacing it.
 In this paper we target replayability by insisting in the
 generation of free-form structures. If all content generated follow a
 simple pattern, this is easily spotted and the player disengages. By
@@ -335,17 +274,6 @@ There are three main classes of fitness functions in
 SBPCG \cite{togelius2010search}, but we will use a {\em direct fitness function}.
 In this kind of function, we extract measurable features from the generated content and map them to a fitness value.
 
-%\begin{itemize}
-%	\item \textit{Direct Fitness Function} where certain easily measurable 
-%	features are extracted from the generated content and mapped to a 
-%	fitness value.
-%	\item \textit{Simulation-Based Fitness Function} where the 
-%	fitness is calculated using features from an agent's gameplay. 
-%	\item \textit{Interactive Fitness Function} where the fitness value is 
-%	obtained from the player, whether it be explicitly or 
-%	implicitly. 
-%\end{itemize}
-
 Since we are interested in structural integrity of the generated
 structures, neither actual gameplay nor players are taken into
 account. However, this is a
@@ -362,20 +290,6 @@ The fact that we are focusing on structures with a free form also
 implies that the data structure we will evolve has to take this into
 account. However, there is no single way to create this representation
 from first principles, so several options will have to be evaluated. 
-% This paragraph does not fit into the narrative. It's better to
-% eliminate it - JJ
-% ---------------------------------
-% It is common for AI researchers to turn to games in general as a testing 
-% environment for AI techniques.
-% This interest in games ---both video games and board games--- is not 
-% surprising since they have a rather simple set of rules, they can be a 
-% challenging task even for a human brain and they offer a wide range of dynamic 
-% and competitive elements that resemble real-world problems to some extent. The 
-% interest works in both ways. Many video games use AI techniques to deliver 
-% better experiences, mainly involving NPC behaviour and PCG.
-% ---------------------------------
-
-
 
 % Antonio - In my opinion the introduction is extremely long. It
 % should be reduced, doing it more concise, focused on the paper
