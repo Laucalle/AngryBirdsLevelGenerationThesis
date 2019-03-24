@@ -43,7 +43,7 @@
 
 
 \begin{document}
-\title{Improved Free Form Evolution for Angry Birds Structures
+\title{Generating structures for Angry Birds via free form evolution}
 \thanks{This paper has been supported in part by project DeepBio (TIN2017-85727-C4-2-P).}}
 
 %%% The submitted version for review should be ANONYMOUS
@@ -607,7 +607,7 @@ that are not covered inside the feasible range. This is treated the same way as 
 (same penalization and threshold) and we call it $f_{Y-axis}$:
 $$f_{Y-axis} = 
 \begin{cases}
-P_{distance}\cdot Project_{Y-axis}, & \text{if } Project_{Y-axis} > threshold\\
+P_{distance}\cdot Pr_{Y-axis}, & \text{if } Pr_{Y-axis} > threshold\\
 0, & \text{otherwise}
 \end{cases}
 $$
@@ -1024,7 +1024,7 @@ which suggest that in most executions the population did converge.
 
 The levels are stable and the blocks do not fall when loading the level, but 
 it is arguable that they would be be considered structures, since most of them consist in a 
-few blocks spread about on the floor, like the one shown in figure \ref{f:e3-4}.
+few blocks spread about on the floor.%, like the one shown in figure \ref{f:e3-4}
 The average amount of blocks is $6.26$, 
 which is really close to the minimum amount of blocks allowed. However, given 
 the proposed fitness function, it is completely logical that the evolution 
@@ -1038,11 +1038,11 @@ assess, but in this case it is clear that search goes on the direction
 of minimizing the number of blocks so that the number of blocks
 actually falling is zero. The created structures are not very
 interesting, though, that is why we propose some changes in the next experiment.
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{level-0-second_crossover180613_055622.png}
-	\caption{One of the solutions from \ref{E3}: Fitness = 1.571e-7, G = 194  }\label{f:e3-4}
-\end{figure}
+% \begin{figure}
+% 	\centering
+% 	\includegraphics[scale=0.2]{level-0-second_crossover180613_055622.png}
+% 	\caption{One of the solutions from \ref{E3}: Fitness = 1.571e-7, G = 194  }\label{f:e3-4}
+% \end{figure}
 % -------------------------------------------------------------------
 \subsection{Changing the minimum number of blocks per individual}\label{E4}
 
@@ -1062,15 +1062,15 @@ from the third experiment.
 
 However, the results are more interesting visually. We can find some blocks 
 being stacked together, not only lying on the ground as in previous 
-experiment. An example of the resulting structures is found in figure \ref{f:e4-1}.
+experiment.% An example of the resulting structures is found in figure \ref{f:e4-1}.
 
 % There is no reference to figures. You have to reference every single
 % figure and comment it- JJ
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{level-0-second_crossover_min10_180602_035405.png}
-	\caption{One of the solutions from \ref{E4}: Fitness = 9.229e-7, G = 198 }\label{f:e4-1}
-\end{figure}
+%\begin{figure}
+% 	\centering
+% 	\includegraphics[scale=0.2]{level-0-second_crossover_min10_180602_035405.png}
+% 	\caption{One of the solutions from \ref{E4}: Fitness = 9.229e-7, G = 198 }\label{f:e4-1}
+% \end{figure}
 
 \subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
 
