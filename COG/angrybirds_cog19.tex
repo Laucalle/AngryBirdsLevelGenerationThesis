@@ -43,10 +43,9 @@
 
 
 \begin{document}
-\title{Generating structures for Angry Birds via free form evolution}
+\title{Generating structures for Angry Birds via free form evolution
 \thanks{This paper has been supported in part by project DeepBio (TIN2017-85727-C4-2-P).}}
 
-%%% The submitted version for review should be ANONYMOUS
 \author{\IEEEauthorblockN{Laura Calle}
 \IEEEauthorblockA{\textit{Universidad de Málaga} \\
 Málaga, Spain\\
@@ -112,18 +111,9 @@ playable.
 \section{Introduction}
 \label{sec:intro}
 
-\textit{Angry Birds} is a mobile game created by the Finnish company Rovio Entertainment 
-Corporation\cite{angry-birds}, first launched in 2009. 
-%The game was a huge success in the \textit{AppStore}
-%---being the most downloaded mobile game in 
-%history. Having been ported to several other platforms since, it has an 
-%animated movie and way too many \textit{spin offs}---around seventeen.
-In the game, there is a variety of defensive structures made out of
-blocks which house {\em pigs} (which we can call {\em pigsties} for
-that reason)
-and the player has to fire birds from a slingshot
-%---apparently they never learnt to fly---
-% aiming at destabilizing or destroyng the structures to hit the pigs - Mario
+\textit{Angry Birds} is a mobile game created in 2009 by the Finnish company Rovio Entertainment 
+Corporation. It includes a variety of defensive structures made out of
+blocks which house {\em pigs}; the player has to fire birds from a slingshot
 so the structure is destabilized or, in some cases, destroyed.
 What is interesting to us is how heavily the 
 game relies in gravity to create interesting puzzles, making the
@@ -135,14 +125,14 @@ before crumbling to the ground. Prior to that they have to obviously
 stand on their own and not crash immediately, even before a single
 shot has been fired.
 
-There is a number of competitions centered around playing AI agents for specific 
-games or genres, but it is less common to find PCG competitions like the 
-\textit{Angry Birds Level Generation Competition}, whose third edition
-was celebrated in 2018 during CIG \cite{aibirds}.
-%Participants must build 
-%computer programs that are able to generate levels for the \textit{Angry Birds} game;
-Generated levels must first be valid (i. e. not crash), and then,
-they are evaluated and judged for playability and aesthetics.
+% There is a number of competitions centered around playing AI agents for specific 
+% games or genres, but it is less common to find PCG competitions like the 
+% \textit{Angry Birds Level Generation Competition}, whose third edition
+% was celebrated in 2018 during CIG \cite{aibirds}.
+% %Participants must build 
+% %computer programs that are able to generate levels for the \textit{Angry Birds} game;
+% Generated levels must first be valid (i. e. not crash), and then,
+% they are evaluated and judged for playability and aesthetics.
 
 The ultimate objective of the work presented in this paper is to
 build a program capable of creating levels for \textit{Angry Birds}
@@ -161,110 +151,15 @@ objectives:
 In this paper we will focus on the first three objectives, with sight
 on producing free-form structures that do not collapse; in a nutshell,
 we will be describing a PCG method that efficiently generates free
-form and stable Angry Birds {\em pigsty} structures.
-
-% Antonio - I think that the paper must be better motivated. It cannot
-% be just a "let's try what happens", but you should justify why this
-% idea is different *and better* than other existing approaches. And
-% also, what's the objective from the PCG perspective, I mean, do you
-% aim to create funny levels, enjoyable ones, challenging ones, etc?
-% ;)
-% It's not that now, and it's not too long. 
-
-% ***********************************************
-% I have moved this to below, but we have to check we have narrative
-% coherence in the introduction. - JJ
-% ************************************************
-
-
-For the purpose of this paper, we take the definition of Procedural Game Generation
-(PCG) as \textit{the algorithmic creation of game content with
-	limited or indirect user input} \cite{togelius2011procedural}.  
-%Although PCG often uses Artificial Intelligence (AI) techniques, this
-%definition does not include all uses of it in games. We do not
-%consider Non Playable Character (NPC) behaviour or AI playing agents
-%as content, thus they are not PCG either.
-Aesthetic elements, game rules, levels, items, stories and characters
-among others are considered content in this definition  
-\cite{togelius2011procedural}. % If this
-                                % definition is not totally yours, you
-                                % should give a reference for it.
-                                % It is from the same  
-                                %\cite{togelius2011procedural}
-%Note that neither computers nor video games are mentioned in the
-%definition. In fact, PCG has its roots in analog games.
-%This may
-%conflict with the \textit{limited or indirect user input}, but it is
-%reasonable to assume that following a detailed set of
-%instructions---even if it is done by a human---is not
-%\textit{input}.
-%The underlying concepts used by games such as \textit{Dungeon \& Dragons} still 
-%prevail in modern video games. \cite{smith2015analog} 
-% Using an
-%algorithm to assemble pre-designed pieces is a common technique in
-%tabletop roleplaying guides---where the algorithm usually consists in
-%several dice rolls---such as \textit{Dungeon \& Dragons}.
-% It is not
-%surprising that one of the early adaptations of PCG to digital
-%platforms aimed to generate monsters and dungeons for physical
-%games.
-%
-% Antonio - I think this text should be moved to the beginning of this section. 
-%Or remove it.
-% Moved it for now - Laura
-But the fast pace at which the game industry grows poses a challenge to developers. 
-How do we create a vast amount of content that suits 
-players' expectations with low investment? PCG can tackle this by  
-increasing replayability, offering adaptive content or reducing designers' 
-workload.\cite{togelius2016introduction}
-% Antonio - these two paragraphs could be moved up and should be summarized (or 
-%removed). The text must be concise. ;)
-
-% The sentence below I think is an orphan, From these factors?  define replayability?
-% I can do it if needed - Mario
-%From these factors that we need to optimize, replayability relies on how interesting is 
-%playing a game more than once.
-%For designers, this means their 
-%product should offer more with less manually crafted content. 
-%Games can also engage players by adapting gameplay elements to each individual 
-%player.
-%The most common way is 
-%to present users with options to adjust game elements; however, by using PCG techniques 
-%the game itself can change based on in-game player behaviour.
-%PCG can be used as a tool to assist developers. It can suggest what might be a 
-%base for later development, enhancing human creativity rather than displacing it.
-In this paper we target replayability by insisting in the
+form and stable Angry Birds {\em pigsty} structures. We  will target
+replayability by insisting in the 
 generation of free-form structures.This is, that it does not follow a pattern.
 If all content generated follow a simple pattern, this is easily spotted and
 the player disengages. We aim to avoid this by creating structures whose form
 is only constrained by gravity.
 
-% Paragraph that could be reduced to a single sentence or even
-% eliminated. We are now up to 17 pages - JJ
-There are many PCG methods and it is necessary to look at some traits that 
-characterize and differentiate them from each 
-other \cite{togelius2016introduction}. The method proposed in this paper is 
-described as \textit{offline}, 
-%---the PCG occurs before the game session or during development---
-% \textit{necessary}, 
-%---the generated content is part of the essential structure of the game---,
-% \textit{generic},
-%---it does not take into account player behaviour---,
-\textit{stochastic} 
-%---it will not produce the same output every time it is run---,
-\textit{generate-and-test} %---it produces potentially correct solutions that are tested and adjusted in each iteration before giving the actual output---
-and potentially be either \textit{automatic}
-%---where the designer does not take part on the process---
-or \textit{mixed authorship}.
-% where the generated content is used as a base or part of an interactive tool.
-From all these features, the actual
-challenge in the game we are occupied with in this paper, Angry Birds,
-is to generate potentially correct solutions.
-% ------------------------------------------------------------------
-
-A special kind of \textit{generate-and-test} approach to PCG is
-% This was mantioned earlier so I defined the 
-% acronym before. But I like it more in here.
+A special kind of \textit{generate-and-test} approach to procedural
+content generation is
 Search-based Procedural Content Generation (SBPCG), which is
 usually tackled with Evolutionary Algorithms(EA) \cite{togelius2010search} like the 
 one proposed in \cite{hastings2009evolving}. 
@@ -500,19 +395,19 @@ problem and our approach to it.
 Science Birds is nowadays the main open source Angry Birds
 simulator. It was developed by  Ferreira and Toledo
 \cite{ferreira2014search}, and is available at 
-GitHub \cite{sciencebirds}. We used it  as a starting point; however we
+GitHub. We used it  as a starting point; however we
 had to patch it for producing usable output 
 % Antonio - I think this is important and could be considered as a contribution 
 %of the work, so please, explain it and clarify.
 % Better this way? - Laura
 and automate its work. The modified 
-version is available on GitHub \cite{sciencebirds-adapt}. It produces output 
+version is available on GitHub \url{https://github.com/Laucalle/AngryBirdsLevelGenerationThesis}. It produces output 
 containing the position and average magnitude of the velocity of each block 
 that was not broken after the simulation. It can be run from beginning to end 
 without user interaction and minimizes the amount of time spent on simulating 
 each level. 
 
-In later experiments we will use Box2D \cite{box2d}, a physics engine written in C++ originally
+In later experiments we will use Box2D (\url{https://box2d.org}), a physics engine written in C++ originally
 used for the actual Angry Birds game, to avoid launching the whole game. In this 
 simulation we do not have the resistance of the blocks implemented but we can test
 the level stability much more efficiently (since there is no overhead computing things
@@ -783,10 +678,8 @@ The information that describes a level can be too complex to have a binary
 representation as pure genetic algorithms suggest, so the framework should be 
 flexible enough to support complex data structures. This prevented us from using other 
 frameworks
-%such as DEAP \cite{fortin2012deap}, PyEvolve \cite{perone2009pyevolve} or Evolopy \cite{evolopy}
-and therefore a new framework was created. The source  code can be found on GitHub \cite{ab-level}.
-% Say in a sentence why we are not using those above (and there's also
-% Evolopy) - jj
+and therefore a new framework was created. The source  code can be
+found on GitHub as above..
 
 % Other features that would be desirable for a framework to have in order to be suitable for our goals are readability, ease of use and efficiency.
 
@@ -1289,7 +1182,7 @@ structures that are already stable. % Check out this idea, Laura - JJ
 % blocks of the generative grammar.
 
 
-Another important issue that needs to be addressed is the time performance. 
+%Another important issue that needs to be addressed is the time performance. 
 %Right now the simulation is the main bottleneck in the execution. One way to 
 %speed up the process can be \textit{cleaning} up the current simulation, getting 
 %rid of any unnecessary assets while maintaining the bare minimum to
@@ -1300,11 +1193,11 @@ Another important issue that needs to be addressed is the time performance.
 %The communication between the simulation and the content generator is through 
 %read and write operations on disk, instead of memory. This could be avoided if 
 %both tools were integrated in one.
-If we aim for an online automatic generator, the generator should be 
-integrated in the game and therefore the current execution times would
-be unacceptable. However, if our goal is to 
-generate levels for mixed authorship, as an assistance to developers, it may be 
-a better idea to integrate the simulation in the generator.
+% If we aim for an online automatic generator, the generator should be 
+% integrated in the game and therefore the current execution times would
+% be unacceptable. However, if our goal is to 
+% generate levels for mixed authorship, as an assistance to developers, it may be 
+% a better idea to integrate the simulation in the generator.
 % This could be done 
 % by approximating in-game physics with real physics, as described in 
 % \cite{blum1970stability}. % Expand on this - JJ
