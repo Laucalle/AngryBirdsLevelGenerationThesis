@@ -449,10 +449,10 @@ not be a valid solution
 % Antonio - what do you mean? It is not clear.
 and thus simulation can be skipped.
 
-If the lowest object is not close to the ground it is very likely that
-it, along with all the others blocks above it, 
-will break from the impact. Levels that have all their blocks higher than a 
-certain threshold will not be simulated in the game. The threshold used is 
+If the object closest to the ground is far above, it is very likely that
+it, along with all the others blocks above, 
+will collapse from the impact. Levels that have all their blocks higher than a 
+certain threshold will not be simulated by the engine. The threshold used is 
 $0.1$ in game units and the penalty applied to the distance in order
 to compute the fitness value is $10$:
 $$f_{distance} = 
@@ -462,21 +462,13 @@ P_{distance}\cdot D_{lowest}, & \text{if } D_{lowest} > threshold\\
 \end{cases}
 $$
 
-% This is question about your code. In there each block individual
-% has a penaly attribute. This is a penalty value or is something that is
-% calculated? This value is the same for all individuals? If it is maybe
-% it belongs on the experiment or evolution object.
-% There is a penalty that is equal for all of them. It was that way to make the 
-%fitness value calculation of each individual independent. I am pretty sure it 
-%would be easy to change. Does it need to be change before the paper submission 
-%date? 
-
-
 The other measure is the number of overlapping blocks. The separating axis 
 theorem \cite{ericson2004real} determines if two convex shapes intersect. It is 
 commonly used in game development for detecting collisions. A level with blocks 
 that occupy the same space is not likely to be stable, as the Unity
-Engine underlying the simulator will solve the issue moving the blocks until there is no collision, but this is done by Unity proprietary code and it is not possible to know what it does.
+Engine underlying the simulator will solve the issue moving the blocks
+until there is no collision, but this is done by Unity proprietary
+code and it is not possible to know what it does. 
 % Since Unity 
 % Engine is not open source and there is no documentation on how exactly those 
 % collisions are solved, we assume that a precise prediction of the positions of 
@@ -507,22 +499,12 @@ multiple blocks broken during the simulation are not feasible either but
 running the simulation is necessary. In this case, the penalization does not 
 prevent the region to be explored.
 
-% Paragraph candidate for elimination (back to 17 pages again)--------------------------
-%Previous approaches to this problem (studied in section \ref{sec:soa}) provide 
-%fairly constrained outputs. The constructive method presented creates 
-%pyramid-like structures and, even though there is a variety of levels, the 
-%method is highly specialized in this kind of theme. The search-based approach 
-%only produces tower structures adding some variety by having pre-built 
-%compound 
-%blocks.
-% ---- That has already been mentioned in the soa section --------------
-
 Since one of the objectives of this work is to explore the expressiveness 
 and variability of SBPCG, it seems reasonable to use a flexible representation. 
-We will try these solutions to allow a less directed search than previous solutions while keeping a 
+We will test these solutions to allow a less directed search than previous solutions while keeping a 
 simple representation. 
 
-Individuals are composed by a list of blocks; platforms, TNT boxes or pigs are not considered in this 
+Individuals are composed of a list of blocks; platforms, TNT boxes or pigs are not considered in this 
 paper, since we are focused on the generation of structures. These
 building blocks have the following attributes:
 
@@ -545,7 +527,6 @@ Using this representation a gene representing a single block will be formed by t
 % The position of the corners of the block is frequently required, so it is 
 %stored along with those attributes even though it can be calculated using the 
 %size, the position and rotation of the block. (back to 16 pages with this)
-
 
 Individuals are a collection of genes, in the same way a level is a collection 
 of building blocks. The number of blocks is variable and the order in which 
@@ -647,44 +628,12 @@ The new generation is selected using an elitist strategy. Best individuals in
 both the old population and their offspring pass on the next generation, 
 maintaining the size of the population.
 
-
-%************************************************
-% Same as in the case of the modification, it's better to cut this
-% section down to a single reference, and url of the published code -
-% JJ
-
-%\subsection{Evolutionary Algorithm Framework}\label{ch:frameworkSelection}
-
-
-% The selected language for this project was Python. It has a vast Standard Library and is well documented. There are a number of evolutionary programming frameworks for Python. We considered two in particular for this project: 
-
-% \begin{itemize}
-% 	\item DEAP (Distributed Evolutionary Algorithms in Python)\cite{fortin2012deap}
-% 	\item PyEvolve\cite{perone2009pyevolve}
-% \end{itemize}
-
-% Since the game simulation will be used as a part of the fitness function, there is another aspect to keep in mind. The simulation takes several seconds to start, but much less between levels. When evaluating individuals in a evolutionary algorithm, it would be more efficient to avoid this overhead by simulating the whole population in a single execution instead of launching a simulation for each individual. Then, it seems compulsory that the framework used allow this behaviour.
-
 The information that describes a level can be too complex to have a binary 
 representation as pure genetic algorithms suggest, so the framework should be 
 flexible enough to support complex data structures. This prevented us from using other 
 frameworks
 and therefore a new framework was created. The source  code can be
-found on GitHub as above..
-
-% Other features that would be desirable for a framework to have in order to be suitable for our goals are readability, ease of use and efficiency.
-
-% Although both frameworks offer what this project is looking for, it is important to note exactly how each one provides said feature:
-
-% \begin{itemize}
-% 	\item Flexible data structures: both allow them, but the user has to provide the genetic operators. That is reasonable and expected. Using DEAP, the new data structure only needs to be registered in the \textit{Creator} class, but PyEvolve requires \textit{GenomeBase}---its base module for genomes---to be modified in order to use custom data types.
-% 	\item Customizable fitness function calls: With DEAP you can register a function to evaluate individuals, but those have to take a single individual as a parameter. If we were to evaluate all of them at once, we would have to give up the algorithms the framework provides, executing each operator and managing parameters ourselves. In PyEvolve, although it is possible, it is rather inconvenient since it means working around the \textit{GPopulation} class.
-% \end{itemize}
-
-% The problem tackled in this project requires high customization. Both frameworks are fairly flexible and easy to use when presented with a pure numerical optimization problem, but that is not the case. Taking into account the time limitations for this project, productivity is really important. It is not worth adapting these frameworks, considering how little we gain from their use, even though it would not take a great amount of time. Instead, a new one was implemented, providing all the flexibility we were looking for.
-
-% The framework is not complex, but it covers all the features required. The most important one is a fitness function that executes all the individuals at once. This does not mean parallelism, in fact the steps to take cannot be concurrent. First, the penalization function is applied to all individuals and an XML is generated for those not penalized. Only after that, the simulation is run. The whole evolution process is summarized in algorithm \ref{a:evolution}.
-
+found on GitHub at \url{https://github.com/Laucalle/AngryBirdsLevelGenerator}. % Is this true?
 
 In order to evaluate the different options and check if they meet our
 objective, we performed a series of experiments presented in next
