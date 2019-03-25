@@ -383,12 +383,9 @@ problem and our approach to it.
 
 Science Birds is nowadays the main open source Angry Birds
 simulator. It was developed by  Ferreira and Toledo
-\cite{ferreira2014search}, and is available at 
+\cite{ferreira2014search}, and is available from
 GitHub. We used it  as a starting point; however we
 had to patch it for producing usable output 
-% Antonio - I think this is important and could be considered as a contribution 
-%of the work, so please, explain it and clarify.
-% Better this way? - Laura
 and automate its work. The modified 
 version is available on GitHub \url{https://github.com/Laucalle/AngryBirdsLevelGenerationThesis}. It produces output 
 containing the position and average magnitude of the velocity of each block 
@@ -396,11 +393,13 @@ that was not broken after the simulation. It can be run from beginning to end
 without user interaction and minimizes the amount of time spent on simulating 
 each level. 
 
-In later experiments we will use Box2D (\url{https://box2d.org}), a physics engine written in C++ originally
-used for the actual Angry Birds game, to avoid launching the whole game. In this 
+In later experiments we will use Box2D (\url{https://box2d.org}), the
+Physics engine, written in C++, originally 
+used for the actual Angry Birds game, to avoid launching the whole
+game which adds overhead to the fitness evaluation. In this 
 simulation we do not have the resistance of the blocks implemented but we can test
-the level stability much more efficiently (since there is no overhead computing things
-unrelated to physics). This means we cannot penalize levels per broken block.
+the level stability much more efficiently, since there is no overhead computing things
+unrelated to Physics, such as the graphic interface itself. This means we cannot penalize levels per broken block.
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
@@ -411,19 +410,22 @@ is not in motion, so it seems reasonable to evaluate its whole stillness as oppo
 
 $$fitness_{ind} = \frac{1}{|V|}\sum_{i=0}^{b}{V_i} + P_{broken}\cdot(b-|V|)$$
 
-The modified 
-% Antonio - So it was not in the original simulator, was it?
-game simulator provides the average magnitude of
-velocity for each block. % Check that this is true - JJ
-% The original simulator did calculate the average but it did not offer it as 
-% output and most importantly th value was frame rate dependent. So yes, it was 
-% the modified version - Laura 
-This set is noted as $V$, with $|V|$ being the cardinality of the set. The number of blocks in an individual is $b$ and it can differ from the cardinality of $V$ since broken blocks are not tracked. The number of broken blocks is $b-|V|$ and it is multiplied by a penalization factor, since a level whose blocks break without user interaction would not be considered valid. This happens when a block free-falls from a certain height or collides with a falling object. 
+In this version, the game engine provides the average magnitude of
+velocity for each block. 
+This set is noted as $V$, with $|V|$ being the cardinality of the
+set.  $b$  is the number of blocks in an individual and it can differ
+from the cardinality of $V$ since collapsed blocks are not tracked. The
+number of broken blocks is $b-|V|$ and it is multiplied by a
+penalization factor, since a level whose blocks break without user
+interaction would not be considered valid. This happens when a block
+free-falls from a certain height or collides with a falling object. 
 $P_{broken}$ is set to $100$ since objects in a level do not usually reach that 
 velocity, therefore it will separate non-valid levels from potentially good 
 ones.
 
-In the sixth experiment this fitness function is changed to the following function after observing the results for the previous experiment, al of them described in section \ref{ch:res}:
+In the sixth experiment this fitness function is changed to the
+following function after observing the results for the previous
+experiment, al of them described in section \ref{ch:res}: 
 $$fitness_{indV2} = \max{(V)}$$
 % When we say length of a vector, we think about the norm (the actual lenght) 
 % for instance the hypotenuse in a 2D vector. I think here we are talking about 
