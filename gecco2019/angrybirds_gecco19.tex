@@ -224,60 +224,63 @@ Game development, Angry Birds, Level generation}
 \section{Introduction}
 \label{sec:intro}
 
-\textit{Angry Birds} is a mobile game created by the Finnish company Rovio 
+\textit{Angry Birds} is a mobile game created by Rovio 
 Entertainment 
-Corporation\cite{angry-birds}, first launched in 2009. 
+Corporation\cite{angry-birds}. %, first launched in 2009. 
 %The game was a huge success in the \textit{AppStore}
 %---being the most downloaded mobile game in 
 %history. Having been ported to several other platforms since, it has an 
 %animated movie and way too many \textit{spin offs}---around seventeen.
 In the game, there is a variety of defensive structures made out of
-blocks which house {\em pigs} (which we can call {\em pigsties} for
-that reason)
+blocks which house {\em pigs} %(which we can call {\em pigsties} for that reason)
 and the player has to fire birds from a slingshot
 %---apparently they never learnt to fly---
 % aiming at destabilizing or destroyng the structures to hit the pigs - Mario
-so the structure is destabilized or, in some cases, destroyed.
-What is interesting to us is how heavily the 
-game relies in gravity to create interesting puzzles, making the
-structures very close to reality in its dynamic behavior. The main challenge 
-from 
+so the structure is destabilized or destroyed.
+%What is interesting to us is how heavily the 
+%game relies in gravity to create interesting puzzles, making the
+%structures very close to reality in its dynamic behavior.
+The main challenge from 
 the Procedural Content Generation (PCG) perspective is to build stable
-structures that are robust enough to take more than a single shot
-before crumbling to the ground. Prior to that they have to obviously
-stand on their own and not crash immediately, even before a single
-shot has been fired.
+structures that 
+%are robust enough to take more than a single shot
+%before crumbling to the ground.
+%Prior to that they have to obviously
+stand on their own and not crash immediately.
+%, even before a single shot has been fired.
+%For the purpose of this paper, we take the definition of Procedural Game 
+%Generation (PCG) presented in \cite{togelius2011procedural}.
 
-There is a number of competitions centered around playing AI agents for 
-specific 
-games or genres, but it is less common to find PCG competitions like the 
-\textit{Angry Birds Level Generation Competition}, whose third edition
-was celebrated in 2018 during CIG \cite{aibirds}.
-%Participants must build 
-%computer programs that are able to generate levels for the \textit{Angry 
-%Birds} game;
-Generated levels must first be valid (i. e. not crash), and then,
-they are evaluated and judged for playability and aesthetics.
+%There is a number of competitions centered around playing AI agents for 
+%specific 
+%games or genres, but it is less common to find PCG competitions like the 
+%\textit{Angry Birds Level Generation Competition}, whose third edition
+%was celebrated in 2018 during CIG \cite{aibirds}.
+%%Participants must build 
+%%computer programs that are able to generate levels for the \textit{Angry 
+%%Birds} game;
+%Generated levels must first be valid (i. e. not crash), and then,
+%they are evaluated and judged for playability and aesthetics.
 
-The ultimate objective of the work presented in this paper is to
-build a program capable of creating levels for \textit{Angry Birds}
-and which would be able to eventually compete in the above mentioned
-competitions. We can break it down to the following, more concise,
-objectives: 
+%The ultimate objective of the work presented in this paper is to
+%build a program capable of creating levels for \textit{Angry Birds}
+%and which would be able to eventually compete in the above mentioned
+%competitions. We can break it down to the following, more concise,
+%objectives: 
 
-\begin{itemize}
-	\item Explore the expressiveness and variability of Search-Based PCG 
-	(SBPCG) using EAs.
-	\item Adapt the game code to extract data from execution to 
-	evaluate the levels.
-	\item Produce stable structures under gravity.
-	\item Place other elements on the structures to complete the levels.
-\end{itemize} 
+%\begin{itemize}
+%	\item Explore the expressiveness and variability of Search-Based PCG 
+%	(SBPCG) using EAs.
+%	\item Adapt the game code to extract data from execution to 
+%	evaluate the levels.
+%	\item Produce stable structures under gravity.
+%	\item Place other elements on the structures to complete the levels.
+%\end{itemize} 
 
-In this paper we will focus on the first three objectives, with sight
-on producing free-form structures that do not collapse; in a nutshell,
-we will be describing a PCG method that efficiently generates free
-form and stable Angry Birds {\em pigsty} structures.
+%In this paper we will focus on the first three objectives, with sight
+%on producing free-form structures that do not collapse; in a nutshell,
+%we will be describing a PCG method that efficiently generates free
+%form and stable Angry Birds {\em pigsty} structures.
 
 % Antonio - I think that the paper must be better motivated. It cannot
 % be just a "let's try what happens", but you should justify why this
@@ -293,17 +296,18 @@ form and stable Angry Birds {\em pigsty} structures.
 % ************************************************
 
 
-For the purpose of this paper, we take the definition of Procedural Game 
-Generation
-(PCG) as \textit{the algorithmic creation of game content with
-	limited or indirect user input} \cite{togelius2011procedural}.  
+%For the purpose of this paper, we take the definition of Procedural Game 
+%Generation (PCG) presented in \cite{togelius2011procedural}
+%as \textit{the algorithmic creation of game content with
+%	limited or indirect user input} \cite{togelius2011procedural}.  
+
 %Although PCG often uses Artificial Intelligence (AI) techniques, this
 %definition does not include all uses of it in games. We do not
 %consider Non Playable Character (NPC) behaviour or AI playing agents
 %as content, thus they are not PCG either.
-Aesthetic elements, game rules, levels, items, stories and characters
-among others are considered content in this definition  
-\cite{togelius2011procedural}. % If this
+%Aesthetic elements, game rules, levels, items, stories and characters
+%among others are considered content in this definition  
+%\cite{togelius2011procedural}. % If this
                                 % definition is not totally yours, you
                                 % should give a reference for it.
                                 % It is from the same  
@@ -330,12 +334,12 @@ among others are considered content in this definition
 % Antonio - I think this text should be moved to the beginning of this section. 
 %Or remove it.
 % Moved it for now - Laura
-But the fast pace at which the game industry grows poses a challenge to 
-developers. 
-How do we create a vast amount of content that suits 
-players' expectations with low investment? PCG can tackle this by  
-increasing replayability, offering adaptive content or reducing designers' 
-workload.\cite{togelius2016introduction}
+%But the fast pace at which the game industry grows poses a challenge to 
+%developers. 
+%How do we create a vast amount of content that suits 
+%players' expectations with low investment? PCG can tackle this by  
+%increasing replayability, offering adaptive content or reducing designers' 
+%workload.\cite{togelius2016introduction}
 % Antonio - these two paragraphs could be moved up and should be summarized (or 
 %removed). The text must be concise. ;)
 
@@ -356,72 +360,76 @@ workload.\cite{togelius2016introduction}
 %PCG can be used as a tool to assist developers. It can suggest what might be a 
 %base for later development, enhancing human creativity rather than displacing 
 %it.
-In this paper we target replayability by insisting in the
-generation of free-form structures.This is, that it does not follow a pattern.
-If all content generated follow a simple pattern, this is easily spotted and
-the player disengages. We aim to avoid this by creating structures whose form
-is only constrained by gravity.
+%In this paper we target replayability by insisting in the
+%generation of free-form structures.This is, that it does not follow a pattern.
+%If all content generated follow a simple pattern, this is easily spotted and
+%the player disengages. We aim to avoid this by creating structures whose form
+%is only constrained by gravity.
 
+In this paper we insist in the generation of free-form structures (they do not follow patterns) in attempt to enhance replayability of the game. 
 % Paragraph that could be reduced to a single sentence or even
 % eliminated. We are now up to 17 pages - JJ
-There are many PCG methods and it is necessary to look at some traits that 
-characterize and differentiate them from each 
-other \cite{togelius2016introduction}. The method proposed in this paper is 
-described as \textit{offline}, 
+%There are many PCG methods and it is necessary to look at some traits that 
+%characterize and differentiate them from each 
+%other \cite{togelius2016introduction}. The method proposed in this paper is 
+%described as \textit{offline}, 
 %---the PCG occurs before the game session or during development---
 % \textit{necessary}, 
 %---the generated content is part of the essential structure of the game---,
 % \textit{generic},
 %---it does not take into account player behaviour---,
-\textit{stochastic} 
+%\textit{stochastic} 
 %---it will not produce the same output every time it is run---,
-\textit{generate-and-test} %---it produces potentially correct solutions that 
+%\textit{generate-and-test} %---it produces potentially correct solutions that 
 %are tested and adjusted in each iteration before giving the actual output---
-and potentially be either \textit{automatic}
+%and potentially be either \textit{automatic}
 %---where the designer does not take part on the process---
-or \textit{mixed authorship}.
+%or \textit{mixed authorship}.
 % where the generated content is used as a base or part of an interactive tool.
-From all these features, the actual
-challenge in the game we are occupied with in this paper, Angry Birds,
-is to generate potentially correct solutions.
+%From all these features, the actual
+The main challenge % in the game we are occupied with in this paper, Angry Birds,
+is to generate potentially correct solutions, given that structural integrity is not
+guaranteed by this approach. 
 % ------------------------------------------------------------------
 
-A special kind of \textit{generate-and-test} approach to PCG is
+%A special kind of \textit{generate-and-test} approach to PCG is
 % This was mantioned earlier so I defined the 
 % acronym before. But I like it more in here.
-Search-based Procedural Content Generation (SBPCG), which is
-usually tackled with Evolutionary Algorithms(EA) \cite{togelius2010search} like 
-the 
-one proposed in \cite{hastings2009evolving}. 
-The problems faced by SBPCG are not very far from those encountered in
-EAs; since they are search
-methods, they can be a good match to perform this kind of procedures. 
+%Search-based Procedural Content Generation (SBPCG), which is
+%usually tackled with Evolutionary Algorithms(EA) \cite{togelius2010search} like 
+%the 
+%one proposed in \cite{hastings2009evolving}. 
+%The problems faced by SBPCG are not very far from those encountered in
+%EAs; since they are search
+%methods, they can be a good match to perform this kind of procedures. 
 
-Since in Angry Birds birds are launched against structures that include pigs,
-we will be searching
-for these structures, whose playability and appearance has to be
-optimized. We try to address playability by eliminating the constraint
-that they must follow a pattern, and do not really address aesthetics
-in this paper, not even constraining the structures to be
-symmetric. However, the free form implies that structural integrity is
-not guaranteed, and the structures have a realistic
-gravity, so we must avoid its collapse when they are erected at the
-beginning of a level. We will have to include this factor into the 
-\textit{fitness function}, which grades how good a solution is, or, as
-it might be the case, how far away it is from actually being good.
+%Since in Angry Birds birds are launched against structures that include pigs,
+%we will be searching
+%for these structures, whose playability and appearance has to be
+%optimized. We try to address playability by eliminating the constraint
+%that they must follow a pattern, and do not really address aesthetics
+%in this paper, not even constraining the structures to be
+%symmetric. However, 
+%The free form implies that structural integrity is
+%not guaranteed, and the structures have a realistic
+%gravity, so we must avoid its collapse when they are erected at the
+%beginning of a level. We will have to include this factor into the 
+%\textit{fitness function}. %, which grades how good a solution is, or, as
+%it might be the case, how far away it is from actually being good.
 % Antonio - fitness function is part of the EA
-In SBPCG, how to evaluate the quality of a solution has no straightforward 
-answer. It requires formalizing as an evaluation function how much fun, 
-exciting or engaging certain content is, which are usually based in subjective 
-assumptions. However, before being fun, the generated content must be
-valid; this is the main issue we are tackling in this paper.
+%In Search-Based PCG, how to evaluate the quality of a solution has no straightforward 
+%answer. It requires formalizing as an evaluation function how much fun, 
+%exciting or engaging certain content is, which are usually based in subjective 
+%assumptions. However, before being fun, the generated content must be
+%valid; this is the main issue we are tackling in this paper.
 
-There are three main classes of fitness functions in 
-% Antonio - You should just remark the term once. ;)
-SBPCG \cite{togelius2010search}, but we will use a {\em direct fitness 
-function}.
-In this kind of function, we extract measurable features from the generated 
-content and map them to a fitness value.
+%There are three main classes of fitness functions in 
+%% Antonio - You should just remark the term once. ;)
+%Search Based PCG \cite{togelius2010search}, but we will use a {\em direct fitness 
+%function}, which takes
+%measures directly on the generated content.
+%In this kind of function, we extract measurable features from the generated 
+%content and map them to a fitness value.
 
 %\begin{itemize}
 %	\item \textit{Direct Fitness Function} where certain easily measurable 
@@ -434,23 +442,25 @@ content and map them to a fitness value.
 %	implicitly. 
 %\end{itemize}
 
-Since we are interested in structural integrity of the generated
-structures, neither actual gameplay nor players are taken into
-account. We will use then a {\em direct fitness function}, which takes
-measures directly on the generated content. However, this is a
-time-consuming procedure since it actually involves the graphic
-representation of the structure and application of falling motion to
-its different parts. If we have to subject every single individual in
-the population to this, the size of the search space (which is huge
-since it is free form) explored is going to be very small. So we will
-have to change it to minimize the actual number of structures that are
-simulated by applying heuristics to the data structure and assigning
-it a fitness even before simulation.
+%Since we are interested in structural integrity of the generated
+%structures, 
+%Neither actual gameplay nor players are taken into account. 
+%We will use then a {\em direct fitness function}, which takes
+%measures directly on the generated content.
+%However, this is a
+%time-consuming procedure since it actually involves the graphic
+%representation of the structure and application of falling motion to
+%its different parts. If we have to subject every single individual in
+%the population to this, the size of the search space (which is huge
+%since it is free form) explored is going to be very small. So we will
+%have to change it to minimize the actual number of structures that are
+%simulated by applying heuristics to the data structure and assigning
+%it a fitness even before simulation.
 
-The fact that we are focusing on structures with a free form also
-implies that the data structure we will evolve has to take this into
-account. However, there is no single way to create this representation,
- so several options will have to be evaluated. 
+%The fact that we are focusing on structures with a free form also
+%implies that the data structure we will evolve has to take this into
+%account. However, there is no single way to create this representation,
+% so several options will have to be evaluated. 
 
  % Antonio - In my opinion the introduction is extremely long. It
 % should be reduced, doing it more concise, focused on the paper
@@ -458,132 +468,135 @@ account. However, there is no single way to create this representation,
 % the state of the art. 
  
 
-The rest of this paper is organized as follows: next section presents
-the state of the art in this type of level generation, as well as its
-relationship to the actual problem of generation of structurally sound
-structures. The problem of generating Angry Birds levels is described
+The rest of this paper is organized as follows: 
+%next section presents
+%the state of the art in this type of level generation, as well as its
+%relationship to the actual problem of generation of structurally sound
+%structures. 
+the problem of generating Angry Birds levels is described
 next in Section \ref{sec:angry}. Next experiments are presented in
 section \ref{ch:res}. We present our conclusions in \ref{sec:conclusions}.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  STATE OF THE ART  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Background and State of the Art}
-\label{sec:soa}
+%\section{Background and State of the Art}
+%\label{sec:soa}
+%
+%PCG is becoming more frequently used in new games as one of the main
+%tools for supporting designers and developers. It has a growing
+%relevance which has been also translated into the creation of new
+%international competitions aimed to design algorithms to generate
+%interesting/funny/enjoyable contents for different games, such as
+%Super Mario (a clone of it indeed) \cite{MarioAI_Level_12}, not
+%specified General Video Games
+%\cite{GAIG_LevelGeneration_18,Khalifa_GVGLG_16}, or recently, for
+%Angry Birds \cite{AngryBirds_LevelGeneration_18}. 
 
-PCG is becoming more frequently used in new games as one of the main
-tools for supporting designers and developers. It has a growing
-relevance which has been also translated into the creation of new
-international competitions aimed to design algorithms to generate
-interesting/funny/enjoyable contents for different games, such as
-Super Mario (a clone of it indeed) \cite{MarioAI_Level_12}, not
-specified General Video Games
-\cite{GAIG_LevelGeneration_18,Khalifa_GVGLG_16}, or recently, for
-Angry Birds \cite{AngryBirds_LevelGeneration_18}. 
+%Obviously, all the entries presented in previous editions of this last
+%competition are strongly related with this
+%work. Unfortunately just a few  authors have published their
+%proposals in conferences or journals. The latest edition
+%\cite{AngryBirds_LevelGeneration_18} was focused on finding the best 
+%entry generating entertaining levels. Fun was the main factor in the
+%evaluation of the participants;  creativity and difficulty were then
+%also taken into account as secondary factors. 
+%Six entries competed on it, being the most representative the one by
+%J. Yuxuan et al., able to generate random quotations and formulae with
+%the different components of a level; J. Xu et al. proposal which
+%generates levels that look like pixel images; or a third approach (by
+%C. Kocaogullar) that generates levels by translating music patterns to
+%structures. % No reference for this? - JJ 
 
-Obviously, all the entries presented in previous editions of this last
-competition are strongly related with this
-work. Unfortunately just a few  authors have published their
-proposals in conferences or journals. The latest edition
-\cite{AngryBirds_LevelGeneration_18} was focused on finding the best 
-entry generating entertaining levels. Fun was the main factor in the
-evaluation of the participants;  creativity and difficulty were then
-also taken into account as secondary factors. 
-Six entries competed on it, being the most representative the one by
-J. Yuxuan et al., able to generate random quotations and formulae with
-the different components of a level; J. Xu et al. proposal which
-generates levels that look like pixel images; or a third approach (by
-C. Kocaogullar) that generates levels by translating music patterns to
-structures. % No reference for this? - JJ 
-
-The winner was a submission called Iratus Aves, an new iteration of
-the works by M. Stephenson and J. Renz
-\cite{stephenson2017generating,stephenson2016procedural}, which is a
-\textit{constructive method} where the structures displayed on the
-level are built from top to down, in several phases, recursively
-building a structure, each row composed of a single type of block
-(with a fixed rotation). The likelihood of selecting a certain block
-is given by a probability table, which was tuned using an optimization
-method. Then, the blocks are placed using a tree structure.
-% where the first selected block is the peak and blocks underneath it are split
-%into subsets that support the previous row with one, two or three
-%blocks. 
-This ensures local stability, but not global stability, which
-is tested once the whole structure is completed.  
-After that, other objects (pigs and TNT) are placed, following an
-scheme of potential positions for them according to a rank based on
-some terms such as structural protection or dispersion. 
-
-This approach was improved by adding a `layer' devoted to the
-selection of the material (stone, ice or wood) based on different
-strategies. Materials are important for the game dynamics given that certain 
-birds are more
-efficient against particular ones.
-%so they will have a high impact on
-%the game dynamics.
-Thus, a strategy sets stone to detected weak
-points using a trajectory analysis-based strategy.
-% sets to the same material
-% all blocks in the trajectory of a shot aimed at a particular pig.
-Clustering strategy takes a random block, sets its material and
-propagates to the surrounding blocks
-%that have not been assigned yet.
-Row grouping and structure blocking apply the same material to a
-whole row or structure respectively. 
-
-The main problem with this and other constructive approaches is that 
-the range of different structures created is going to be relatively small; 
-monotony
-leads to boredom, decreasing playability. On the other hand, generated
-structures are guaranteed to be structurally sound, and constructive
-approaches are generally faster than search-based procedures.
-
-\textit{Search-based approaches} propose a good alternative to deal
-with these limitations. Thus, Lucas Ferreira and Claudio Toledo
-\cite{ferreira2014search} presented a solution -- ranked 4th on the
-last competition -- based on SBPCG, which uses a Genetic Algorithm
-(GA) and a game clone named \textit{Science Birds} developed to
-evaluate the levels, the same one we use in this paper.
-
-In a GA individuals correspond to levels, each represented by an array
-of columns. Each column is a sequence of blocks, pigs and predefined
-compound blocks, using an identification integer. This representation
-also includes the distances between different columns. The population
-is initialized randomly following a probability table which defines
-the likelihood of a certain element being placed in a certain position
-inside a column. This implies that a shape is chosen beforehand, once
-again to guarantee stability, but decreases playability by generating
-structures whose only differences are which blocks are placed on top
-of which.  Levels are evaluated executing them in the simulator and
-checking their average stability, considering the speed of every block
-when erected -- which must tend to be zero for having a stable
-structure --. The authors designed specialized crossover and mutation
-operators, aiming to maintain some consistency in the new solutions
-generated.
-
-However, this paper proposes a different approach: the \textit{free
-  form evolution}. To our knowledge there are no other PCGs that
-use this approach for the generation of Angry Birds levels. 
-% Antonio - This is the main selling point of the paper, so if you
-% think this is the only approach of free form evolution in games,
-% remove the word 'many' in the sentence above. ;D
-% Done - JJ
-
-If we look outside computational intelligence in games and focus on 
-structural optimization in architecture, there are several approaches using 
-search-based
-algorithms. Just to cite some examples, we can find a bioinspired algorithm 
-called Cuckoo Search \cite{gandomi2013cuckoo}
-which performance was tested with structural optimization. However, this 
-optimization is heavily parametrized
-and we are looking for evolution of structures that do not follow a predefined 
-pattern, so this approach does not fit our requirements. A different take on 
-the design of structures is using Generative Grammatical 
-Encodings as Hornby and Pollack present in \cite{hornby2001advantages} where 
-L-system
-and its production rules are considered individuals. Still, this increases the
-number of patterns that can be generated, but still precludes the formation 
-of disjoint structures, for instance, a defensive tower before a simple pigsty 
-in our scope.
+%The winner was a submission called Iratus Aves, an new iteration of
+%the works by M. Stephenson and J. Renz
+%\cite{stephenson2017generating,stephenson2016procedural}, which is a
+%\textit{constructive method} where the structures displayed on the
+%level are built from top to down, in several phases, recursively
+%building a structure, each row composed of a single type of block
+%(with a fixed rotation). The likelihood of selecting a certain block
+%is given by a probability table, which was tuned using an optimization
+%method. Then, the blocks are placed using a tree structure.
+%% where the first selected block is the peak and blocks underneath it are split
+%%into subsets that support the previous row with one, two or three
+%%blocks. 
+%This ensures local stability, but not global stability, which
+%is tested once the whole structure is completed.  
+%After that, other objects (pigs and TNT) are placed, following an
+%scheme of potential positions for them according to a rank based on
+%some terms such as structural protection or dispersion. 
+%
+%This approach was improved by adding a `layer' devoted to the
+%selection of the material (stone, ice or wood) based on different
+%strategies. Materials are important for the game dynamics given that certain 
+%birds are more
+%efficient against particular ones.
+%%so they will have a high impact on
+%%the game dynamics.
+%Thus, a strategy sets stone to detected weak
+%points using a trajectory analysis-based strategy.
+%% sets to the same material
+%% all blocks in the trajectory of a shot aimed at a particular pig.
+%Clustering strategy takes a random block, sets its material and
+%propagates to the surrounding blocks
+%%that have not been assigned yet.
+%Row grouping and structure blocking apply the same material to a
+%whole row or structure respectively. 
+%
+%The main problem with this and other constructive approaches is that 
+%the range of different structures created is going to be relatively small; 
+%monotony
+%leads to boredom, decreasing playability. On the other hand, generated
+%structures are guaranteed to be structurally sound, and constructive
+%approaches are generally faster than search-based procedures.
+%
+%\textit{Search-based approaches} propose a good alternative to deal
+%with these limitations. Thus, Lucas Ferreira and Claudio Toledo
+%\cite{ferreira2014search} presented a solution -- ranked 4th on the
+%last competition -- based on SBPCG, which uses a Genetic Algorithm
+%(GA) and a game clone named \textit{Science Birds} developed to
+%evaluate the levels, the same one we use in this paper.
+%
+%In a GA individuals correspond to levels, each represented by an array
+%of columns. Each column is a sequence of blocks, pigs and predefined
+%compound blocks, using an identification integer. This representation
+%also includes the distances between different columns. The population
+%is initialized randomly following a probability table which defines
+%the likelihood of a certain element being placed in a certain position
+%inside a column. This implies that a shape is chosen beforehand, once
+%again to guarantee stability, but decreases playability by generating
+%structures whose only differences are which blocks are placed on top
+%of which.  Levels are evaluated executing them in the simulator and
+%checking their average stability, considering the speed of every block
+%when erected -- which must tend to be zero for having a stable
+%structure --. The authors designed specialized crossover and mutation
+%operators, aiming to maintain some consistency in the new solutions
+%generated.
+%
+%However, this paper proposes a different approach: the \textit{free
+%  form evolution}. To our knowledge there are no other PCGs that
+%use this approach for the generation of Angry Birds levels. 
+%% Antonio - This is the main selling point of the paper, so if you
+%% think this is the only approach of free form evolution in games,
+%% remove the word 'many' in the sentence above. ;D
+%% Done - JJ
+%
+%If we look outside computational intelligence in games and focus on 
+%structural optimization in architecture, there are several approaches using 
+%search-based
+%algorithms.
+%Just to cite some examples, we can find a bioinspired algorithm 
+%called Cuckoo Search \cite{gandomi2013cuckoo}
+%which performance was tested with structural optimization. However, this 
+%optimization is heavily parametrized
+%and we are looking for evolution of structures that do not follow a predefined 
+%pattern, so this approach does not fit our requirements. A different take on 
+%the design of structures is using Generative Grammatical 
+%Encodings as Hornby and Pollack present in \cite{hornby2001advantages} where 
+% l-system
+%and its production rules are considered individuals. Still, this increases the
+%number of patterns that can be generated, but still precludes the formation 
+%of disjoint structures, for instance, a defensive tower before a simple pigsty 
+%in our scope.
 
 %Thus, we will mainly have to look outside computational intelligence in
 %games to focus on optimization in architecture, where there are
@@ -625,11 +638,11 @@ in our scope.
 %generated, but still precludes the formation of disjoint structures, for 
 %instance, a defensive tower before a simple pigsty in our scope. 
 
-In general, we will try to follow a realistic structure generation
-approach, without constraining it to a fixed form, thus advancing the
-state of the art by allowing the creation of Angry Birds level with
-any structure. The next section will describe how we characterize this
-problem and our approach to it.
+%In general, we will try to follow a realistic structure generation
+%approach, without constraining it to a fixed form, thus advancing the
+%state of the art by allowing the creation of Angry Birds level with
+%any structure. The next section will describe how we characterize this
+%problem and our approach to it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
@@ -651,20 +664,18 @@ without user interaction and minimizes the amount of time spent on simulating
 each level. 
 
 In later experiments we will use Box2D \cite{box2d}, a physics engine written 
-in C++ originally
-used for the actual Angry Birds game, to avoid launching the whole game. In 
-this 
-simulation we do not have the resistance of the blocks implemented but we can 
-test
-the level stability much more efficiently (since there is no overhead computing 
-things
-unrelated to physics). This means we cannot penalize levels per broken block.
+in C++ originally used for the actual Angry Birds game, to avoid launching
+the whole game. In this simulation we do not have the resistance of the
+blocks implemented but we can test the level stability much more efficiently
+(since there is no overhead computing things unrelated to physics). This 
+means we cannot penalize levels per broken block.
 
 %\subsection{Evolutionary Algorithm}\label{ch:Representation}
 
-Once the simulator that is going to be used to measure fitness is
-ready, we have to design the fitness function. As obvious as it
-might seem, the main feature of a stable level is that it 
+%Once the simulator that is going to be used to measure fitness is
+%ready, we have to design the fitness function.
+%As obvious as it might seem,
+The main feature of a stable level is that it 
 is not in motion, so it seems reasonable to evaluate its whole stillness as 
 opposed to its speed -- considering every single block --.
 
