@@ -1141,15 +1141,12 @@ The EA in this experiments uses random initialization, elitist replacement and t
 	\myfloatalign
 	\caption{Parameters used in the first experiment} 
 	\label{t:base}
-	\begin{tabular}{lc}
+	\begin{tabular}{lclc}
 		\hline
-		\textbf{Population size} & 100 \\ \hline
-		\textbf{Number of generations} & 100 \\  \hline
-		\textbf{Percentage of parents} &  0.5 \\  \hline
-		\textbf{Percentage of type mutations} & 0.5 \\  \hline
-		\textbf{Percentage of rotation mutations} & 0.5 \\  \hline
-		\textbf{Percentage of axis x mutations}  & 0.5 \\  \hline
-		\textbf{Percentage of axis y mutations}  & 1 \\  \hline
+		\textbf{Population size} & 100 & \textbf{N of generations} & 100\\ \hline
+		\textbf{\% of parents} &  0.5 &\textbf{\% of type mutations} & 0.5\\  \hline
+		\textbf{\% of rotation mutations} & 0.5 & \textbf{\% of axis x mutations}  & 0.5 \\  \hline
+		\textbf{\% of axis y mutations}  & 1 & &\\  \hline
 	\end{tabular}
 \end{table}
 % Antonio - I agree, you could save space using a table with two columns, for 
@@ -1167,14 +1164,14 @@ breaking) when loaded. However, there is variety in the structures.
 %valid. However, we can tell that there is variety in the structures, since they 
 %clearly differ from each other. 
 
-In the experiment the only termination condition was reaching the maximum 
-number of generations. Solutions found in this experiment contained just a few blocks on the ground,
-occasionally those were stacked as seen in figure \ref{f:e1}.
-However, looking at the results, it seems that the 
-execution ended before the population stabilized or converged.
-This means the EA may need a 
-larger number of generations to fully evolve a solution. This is the hypothesis 
-for the second experiment, which we describe next.
+%In the experiment the only termination condition was reaching the maximum 
+%number of generations. Solutions found in this experiment contained just a few blocks on the ground,
+%occasionally those were stacked. %as seen in figure \ref{f:e1}.
+%However, looking at the results, it seems that the 
+%execution ended before the population stabilized or converged.
+%This means the EA may need a 
+%larger number of generations to fully evolve a solution. This is the hypothesis 
+%for the second experiment, which we describe next.
 %Since mutation 
 %percentages are high it is normal that convergence where every single 
 %individual is the same one, is not reached. However, it could be possible that 
@@ -1196,18 +1193,25 @@ for the second experiment, which we describe next.
 %Most executions from the previous experiment reached the maximum number of 
 %generations without stabilizing or converging.
 
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{level-0-180523_203106.png}
-	\caption{One of the results for \ref{E1}: Fitness = 9.021, G = 100  
-	}\label{f:e1}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.2]{level-0-180523_203106.png}
+%	\caption{One of the results for \ref{E1}: Fitness = 9.021, G = 100  
+%	}\label{f:e1}
+%\end{figure}
 \subsection{Changing termination conditions} \label{E2}
 
+In the first experiment the only termination condition was reaching the maximum 
+number of generations. %Solutions found in this experiment contained just a few blocks on the ground,
+%occasionally those were stacked. %as seen in figure \ref{f:e1}.
+However, looking at the results, it seems that the 
+execution ended before the population stabilized or converged.
+The EA may need a 
+larger number of generations to fully evolve a solution.
 % Antonio - You must introduce the experiment (each of them), trying to justify 
 %its necessity.
-
-The main change in this implementation is the addition of two new stop 
+%The main change in this implementation is the addition 
+So we will be adding two new stop 
 conditions: being 10 generations without changes (stable population) or best 
 fitness value below 0.01. 
 % This should not be "also", it's maybe the most important change - JJ
@@ -1221,11 +1225,12 @@ unchanged except for the \textit{Number of generations} which is equal to 1000.
 
 Although the best levels obtained with this experiment are better than those 
 evolved in the first experiment, the bad solutions have a really high fitness 
-value. An example of one the best levels obtained is shown in figure 
-\ref{f:e2-4}.
-In table \ref{t:resOver2}, we can see that average fitness of levels 
-produced with this version of the EA is worse than the ones generated in the 
-first experiment. In fact, all of the executions terminated after 10 generations with no new individuals.
+value. 
+%An example of one the best levels obtained is shown in figure \ref{f:e2-4}.
+%In table \ref{t:resOver2}, we can see that average fitness of levels 
+%produced with this version of the EA is worse than the ones generated in the 
+%first experiment.
+In fact, all of the executions terminated after 10 generations with no new individuals.
 %It suggest that populations can be stuck for many generations 
 %before making any type of improvement.
 %Any of the generated levels have a 
@@ -1247,21 +1252,24 @@ first experiment. In fact, all of the executions terminated after 10 generations
 %improvements are most common in those executions with a poor initial 
 %population. Even the ones with several hundreds of generations struggle to 
 %improve the initial population.
-
 Our hypothesis that the number of generations could be the main factor
 is then not correct; it is more likely that there this EA is biased towards 
 exploration rather than exploitation. 
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{level-0-base_large180529_223045.png}
-	\caption{One of the solutions from \ref{E2}: Fitness = 5.176, G = 767  
-	}\label{f:e2-4}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.2]{level-0-base_large180529_223045.png}
+%	\caption{One of the solutions from \ref{E2}: Fitness = 5.176, G = 767  
+%	}\label{f:e2-4}
+%\end{figure}
 % -------------------------------------------------------------------
 \subsection{Improving exploitation using a better crossover operator}\label{E3}
-As seen in teh prevoius experiment, the genetic operators are failing to 
-create new individuals that inherit good traits from their parents. The second 
-crossover operator descibed earlier could shift the focus to exploitation.
+As seen in the previous experiment, the genetic operators are failing to 
+create new individuals that inherit good traits from their parents.
+We will use a new crossover method that produces two 
+individuals, containing the blocks common to both parents and randomly
+distributes the rest of them.
+%The second 
+%crossover operator described earlier could shift the focus to exploitation.
 %For the third experiment, the change introduced is in the crossover operator 
 %used which was previously described as \textit{Common blocks} crossover. 
 The rest of the operators as 
@@ -1282,7 +1290,7 @@ The levels are stable but
 % and the blocks do not fall when loading the level, but 
 %it is arguable that they would be be considered structures, since
 most of them consist in a 
-few blocks spread about on the floor, like the one shown in figure \ref{f:e3-4}.
+few blocks spread about on the floor.
 The average amount of blocks is $6.26$, 
 which is really close to the minimum amount of blocks allowed.
 %However, given 
@@ -1295,12 +1303,12 @@ which is really close to the minimum amount of blocks allowed.
 %The fitness landscape a fitness function creates is difficult to
 %assess, but in this case 
 
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{level-0-second_crossover180613_055622.png}
-	\caption{One of the solutions from \ref{E3}: Fitness = 1.571e-7, G = 194  
-	}\label{f:e3-4}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.2]{level-0-second_crossover180613_055622.png}
+%	\caption{One of the solutions from \ref{E3}: Fitness = 1.571e-7, G = 194  
+%	}\label{f:e3-4}
+%\end{figure}
 % -------------------------------------------------------------------
 \subsection{Changing the minimum number of blocks per individual}\label{E4}
 It is clear that search goes on the direction
@@ -1329,16 +1337,16 @@ collapse is more difficult than placing just five.
 However, the results are more interesting visually. We can find some blocks 
 being stacked together.
 %, not only lying on the ground as in previous experiment.
-An example of the resulting structures is found in figure \ref{f:e4-1}.
+%An example of the resulting structures is found in figure \ref{f:e4-1}.
 
 % There is no reference to figures. You have to reference every single
 % figure and comment it- JJ
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.2]{level-0-second_crossover_min10_180602_035405.png}
-	\caption{One of the solutions from \ref{E4}: Fitness = 9.229e-7, G = 198 
-	}\label{f:e4-1}
-\end{figure}
+%\begin{figure}
+%	\centering
+%	\includegraphics[scale=0.2]{level-0-second_crossover_min10_180602_035405.png}
+%	\caption{One of the solutions from \ref{E4}: Fitness = 9.229e-7, G = 198 
+%	}\label{f:e4-1}
+%\end{figure}
 
 \subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
 
