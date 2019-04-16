@@ -121,32 +121,32 @@
 \begin{document}
 \title{Improved Free Form Evolution for Angry Birds Structures}
 
-%%% The submitted version for review should be ANONYMOUS
-\author{Author 1, Author 4}
-%\authornote{Dr.~Trovato insisted his name be first.}
-%\orcid{1234-5678-9012}
-\affiliation{%
-  \institution{Institute anonymous 1}
-  \streetaddress{Street 1}
-  \city{City 1} 
-  \state{State 1} 
-  \postcode{Postcode 1}
-}
-\email{author1@dom.com}
+  
+  \author{Laura Calle}
+  \affiliation{%
+    \institution{Universidad de Granada}
+  }
+  \email{laucalle09@gmail.com}
 
-\author{Author 2, Author 3}
-%\authornote{The secretary disavows any knowledge of this author's actions.}
-\affiliation{%
-  \institution{Institute 2}
-  \streetaddress{Street 2}
-  \city{City 2} 
-  \state{State 2} 
-  \postcode{Postcode 2}
-}
-\email{author2@dom.com}
+  \author{Juan-Juli\'an Merelo-Guerv\'os, Antonio Mora-García}
+%  \orcid{1234-5678-9012}
+  \affiliation{%
+    \institution{Universidad de Granada/CITIC}
+    \city{Granada,Spain}
+    \postcode{18071}
+  }
+  \email{(jmerelo|amorag)@ugr.es}
 
-% The default list of authors is too long for headers.
-\renewcommand{\shortauthors}{Author 1 et al.}
+  \author{Mario Garc\'ia Valdez}
+  \affiliation{%
+    \institution{Tecnol\'ogico Nacional de M\'exico}
+    \city{Tijuana}
+    \state{M\'exico}
+    \postcode{22414}
+  }
+  \email{mario@tectijuana.edu.mx}
+
+\renewcommand{\shortauthors}{Calle et al.}
 
 
 \begin{abstract}
@@ -221,7 +221,7 @@ Game development, Angry Birds, Level generation}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%   INTRODUCTION   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-\section{Introduction}
+\section{Introduction and problem description}
 \label{sec:intro}
 
 \textit{Angry Birds} is a mobile game created by Rovio 
@@ -633,8 +633,8 @@ In this paper we insist in the generation of free-form structures (they do not f
 %problem and our approach to it.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Problem Description}
-\label{sec:angry}
+%\section{Problem Description}
+%\label{sec:angry}
 
 Science Birds is the main open source Angry Birds
 simulator, developed by  Ferreira and Toledo
@@ -1011,74 +1011,75 @@ one, the different parts of our algorithm.
 % fitness function, some
 %evolutionary algorithm parameters and the genetic operators.
 %In order to do so, 
-We performed a set of experiments to test our hypotheses,
-whose results are shown in Table \ref{t:resOver1} and \ref{t:resOver2}.
+We performed a set of initial experiments, whose results have been
+published in \cite{DBLP:conf/evoW/CalleGGV19}
+%whose results are shown in Table \ref{t:resOver1} and \ref{t:resOver2}.
 %shows an overview of the results. 
 
-\begin{table}
-	\myfloatalign
-	\begin{tabular}{cclcl}
-		& \textbf{Time(h)} &$\sigma$ & \textbf{G}& $\sigma$ \\ \hline
-		\textbf{E \ref{E1}}&0.89&(0.59)&100.0&(0)\\  \hline
-		\textbf{E \ref{E2}}&1.002&(1.97)&155.087&(240.56) \\  \hline
-		\textbf{E \ref{E3}}&1.76&(0.6)&76.625&(42.3)\\  \hline
-		\textbf{E \ref{E4}}&5.03&(1.46)&365.929&(158.09)  \\  \hline
-		\textbf{E \ref{E5}}&0.27&(0.1)&894.95&(184.73)     \\  \hline 
-		\textbf{E \ref{E6}}&0.81&(0.15)&1000.0&(0) \\  \hline
-		% If possible, add standard deviation here - JJ
-		% I could not find the original spreadsheet, I only have the raw data. 
-		%I could 
-		%%% not add standard deviation on time - Laura
-		\hline
-	\end{tabular}
-	\caption{Summary of the execution of the last generation in 15-20 runs for 
-	each experiment.
-		G: number of generations} % What
-	% is E? Is that the average? Number of
-	% generations up to what?
-	% Also explain the importance of the
-	% fitness as an evaluation of the
-	% quality of the solutions - JJ
-	% Also, average over what. Best individual in every experiment?
-	% Last generation? - JJ
-	% Modified caption. Better? - Laura
-	\label{t:resOver1}
-\end{table}
+% \begin{table}
+% 	\myfloatalign
+% 	\begin{tabular}{cclcl}
+% 		& \textbf{Time(h)} &$\sigma$ & \textbf{G}& $\sigma$ \\ \hline
+% 		\textbf{E \ref{E1}}&0.89&(0.59)&100.0&(0)\\  \hline
+% 		\textbf{E \ref{E2}}&1.002&(1.97)&155.087&(240.56) \\  \hline
+% 		\textbf{E \ref{E3}}&1.76&(0.6)&76.625&(42.3)\\  \hline
+% 		\textbf{E \ref{E4}}&5.03&(1.46)&365.929&(158.09)  \\  \hline
+% 		\textbf{E \ref{E5}}&0.27&(0.1)&894.95&(184.73)     \\  \hline 
+% 		\textbf{E \ref{E6}}&0.81&(0.15)&1000.0&(0) \\  \hline
+% 		% If possible, add standard deviation here - JJ
+% 		% I could not find the original spreadsheet, I only have the raw data. 
+% 		%I could 
+% 		%%% not add standard deviation on time - Laura
+% 		\hline
+% 	\end{tabular}
+% 	\caption{Summary of the execution of the last generation in 15-20 runs for 
+% 	each experiment.
+% 		G: number of generations} % What
+% 	% is E? Is that the average? Number of
+% 	% generations up to what?
+% 	% Also explain the importance of the
+% 	% fitness as an evaluation of the
+% 	% quality of the solutions - JJ
+% 	% Also, average over what. Best individual in every experiment?
+% 	% Last generation? - JJ
+% 	% Modified caption. Better? - Laura
+% 	\label{t:resOver1}
+% \end{table}
 
-\begin{table}
-	\myfloatalign
-	\begin{tabular}{cclclcl}
-		& \textbf{Best}& $\sigma$  &\textbf{Avg}&$\sigma$  & 
-		\textbf{Worst}&$\sigma$ \\ \hline
-		\textbf{E \ref{E1}}&61.334&(133.02)&383.701&(106.14)&510.515&(133.04)\\  \hline
-		\textbf{E \ref{E2}}&110.66&(142.21)&327.547&(238.33)&367.895&(260.83)  \\  
-		\hline
-		\textbf{E \ref{E3}}&0.0015&(0.003)&0.54&(0.24)&0.828&(0.34)   \\  \hline
-		\textbf{E \ref{E4}}&0.0018&(0.003)&0.203&(0.068)&0.2997&(0.1)  \\  \hline
-		\textbf{E \ref{E5}}& 0.065&(0.06)&0.069&(0.06)&0.071&(0.06)     \\  \hline 
-		\textbf{E \ref{E6}}& 0.932&(0.78)&1.223&(0.74)&1.3&(0.72) \\  \hline
-		% If possible, add standard deviation here - JJ
-		% I could not find the original spreadsheet, I only have the raw data. 
-		%I could 
-		%%% not add standard deviation on time - Laura
-		\hline
-	\end{tabular}
-	\caption{Summary of the results of the last generation in 15-20 runs for 
-	each
-		experiment.
-		G: number of generations} % What
-	% is E? Is that the average? Number of
-	% generations up to what?
-	% Also explain the importance of the
-	% fitness as an evaluation of the
-	% quality of the solutions - JJ
-	% Also, average over what. Best individual in every experiment?
-	% Last generation? - JJ
-	% Modified caption. Better? - Laura
-	\label{t:resOver2}
-\end{table}
+% \begin{table}
+% 	\myfloatalign
+% 	\begin{tabular}{cclclcl}
+% 		& \textbf{Best}& $\sigma$  &\textbf{Avg}&$\sigma$  & 
+% 		\textbf{Worst}&$\sigma$ \\ \hline
+% 		\textbf{E \ref{E1}}&61.334&(133.02)&383.701&(106.14)&510.515&(133.04)\\  \hline
+% 		\textbf{E \ref{E2}}&110.66&(142.21)&327.547&(238.33)&367.895&(260.83)  \\  
+% 		\hline
+% 		\textbf{E \ref{E3}}&0.0015&(0.003)&0.54&(0.24)&0.828&(0.34)   \\  \hline
+% 		\textbf{E \ref{E4}}&0.0018&(0.003)&0.203&(0.068)&0.2997&(0.1)  \\  \hline
+% 		\textbf{E \ref{E5}}& 0.065&(0.06)&0.069&(0.06)&0.071&(0.06)     \\  \hline 
+% 		\textbf{E \ref{E6}}& 0.932&(0.78)&1.223&(0.74)&1.3&(0.72) \\  \hline
+% 		% If possible, add standard deviation here - JJ
+% 		% I could not find the original spreadsheet, I only have the raw data. 
+% 		%I could 
+% 		%%% not add standard deviation on time - Laura
+% 		\hline
+% 	\end{tabular}
+% 	\caption{Summary of the results of the last generation in 15-20 runs for 
+% 	each
+% 		experiment.
+% 		G: number of generations} % What
+% 	% is E? Is that the average? Number of
+% 	% generations up to what?
+% 	% Also explain the importance of the
+% 	% fitness as an evaluation of the
+% 	% quality of the solutions - JJ
+% 	% Also, average over what. Best individual in every experiment?
+% 	% Last generation? - JJ
+% 	% Modified caption. Better? - Laura
+% 	\label{t:resOver2}
+% \end{table}
 
-\subsection{Baseline experiment}\label{E1}
+%\subsection{Baseline experiment}\label{E1}
 
 The premise of the first experiment is that our basic EA should be able to 
 minimize the movement of the blocks placed on the level and
@@ -1105,18 +1106,18 @@ The EA in this experiments uses random initialization, elitist replacement and t
 
  % A table is better for this - JJ
 
-\begin{table}
-	\myfloatalign
-	\caption{Parameters used in the first experiment} 
-	\label{t:base}
-	\begin{tabular}{lclc}
-		\hline
-		\textbf{Population size} & 100 & \textbf{N of generations} & 100\\ \hline
-		\textbf{\% of parents} &  0.5 &\textbf{\% of type mutations} & 0.5\\  \hline
-		\textbf{\% of rotation mutations} & 0.5 & \textbf{\% of axis x mutations}  & 0.5 \\  \hline
-		\textbf{\% of axis y mutations}  & 1 & &\\  \hline
-	\end{tabular}
-\end{table}
+% \begin{table}
+% 	\myfloatalign
+% 	\caption{Parameters used in the first experiment} 
+% 	\label{t:base}
+% 	\begin{tabular}{lclc}
+% 		\hline
+% 		\textbf{Population size} & 100 & \textbf{N of generations} & 100\\ \hline
+% 		\textbf{\% of parents} &  0.5 &\textbf{\% of type mutations} & 0.5\\  \hline
+% 		\textbf{\% of rotation mutations} & 0.5 & \textbf{\% of axis x mutations}  & 0.5 \\  \hline
+% 		\textbf{\% of axis y mutations}  & 1 & &\\  \hline
+% 	\end{tabular}
+% \end{table}
 
 %\begin{itemize}
 %		\item \textbf{Population size}: 100 
@@ -1132,10 +1133,10 @@ The EA in this experiments uses random initialization, elitist replacement and t
 %in a table. ;)
 % Done - Laura
 
-The results suggest that the hypothesis was not correct. The average best 
-solution has a fitness value of 61.334 (Table \ref{t:resOver2}) 
-which indicates that probably most levels have blocks falling and  
-breaking when loaded. However, there is variety in the structures.
+% The results suggest that the hypothesis was not correct. The average best 
+% solution has a fitness value of 61.334 (Table \ref{t:resOver2}) 
+% which indicates that probably most levels have blocks falling and  
+% breaking when loaded. However, there is variety in the structures.
 %The standard deviation of this measure is 133.0209 which 
 %implies that while some executions performed poorly, some others may be good.
 %Even the best levels have blocks that break after loading so they would not be 
@@ -1177,7 +1178,7 @@ breaking when loaded. However, there is variety in the structures.
 %	\caption{One of the results for \ref{E1}: Fitness = 9.021, G = 100  
 %	}\label{f:e1}
 %\end{figure}
-\subsection{Changing termination conditions} \label{E2}
+%\subsection{Changing termination conditions} \label{E2}
 
 In the first experiment the only termination condition was reaching the maximum 
 number of generations. %Solutions found in this experiment contained just a few blocks on the ground,
@@ -1240,7 +1241,7 @@ exploration rather than exploitation.
 %	}\label{f:e2-4}
 %\end{figure}
 % -------------------------------------------------------------------
-\subsection{Improving exploitation using a better crossover operator}\label{E3}
+%\subsection{Improving exploitation using a better crossover operator}\label{E3}
 As seen in the previous experiment, our genetic operators are failing to 
 create new individuals that inherit good traits.
 We will use a new crossover method that produces two 
@@ -1252,10 +1253,10 @@ distributing the rest of them.
 %used which was previously described as \textit{Common blocks} crossover. 
 The remaining operators and termination criteria are kept the same. 
 
-Table \ref{t:resOver2} shows that the results have radically improved as the 
-average fitness of the best solutions drops to $0.0015$, a decrease of almost 
-100\%. Fitness values on average and worst individual fitness suggest that the
-the population converged in most executions. 
+% Table \ref{t:resOver2} shows that the results have radically improved as the 
+% average fitness of the best solutions drops to $0.0015$, a decrease of almost 
+% 100\%. Fitness values on average and worst individual fitness suggest that the
+% the population converged in most executions. 
 %Additionally, it took less generations in general to reach those 
 %results.
 %However, executions took longer on average, which makes sense given 
@@ -1287,15 +1288,15 @@ which is really close to the minimum amount of blocks allowed.
 %	}\label{f:e3-4}
 %\end{figure}
 % -------------------------------------------------------------------
-\subsection{Changing the minimum number of blocks per individual}\label{E4}
+%\subsection{Changing the minimum number of blocks per individual}\label{E4}
 The search goes on the direction
 of minimizing the number of blocks so that the blocks
 actually falling is zero.
 So the only parameter that was changed for this experiment is the minimum
 number of them, which went from 5 to 10. 
 
-The first thing to notice in these experiments (Table \ref{t:resOver1}) is the 
-increase of the average execution time.
+% The first thing to notice in these experiments (Table \ref{t:resOver1}) is the 
+% increase of the average execution time.
 % it went from 1.76 hours in the third 
 %experiment to 5.03 hours in this one. The time spent running the simulation for 
 %each population in this experiments and in the previous one should be similar. 
@@ -1324,7 +1325,7 @@ being stacked together.
 %	}\label{f:e4-1}
 %\end{figure}
 
-\subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
+%\subsection{Removing game and penalizing gaps in Y-axis}\label{E5}
 
 The main problem with the previous experiments was the time needed to
 load the Science Birds simulation environment and run the levels.
@@ -1364,7 +1365,7 @@ structures.
 One of the stable results is shown in figure \ref{f:e5}.
 % Something more should have to be commented on these results - JJ
 
-\subsection{Changing the evaluation function}\label{E6}
+%\subsection{Changing the evaluation function}\label{E6}
 
 Observing results from the previous experiment we realized that what
 evolution found was that laying many blocks on the ground was enough
