@@ -226,7 +226,7 @@ Game development, Angry Birds, Level generation}
 
 \textit{Angry Birds} is a mobile game created by Rovio 
 Entertainment 
-Corporation\cite{angry-birds}. %, first launched in 2009. 
+Corporation. %\cite{angry-birds}. %, first launched in 2009. 
 %The game was a huge success in the \textit{AppStore}
 %---being the most downloaded mobile game in 
 %history. Having been ported to several other platforms since, it has an 
@@ -1091,7 +1091,7 @@ be used as a baseline.
 % optimistic, but we need an estimation as a starting point, and this 
 %experiment 
 % will serve the purpose. 
-There will be four different mutations, one per gene attribute, adding or subtract a random value inside a range to the existing value of the gene.
+There will be four different mutations, one per gene attribute, adding or subtracting a random value inside a range to the existing value.
 The crossover takes a random number of genes from both parents
 without repeated blocks and produces a single individual.
 The EA in this experiments uses random initialization, elitist replacement and tournament selection. The parameters are in table \ref{t:base}.
@@ -1133,9 +1133,9 @@ The EA in this experiments uses random initialization, elitist replacement and t
 % Done - Laura
 
 The results suggest that the hypothesis was not correct. The average best 
-solution has a fitness value of 61.334 (as shown in Table \ref{t:resOver2}) 
-which indicates that probably most levels have blocks falling (and even 
-breaking) when loaded. However, there is variety in the structures.
+solution has a fitness value of 61.334 (Table \ref{t:resOver2}) 
+which indicates that probably most levels have blocks falling and  
+breaking when loaded. However, there is variety in the structures.
 %The standard deviation of this measure is 133.0209 which 
 %implies that while some executions performed poorly, some others may be good.
 %Even the best levels have blocks that break after loading so they would not be 
@@ -1194,21 +1194,21 @@ conditions: being 10 generations without changes (stable population) or best
 fitness value below 0.01. 
 % This should not be "also", it's maybe the most important change - JJ
 % Antonio - I have stressed it. ;)
-The set of operators is the same as the previous one, and the parameters remain 
+The set of operators is the same as the previous one, and parameters remain 
 unchanged except for the \textit{Number of generations} which is equal to 1000. 
 %The increase in the number of generations allows each run to fully develop 
 %their individuals. This would not be feasible if we had to simulate all the 
 %individuals, but thanks to the fitness function and the new stop conditions we 
 %can afford this number of generations.
 
-Although the best levels obtained with this experiment are better than those 
-evolved in the first experiment, the bad solutions have a really high fitness 
+Although the best levels did improve respect those 
+evolved in the first experiment, bad solutions have a really high fitness 
 value. 
 %An example of one the best levels obtained is shown in figure \ref{f:e2-4}.
 %In table \ref{t:resOver2}, we can see that average fitness of levels 
 %produced with this version of the EA is worse than the ones generated in the 
 %first experiment.
-In fact, all of the executions terminated after 10 generations with no new individuals.
+In fact, all of the executions terminated after 10 generations with no new individuals,
 %It suggest that populations can be stuck for many generations 
 %before making any type of improvement.
 %Any of the generated levels have a 
@@ -1230,8 +1230,8 @@ In fact, all of the executions terminated after 10 generations with no new indiv
 %improvements are most common in those executions with a poor initial 
 %population. Even the ones with several hundreds of generations struggle to 
 %improve the initial population.
-Our hypothesis that the number of generations could be the main factor
-is then not correct; it is more likely that there this EA is biased towards 
+which suggest that our hypothesis %that the number of generations could be the main factor
+is not correct. It is more likely that there this EA is biased towards 
 exploration rather than exploitation. 
 %\begin{figure}
 %	\centering
@@ -1241,17 +1241,16 @@ exploration rather than exploitation.
 %\end{figure}
 % -------------------------------------------------------------------
 \subsection{Improving exploitation using a better crossover operator}\label{E3}
-As seen in the previous experiment, the genetic operators are failing to 
-create new individuals that inherit good traits from their parents.
+As seen in the previous experiment, our genetic operators are failing to 
+create new individuals that inherit good traits.
 We will use a new crossover method that produces two 
 individuals, containing the blocks common to both parents and randomly
-distributes the rest of them.
+distributing the rest of them.
 %The second 
 %crossover operator described earlier could shift the focus to exploitation.
 %For the third experiment, the change introduced is in the crossover operator 
 %used which was previously described as \textit{Common blocks} crossover. 
-The rest of the operators as 
-well as the termination criteria are kept the same. 
+The remaining operators and termination criteria are kept the same. 
 
 Table \ref{t:resOver2} shows that the results have radically improved as the 
 average fitness of the best solutions drops to $0.0015$, a decrease of almost 
@@ -1289,11 +1288,11 @@ which is really close to the minimum amount of blocks allowed.
 %\end{figure}
 % -------------------------------------------------------------------
 \subsection{Changing the minimum number of blocks per individual}\label{E4}
-It is clear that search goes on the direction
-of minimizing the number of blocks so that the number of blocks
+The search goes on the direction
+of minimizing the number of blocks so that the blocks
 actually falling is zero.
 So the only parameter that was changed for this experiment is the minimum
-number, which went from 5 to 10. 
+number of them, which went from 5 to 10. 
 
 The first thing to notice in these experiments (Table \ref{t:resOver1}) is the 
 increase of the average execution time.
@@ -1303,15 +1302,14 @@ increase of the average execution time.
 %However, the number of actual executions of the simulator, which only
 %kick in if there is actually some block on the floor and there is no overlap, 
 %drastically increased too.
-There is no doubt 
-that placing at least ten objects in a structure that does not
-collapse is more difficult than placing just five.
+%There is no doubt 
+%that placing at least ten objects in a structure that does not
+%collapse is more difficult than placing just five.
 %The average 
 %best fitness value increased slightly, while the average and worst values are 
 %lower. This suggest that the latest generations of this EA are less diverse 
 %than those 
 %from the third experiment.
-
 However, the results are more interesting visually. We can find some blocks 
 being stacked together.
 %, not only lying on the ground as in previous experiment.
@@ -1335,7 +1333,8 @@ load the Science Birds simulation environment and run the levels.
 %main objective of this experiment was to find a way to get
 %rid of the in-game simulation.
 In order to get rid of the in-game simulation, we will use Box2D
-\cite{catto2011box2d}\cite{box2d}, the physics engine used in the original game.
+\cite{catto2011box2d}, %\cite{box2d}
+the physics engine used in the original game.
 %Since game physics do not usually resemble real world physics we adjusted
 %the parameters so this simulation an the game behave in the same way.
 As we can see in table \ref{t:resOver1} the execution time drastically
@@ -1377,9 +1376,9 @@ Additionally, we initialized levels including one of a list of pre configured
 blocks (disposed as un \cite{ferreira2014search}) in addition to the random initialization used until now.
 $$fitness_{indV2} = \max{(V)}$$
 
-This makes the fitness value depends on just one gene, although it can be a
-different one each time. The improvement of solutions to find acceptable ones
-slowed down % This would have to be proved by a chart
+%This makes the fitness value depends on just one gene, although it can be a
+%different one each time. The improvement of solutions to find acceptable ones
+%slowed down % This would have to be proved by a chart
 Again, with a different fitness function we cannot compare the fitness
 value with the rest of the experiments. One of the results shown in 
 Figure \ref{f:e6}.
