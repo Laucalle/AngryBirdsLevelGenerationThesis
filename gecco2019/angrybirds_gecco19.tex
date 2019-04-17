@@ -265,33 +265,35 @@ Y-axis, which will make objects drop and maybe break.
 This will encourage individuals to grow vertically and not only horizontally
 like in previous experiments.
 This changes the fitness function, so we
-will have to compare by the actual obtained structure, one of which is
-shown in Figure \ref{f:e5}.
+will have to compare by the actual obtained structure. %, one of which is
+%shown in Figure \ref{f:e5}.
 
  \begin{figure}
  	\centering
  	\includegraphics[scale=0.3]{E5.png}
- 	\caption{One of the solutions from \ref{E5}}\label{f:e5}
+ 	\caption{One of the solutions from Experiment 5}\label{f:e5}
       \end{figure}
 
 In general, this penalization of gaps creates a faster path to higher stable
 structures.
-%Still, this path leads to mostly flat structures with 
-%some higher block in unstable positions, which
-%are structurally solid, but not interesting.
-One of the stable results is shown in figure \ref{f:e5}.
+Still, it led to mostly flat structures with 
+some higher block in unstable positions, which
+are structurally solid, but not interesting.
+One of the stable results is shown in Figure \ref{f:e5}.
 % Something more should have to be commented on these results - JJ
-
-%\subsection{Changing the evaluation function}\label{E6}
+% Like this part down here? - Laura
 
 Observing results from the previous experiment we realized that what
 evolution found was that laying many blocks on the ground was enough
 to get a high fitness: the average speed was decreased and it will
-place unstable blocks to cover gaps in Y-axis. 
+place unstable blocks to cover gaps in Y-axis. Even if those blocks just
+free-fall and break, a high amount of static block will compensate.
 In order to correct this behaviour we changed the 
-fitness function to take into account the fastest moving object. 
+fitness function to take into account the fastest moving object.
+That way, other blocks will not mask the fact that there are unstable elements
+being placed in the level. 
 Additionally, we initialized levels including one of a list of pre configured
-blocks (disposed as un \cite{ferreira2014search}) in addition to the random initialization used until now.
+blocks (disposed as in \cite{ferreira2014search}) in addition to the random initialization used until now.
 $$fitness_{indV2} = \max{(V)}$$
 
 %This makes the fitness value depends on just one gene, although it can be a
@@ -299,17 +301,19 @@ $$fitness_{indV2} = \max{(V)}$$
 %slowed down % This would have to be proved by a chart
 Again, with a different fitness function we cannot compare the fitness
 value with the rest of the experiments. One of the results shown in 
-Figure \ref{f:e6}.
+Figure \ref{f:e6}. The results were in general more stable and complex than
+the ones obtained with the previous fitness function.
  \begin{figure}
  	\centering
  	\includegraphics[scale=0.3]{E6.png}
- 	\caption{One of the solutions from \ref{E6}}\label{f:e6}
+ 	\caption{One of the solutions from Experiment 6}\label{f:e6}
  \end{figure}
 
 
  %Again, you can't simply show a single figure as a result. Maybe show
  %average height, or several best solutions. And always reference the
  %figure - JJ
+ % Problem here is that most of the structures actually fall - Laura
 %************************************************
 
 
@@ -319,190 +323,48 @@ Figure \ref{f:e6}.
 \section{Conclusions and Future Work} 
 \label{sec:conclusions}
 
-% ----- probably should be eliminated --- 
-% Here, we briefly recap several aspects of the development of this project. 
-% First, we reviewed the context of the problem: PCG. In section 
-%\ref{sec:intro}, 
-% we looked at the main reasons for its existence: from replacing human 
-% creativity where it cannot reach (unlimited or personalized) to enhancing and 
-% speeding the creative process. In some cases, PCG can  be considered a kind 
-%of 
-% creative expression for itself. The technical background to approach the 
-% problem is discussed in section \ref{sec:soa}.
-% --- up to here --
-
 This paper was developed with
 objective of exploring the expressiveness and variability of 
 SBPCG with evolutionary techniques
-%, adapting the game to extract data from execution 
 and producing stable structures under gravity.
-% What the intro to the conclusion should say are the main objectives
-% of this paper, and whether they have been, or not, achieved or to
-% what extent - JJ
 
-% Antonio - This is my Proposal for this paragraph
 For this aim we have implemented an Evolutionary Algorithm able to optimize 
-level structures to meet this criteria. %, like the stability of the 
-%constructions.
-%Perhaps the level of achievement of the first objective, exploring the 
-%expressiveness and variability of 
-%SBPCG with evolutionary techniques,
-%is not as easily measurable as the other two. It could seem like
-%this objective has not been fully accomplished: only one SBPCG method
-%has been implemented and tested. However, it was not in the scope of
-%this work to test SBPCG in general, but in this particular case, for
-%this particular game.
-%Considering this, 
+level structures to meet this criteria. 
 The method studied was
 sufficiently general and flexible to draw some conclusions about the
 topic. SBPCG methods are a potential good solution to offline content
 generation but it requires a great amount of problem-specific
 knowledge. 
-%Like any other form of creative work, 
-%The biggest issue may
-%be how to measure how good, creative or enjoyable is the piece. 
 The more rules the author adds, results tend to be 
-%expressiveness starts to get lost as the results are 
-variations of the same idea. However, %it is crystal clear
-%from the experiments run in this paper that 
+variations of the same idea. However,
 a lack of knowledge
 will lead to unexpected outcomes.
 In our case, the fitness function used the 
-stability of the structure and only considered other features %--- overlapping 
-%blocks and distance to the ground--- 
+stability of the structure and only considered other features 
 to ensure the levels would be valid.
-%In experiment \ref{E5} and \ref{E6} height was also taken into account.
 
- % I am lost in this paragraph. It should be more
- % related to the actual experiments made - JJ
-
-%The second objective, adapting the game to extract data from execution, was 
-%certainly achieved. It was also a basic requirement to proceed with the rest of 
-%them. The game does provide the data, as long as the input is correctly 
-%structured. 
-% Although the original intention was to make it available on Linux, 
-% currently it can only be executed with the desired behaviour on Windows. 
-% Antonio - I think this is not relevant
-% Another issue is that the simulation is not easily adaptable. If the fitness 
-% function of the EA is changed and needs data that is not included in the 
-%output 
-% right now, the game would have to be changed and compiled again. 
-% Antonio - I would suggest this text instead
-%In order to conduct our experiments the Angry Birds simulator (Science Birds) 
-%has been adapted to our necessities, yielding now some  other information 
-%required to evaluate the individuals of the implemented EA. As this was a 
-%bottleneck, experiments \ref{E5} and \ref{E6} used only a physic simulation,
-%leaving behind the actual game.
-%It would be interesting to obtain other kind of data from both simulations,
-%such as the height of the structure and, eventually, its resistance to
-%bombardment by angry birds. However, this is left as future work.
 The main issue is how we define levels and how the definition %of level 
-plays
-with the paths of evolution.
-Producing stable structures under gravity was %the third objective and
-%the closest to the ultimate one. That objective was 
-effectively
+plays with the paths of evolution.
+Producing stable structures under gravity was effectively
 achieved, but the consequence of evolving in a path of minimum movement 
-%or maximum stability
-results in squat
-structures that are %neither aesthetically pleasing nor 
-not playable,
-although undeniably sturdy and stable. % and do not have more than a few floors, which could not be very 
-%exciting for the players. 
-% Antonio - I would add:
-% , which could not be very exciting for the players. 
-% Tell me what you think of this.
-% Floors is not precise. ..more than a few stacked blocks? - Mario 
-%The main issue is, then, how we evaluate the levels. In fact this is 
-%a matter of how we define what an Angry Birds' level \textit{is} and if that 
-%definition matches the fitness function.
-%A lot of elements were correct, but the definition was not complete.
- % is also a problem.
-%Since we define as
-%level as a structure that
-%If the key feature in the definition is \textit{stable}, evolution 
-%will maximize stability,
-%finding %, as in the beginnings of architectural practice,
+results in squat structures that are not playable,
+although undeniably sturdy and stable. When we also consider height in the
+definition, stable structures were harder to find. An important element was
+missing in the experiments presented here and it was the ability of the blocks
+to break during simulation. Since Box2D only simulates physics, the blocks did
+not have \textit{life points} like in the original game, so we could not penalize
+these levels like we did in \cite{DBLP:conf/evoW/CalleGGV19}. As a result, some
+solutions obtained a good fitness value but will not be considered valid levels.
+A relevant improvement would be adding this \textit{durability system} to the physics
+simulation in order to discard invalid levels.
 
-%We have been successful in,
-%evolving free form structures, to find these type. But once we get
-%there, we need to go into a different evolution mode that takes into
-%account several features as 
 Next step would be treating this as a multiobjective optimization problem:
 stability is the first, but we can sacrifice a bit of stability for
 height or some other aesthetic quality.
 
-% This idea brings us to the last objective, that was not achieved. Without 
-% results that match the definition of an Angry Birds level, placing the 
-% remaining objects would not have made the level playable. The partial 
-% achievement of the third goal, blocked the fourth one as this objective was 
-% dependent on the third one.
-
 To conclude on an optimistic tone, this work provides an interesting insight 
 into the SBPCG, through the completion---and failure---of the goals we
 set out to achieve at the beginning.
-%
-%In order to improve the results of the method, different constraints could be 
-%expressed as multiple objectives. Overlapping blocks and velocity could 
-%be treated as minimization objectives and height as a maximization one. % but 
-%of course we don't need
-                                % to minimize height any more... - JJ
-                                % Corrected - Laura
-
-%If we pay attention at the stages of evolution in this work, there is also 
-%room for improvement in the genetic operators. For example, the initialization 
-%produces a small amount of valid individuals which suggested that an elitist 
-%strategy for selection would work best. However, new experiments will help to 
-%better balance exploration and exploitation. An interesting addition
-%would be to add {\em building} operators that pile blocks on
-%structures that are already stable. % Check out this idea, Laura - JJ
- % I like it, let's keep it - Laura
-
-% First a discussion to say if the goal can be achieved using these
-% methods. That is, finding stable structures is just a matter of
-% adding more to the minimum numbre of blocks or more generations? - JJ
-
-% ---- If we need 5 hours for every run, this is not realistic --- 
-% Once we had a generator that meets our expectations, performance could be 
-% enhanced by the analysis of the best set of initial parameters using Analysis 
-% of Variance (or ANOVA), as presented in \cite{estevez2017statistical}. 
-
-% ---- Some kind of "building" could be combined as genetic operator,
-% but that would create structures that are too similar -- JJ
-% -------------
-% Some options were discarded for time limitations, so these could be main 
-%areas 
-% of development. The chromosome representation using generative grammatical 
-% encoding\cite{hornby2001advantages}, although it would radically change the 
-% structure of the method, might ensure that generated levels are consistent. 
-% This would require carefully selection the operators that would be the 
-%building 
-% blocks of the generative grammar.
-
-
-%Another important issue that needs to be addressed is the time performance. 
-%Right now the simulation is the main bottleneck in the execution. One way to 
-%speed up the process can be \textit{cleaning} up the current simulation, 
-%getting 
-%rid of any unnecessary assets while maintaining the bare minimum to
-%perform evaluation. 
-% However, this will not solve the problem, since the content generator will 
-%still need to launch an external executable.
-% Antonio - I would not mention future problems
-
-%The communication between the simulation and the content generator is through 
-%read and write operations on disk, instead of memory. This could be avoided if 
-%both tools were integrated in one.
-%If we aim for an online automatic generator, the generator should be 
-%integrated in the game and therefore the current execution times would
-%be unacceptable. However, if our goal is to 
-%generate levels for mixed authorship, as an assistance to developers, it may be 
-%a better idea to integrate the simulation in the generator.
-% This could be done 
-% by approximating in-game physics with real physics, as described in 
-% \cite{blum1970stability}. % Expand on this - JJ
-% Or maybe eliminate if there's no space - JJ
-
 
 
 %----------------------- ACKNOWLEDGEMENTS -----------------------
