@@ -1094,8 +1094,9 @@ be used as a baseline.
 % will serve the purpose. 
 There will be four different mutations, one per gene attribute, adding or subtracting a random value inside a range to the existing value.
 The crossover takes a random number of genes from both parents
-without repeated blocks and produces a single individual.
-The EA in this experiments uses random initialization, elitist replacement and tournament selection. The parameters are in table \ref{t:base}.
+without repeated blocks and produces a single individual. All these
+initial experiments were described in \cite{DBLP:conf/evoW/CalleGGV19}
+% The EA in this experiments uses random initialization, elitist replacement and tournament selection. The parameters are in table \ref{t:base}.
 %\begin{itemize}
 %	\item  Initialization with the discrete method described earlier.
 %	\item  Basic sample crossover.
@@ -1338,9 +1339,9 @@ In order to get rid of the in-game simulation, we will use Box2D
 the physics engine used in the original game.
 %Since game physics do not usually resemble real world physics we adjusted
 %the parameters so this simulation an the game behave in the same way.
-As we can see in table \ref{t:resOver1} the execution time drastically
-drops from 5 hours to less than 20 minutes on average, even running
-more generations in the process.
+% As we can see in table \ref{t:resOver1} the execution time drastically
+% drops from 5 hours to less than 20 minutes on average, even running
+% more generations in the process.
 Lower execution time allowed us to perform more operations like penalizing
 not only the distance to the ground but also the \textit{gaps} in the
 Y-axis.
