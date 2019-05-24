@@ -484,8 +484,9 @@ In this case it is $f_{overlapping} = P_{overlapping} \cdot N_{overlapping}$
 where the first factor is a penalty set to $10$ and the second is the number of 
 blocks that overlap with each other.
 
-In some of the late experiments we will substitute the $f_{distance}$ with gap in Y-axis.
-We project all blocks on the Y-axis and calculate range of values for the Y coordinate
+In some of the late experiments we will substitute the $f_{distance}$
+with the gap in the Y-axis.
+We project all blocks on the Y-axis and calculate the range of values for the Y coordinate
 that are not covered inside the feasible range. This is treated the same way as $f_{distance}$
 (same penalization and threshold) and we call it $f_{Y-axis}$:
 $$f_{Y-axis} = 
@@ -519,8 +520,8 @@ building blocks have the following attributes:
         integer between $0$ and $7$.
 	\item Position: coordinates $x$ and $y$ of the centre of the block in game 
 	units.
-	\item Rotation: rotation of the block in degrees. Here four different 
-	rotation angles are considered, 0, 45, 90 or 135 degrees represented as integers 
+	\item Rotation: rotation of the block in degrees. Four different 
+	rotation angles are considered: 0, 45, 90 or 135 degrees represented as integers 
 	between $0$ and $3$.
         \item Material: three types, which determine the durability 
 of the block. However, this does not affect their stability, so it will remain 
