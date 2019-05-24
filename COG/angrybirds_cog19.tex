@@ -321,10 +321,6 @@ generated.
 However, this paper proposes a different approach: the \textit{free
   form evolution}. To our knowledge there are no other PCGs that
 use this approach for the generation of Angry Birds levels. 
-% Antonio - This is the main selling point of the paper, so if you
-% think this is the only approach of free form evolution in games,
-% remove the word 'many' in the sentence above. ;D
-% Done - JJ
 
 If we look outside computational intelligence in games and focus on 
 structural optimization in architecture, there are several approaches using search-based
@@ -378,7 +374,13 @@ In general, we will try to follow a realistic structure generation
 approach, without constraining it to a fixed form, thus advancing the
 state of the art by allowing the creation of Angry Birds level with
 any structure. The next section will describe how we characterize this
-problem and our approach to it.
+problem and our approach to it. In our
+previous paper \cite{DBLP:conf/evoW/CalleGGV19} we explored this
+approach and found as one of its shortcomings the fact that the
+evaluation of generated structures through the simulator was lengthy
+and didn't leave the algorithm enough time to explore the search
+space. In this paper we try to tackle that problem, as well as take
+additional steps to increase the complexity of generated structures.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%  PROBLEM DESCRIPTION  %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Problem Description}
@@ -518,7 +520,7 @@ building blocks have the following attributes:
 	\item Position: coordinates $x$ and $y$ of the centre of the block in game 
 	units.
 	\item Rotation: rotation of the block in degrees. Here four different 
-	rotations are considered, 0, 45, 90 or 135 degrees represented as integers 
+	rotation angles are considered, 0, 45, 90 or 135 degrees represented as integers 
 	between $0$ and $3$.
         \item Material: three types, which determine the durability 
 of the block. However, this does not affect their stability, so it will remain 
@@ -643,7 +645,7 @@ objective, we performed a series of experiments presented in next
 section. 
 
 %************************************************
-\section{Experimentation and Results}\label{ch:res}
+\section{Experiments and Results}\label{ch:res}
 
 We set out to evolve free-form structures, but we need to test, one by
 one, the different parts of our algorithm: fitness function, some
@@ -722,17 +724,10 @@ be used as a baseline.
 % optimistic, but we need an estimation as a starting point, and this experiment 
 % will serve the purpose. 
 
-The EA in this experiments uses:
-\begin{itemize}
-	\item  Initialization with the discrete method described earlier.
-	\item  Basic sample crossover.
-	\item  All four mutations.
-	\item  Elitist replacement.
-	\item  Tournament selection using.
-\end{itemize}
-
-The parameters are in table \ref{t:base}: % A table is better for this - JJ
-
+The EA in this experiments uses initialization with the discrete
+method described earlier, basic sample crossover, all four mutations,
+elitist replacement and tournament selection using the parameters are in table \ref{t:base}.
+%
 \begin{table}
 	\myfloatalign
 	\caption{Parameters used in the first experiment} 
@@ -748,10 +743,7 @@ The parameters are in table \ref{t:base}: % A table is better for this - JJ
 		\textbf{Percentage of axis y mutations}  & 1 \\  \hline
 	\end{tabular}
 \end{table}
-% Antonio - I agree, you could save space using a table with two columns, for 
-%instance. Moreover it will be easier for the reader to find the configuration 
-%in a table. ;)
-% Done - Laura
+
 
 The results suggest that the hypothesis was not correct. The average best 
 solution has a fitness value of 61.334 (as shown in Table \ref{t:resOver2}) 
@@ -775,29 +767,29 @@ of the worst individual should be the same over several generations. In Figure
 populations do remain the same for several generations close to the maximum, 
 most of them do not.
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[scale=0.5]{exp1_worstIndv.png}
-	\caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
+\begin{figure}[h!tbp]
+  \centering
+  \includegraphics[scale=0.5]{exp1_worstIndv.png}
+  \caption{In grey, different executions of the first experiment (E1)}\label{f:grahp1}
 \end{figure}
+%
 Solutions found in this experiment contained just a few blocks on the ground,
 occasionally those were stacked as seen in figure \ref{f:e1}.
 Most executions from the previous experiment reached the maximum number of 
 generations without stabilizing or converging. This means the EA may need a 
 larger number of generations to fully evolve a solution. This is the hypothesis 
 for the second experiment, which we describe next.
+%
 \begin{figure}
 	\centering
 	\includegraphics[scale=0.2]{level-0-180523_203106.png}
 	\caption{One of the results for \ref{E1}: Fitness = 9.021, G = 100  }\label{f:e1}
 \end{figure}
+%
+%
 \subsection{Changing termination conditions} \label{E2}
 
-% Antonio - You must introduce the experiment (each of them), trying to justify its necessity.
-
 The main change in this implementation is the addition of two new stop conditions: being 10 generations without changes (stable population) or best fitness value below 0.01. 
-% This should not be "also", it's maybe the most important change - JJ
-% Antonio - I have stressed it. ;)
 The set of operators is the same as the previous one, and the parameters remain 
 unchanged except for the \textit{Number of generations} which is equal to 1000. 
 The increase in the number of generations allows each run to fully develop 
@@ -1146,6 +1138,11 @@ structures that are already stable. % Check out this idea, Laura - JJ
 % \cite{blum1970stability}. % Expand on this - JJ
 % Or maybe eliminate if there's no space - JJ
 
+\section{Acknowledgements}
+
+ This paper has been supported in part by DeepBio
+ (TIN2017-85727-C4-2-P) from the Ministerio de Economía y Competitividad
+ in Spain.
 
 
 \bibliographystyle{IEEEtran}
